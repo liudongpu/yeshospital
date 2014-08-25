@@ -99,12 +99,8 @@
 	  	</#if>
 	  	
 	</#list>
-	
-	<#if (e_page.upInquireData()?size=1)>
 	<#--兼容form中input如果只有一个自动提交的情况-->
 	<input style="display:none;"/>
-	</#if>
-
 </#macro>
 
 
@@ -296,7 +292,7 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 <#-- 字段：日期 -->
 <#macro m_zapmacro_common_field_date e_field>
 	<@m_zapmacro_common_field_start text=e_field.getFieldNote() for=e_field.getPageFieldName() />
-		<input type="text"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  id="${e_field.getPageFieldName()}" name="${e_field.getPageFieldName()}" value="${e_field.getPageFieldValue()}">
+		<input type="text"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  id="${e_field.getPageFieldName()}" name="${e_field.getPageFieldName()}" value="${e_field.getPageFieldValue()}">
 	<@m_zapmacro_common_field_end />
 	  
 	  

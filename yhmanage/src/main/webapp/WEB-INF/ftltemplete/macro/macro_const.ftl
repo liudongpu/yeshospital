@@ -2,7 +2,7 @@
 
 
 <#-- 后台名称 -->
-<#assign a_macro_const_manage_home_title="超级管理后台" >
+<#assign a_macro_const_manage_home_title="助老服务平台" >
 <#-- 后台菜单起始编号 -->
 <#assign a_macro_const_manage_home_menu="467703130003" >
 
