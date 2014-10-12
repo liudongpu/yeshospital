@@ -25,13 +25,31 @@
 	
 </#macro>
 
-<#-- 柱方图 -->
+<#-- 报表 -->
 <#macro m_report_highchart_column e_page>
 	<div class="zab_page_common_inquire">
 	<@m_zapmacro_common_page_inquire e_page />
 	</div>
 	<@m_report_highchart_date e_page,e_page.upChartData(),"column" />
 </#macro>
+
+
+<#macro m_report_highchart_area e_page>
+	<div class="zab_page_common_inquire">
+	<@m_zapmacro_common_page_inquire e_page />
+	</div>
+	<@m_report_highchart_date e_page,e_page.upChartData(),"area" />
+</#macro>
+
+
+<#macro m_report_highchart_line e_page>
+	<div class="zab_page_common_inquire">
+	<@m_zapmacro_common_page_inquire e_page />
+	</div>
+	<@m_report_highchart_date e_page,e_page.upChartData(),"line" />
+</#macro>
+
+
 
 
 <#-- 报表的自动输出 -->
@@ -64,7 +82,8 @@
 	                type: '${e_chart_type}',
 	                marginRight: 30 
 	            },
-	            credits : { enabled:false//不显示highCharts版权信息 },
+	            credits : { enabled:false//不显示highCharts版权信息 
+	            },
 	            title: {
 	                text: chartTitle
 	            },
