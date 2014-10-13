@@ -7,6 +7,8 @@ import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.srnpr.zapcom.baseclass.BaseClass;
 import com.srnpr.zapcom.basehelper.FormatHelper;
 import com.srnpr.zapdata.dbdo.DbUp;
@@ -38,12 +40,24 @@ public class PostSiheal extends BaseClass {
 
 		String sInfo = info.toString();
 
-		String sLogCodeString = WebHelper.upCode("LC");
+		String sReturn="0";
+		if(StringUtils.isEmpty(sInfo))
+		{
+			
+		}
+		else {
+			String sLogCodeString = WebHelper.upCode("LC");
 
-		DbUp.upTable("yh_log_post").insert("log_code", sLogCodeString,
-				"post_info", sInfo, "create_time", FormatHelper.upDateTime());
+			DbUp.upTable("yh_log_post").insert("log_code", sLogCodeString,
+					"post_info", sInfo, "create_time", FormatHelper.upDateTime());
+			
+			
+			sReturn="1";
+			
 
-		return "1";
+		}
+		
+		return sReturn;
 	}
 
 }
