@@ -6,7 +6,7 @@ api_model=b_method.upClass("com.srnpr.zapweb.webclass.ShowApiInfo")>
 	<div class="container">
 		<div class="navbar-header">
 
-			<a class="navbar-brand" href="?"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;仓颉开放平台</a>
+			<a class="navbar-brand" href="?"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;助老服务开放平台</a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">

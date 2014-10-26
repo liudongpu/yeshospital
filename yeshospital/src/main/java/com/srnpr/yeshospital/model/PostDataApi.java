@@ -7,9 +7,11 @@ import com.srnpr.yeshospital.face.IPostDataApi;
 import com.srnpr.yeshospital.face.IPostDataInput;
 import com.srnpr.zapcom.baseface.IBaseInput;
 import com.srnpr.zapcom.baseface.IBaseResult;
+import com.srnpr.zapcom.basehelper.FormatHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
 import com.srnpr.zapdata.dbdo.DbUp;
+import com.srnpr.zapweb.helper.WebHelper;
 import com.srnpr.zapweb.webapi.RootApiForManage;
 import com.srnpr.zapweb.webmodel.MWebResult;
 
@@ -24,7 +26,7 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 
 	public TResult upResult(TInput tInput, String sLogCode, String sManageCode) {
 
-		return toPost(tInput, "", getManageCode());
+		return toPost(tInput, sLogCode, sManageCode);
 
 	}
 
@@ -70,6 +72,42 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 		}
 
 		return mWebResult;
+	}
+
+	/**
+	 * 更新报告信息
+	 * 
+	 * @param sInfoField
+	 * @param sInfoValue
+	 * @param sUpdateTimeField
+	 * @return
+	 */
+	public MWebResult updateReport(String sInfoField, String sInfoValue,
+			String sUpdateTimeField) {
+
+		MDataMap mUpdateMap = DbUp.upTable("yh_report_info").one("member_code",
+				upMemberCode());
+
+		if (mUpdateMap == null || mUpdateMap.size() == 0) {
+			mUpdateMap = new MDataMap();
+			mUpdateMap.inAllValues("report_code", WebHelper.upCode("RC"),
+					"member_code", upMemberCode());
+
+			DbUp.upTable("yh_report_info").dataInsert(mUpdateMap);
+		} else {
+			mUpdateMap.inAllValues("member_code", upMemberCode());
+		}
+
+		mUpdateMap.inAllValues(sInfoField, sInfoValue, sUpdateTimeField,
+				FormatHelper.upDateTime(), "last_update_time",
+				FormatHelper.upDateTime());
+
+		DbUp.upTable("yh_report_info").dataUpdate(mUpdateMap,
+				sInfoField + "," + sUpdateTimeField + ",last_update_time",
+				"member_code");
+
+		return new MWebResult();
+
 	}
 
 	private String memberCode = "";
