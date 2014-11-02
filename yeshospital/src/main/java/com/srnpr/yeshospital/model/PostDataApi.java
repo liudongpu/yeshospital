@@ -19,10 +19,7 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 		extends RootApiForManage<TResult, TInput> implements
 		IPostDataApi<TResult, TInput> {
 
-	public TResult Process(TInput inputParam, MDataMap mRequestMap) {
-
-		return upResult(inputParam, "", getManageCode());
-	}
+	
 
 	public TResult upResult(TInput tInput, String sLogCode, String sManageCode) {
 

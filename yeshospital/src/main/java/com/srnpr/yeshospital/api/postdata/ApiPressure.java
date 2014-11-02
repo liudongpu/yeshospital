@@ -12,6 +12,10 @@ import com.srnpr.zapweb.helper.WebHelper;
 import com.srnpr.zapweb.webapi.RootApiForManage;
 
 public class ApiPressure extends PostDataApi<PostDataResult, PressureInput> {
+	public PostDataResult Process(PressureInput inputParam, MDataMap mRequestMap) {
+
+		return upResult(inputParam, "", getManageCode());
+	}
 
 	public PostDataResult toPost(PressureInput tInput, String sLogCode,
 			String sManageCode) {

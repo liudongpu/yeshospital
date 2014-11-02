@@ -7,10 +7,15 @@ import com.srnpr.yeshospital.model.PostDataResult;
 import com.srnpr.yeshospital.model.WarnCheckInfo;
 import com.srnpr.yeshospital.support.WarnSupport;
 import com.srnpr.zapcom.basehelper.FormatHelper;
+import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebHelper;
 
 public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
+	public PostDataResult Process(GlucoseInput inputParam, MDataMap mRequestMap) {
+
+		return upResult(inputParam, "", getManageCode());
+	}
 
 	public PostDataResult toPost(GlucoseInput tInput, String sLogCode,
 			String sManageCode) {

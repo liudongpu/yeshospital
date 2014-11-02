@@ -103,7 +103,14 @@ ${e_addhead}
 
 
 
+<#macro m_common_page_show_errinfo e_info="" >
 
+<div class="alert alert-error">
+  
+  ${e_info}
+</div>
+
+</#macro>
 
 
 

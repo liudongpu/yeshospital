@@ -7,10 +7,15 @@ import com.srnpr.yeshospital.model.PostDataResult;
 import com.srnpr.yeshospital.model.WarnCheckInfo;
 import com.srnpr.yeshospital.support.WarnSupport;
 import com.srnpr.zapcom.basehelper.FormatHelper;
+import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebHelper;
 
 public class ApiOxygen extends PostDataApi<PostDataResult, OxygenInput> {
+	public PostDataResult Process(OxygenInput inputParam, MDataMap mRequestMap) {
+
+		return upResult(inputParam, "", getManageCode());
+	}
 
 	public PostDataResult toPost(OxygenInput tInput, String sLogCode,
 			String sManageCode) {
