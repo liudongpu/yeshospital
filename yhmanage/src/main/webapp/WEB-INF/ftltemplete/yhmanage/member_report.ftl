@@ -9,13 +9,15 @@
 
 
 <#if a_order_code!="" >
-<@m_zapmacro_common_page_book b_page />
-
-
 
 	<div class="zab_info_page_title  w_clear">
 	<span>用户报告信息</span>
 	</div>
+
+	<@m_zapmacro_common_page_book b_page />
+
+
+	
 
 	<div class="zab_info_page_title  w_clear">
 	<span>血压信息</span>
