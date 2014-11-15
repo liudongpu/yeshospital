@@ -272,7 +272,7 @@ api_model=b_method.upClass("com.srnpr.zapweb.webclass.ShowApiInfo")>
 
 	<footer>
 
-		<p>&copy; Company 2013</p>
+		<p>&copy; Company 2014-2020</p>
 	</footer>
 
 </div>
