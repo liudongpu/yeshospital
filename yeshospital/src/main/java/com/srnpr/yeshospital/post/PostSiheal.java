@@ -26,7 +26,6 @@ import com.srnpr.zapcom.basehelper.FormatHelper;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebHelper;
 import com.srnpr.zapweb.helper.WebSessionHelper;
-import com.srnpr.zapweb.webface.IWebResult;
 
 public class PostSiheal extends BaseClass {
 
