@@ -12,7 +12,7 @@ import com.srnpr.zapweb.webmodel.MWebField;
  */
 public class MemberSingleSelect extends ComponentWindowSingle {
 
-	@Override
+	
 	public String upText(MWebField mWebField, MDataMap mDataMap, int iType) {
 
 		mWebField
