@@ -117,6 +117,8 @@ public class WarnSupport extends BaseClass {
 			String sLevelText = WebTemp.upTempDataOne("yh_define",
 					"define_name", "define_code", sWarnLevel);
 
+			String sMemberMobile = "";
+
 			/*
 			 * 中度异常：发短信给老人，家属，社区医院。
 			 * 内容：老人：您的【检测项目】检测结果为【XXX】（根据各个检测设备显示不同的检测值），数据中度异常
@@ -137,11 +139,11 @@ public class WarnSupport extends BaseClass {
 			// 开始通知老人
 			if (mWebResult.upFlagTrue()) {
 
-				String sMobile = DbUp.upTable("yh_member_info")
+				sMemberMobile = DbUp.upTable("yh_member_info")
 						.one("member_code", sMemberCode)
 						.get("i_home_mobilephone");
 
-				if (StringUtils.isNotBlank(sMobile)) {
+				if (StringUtils.isNotBlank(sMemberMobile)) {
 
 					String sContent = "";
 
@@ -154,7 +156,7 @@ public class WarnSupport extends BaseClass {
 								sLevelText);
 					}
 
-					MessageHelper.SendSms(sMobile, sContent);
+					MessageHelper.SendSms(sMemberMobile, sContent);
 
 				}
 
@@ -187,6 +189,51 @@ public class WarnSupport extends BaseClass {
 					}
 				}
 
+			}
+
+			// 开始通知医生
+			if (mWebResult.upFlagTrue()) {
+				if (sWarnLevel.equals("46580001000300020003")
+						|| sWarnLevel.equals("46580001000300020004")) {
+
+					String sMemberName = DbUp
+							.upTable("yh_member_info")
+							.dataGet("member_name", "",
+									new MDataMap("member_code", sMemberCode))
+							.toString();
+					String sContent = bInfo(965805804, sMemberName, sTypeText,
+							sValueText, sLevelText, sMemberMobile);
+
+					// 循环关联医院
+					for (MDataMap mHospitalMap : DbUp.upTable(
+							"yh_member_hospital").queryByWhere("member_code",
+							sMemberCode, "flag_enable", "1")) {
+
+						// 循环科室信息
+						for (MDataMap mOfficeMap : DbUp.upTable(
+								"yh_office_info").queryByWhere("hospital_code",
+								mHospitalMap.get("hospital_code")))
+
+						{
+
+							for (MDataMap mDoctorMap : DbUp.upTable(
+									"yh_doctor_info").queryByWhere(
+									"office_code",
+									mOfficeMap.get("office_code"))) {
+
+								String sMobile = mDoctorMap.get("mobile_phone");
+
+								if (StringUtils.isNotBlank(sMobile)) {
+									MessageHelper.SendSms(sMobile, sContent);
+								}
+
+							}
+
+						}
+
+					}
+
+				}
 			}
 
 		}
