@@ -1,0 +1,71 @@
+/*****************************************************************/
+.bar
+{
+	background-color:#f2f2f2;
+	
+	height:50px;
+	position:relative;
+}
+
+.bar .btn-link
+{
+	
+	line-height:50px;
+	
+}
+.bar .btn .icon
+{
+	top:5px;
+}
+
+
+/** hack bootstrap*******************************************************************/
+
+.form-horizontal .control-group
+{
+	width:96%;
+	margin-left:2%;
+}
+
+
+.form-horizontal .control-label {
+  float: left;
+  width: 30%;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.form-horizontal .controls {
+  margin-left: 30%;
+}
+
+/************************************************************************************/
+.yb_body
+{
+	width:96%;
+	margin-left:2%;
+}
+
+.yb_layout_box
+{
+	height:100%;
+	overflow:auto;
+	padding-bottom:50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

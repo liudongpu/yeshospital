@@ -1,0 +1,116 @@
+<#-- 系统版本号 -->
+<#assign a_macro_mobile_system_version="2.0.0.2">
+<#-- 资源附加后缀版本 -->
+<#assign a_macro_mobile_resources_version="?v="+a_macro_mobile_system_version >
+<#-- 资源文件路径 -->
+<#assign a_macro_mobile_resources_link="../" >
+<#-- 项目特殊样式 -->
+<#assign a_macro_mobile_resources_thems_js=["mlib/apicloud/script/api.js","mlib/zepto/zepto.min.js","mlib/ratchet/js/ratchet.min.js","zapmobile/js/zmapi.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","zapmobile/js/zmjs.js","yesapp/js/yesapp-frame.js"] >
+<#assign a_macro_mobile_resources_thems_css=["mlib/apicloud/css/api.css","mlib/ratchet/css/ratchet.min.css","yesapp/css/yes-base.css"] >
+
+
+<#macro m_mobile_html_js e_list>
+	<#list e_list as e>
+	<script type="text/javascript" src="${a_macro_mobile_resources_link}resources/${e}${a_macro_mobile_resources_version}"></script>
+	</#list>
+</#macro>
+<#macro m_mobile_html_css e_list >
+    <#list e_list as e>
+	<link type="text/css" href="${a_macro_mobile_resources_link}resources/${e}${a_macro_mobile_resources_version}" rel="stylesheet">
+	</#list>
+</#macro>
+
+<#macro m_mobile_html_script  e_info >
+
+	<script type="text/javascript">
+		${e_info}
+	</script>
+
+</#macro>
+
+
+<#macro m_mobile_html_begin  p_title="" p_type="" p_css=[]>
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>${p_title}</title>
+    
+  
+   
+	<@m_mobile_html_css    a_macro_mobile_resources_thems_css />
+
+	  
+	 <@m_mobile_html_css    p_css />
+	 
+	 
+	 
+	 <#-- 开发时使用 -->
+	 <link rel="stylesheet/less" type="text/css" href="${a_macro_mobile_resources_link}resources/zapmobile/less/zmcss.less" />
+	<@m_mobile_html_js ["mlib/less/less.min.js"] />
+	
+</#macro>
+
+
+
+<#macro m_mobile_body_begin>
+
+</head>
+<body>
+
+</#macro>
+
+<#macro m_mobile_body_end  p_type="" p_js=[]>
+
+
+
+
+
+
+<@m_mobile_html_js a_macro_mobile_resources_thems_js />
+
+
+
+<@m_mobile_html_js p_js />
+
+
+</#macro>
+
+<#macro m_mobile_html_end  >
+
+</body>
+</html>
+</#macro>
+
+
+
+
+
+
+<#macro m_mobile_call_page  p_page="">
+ onclick="zmjs.page.open_page('${p_page}')" 
+</#macro>
+
+<#macro m_mobile_back_page>
+ onclick="zmjs.page.back_page()" 
+</#macro>
+
+
+<#macro m_mobile_back_root>
+ onclick="zmjs.page.back_root()" 
+</#macro>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
