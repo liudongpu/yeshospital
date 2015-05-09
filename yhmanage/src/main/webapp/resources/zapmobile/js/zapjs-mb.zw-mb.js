@@ -44,10 +44,12 @@ zapjs.zw = {
 	},
 
 	modal_process : function() {
+		/*
 		zapjs.zw.modal_show({
 			content : '<div class="w_loading_small"></div>',
 			flagbutton : false
 		});
+		*/
 	},
 
 	window_show : function(sContent) {
@@ -416,7 +418,7 @@ zapjs.zw = {
 		
 		
 		alert(zapjs.f.cookie(zapjs.c.cookie_user));
-		zapjs.f.tourl('user-login.html');
+		
 	},
 	
 	

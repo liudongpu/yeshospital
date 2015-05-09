@@ -105,16 +105,19 @@ zmapi.m = {
 		var s = $.extend({}, defaults, options || {});
 		if (sContent)
 			s.content = sContent;
+		if (zmapi.c.flag_api) {
+			api.alert({
+				title : s.title,
+				msg : s.content,
+				buttons : [ s.oktext ]
+			}, function(ret, err) {
+				if (ret.buttonIndex == 1) {
 
-		api.alert({
-			title : s.title,
-			msg : s.content,
-			buttons : [ s.oktext ]
-		}, function(ret, err) {
-			if (ret.buttonIndex == 1) {
-				
-			}
-		});
+				}
+			});
+		} else {
+			alert(s.content);
+		}
 	}
 
 };

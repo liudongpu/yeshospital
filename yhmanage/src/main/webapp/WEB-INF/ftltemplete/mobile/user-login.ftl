@@ -64,6 +64,6 @@
 
  <@m_mobile_body_end />
  
-
+<@m_mobile_html_script e_info="$(function(){ //window.history.forward(10);})" />
  
  <@m_mobile_html_end />

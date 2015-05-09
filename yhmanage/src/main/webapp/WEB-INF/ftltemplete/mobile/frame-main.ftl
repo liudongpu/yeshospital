@@ -8,7 +8,7 @@
 <div class="">
 	<div class="zmcss_h_10"></div>
 	<div class="zmcss_w_96 ">
-	 <button class="btn  btn-positive zmcss_f_right" <@m_mobile_call_page p_page="../mb/page_add_m_yh_tour_order_info" />>
+	 <button id="fm-create" class="btn  btn-positive zmcss_f_right" <@m_mobile_call_page p_page="../mb/page_add_m_yh_tour_order_info" />>
   		<span class="icon icon-plus"></span>
   		创建一个巡视
 	</button>
@@ -75,4 +75,8 @@
 
     
  <@m_mobile_body_end />
+ 
+ 
+ 
+ 
  <@m_mobile_html_end />

@@ -1,7 +1,3 @@
-$(function() {
-	alert('x');
-	zapjs.zw.check_login();
-});
 
 apiready = function() {
 	var $header = $api.dom('header');
@@ -37,6 +33,11 @@ apiready = function() {
 		} ]
 	}, function(ret, err) {
 	});
+	
+	
+	
+	
+	
 
 }
 // 随意切换按钮

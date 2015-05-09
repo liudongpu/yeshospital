@@ -5,7 +5,7 @@
 <#-- 资源文件路径 -->
 <#assign a_macro_mobile_resources_link="../" >
 <#-- 项目特殊样式 -->
-<#assign a_macro_mobile_resources_thems_js=["mlib/apicloud/script/api.js","mlib/zepto/zepto.min.js","mlib/ratchet/js/ratchet.min.js","zapmobile/js/zmapi.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","zapmobile/js/zmjs.js","yesapp/js/yesapp-frame.js"] >
+<#assign a_macro_mobile_resources_thems_js=["mlib/apicloud/script/api.js","lib/jquery/jquery-last.min.js","lib/jquery/jquery-plugins-zap.min.js","mlib/ratchet/js/ratchet.min.js","zapmobile/js/zmapi.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","zapmobile/js/zmjs.js","yesapp/js/yesapp-frame.js"] >
 <#assign a_macro_mobile_resources_thems_css=["mlib/apicloud/css/api.css","mlib/ratchet/css/ratchet.min.css","yesapp/css/yes-base.css"] >
 
 

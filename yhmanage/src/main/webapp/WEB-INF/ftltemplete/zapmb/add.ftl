@@ -3,9 +3,7 @@
     <span class="icon icon-left-nav"></span>
     返回
   </button>
-  <button class="btn btn-link btn-nav pull-right" <@m_mobile_call_page p_page="../tour/person" /> >
-    保存
-  </button>
+ 
   
   <@m_zapmacro_mobile_top_operate   b_page.getWebPage().getPageOperate()  "116001016" />
   

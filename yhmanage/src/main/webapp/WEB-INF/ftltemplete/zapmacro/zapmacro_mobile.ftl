@@ -206,7 +206,7 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 		<#elseif  e_field.getFieldTypeAid()=="104005022">
   			<@m_zapmacro_mobile_field_datesfm  e_field />
 	  	<#elseif  e_field.getFieldTypeAid()=="104005019">
-	  		<@m_zapmacro_mobile_field_select  e_field  e_page ""/>
+	  		<@m_zapmacro_mobile_field_select  e_field  e_page "请选择"/>
 	  	<#elseif  e_field.getFieldTypeAid()=="104005103">
 	  		<@m_zapmacro_mobile_field_checkbox  e_field  e_page />
 	  	<#elseif  e_field.getFieldTypeAid()=="104005020">

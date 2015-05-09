@@ -52,7 +52,16 @@
 
 
 
-<@m_mobile_body_end p_type="index" p_js=["yesapp/js/yesapp-index.js"] />
+
+
+<#assign user_support=b_method.upClass("com.srnpr.zapweb.websupport.UserSupport")>
+<#if user_support.checkLogin()>
+	<@m_mobile_body_end p_type="index" p_js=["yesapp/js/yesapp-index.js"] />
+<#else>
+	<@m_mobile_body_end p_type="index"  />
+	<@m_mobile_html_script e_info="$(function(){  zapjs.f.tourl('user-login.html')})" />
+</#if>
+
 <@m_mobile_html_end />
 
 
