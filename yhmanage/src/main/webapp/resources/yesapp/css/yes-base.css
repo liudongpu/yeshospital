@@ -25,6 +25,8 @@
 {
 	width:96%;
 	margin-left:2%;
+	clear:both;
+	padding-bottom:20px;
 }
 
 
@@ -37,6 +39,7 @@
 
 .form-horizontal .controls {
   margin-left: 30%;
+  width:65%;
 }
 
 /************************************************************************************/

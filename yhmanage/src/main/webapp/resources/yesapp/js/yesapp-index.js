@@ -19,16 +19,16 @@ apiready = function() {
 		},
 		index : 0,
 		frames : [ {
-			name : 'frame1',
+			name : 'frame-main',
 			url : '../mobile/frame-main.html'
 		}, {
-			name : 'frame2',
+			name : 'frame-daily',
 			url : '../mobile/frame-daily.html'
 		}, {
-			name : 'frame3',
+			name : 'frame-see',
 			url : '../mobile/frame-see.html'
 		}, {
-			name : 'frame4',
+			name : 'frame-my',
 			url : '../mobile/frame-my.html'
 		} ]
 	}, function(ret, err) {

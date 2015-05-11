@@ -531,7 +531,10 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 
 
 
-
+<#-- 隐藏参数 -->
+<#macro m_zapmacro_mobile_html_hidden e_id="" e_value="">
+	<input type="hidden" id="${e_id}" name="${e_id}" value="${e_value}" />
+</#macro>
 
 
 

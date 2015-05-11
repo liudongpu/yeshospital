@@ -88,8 +88,9 @@ zapjs.zw = {
 		var defaults = oData?{
 			api_target : sTarget,
 			api_input : zapjs.f.tojson(oData),
-			api_key : 'jsapi'
-		}:{api_key : 'jsapi',api_input:''};
+			api_key : zapjs.c.api_key,
+			api_token:zapjs.c.api_token
+		}:{api_key : zapjs.c.api_key,api_input:''};
 		
 
 		//oData = $.extend({}, defaults, oData || {});

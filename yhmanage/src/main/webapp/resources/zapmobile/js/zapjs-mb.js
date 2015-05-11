@@ -4,12 +4,6 @@
  * 其中zapjs.f 表示扩展功能
  */
 
-
-
-
-
-
-
 var zapjs = {
 	// 配置
 	c : {
@@ -20,9 +14,11 @@ var zapjs = {
 		main_iframe : 'main_iframe',
 		split : '|',
 		path_resources : '../resources/',
-		path_upload:'../upload/',
+		path_upload : '../upload/',
 		cookie_base : 'cookie-zw-',
 		cookie_user : 'userinfo',
+		api_key:'jsapi',
+		api_token:'',
 		extend : {},
 		// 是否调试模式
 		debug : true
@@ -60,7 +56,7 @@ zapjs.f = {
 
 	// 提交参数
 	ajaxsubmit : function(oElment, sAction, fSucceess, fError) {
-		var bReturn=true;
+		var bReturn = true;
 		if (sAction == "") {
 
 		}
@@ -75,36 +71,30 @@ zapjs.f = {
 			}
 		};
 
-		if(zapjs.f.callextend("zapjs_e_zapjs_f_ajaxsubmit_submit"))
-		{
+		if (zapjs.f.callextend("zapjs_e_zapjs_f_ajaxsubmit_submit")) {
 			$(oElment).ajaxSubmit(options);
-		}
-		else
-		{
-			bReturn=false;
+		} else {
+			bReturn = false;
 		}
 		return bReturn;
 
 	},
 	ajaxjson : function(sTarget, data, fCallBack) {
-		
-		
-		var options = {
-			
-			dataType: "json",
-		  url: sTarget,
-		  type: "POST",
-		  data: data,
-		  success: fCallBack,
-		   error: function (msg) {
-						zapjs.f.message('系统异步调用出现错误，请联系技术，谢谢！');
-		            }
-		};
-		
-		
-				$.ajax(options);
 
-		
+		var options = {
+
+			dataType : "json",
+			url : sTarget,
+			type : "POST",
+			data : data,
+			success : fCallBack,
+			error : function(msg) {
+				zapjs.f.message('系统异步调用出现错误，请联系技术，谢谢！');
+			}
+		};
+
+		$.ajax(options);
+
 		/*
 		 * $.getJSON(sTarget, data, fCallBack).fail(function() {
 		 * alert('系统异步调用出现错误，请联系技术，谢谢！'); });
@@ -145,17 +135,18 @@ zapjs.f = {
 	updomain : function(url) {
 
 		var host = "null";
-		if ( typeof url == "undefined" || null == url)
+		if (typeof url == "undefined" || null == url)
 			url = window.location.href;
 		var regex = /.*\:\/\/([^\/|:]*).*/;
 		var match = url.match(regex);
-		if ( typeof match != "undefined" && null != match) {
+		if (typeof match != "undefined" && null != match) {
 			host = match[1];
 		}
-		if ( typeof host != "undefined" && null != host) {
+		if (typeof host != "undefined" && null != host) {
 			var strAry = host.split(".");
 			if (strAry.length > 1) {
-				host = strAry[strAry.length - 2] + "." + strAry[strAry.length - 1];
+				host = strAry[strAry.length - 2] + "."
+						+ strAry[strAry.length - 1];
 			}
 		}
 
@@ -167,7 +158,7 @@ zapjs.f = {
 		var bReturn = true;
 
 		if (zapjs.c.extend[sId]) {
-			for (var p in zapjs.c.extend[sId]) {
+			for ( var p in zapjs.c.extend[sId]) {
 				var bFlag = zapjs.c.extend[sId][p]();
 				if (!bFlag) {
 					bReturn = false;
@@ -193,13 +184,22 @@ zapjs.f = {
 	upurl : function() {
 		return window.location.href;
 	},
+	// 删除左右两端的空格
+	trim:function(str){
+		
+		return str.replace(/(^\s*)|(\s*$)/g, "");
+		
+	　　},
+	
+	
 
 	/*
 	 * 自动刷新 如果有子页面 则刷新iframe
 	 */
 	autorefresh : function() {
 		if (zapjs.f.exist('main_iframe')) {
-			document.getElementById("main_iframe").contentWindow.zapjs.f.tourl();
+			document.getElementById("main_iframe").contentWindow.zapjs.f
+					.tourl();
 		} else {
 			zapjs.f.tourl();
 		}
@@ -207,9 +207,40 @@ zapjs.f = {
 	/*
 	 * 格式化字符串
 	 */
-	formatsplit:function(sSource)
-	{
-	return zapjs.f.replace(sSource,zapjs.c.split,'-');	
+	formatsplit : function(sSource) {
+		return zapjs.f.replace(sSource, zapjs.c.split, '-');
+	},
+
+	formatdate : function(date, format) {
+		var paddNum = function(num) {
+			num += "";
+			return num.replace(/^(\d)$/, "0$1");
+		}
+		// 指定格式字符
+		var cfg = {
+			yyyy : date.getFullYear() // 年 : 4位
+			,
+			yy : date.getFullYear().toString().substring(2)// 年 : 2位
+			,
+			M : date.getMonth() + 1 // 月 : 如果1位的时候不补0
+			,
+			MM : paddNum(date.getMonth() + 1) // 月 : 如果1位的时候补0
+			,
+			d : date.getDate() // 日 : 如果1位的时候不补0
+			,
+			dd : paddNum(date.getDate())// 日 : 如果1位的时候补0
+			,
+			hh : paddNum(date.getHours()) // 时
+			,
+			mm : paddNum(date.getMinutes()) // 分
+			,
+			ss : paddNum(date.getSeconds())
+		// 秒
+		}
+		format || (format = "yyyy-MM-dd hh:mm:ss");
+		return format.replace(/([a-z])(\1)*/ig, function(m) {
+			return cfg[m];
+		});
 	},
 
 	replace : function(sSource, sOld, sNew) {
@@ -225,9 +256,10 @@ zapjs.f = {
 		var args = arguments;
 
 		if (args && args.length >= 2) {
-			for (var i in args) {
+			for ( var i in args) {
 				if (i > 0) {
-					sInput = zapjs.f.replace(sInput, '{' + (i - 1) + '}', args[i]);
+					sInput = zapjs.f.replace(sInput, '{' + (i - 1) + '}',
+							args[i]);
 				}
 			}
 		}
@@ -249,48 +281,45 @@ zapjs.f = {
 		return document.getElementById(sId) ? true : false;
 
 	},
-	
-	create_position:function(options)
-	{
-		
+
+	create_position : function(options) {
+
 		var defaults = {
 			id : 'zapjs_f_id_window_position',
 			content : '',
-			source:null
+			source : null
 		};
 
 		var s = $.extend({}, defaults, options || {});
-		
-		
+
 		var offset_x = $(s.source).offset().top;
-		var offset_y=$(s.source).offset().left;
-		
-		
-		if(zapjs.f.exist(s.id))
-		{
-			$('#'+s.id).css('top',offset_x);
-			$('#'+s.id).css('left',offset_y);
-			$('#'+s.id).show();
-			return ;
+		var offset_y = $(s.source).offset().left;
+
+		if (zapjs.f.exist(s.id)) {
+			$('#' + s.id).css('top', offset_x);
+			$('#' + s.id).css('left', offset_y);
+			$('#' + s.id).show();
+			return;
 		}
-		
-		
-		
-		var sHtml='<div id="'+s.id+'" class="w_position" style="top:'+offset_x+'px;left:'+offset_y+'px;">'+s.content+'</div>';
-		
+
+		var sHtml = '<div id="' + s.id + '" class="w_position" style="top:'
+				+ offset_x + 'px;left:' + offset_y + 'px;">' + s.content
+				+ '</div>';
+
 		$('body').append(sHtml);
-		
+
 	},
 	// 浏览器信息
 	browser : function(sBrowser) {
 		var userAgent = navigator.userAgent.toLowerCase();
 		var bs = {
 			version : (userAgent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [
-			0, '0' ])[1],
+					0, '0' ])[1],
 			safari : /webkit/.test(userAgent),
 			opera : /opera/.test(userAgent),
 			msie : /msie/.test(userAgent) && !/opera/.test(userAgent),
-			mozilla : /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent)
+			mozilla : /mozilla/.test(userAgent)
+					&& !/(compatible|webkit)/.test(userAgent)
 		};
 
 		if (sBrowser) {
@@ -315,10 +344,6 @@ zapjs.f = {
 			id : sId,
 			close : true
 		});
-		
-		
-		
-		
 
 	},
 	// 弹出窗口
@@ -328,13 +353,13 @@ zapjs.f = {
 			content : '',
 			width : 600,
 			height : 400,
-			type:'text',
+			type : 'text',
 			title : '&nbsp;',
 			close : false
 		};
 
 		var s = $.extend({}, defaults, options || {});
-		
+
 		// s.onClose(function(){alert('2');});
 		if (s.close) {
 
@@ -345,16 +370,20 @@ zapjs.f = {
 
 		if (!zapjs.f.exist(s.id)) {
 
-			var sText = '<div id="' + s.id + '"  class="easyui-window" title="' + s.title + '"  data-options="iconCls:\'icon-save\',modal:true"></div>';
+			var sText = '<div id="'
+					+ s.id
+					+ '"  class="easyui-window" title="'
+					+ s.title
+					+ '"  data-options="iconCls:\'icon-save\',modal:true"></div>';
 
 			$(document.body).append(sText);
 		}
-		
-		if(s.url&&s.type=="iframe")
-		{
-			s.content='<iframe src="'+s.url+'" frameborder="0" style="width:100%;height:98%;"></iframe>';
+
+		if (s.url && s.type == "iframe") {
+			s.content = '<iframe src="'
+					+ s.url
+					+ '" frameborder="0" style="width:100%;height:98%;"></iframe>';
 		}
-		
 
 		$('#' + s.id).html(s.content);
 
@@ -363,17 +392,16 @@ zapjs.f = {
 			height : s.height,
 			modal : true,
 			closed : false,
-			onClose:function()
-			{
+			onClose : function() {
 				// 修正 关闭时强制删除所有元素
-				var oParent=$('#'+s.id).parent('.panel');
+				var oParent = $('#' + s.id).parent('.panel');
 				oParent.next('.window-shadow').remove();
 				oParent.next('.window-mask').remove();
 				oParent.remove();
 			}
 		});
 
-		if (s.url&&s.type!='iframe') {
+		if (s.url && s.type != 'iframe') {
 			$('#' + s.id).window('refresh', s.url);
 		}
 
@@ -384,24 +412,23 @@ zapjs.f = {
 		zapjs.f.modal({
 			content : sContent,
 			okfunc : okfunc,
-			id:'zapjs_f_id_modal_message'
+			id : 'zapjs_f_id_modal_message'
 		});
 	},
 
 	// 关闭模态窗口
-	modal_close:function(sId)
-	{
-		zapjs.f.modal(
-			{
-			id:sId,
-			close:true}
-			
+	modal_close : function(sId) {
+		zapjs.f.modal({
+			id : sId,
+			close : true
+		}
+
 		);
 	},
 	// 打开模态窗口
-	modal:function(options) {
+	modal : function(options) {
 
-		zmapi.m.alert(false,options);
+		zmapi.m.alert(false, options);
 
 	},
 
@@ -439,12 +466,11 @@ zapjs.f = {
 
 	},
 	//
-	split:function(sValue,sSplit){
-		
-		return sValue==""?[]:sValue.split(sSplit);
-		
+	split : function(sValue, sSplit) {
+
+		return sValue == "" ? [] : sValue.split(sSplit);
+
 	},
-	
 
 	// url替换 如果没有的话会自动添加 如果值为空则自动删除
 	urlreplace : function(sUrl, sKey, sValue) {
@@ -480,7 +506,7 @@ zapjs.f = {
 	}
 };
 
-if ( typeof define === "function" && define.amd) {
+if (typeof define === "function" && define.amd) {
 	define("zapjs/zapjs", [], function() {
 		return zapjs;
 	});
