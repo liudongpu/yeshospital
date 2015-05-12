@@ -9,11 +9,12 @@ import com.srnpr.zapcom.topapi.RootApi;
 import com.srnpr.zapweb.webapi.RootPageDataResult;
 import com.srnpr.zapweb.websupport.DataApiSupport;
 
-public class QueryMember extends RootApi<RootPageDataResult, QueryMemberInput> {
+public class QueryDrug extends RootApi<RootPageDataResult, QueryDrugInput> {
 
-	public RootPageDataResult Process(QueryMemberInput inputParam,
+	public RootPageDataResult Process(QueryDrugInput inputParam,
 			MDataMap mRequestMap) {
-
+		
+		
 		MDataMap mDataMap = new MDataMap();
 
 		ArrayList<String> aWhere = new ArrayList<String>();
@@ -21,22 +22,19 @@ public class QueryMember extends RootApi<RootPageDataResult, QueryMemberInput> {
 		if (StringUtils.isNotBlank(inputParam.getKeyWord())) {
 			mDataMap.put("keyword", "%" + inputParam.getKeyWord() + "%");
 
-			aWhere.add("member_name like :keyword or spell_info like :keyword ");
+			aWhere.add("drug_name like :keyword or spell_info like :keyword ");
 		}
 		
+		aWhere.add(" flag_enable=1 ");
 		
-		if (StringUtils.isNotBlank(inputParam.getGeracomiumCode())) {
-			mDataMap.put("geracomium_code", inputParam.getGeracomiumCode() );
-
-			aWhere.add("geracomium_code=:geracomium_code ");
-		}
 		
 		
 
-		return new DataApiSupport().upData("yh_member_extend_geracomium",
-				"member_code,member_name,room_name,spell_info", "spell_info",
+		return new DataApiSupport().upData("yh_drug_info",
+				"drug_code,drug_name", "spell_info",
 				aWhere, mDataMap, 0, 10);
-
+		
+		
 	}
 
 }

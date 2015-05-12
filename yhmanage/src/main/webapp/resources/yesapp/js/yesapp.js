@@ -9,12 +9,17 @@ var yesapp = {
 		page_data : {
 			api_name : "com_srnpr_zapweb_webapi_RootPageDataApi"
 		},
-		query_member:{
-			api_name:'com_srnpr_yeshospital_api_app_QueryMember'
+		query_member : {
+			api_name : 'com_srnpr_yeshospital_api_app_QueryMember'
 		},
-		main_page:{
-			api_name:'com_srnpr_yeshospital_api_app_FrameMain',
-			flag_token:true
+
+		query_drug : {
+			api_name : 'com_srnpr_yeshospital_api_app_QueryDrug'
+		},
+
+		main_page : {
+			api_name : 'com_srnpr_yeshospital_api_app_FrameMain',
+			flag_token : true
 		}
 	},
 
@@ -28,14 +33,12 @@ var yesapp = {
 			zapjs.f.message('api not exist!');
 			return false;
 		}
-		
-		
+
 		if (o_config.flag_token) {
 
 			zapjs.c.api_token = zapjs.f.cookie(zapjs.c.cookie_user);
 
 		}
-		
 
 		zapjs.zw.api_call(o_config['api_name'], oData, fCallBack);
 

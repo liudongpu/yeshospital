@@ -46,6 +46,42 @@ var yesapp_tour = {
 
 		$('#yesapp_ts_table').html(aHtml);
 
+	},
+	tour_drug_search : function(oEl) {
+
+		var sText = zapjs.f.trim($(oEl).val());
+
+		if (sText != "" && sText != yesapp_tour.temp.last_search) {
+
+			yesapp.api_call('query_drug', {
+				keyWord : sText
+			}, yesapp_tour.tour_drug_search_success);
+
+		}
+
+	},
+	tour_drug_search_success : function(oData) {
+
+		var aHtml = [];
+
+		//var sOrderCode = $('#yesapp_ts_tour_code').val();
+
+		for ( var i in oData.pageData) {
+
+			var o = oData.pageData[i];
+
+			aHtml
+					.push('<li class="table-view-cell" onclick="zmjs.page.open_page(\'tour-member?order_code='
+							
+							
+							+ '\')">'
+							+ o['drug_name']
+							+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>');
+
+		}
+
+		$('#yesapp_ts_table').html(aHtml);
+
 	}
 
 };
