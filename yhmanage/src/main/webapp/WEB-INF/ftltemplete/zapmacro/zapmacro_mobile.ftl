@@ -1,8 +1,9 @@
 <#-- 添加页 -->
 <#macro m_zapmacro_mobile_page_add e_page>
 <form class="form-horizontal" method="POST" >
+	<ul data-role="listview" data-inset="true">
 	<@m_zapmacro_mobile_auto_list  e_page.upAddData()   e_page  />
-	
+	</ul>
 </form>
 </#macro>
 
@@ -237,14 +238,13 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 
 <#macro m_zapmacro_mobile_field_start text="" for="">
 
-<div class="control-group">
-	<label class="control-label" for="${for}">${text}</label>
-	<div class="controls">
+	<li class="ui-field-contain">
+	<label  for="${for}">${text}</label>
+	
 
 </#macro>
 <#macro m_zapmacro_mobile_field_end>
-	</div>
-</div>
+	</li>
 </#macro>
 
 
@@ -519,8 +519,10 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
     			<#if e.getAreaTypeAid()==e_area_type>
     		
 	    			<#if e.getOperateTypeAid()=="116015010">
-	    				 <button class="btn btn-link btn-nav pull-right"  zapweb_attr_operate_id="${e.getOperateUid()}"  onclick="${e.getOperateLink()}"  >${e.getOperateName()}</button>
-	    			<#else>
+	    				 <button class="ui-btn-right"  zapweb_attr_operate_id="${e.getOperateUid()}"  onclick="${e.getOperateLink()}"  >${e.getOperateName()}</button>
+	    				
+
+						<#else>
 	    				
 	    			</#if>
     		

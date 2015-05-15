@@ -5,13 +5,17 @@
 <@m_mobile_body_begin />
 
 
-<header class="bar bar-nav">
-  <button class="btn btn-link btn-nav pull-left" <@m_mobile_back_page/> >
-    <span class="icon icon-left-nav"></span>
-    返回
-  </button>
-  <h1 class="title">选择老人</h1>
-</header>
+
+
+<div data-role="header" style="overflow:hidden;">
+<h1>填写信息</h1>
+	<a <@m_mobile_a_back/> data-icon="back" class="ui-btn-left">返回</a>
+    <a href="#" data-icon="plus" class="ui-btn-right">保存</a>
+
+	
+</div><!-- /header -->
+
+
 
 <div class="zmcss_o_a zmcss_w_96">
 
@@ -30,11 +34,11 @@
  	<input id="yesapp_ts_search" type="search" placeholder="请输入老人姓名" onkeyup="yesapp_tour.tour_select_search(this)"/>
 	
 	
-	<div class="card">
-  <ul class="table-view" id="yesapp_ts_table">
-    
-  </ul>
-</div>
+	<ul data-role="listview" data-inset="true" id="yesapp_ts_table">
+	</ul>
+	
+	
+	
 	
  </div>
 

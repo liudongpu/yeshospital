@@ -1,14 +1,15 @@
-<header class="bar bar-nav">
-  <button class="btn btn-link btn-nav pull-left" <@m_mobile_back_page/> >
-    <span class="icon icon-left-nav"></span>
-    返回
-  </button>
- 
-  
-  <@m_zapmacro_mobile_top_operate   b_page.getWebPage().getPageOperate()  "116001016" />
-  
-  <h1 class="title">${b_page.getWebPage().getPageName()}</h1>
-</header>
+
+
+
+<div data-role="header" style="overflow:hidden;">
+<h1>${b_page.getWebPage().getPageName()}</h1>
+	<a <@m_mobile_a_back/> data-icon="back" class="ui-btn-left">返回</a>
+    <@m_zapmacro_mobile_top_operate   b_page.getWebPage().getPageOperate()  "116001016" />
+
+	
+</div>
+
+
 
 
 <div class="zmcss_o_a zmcss_w_96">

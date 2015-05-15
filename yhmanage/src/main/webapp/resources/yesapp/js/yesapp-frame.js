@@ -23,27 +23,27 @@ var yesapp_frame = {
 			var o = oData.pageData[i];
 
 			aHtml
-					.push('<li class="table-view-cell media" onclick="zmjs.page.open_page(\'tour-select?tour_order='+o["tour_code"]+'\')" >');
-			aHtml
-					.push(' <a class="navigate-right"><div  class="media-object pull-left" >');
-
+					.push('<li  onclick="zmjs.page.open_page(\'tour-select?tour_order='+o["tour_code"]+'\')" ><a href="#">');
+			
+			
 			if (o["order_status"] == "") {
 
 				aHtml
-						.push('<button class="btn btn-negative btn-block">&nbsp;进行中&nbsp;</button>');
+						.push('<img src=""/>');
 			} else {
 				aHtml
-						.push('<button class="btn btn-primary btn-block btn-outlined">&nbsp;已完成&nbsp;</button>');
+						.push('<img src=""/>');
 			}
 
-			aHtml.push('</div><div class="media-body">');
-			aHtml.push(o["tour_date"]
-					+ '<p>'+o["geracomium_name"]+'<br/>已检查：11人 未检查：14人</p>');
-			aHtml.push('</div></a></li>');
+			aHtml.push('<h2>'+o["geracomium_name"]+'</h2>'
+					+ '<p>'+o["tour_date"]+'<br/>已检查：11人 未检查：14人</p>');
+			aHtml.push('</a></li>');
 
 		}
 
 		$('#yesapp_fm_main_list').html(aHtml.join(''));
+		
+		$('#yesapp_fm_main_list').listview('refresh');
 
 	}
 

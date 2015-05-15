@@ -5,19 +5,24 @@
 
 <@m_mobile_html_begin />
 <@m_mobile_body_begin />
-<div class="">
+<div class=""  data-role="page">
 	<div class="zmcss_h_10"></div>
 	<div class="zmcss_w_96 ">
-	 <button id="fm-create" class="btn  btn-positive zmcss_f_right" <@m_mobile_call_page p_page="../mb/page_add_m_yh_tour_order_info" />>
-  		<span class="icon icon-plus"></span>
+	 <button id="fm-create" class="ui-btn ui-btn-inline zmcss_f_right" <@m_mobile_call_page p_page="../mb/page_add_m_yh_tour_order_info" /> >
   		创建一个巡视
+  		
 	</button>
 	</div>
 	<div class="zmcss_h_10"></div>
 	
-	<ul class="table-view" id="yesapp_fm_main_list" >
-  
+	
+	<ul data-role="listview" data-inset="true"  id="yesapp_fm_main_list" >
+    
 	</ul>
+	
+	
+	
+	
 	
 	
 	

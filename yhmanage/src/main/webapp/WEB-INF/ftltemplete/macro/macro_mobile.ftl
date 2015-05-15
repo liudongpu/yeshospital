@@ -5,9 +5,12 @@
 <#-- 资源文件路径 -->
 <#assign a_macro_mobile_resources_link="../" >
 <#-- 项目特殊样式 -->
-<#assign a_macro_mobile_resources_thems_js=["mlib/apicloud/script/api.js","lib/jquery/jquery-last.min.js","lib/jquery/jquery-plugins-zap.min.js","mlib/ratchet/js/ratchet.min.js","zapmobile/js/zmapi.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","zapmobile/js/zmjs.js","yesapp/js/yesapp.js","yesapp/js/yesapp-frame.js"] >
-<#assign a_macro_mobile_resources_thems_css=["mlib/apicloud/css/api.css","mlib/ratchet/css/ratchet.min.css","yesapp/css/yes-base.css"] >
+<#assign a_macro_mobile_resources_thems_js=["mlib/apicloud/script/api.js","mlib/jquery/jquery-2.1.4.min.js","lib/jquery/jquery-plugins-zap.min.js","zapmobile/js/zmapi.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","zapmobile/js/zmjs.js","yesapp/js/yesapp.js","yesapp/js/yesapp-frame.js"] >
+<#assign a_macro_mobile_resources_thems_css=["mlib/apicloud/css/api.css","yesapp/css/yes-base.css"] >
 
+
+<#assign a_macro_mobile_resources_append_css=["mlib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css"] >
+<#assign a_macro_mobile_resources_append_js=["mlib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"] >
 
 <#macro m_mobile_html_js e_list>
 	<#list e_list as e>
@@ -46,7 +49,9 @@
   
    
 	<@m_mobile_html_css    a_macro_mobile_resources_thems_css />
-
+	<#if p_type!="index">
+	<@m_mobile_html_css a_macro_mobile_resources_append_css />
+	</#if>
 	  
 	 <@m_mobile_html_css    p_css />
 	 
@@ -70,12 +75,10 @@
 <#macro m_mobile_body_end  p_type="" p_js=[]>
 
 
-
-
-
-
 <@m_mobile_html_js a_macro_mobile_resources_thems_js />
-
+<#if p_type!="index">
+	<@m_mobile_html_js a_macro_mobile_resources_append_js />
+</#if>
 
 
 <@m_mobile_html_js p_js />
@@ -90,6 +93,16 @@
 </#macro>
 
 
+<#macro m_mobile_header_begin p_title="" >
+	<div data-role="header" style="overflow:hidden;">
+	<h1>${p_title}</h1>
+</#macro>
+
+
+<#macro m_mobile_header_end  >
+
+	</div>
+</#macro>
 
 
 
@@ -101,6 +114,15 @@
 <#macro m_mobile_back_page>
  onclick="zmjs.page.back_page()" 
 </#macro>
+
+<#macro m_mobile_a_back>
+ href="javascript:zmjs.page.back_page()" 
+</#macro>
+
+<#macro m_mobile_a_href  p_page="">
+  href="javascript:zmjs.page.open_page('${p_page}')" 
+</#macro>
+
 
 
 <#macro m_mobile_back_root>

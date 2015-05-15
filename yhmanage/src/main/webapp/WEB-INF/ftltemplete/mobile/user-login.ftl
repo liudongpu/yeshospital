@@ -7,16 +7,10 @@
 <@m_mobile_body_begin />
 
 
-<header class="bar bar-nav">
 
 
-  
-
-    		
-	    				
-  
-  <h1 class="title">用户登陆</h1>
-</header>
+<@m_mobile_header_begin p_title="用户登陆" />
+<@m_mobile_header_end />
 
 
 <div class="zmcss_o_a zmcss_w_96">
