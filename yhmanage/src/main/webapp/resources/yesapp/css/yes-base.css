@@ -62,3 +62,11 @@ body,div,a,span {
 	color: #fff;
 	font-weight: 400;
 }
+
+.yb_span_width_5em
+{
+	display:inline-block;
+	min-width:5em;
+}
+
+

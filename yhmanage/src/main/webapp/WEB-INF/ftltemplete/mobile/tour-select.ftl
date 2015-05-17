@@ -46,7 +46,7 @@
 	
 	
 	<div data-role="collapsible">
-	<h2>查看已检查老人</h2>
+	<h2>查看已检查老人<span class="zmcss_f_right" id="yesapp_ts_has_count">0</span></h2>
     <ul data-role="listview"  id="yesapp_ts_has_check">
         <li><a href="index.html">Acura</a></li>
         <li><a href="index.html">Audi</a></li>
@@ -69,7 +69,7 @@
 
  <@m_mobile_body_end p_js=["yesapp/js/yesapp-tour.js"]/>
  
- 
+ <@m_mobile_html_initjs e_js="yesapp_tour.init_tour_select()" />
  <@m_mobile_html_end />
 
 

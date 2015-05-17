@@ -8,8 +8,36 @@ var yesapp_tour = {
 	},
 
 	init_tour_select : function() {
-
+		yesapp_tour.refresh_tour_select();
 	},
+	
+	refresh_tour_select : function() {
+		yesapp.api_call('query_tour_detail', {
+			orderCode : $('#yesapp_ts_tour_code').val()
+		}, yesapp_tour.refresh_tour_select_success);
+	},
+	refresh_tour_select_success : function(oData) {
+		var aHtml = [];
+
+		// var sOrderCode = $('#yesapp_ts_tour_code').val();
+
+		yesapp_tour.temp.obj_temp = oData.pageData;
+		for ( var i in oData.pageData) {
+
+			var o = oData.pageData[i];
+
+			aHtml
+					.push('<li><span class="yb_span_width_5em">'+o["a_member_name"]+'</span>[房间：'+o["a_room_name"]+']</li>');
+
+		}
+		
+		$('#yesapp_ts_has_count').html(oData.pageData.length);
+
+		$('#yesapp_ts_has_check').html(aHtml);
+		$('#yesapp_ts_has_check').listview('refresh');
+	},
+	
+	
 
 	tour_select_search : function(oEl) {
 
@@ -40,9 +68,9 @@ var yesapp_tour = {
 							+ sOrderCode
 							+ '&member_code='
 							+ o["member_code"]
-							+ '\')">'
+							+ '\')"><span class="yb_span_width_5em">'
 							+ o['member_name']
-							+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(房间：'
+							+ '</span>(房间：'
 							+ o['room_name'] + ')</a></li>');
 
 		}
@@ -186,6 +214,7 @@ var yesapp_tour = {
 	tour_member_done:function()
 	{
 		zmapi.m.execjs("root.frame-main:yesapp_frame.init_frame_main()");
+		zmapi.m.execjs("tour-select:yesapp_tour.init_tour_select()");
 	}
 
 };
