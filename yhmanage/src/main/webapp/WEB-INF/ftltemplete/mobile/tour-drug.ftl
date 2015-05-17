@@ -13,7 +13,7 @@
 <@m_zapmacro_mobile_form_hidden e_id="yesapp_td_member_code" e_value=a_memberCode />
 
 <@m_mobile_header_begin p_title=b_page.getWebPage().getPageName() />
-	<a <@m_mobile_a_back/> data-icon="back" class="ui-btn-left">返回</a>
+	<@m_mobile_button_back />
 	<@m_zapmacro_mobile_top_operate   b_page.getWebPage().getPageOperate()  "116001016" />
 <@m_mobile_header_end />
 

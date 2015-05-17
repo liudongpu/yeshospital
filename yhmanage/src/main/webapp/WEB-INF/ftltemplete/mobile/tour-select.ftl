@@ -6,7 +6,7 @@
 
 
 <@m_mobile_header_begin p_title="巡视老人" />
-	<a <@m_mobile_a_back/> data-icon="back" class="ui-btn-left">返回</a>
+	<@m_mobile_button_back />
 	<a href="javascript:yesapp_tour.tour_select_option()" data-icon="gear" class="ui-btn-right">操作</a>
 <@m_mobile_header_end />
 
@@ -36,11 +36,31 @@
 
 	<div class="zmcss_h_20"></div>
 
- 	<input id="yesapp_ts_search" type="search" placeholder="请输入老人姓名" onkeyup="yesapp_tour.tour_select_search(this)"/>
+ 	<input id="yesapp_ts_search" type="search" placeholder="请输入老人姓名" onkeyup="yesapp_tour.tour_select_search(this)" onkeypress="yesapp_tour.tour_select_search(this)"/>
 	
 	
 	<ul data-role="listview" data-inset="true" id="yesapp_ts_table">
 	</ul>
+	
+	<div class="zmcss_h_20"></div>
+	
+	
+	<div data-role="collapsible">
+	<h2>查看已检查老人</h2>
+    <ul data-role="listview"  id="yesapp_ts_has_check">
+        <li><a href="index.html">Acura</a></li>
+        <li><a href="index.html">Audi</a></li>
+        <li><a href="index.html">BMW</a></li>
+        <li><a href="index.html">Cadillac</a></li>
+        <li><a href="index.html">Chrysler</a></li>
+        <li><a href="index.html">Dodge</a></li>
+        <li><a href="index.html">Ferrari</a></li>
+        <li><a href="index.html">Ford</a></li>
+        <li><a href="index.html">GMC</a></li>
+        <li><a href="index.html">Honda</a></li>
+    </ul>
+</div>
+	
 	
 	
 	

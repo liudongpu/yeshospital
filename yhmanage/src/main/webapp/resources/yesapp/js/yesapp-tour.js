@@ -182,6 +182,10 @@ var yesapp_tour = {
 	{
 		zmapi.m.toast('删除成功');
 		yesapp_tour.refresh_tour_member();
+	},
+	tour_member_done:function()
+	{
+		zmapi.m.execjs("root.frame-main:yesapp_frame.init_frame_main()");
 	}
 
 };

@@ -12,7 +12,7 @@
 
 
 <@m_mobile_header_begin p_title="个人信息" />
-	<a <@m_mobile_a_back/> data-icon="back" class="ui-btn-left">返回</a>
+	<@m_mobile_button_back />
 <@m_mobile_header_end />
 
 	<div class="zmcss_h_20"></div>

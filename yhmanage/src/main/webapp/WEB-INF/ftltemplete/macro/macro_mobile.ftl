@@ -132,9 +132,17 @@
 </#macro>
 
 
+<#-- 返回按钮  -->
+<#macro m_mobile_button_back >
+
+	<a <@m_mobile_a_back/>  data-icon="arrow-l" data-iconpos="notext" data-ajax="false">返回</a>
+	
+</#macro>
 
 
 
+
+<#-- 初始化数据操作脚本  -->
 <#macro m_mobile_init_dbcall>
 <#assign a_macro_mobile_dbcall=b_method.upClass("com.srnpr.zapweb.websupport.DataCallSupport") >
 </#macro>
