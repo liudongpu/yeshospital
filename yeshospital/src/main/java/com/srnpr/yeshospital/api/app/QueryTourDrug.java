@@ -22,7 +22,9 @@ public class QueryTourDrug extends
 		// 如果数据库中不存在该用户对应单据的记录 则取出该用户最近一条单据的记录
 		if (DbUp.upTable("yh_tour_order_detail").count("tour_code",
 				inputParam.getOrderCode(), "member_code",
-				inputParam.getMemberCode()) == 0) {
+				inputParam.getMemberCode()) == 0&&DbUp.upTable("yh_tour_order_drug").count("tour_code",
+						inputParam.getOrderCode(), "member_code",
+						inputParam.getMemberCode()) == 0) {
 
 			MDataMap mWhereMap = new MDataMap("member_code",
 					inputParam.getMemberCode());
@@ -40,7 +42,7 @@ public class QueryTourDrug extends
 					map.inAllValues("zid", "0", "uid", WebHelper.upUuid(),
 							"tour_code", inputParam.getOrderCode(),
 							"create_time", FormatHelper.upDateTime(),
-							"list_code", WebHelper.upCode("TOA"));
+							"record_code", WebHelper.upCode("TOA"));
 
 					DbUp.upTable("yh_tour_order_drug").dataInsert(map);
 				}

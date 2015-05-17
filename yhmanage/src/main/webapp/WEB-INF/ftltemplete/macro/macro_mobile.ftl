@@ -133,7 +133,9 @@
 
 
 
-
+<#macro m_mobile_init_dbcall>
+<#assign a_macro_mobile_dbcall=b_method.upClass("com.srnpr.zapweb.websupport.DataCallSupport") >
+</#macro>
 
 
 

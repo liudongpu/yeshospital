@@ -122,6 +122,8 @@ var yesapp_tour = {
 
 		zmjs.form.set('drug_name', o['drug_name']);
 		zmjs.form.set('drug_code', o['drug_code']);
+		zmjs.form.set('manufacturer', o['manufacturer']);
+		manufacturer
 
 	},
 	init_tour_drug : function() {
@@ -130,6 +132,11 @@ var yesapp_tour = {
 	},
 
 	init_tour_member : function() {
+		
+		
+		zmjs.form.set('member_code', $('#yesapp_tm_member_code').val());
+		zmjs.form.set('tour_code', $('#yesapp_tm_order_code').val());
+		
 		yesapp_tour.refresh_tour_member();
 	},
 	refresh_tour_member : function() {
@@ -153,7 +160,7 @@ var yesapp_tour = {
 							+ i
 							+ '\')"><h2>'
 							+ o['drug_name']
-							+ '</h2><p>Broken Bells</p></a><a href="javascript:yesapp_tour.tour_member_delete(\''
+							+ '</h2><p>是否代购：'+(o["flag_buy"]=="1"?"是":"否")+'&nbsp;&nbsp;&nbsp;购买数量：'+o["number_buy"]+'</p></a><a href="javascript:yesapp_tour.tour_member_delete(\''
 							+ i
 							+ '\')" >删除</a></li>');
 

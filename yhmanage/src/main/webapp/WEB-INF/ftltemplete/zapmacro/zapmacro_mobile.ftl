@@ -28,10 +28,15 @@
 
 <#-- 修改页 -->
 <#macro m_zapmacro_mobile_page_edit e_page>
+
+
 <form class="form-horizontal" method="POST" >
-	<@m_zapmacro_mobile_auto_list  e_page.upEditData()   e_page  />
-	<@m_zapmacro_mobile_auto_operate   e_page.getWebPage().getPageOperate()  "116001016" />
+	<ul data-role="listview" data-inset="true">
+		<@m_zapmacro_mobile_auto_list  e_page.upEditData()   e_page  />
+	</ul>
 </form>
+
+
 </#macro>
 
 
