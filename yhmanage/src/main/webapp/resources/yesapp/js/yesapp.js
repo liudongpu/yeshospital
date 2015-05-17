@@ -22,6 +22,10 @@ var yesapp = {
 		delete_tour_drug : {
 			api_name : 'com_srnpr_yeshospital_api_app_DeleteTourDrug'
 		},
+		finish_tour_order : {
+			api_name : 'com_srnpr_yeshospital_api_app_FinishTourOrder',
+			flag_token : true
+		},
 		main_page : {
 			api_name : 'com_srnpr_yeshospital_api_app_FrameMain',
 			flag_token : true

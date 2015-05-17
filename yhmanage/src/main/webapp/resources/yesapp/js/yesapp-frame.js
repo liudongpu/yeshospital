@@ -26,17 +26,17 @@ var yesapp_frame = {
 					.push('<li  onclick="zmjs.page.open_page(\'tour-select?tour_order='+o["tour_code"]+'\')" ><a href="#">');
 			
 			
-			if (o["order_status"] == "") {
+			if (o["order_status"] == "46580001000500020001") {
 
 				aHtml
-						.push('<img src=""/>');
+						.push('<div class="zmcss_f_left yb_show_tag zmcss_c_red">进行中</div>');
 			} else {
 				aHtml
-						.push('<img src=""/>');
+						.push('<div class="zmcss_f_left yb_show_tag zmcss_c_green">已完成</div>');
 			}
 
-			aHtml.push('<h2>'+o["geracomium_name"]+'</h2>'
-					+ '<p>'+o["tour_date"]+'<br/>已检查：11人 未检查：14人</p>');
+			aHtml.push('<h2>'+o["a_geracomium_name"]+'</h2>'
+					+ '<p>'+o["a_tour_date"]+'<br/>已检查：'+o["a_check_member"]+'人 共计：'+o["a_all_member"]+'人</p>');
 			aHtml.push('</a></li>');
 
 		}

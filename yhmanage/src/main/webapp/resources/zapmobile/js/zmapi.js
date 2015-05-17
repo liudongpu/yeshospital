@@ -131,9 +131,26 @@ zmapi.m = {
 		}
 	},
 
-	execjs : function(oExec) {
+	execjs : function(sExecDo) {
 		if (zmapi.c.flag_api) {
-			api.execScript(oExec);
+			//api.execScript(oExec);
+			var aTarget = sExecDo.split(':');
+
+			var oSet = {
+				name : aTarget[0],
+				script : aTarget[1]
+			};
+			if (aTarget[0].indexOf('.') > -1) {
+				var aName=aTarget[0].split('.');
+				
+				oSet.name=aName[0];
+				oSet.frameName=aName[1];
+				
+			}
+			api.execScript(oSet);
+			
+			
+			
 		}
 	}
 

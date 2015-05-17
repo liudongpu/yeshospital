@@ -5,15 +5,12 @@
 <@m_mobile_body_begin />
 
 
-
-
-<div data-role="header" style="overflow:hidden;">
-<h1>填写信息</h1>
+<@m_mobile_header_begin p_title="巡视老人" />
 	<a <@m_mobile_a_back/> data-icon="back" class="ui-btn-left">返回</a>
-    
+	<a href="javascript:yesapp_tour.tour_select_option()" data-icon="gear" class="ui-btn-right">操作</a>
+<@m_mobile_header_end />
 
-	
-</div><!-- /header -->
+
 
 
 
@@ -28,6 +25,14 @@
 
 	<@m_zapmacro_mobile_form_hidden e_id="yesapp_ts_tour_code" e_value=tour_code />
 	<@m_zapmacro_mobile_form_hidden e_id="yesapp_ts_geracomium_code" e_value=geracomium_code />
+
+	<div id="yesapp_ts_option" class="zmcss_d_none">
+		<div class="zmcss_h_20"></div>
+    	
+   		<button onclick="yesapp_tour.tour_select_finish()" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-grid">全部已巡视完成</button>
+
+	</div>
+
 
 	<div class="zmcss_h_20"></div>
 

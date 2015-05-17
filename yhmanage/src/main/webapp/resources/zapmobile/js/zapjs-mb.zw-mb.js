@@ -139,20 +139,8 @@ zapjs.zw = {
 
 		zapjs.f.autorefresh = function() {
 			if (sExecDo) {
-				var aTarget = sExecDo.split(':');
-
-				var oSet = {
-					name : aTarget[0],
-					script : aTarget[1]
-				};
-				if (aTarget[0].indexOf('.') > -1) {
-					var aName=aTarget[0].split('.');
-					
-					oSet.name=aName[0];
-					oSet.frameName=aName[1];
-					
-				}
-				zmapi.m.execjs(oSet);
+				
+				zmapi.m.execjs(sExecDo);
 			}
 			zmjs.page.back_page();
 		}

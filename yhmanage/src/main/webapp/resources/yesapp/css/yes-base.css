@@ -1,74 +1,64 @@
 /*****************************************************************/
-.bar
-{
-	background-color:#f2f2f2;
-	
-	height:50px;
-	position:relative;
+.bar {
+	background-color: #f2f2f2;
+	height: 50px;
+	position: relative;
 }
 
-.bar .btn-link
-{
-	
-	line-height:50px;
-	
-}
-.bar .btn .icon
-{
-	top:5px;
+.bar .btn-link {
+	line-height: 50px;
 }
 
+.bar .btn .icon {
+	top: 5px;
+}
 
 /** hack bootstrap*******************************************************************/
-
-.form-horizontal .control-group
-{
-	width:96%;
-	margin-left:2%;
-	clear:both;
-	padding-bottom:20px;
+.form-horizontal .control-group {
+	width: 96%;
+	margin-left: 2%;
+	clear: both;
+	padding-bottom: 20px;
 }
 
-
 .form-horizontal .control-label {
-  float: left;
-  width: 30%;
-  padding-top: 5px;
-  text-align: right;
+	float: left;
+	width: 30%;
+	padding-top: 5px;
+	text-align: right;
 }
 
 .form-horizontal .controls {
-  margin-left: 30%;
-  width:65%;
+	margin-left: 30%;
+	width: 65%;
 }
 
 /************************************************************************************/
-.yb_body
-{
-	width:96%;
-	margin-left:2%;
+body,div,a,span {
+	font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Light",
+		"Segoe UI Web Light", "Segoe UI Web Regular", "Segoe UI",
+		"Segoe UI Symbol", "HelveticaNeue-Light", "Helvetica Neue", Arial;
 }
 
-.yb_layout_box
-{
-	height:100%;
-	overflow:auto;
-	padding-bottom:50px;
+.yb_body {
+	width: 96%;
+	margin-left: 2%;
 }
 
+.yb_layout_box {
+	height: 100%;
+	overflow: auto;
+	padding-bottom: 50px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.yb_show_tag {
+	float: left;
+	height: 100%;
+	background-color: #D9534F;
+	font-size: 1.2em;
+	padding: 1em;
+	margin-right: 1em;
+	border-radius: 3px;
+	color: #fff;
+	font-weight: 400;
+}

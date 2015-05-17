@@ -47,11 +47,11 @@
     <title>${p_title}</title>
     
   
-   
-	<@m_mobile_html_css    a_macro_mobile_resources_thems_css />
-	<#if p_type!="index">
+   <#if p_type!="index">
 	<@m_mobile_html_css a_macro_mobile_resources_append_css />
 	</#if>
+	<@m_mobile_html_css    a_macro_mobile_resources_thems_css />
+	
 	  
 	 <@m_mobile_html_css    p_css />
 	 

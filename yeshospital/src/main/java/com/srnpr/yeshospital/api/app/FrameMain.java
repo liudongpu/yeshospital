@@ -19,7 +19,7 @@ public class FrameMain extends RootApiForToken<RootPageDataResult, RootInput> {
 
 		return new DataApiSupport()
 				.upData("yh_tour_order_info",
-						"tour_code,left(tour_date,10) as tour_date,order_status,create_name,(select geracomium_name from yh_geracomium_info where yh_geracomium_info.geracomium_code=yh_tour_order_info.geracomium_code) as geracomium_name",
+						"tour_code,left(tour_date,10) as a_tour_date,order_status,create_name,(select geracomium_name from yh_geracomium_info where yh_geracomium_info.geracomium_code=yh_tour_order_info.geracomium_code) as a_geracomium_name,(select count(1) from yh_member_extend_geracomium where yh_member_extend_geracomium.geracomium_code=yh_tour_order_info.geracomium_code) as a_all_member,(select count(1) from yh_tour_order_detail where yh_tour_order_detail.tour_code=yh_tour_order_info.tour_code) as a_check_member",
 						"-create_time", aWhere, mDataMap, 0, 0);
 
 	}

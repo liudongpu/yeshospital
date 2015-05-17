@@ -18,7 +18,8 @@ var yesapp_tour = {
 		if (sText != "" && sText != yesapp_tour.temp.last_search) {
 
 			yesapp.api_call('query_member', {
-				keyWord : sText
+				keyWord : sText,
+				geracomiumCode:$('#yesapp_ts_geracomium_code').val()
 			}, yesapp_tour.tour_select_search_success);
 
 		}
@@ -50,6 +51,29 @@ var yesapp_tour = {
 		$('#yesapp_ts_table').listview('refresh');
 
 	},
+	
+	tour_select_option:function()
+	{
+		
+		
+		$('#yesapp_ts_option').toggle();
+		
+	},
+	
+	tour_select_finish:function()
+	{
+		yesapp.api_call('finish_tour_order', {
+			orderCode : $('#yesapp_ts_tour_code').val()
+		}, yesapp_tour.tour_select_finish_success);
+
+	},
+	tour_select_finish_success : function(oData) {
+		zmapi.m.execjs("root.frame-main:yesapp_frame.init_frame_main()");
+		
+		zmjs.page.back_page();
+	},
+	
+	
 	tour_drug_search : function(oEl) {
 
 		var sText = zapjs.f.trim($(oEl).val());
