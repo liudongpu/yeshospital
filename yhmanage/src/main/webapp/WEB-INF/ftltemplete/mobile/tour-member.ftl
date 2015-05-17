@@ -56,7 +56,7 @@
 
 			<div>
             	<a <@m_mobile_a_href p_page="member-info?member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">个人信息</a>
-            	<a <@m_mobile_a_href p_page="tour-drug?order_code=${a_orderCode}&member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">购买购物</a>
+            	<a <@m_mobile_a_href p_page="tour-drug?order_code=${a_orderCode}&member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">购买药物</a>
             	<br/>
             	
             	

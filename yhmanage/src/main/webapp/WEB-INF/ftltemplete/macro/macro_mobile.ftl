@@ -5,8 +5,10 @@
 <#-- 资源文件路径 -->
 <#assign a_macro_mobile_resources_link="../" >
 <#-- 项目特殊样式 -->
-<#assign a_macro_mobile_resources_thems_js=["mlib/apicloud/script/api.js","mlib/jquery/jquery-2.1.4.min.js","lib/jquery/jquery-plugins-zap.min.js","zapmobile/js/zmapi.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","zapmobile/js/zmjs.js","yesapp/js/yesapp.js","yesapp/js/yesapp-frame.js"] >
-<#assign a_macro_mobile_resources_thems_css=["mlib/apicloud/css/api.css","yesapp/css/yes-base.css"] >
+
+<#assign a_macro_mobile_resources_base_js=["mlib/jquery/jquery-2.1.4.min.js"] >
+<#assign a_macro_mobile_resources_thems_js=["mlib/apicloud/script/api.js","lib/jquery/jquery-plugins-zap.min.js","zapmobile/js/zmapi.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","zapmobile/js/zmjs.js","yesapp/js/yesapp.js","yesapp/js/yesapp-frame.js"] >
+<#assign a_macro_mobile_resources_thems_css=["mlib/apicloud/css/api.css","zapmobile/css/zmcss.css","yesapp/css/yes-base.css"] >
 
 
 <#assign a_macro_mobile_resources_append_css=["mlib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css"] >
@@ -46,20 +48,22 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <title>${p_title}</title>
     
-  
+  <@m_mobile_html_js a_macro_mobile_resources_base_js />
    <#if p_type!="index">
-	<@m_mobile_html_css a_macro_mobile_resources_append_css />
+		<@m_mobile_html_css a_macro_mobile_resources_append_css />
+		<@m_mobile_html_js a_macro_mobile_resources_append_js />	
 	</#if>
+
 	<@m_mobile_html_css    a_macro_mobile_resources_thems_css />
-	
-	  
 	 <@m_mobile_html_css    p_css />
 	 
 	 
 	 
-	 <#-- 开发时使用 -->
+	 <#-- 开发时使用 
 	 <link rel="stylesheet/less" type="text/css" href="${a_macro_mobile_resources_link}resources/zapmobile/less/zmcss.less" />
 	<@m_mobile_html_js ["mlib/less/less.min.js"] />
+
+	-->
 	
 </#macro>
 
@@ -76,9 +80,7 @@
 
 
 <@m_mobile_html_js a_macro_mobile_resources_thems_js />
-<#if p_type!="index">
-	<@m_mobile_html_js a_macro_mobile_resources_append_js />
-</#if>
+
 
 
 <@m_mobile_html_js p_js />
