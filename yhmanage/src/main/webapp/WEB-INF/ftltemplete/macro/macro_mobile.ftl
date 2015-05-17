@@ -31,7 +31,7 @@
 
 </#macro>
 
-
+<#-- 页面初始化时执行脚本 -->
 <#macro m_mobile_html_initjs  e_js >
 <@m_mobile_html_script "$(function(){"+e_js+"}); " />
 

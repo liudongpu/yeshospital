@@ -1,20 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var zmjs = {};
 window.zmjs = zmjs;
 
@@ -23,7 +6,7 @@ zmjs.temp = {
 };
 
 zmjs.config = {
-
+	form_add : 'zw_f_'
 };
 
 zmjs.a = {
@@ -36,7 +19,27 @@ zmjs.a = {
 zmjs.func = {
 
 	convert_url : function(sUrl) {
-		return sUrl.replace('../', '').replace('/', '-');
+		
+		if(sUrl.indexOf('/')>-1)
+			{
+			sUrl=sUrl.substr(sUrl.indexOf('/'));
+			}
+		if(sUrl.indexOf('.')>-1)
+		{
+		sUrl=sUrl.substr(0,sUrl.indexOf('.'));
+		}
+		
+		if(sUrl.indexOf('?')>-1)
+		{
+		sUrl=sUrl.substr(0,sUrl.indexOf('?'));
+		}
+		
+		
+	   
+	    return sUrl;  
+		
+		
+		//return sUrl.replace('../', '').replace('/', '-');
 	}
 
 };
@@ -51,8 +54,7 @@ zmjs.page = {
 
 		zmapi.p.open_page(sUrl, zmjs.func.convert_url(sUrl));
 	},
-	
-	
+
 	back_page : function(sName) {
 		zmapi.p.close_window(sName);
 	},
@@ -63,5 +65,16 @@ zmjs.page = {
 };
 
 zmjs.ui = {
+
+};
+
+zmjs.form = {
+
+	set : function(sId, sVal) {
+		$('#' + zmjs.config.form_add + sId).val(sVal);
+	},
+	get : function(sId) {
+		return $('#' + zmjs.config.form_add + sId).val();2
+	}
 
 };

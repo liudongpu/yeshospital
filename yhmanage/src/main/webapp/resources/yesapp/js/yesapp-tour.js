@@ -76,19 +76,16 @@ var yesapp_tour = {
 
 			aHtml
 					.push('<li><a href="javascript:yesapp_tour.tour_drug_select(\''
-							+ i
-							+ '\')">'
-							+ o['drug_name']
-							+ '</a></li>');
+							+ i + '\')">' + o['drug_name'] + '</a></li>');
 
 		}
-		
+
 		$('#yesapp_ts_table').html(aHtml);
 		$('#yesapp_ts_table').listview('refresh');
 
 	},
 	tour_drug_search_clear : function() {
-		
+
 		$('#yesapp_ts_table').html('');
 		$('#yesapp_ts_search').val('');
 	},
@@ -98,9 +95,62 @@ var yesapp_tour = {
 		var o = yesapp_tour.temp.obj_temp[iIndex];
 
 		yesapp_tour.tour_drug_search_clear();
-		
-		
 
+		zmjs.form.set('drug_name', o['drug_name']);
+		zmjs.form.set('drug_code', o['drug_code']);
+
+	},
+	init_tour_drug : function() {
+		zmjs.form.set('member_code', $('#yesapp_td_member_code').val());
+		zmjs.form.set('tour_code', $('#yesapp_td_order_code').val());
+	},
+
+	init_tour_member : function() {
+		yesapp_tour.refresh_tour_member();
+	},
+	refresh_tour_member : function() {
+		yesapp.api_call('query_tour_drug', {
+			orderCode : $('#yesapp_tm_order_code').val(),
+			memberCode : $('#yesapp_tm_member_code').val()
+		}, yesapp_tour.refresh_tour_member_success);
+	},
+	refresh_tour_member_success : function(oData) {
+		var aHtml = [];
+
+		// var sOrderCode = $('#yesapp_ts_tour_code').val();
+
+		yesapp_tour.temp.obj_temp = oData.pageData;
+		for ( var i in oData.pageData) {
+
+			var o = oData.pageData[i];
+
+			aHtml
+					.push('<li><a href="javascript:yesapp_tour.tour_member_select(\''
+							+ i
+							+ '\')"><h2>'
+							+ o['drug_name']
+							+ '</h2><p>Broken Bells</p></a><a href="javascript:yesapp_tour.tour_member_delete(\''
+							+ i
+							+ '\')" >删除</a></li>');
+
+		}
+
+		$('#yesapp_tm_ul_drug').html(aHtml);
+		$('#yesapp_tm_ul_drug').listview('refresh');
+	},
+	tour_member_delete:function(iIndex)
+	{
+		
+		var o = yesapp_tour.temp.obj_temp[iIndex];
+		
+		yesapp.api_call('delete_tour_drug', {
+			recordCode : o["record_code"]
+		}, yesapp_tour.tour_member_delete_success);
+	},
+	tour_member_delete_success:function(oData)
+	{
+		zmapi.m.toast('删除成功');
+		yesapp_tour.refresh_tour_member();
 	}
 
 };

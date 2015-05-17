@@ -10,7 +10,7 @@
 <div data-role="header" style="overflow:hidden;">
 <h1>填写信息</h1>
 	<a <@m_mobile_a_back/> data-icon="back" class="ui-btn-left">返回</a>
-    <a href="#" data-icon="plus" class="ui-btn-right">保存</a>
+    
 
 	
 </div><!-- /header -->
@@ -26,8 +26,8 @@
 	<#assign geracomium_code=app_page.upTourOrderInfo(tour_code)["geracomium_code"]>
 	
 
-	<@m_zapmacro_mobile_html_hidden e_id="yesapp_ts_tour_code" e_value=tour_code />
-	<@m_zapmacro_mobile_html_hidden e_id="yesapp_ts_geracomium_code" e_value=geracomium_code />
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_ts_tour_code" e_value=tour_code />
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_ts_geracomium_code" e_value=geracomium_code />
 
 	<div class="zmcss_h_20"></div>
 

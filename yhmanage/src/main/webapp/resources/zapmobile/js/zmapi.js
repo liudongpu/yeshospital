@@ -118,6 +118,23 @@ zmapi.m = {
 		} else {
 			alert(s.content);
 		}
+	},
+	toast : function(sContent) {
+		if (zmapi.c.flag_api) {
+			api.toast({
+				msg : sContent,
+				duration : 2000,
+				location : 'bottom'
+			});
+		} else {
+			alert(sContent);
+		}
+	},
+
+	execjs : function(oExec) {
+		if (zmapi.c.flag_api) {
+			api.execScript(oExec);
+		}
 	}
 
 };

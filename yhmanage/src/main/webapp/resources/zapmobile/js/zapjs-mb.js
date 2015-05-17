@@ -197,12 +197,16 @@ zapjs.f = {
 	 * 自动刷新 如果有子页面 则刷新iframe
 	 */
 	autorefresh : function() {
+		
+		/*
 		if (zapjs.f.exist('main_iframe')) {
 			document.getElementById("main_iframe").contentWindow.zapjs.f
 					.tourl();
 		} else {
 			zapjs.f.tourl();
 		}
+		*/
+		
 	},
 	/*
 	 * 格式化字符串

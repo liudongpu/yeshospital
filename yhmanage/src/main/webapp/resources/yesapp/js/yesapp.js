@@ -16,7 +16,12 @@ var yesapp = {
 		query_drug : {
 			api_name : 'com_srnpr_yeshospital_api_app_QueryDrug'
 		},
-
+		query_tour_drug : {
+			api_name : 'com_srnpr_yeshospital_api_app_QueryTourDrug'
+		},
+		delete_tour_drug : {
+			api_name : 'com_srnpr_yeshospital_api_app_DeleteTourDrug'
+		},
 		main_page : {
 			api_name : 'com_srnpr_yeshospital_api_app_FrameMain',
 			flag_token : true

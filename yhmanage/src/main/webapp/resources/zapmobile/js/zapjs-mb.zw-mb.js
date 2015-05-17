@@ -39,17 +39,15 @@ zapjs.zw = {
 	},
 
 	modal_show : function(oSet) {
-		//top.zapjs.f.modal(oSet);
+		// top.zapjs.f.modal(oSet);
 		zapjs.f.modal(oSet);
 	},
 
 	modal_process : function() {
 		/*
-		zapjs.zw.modal_show({
-			content : '<div class="w_loading_small"></div>',
-			flagbutton : false
-		});
-		*/
+		 * zapjs.zw.modal_show({ content : '<div class="w_loading_small"></div>',
+		 * flagbutton : false });
+		 */
 	},
 
 	window_show : function(sContent) {
@@ -84,19 +82,21 @@ zapjs.zw = {
 	 */
 	api_call : function(sTarget, oData, fCallBack) {
 
-		//判断如果传入了oData则自动拼接 否则无所只传入key认证
-		var defaults = oData?{
+		// 判断如果传入了oData则自动拼接 否则无所只传入key认证
+		var defaults = oData ? {
 			api_target : sTarget,
 			api_input : zapjs.f.tojson(oData),
 			api_key : zapjs.c.api_key,
-			api_token:zapjs.c.api_token
-		}:{api_key : zapjs.c.api_key,api_input:''};
-		
+			api_token : zapjs.c.api_token
+		} : {
+			api_key : zapjs.c.api_key,
+			api_input : ''
+		};
 
-		//oData = $.extend({}, defaults, oData || {});
+		// oData = $.extend({}, defaults, oData || {});
 
 		zapjs.f.ajaxjson("../jsonapi/" + sTarget, defaults, function(data) {
-			//fCallBack(data);			
+			// fCallBack(data);
 			if (data.resultCode == "1") {
 
 				fCallBack(data);
@@ -106,13 +106,15 @@ zapjs.zw = {
 					content : data.resultMessage
 				});
 			}
-			
+
 		});
 
 	},
 
 	api_link : function(sTarget, sInput) {
-		return "../jsonapi/" + sTarget + "?api_target=" + sTarget + "&api_key=jsapi&api_input=" + (sInput == undefined ? '' : sInput);
+		return "../jsonapi/" + sTarget + "?api_target=" + sTarget
+				+ "&api_key=jsapi&api_input="
+				+ (sInput == undefined ? '' : sInput);
 	},
 
 	// 提交操作
@@ -121,11 +123,38 @@ zapjs.zw = {
 		var oForm = $(document.body).find("form");
 		if (zapjs.zw.func_regex(oForm)) {
 			zapjs.zw.modal_process();
-			if (zapjs.f.ajaxsubmit(oForm, "../func/" + $(oElm).attr('zapweb_attr_operate_id'), zapjs.zw.func_success, zapjs.zw.func_error)) {
+			if (zapjs.f.ajaxsubmit(oForm, "../func/"
+					+ $(oElm).attr('zapweb_attr_operate_id'),
+					zapjs.zw.func_success, zapjs.zw.func_error)) {
 
 			} else {
 				zapjs.f.modal_close();
 			}
+		}
+	},
+
+	// 提交操作并且执行一个跨页面的刷新并且返回上一页 移动端专用
+	func_doback : function(oElm, sExecDo) {
+		zapjs.zw.func_call(oElm);
+
+		zapjs.f.autorefresh = function() {
+			if (sExecDo) {
+				var aTarget = sExecDo.split(':');
+
+				var oSet = {
+					name : aTarget[0],
+					script : aTarget[1]
+				};
+				if (aTarget[0].indexOf('.') > -1) {
+					var aName=aTarget[0].split('.');
+					
+					oSet.name=aName[0];
+					oSet.frameName=aName[1];
+					
+				}
+				zmapi.m.execjs(oSet);
+			}
+			zmjs.page.back_page();
 		}
 	},
 
@@ -147,12 +176,13 @@ zapjs.zw = {
 				sErrorMsg = "不能为空";
 			}
 
-			//var sTitle = '';
+			// var sTitle = '';
 			if (!sTitle) {
 				if ($(el).attr('zapweb_attr_regex_title')) {
 					sTitle = $(el).attr('zapweb_attr_regex_title');
 				} else {
-					sTitle = $(el).parents('.control-group').find('.control-label').text();
+					sTitle = $(el).parents('.control-group').find(
+							'.control-label').text();
 				}
 			}
 
@@ -165,12 +195,12 @@ zapjs.zw = {
 	},
 
 	/*
-	 * 验证检查
-	 * @return 是否验证通过  true/false
+	 * 验证检查 @return 是否验证通过 true/false
 	 */
 	validate_check : function(sRegId, sVal) {
 		var iReturn = 1;
-		if (sRegId != "" && sRegId != "469923180001" && sRegId.indexOf('46992318') > -1) {
+		if (sRegId != "" && sRegId != "469923180001"
+				&& sRegId.indexOf('46992318') > -1) {
 
 			var rv = zapjs.zw.temp.regex['r_' + sRegId];
 			if (rv) {
@@ -188,7 +218,7 @@ zapjs.zw = {
 
 					} else if (sRegText.indexOf('-') == 0) {
 						sRegText = sRegText.substr(1);
-						//如果是负号  则可以为空
+						// 如果是负号 则可以为空
 						if (sVal == "") {
 							sRegText = "";
 						}
@@ -225,7 +255,7 @@ zapjs.zw = {
 		zapjs.f.message(sMessage);
 	},
 
-	//正则表达式验证form
+	// 正则表达式验证form
 	func_regex : function(oForm) {
 		var bFlag = true;
 
@@ -274,44 +304,51 @@ zapjs.zw = {
 	func_success : function(o) {
 
 		switch (o.resultType) {
-			case "116018010":
-				eval(o.resultObject);
-				break;
-			default:
-				// alert(o.resultMessage);
+		case "116018010":
+			eval(o.resultObject);
+			break;
+		default:
+			// alert(o.resultMessage);
 
-				if (o.resultCode == "1") {
+			if (o.resultCode == "1") {
 
-					if (o.resultMessage == "") {
-						o.resultMessage = "操作成功";
-					}
-
-					zapjs.zw.modal_show({
-						content : o.resultMessage,
-						okfunc : 'zapjs.f.autorefresh()'
-					});
-
-				} else {
-					zapjs.zw.modal_show({
-						content : o.resultMessage
-					});
+				/*
+				 * if (o.resultMessage == "") { o.resultMessage = "操作成功"; }
+				 * 
+				 * zapjs.zw.modal_show({ content : o.resultMessage, okfunc :
+				 * 'zapjs.f.autorefresh()' });
+				 */
+				if (o.resultMessage == "") {
+					o.resultMessage = "操作成功";
 				}
+				zmapi.m.toast(o.resultMessage);
 
-				break;
+				zapjs.f.autorefresh();
+
+			} else {
+				zapjs.zw.modal_show({
+					content : o.resultMessage
+				});
+			}
+
+			break;
 		}
 
 	},
 
 	func_export : function() {
 
-		//zapjs.f.tourl(zapjs.f.upurl().replace("/page/", "/export/"));
+		// zapjs.f.tourl(zapjs.f.upurl().replace("/page/", "/export/"));
 
 		var sUrl = zapjs.f.upurl().replace("/page/", "/export/");
 
 		var aHtml = [];
 		aHtml.push('<div class="w_p_20">');
-		aHtml.push('<a class="btn" target="_blank" href="' + sUrl + '">导出当前页</a>&nbsp;&nbsp;&nbsp;&nbsp;');
-		aHtml.push('<a class="btn" target="_blank" href="' + zapjs.f.urlreplace(sUrl, zapjs.c.web_paginaion + 'size', -1) + '">导出所有页</a>');
+		aHtml.push('<a class="btn" target="_blank" href="' + sUrl
+				+ '">导出当前页</a>&nbsp;&nbsp;&nbsp;&nbsp;');
+		aHtml.push('<a class="btn" target="_blank" href="'
+				+ zapjs.f.urlreplace(sUrl, zapjs.c.web_paginaion + 'size', -1)
+				+ '">导出所有页</a>');
 		aHtml.push('</div>');
 
 		zapjs.f.window_box({
@@ -372,8 +409,8 @@ zapjs.zw = {
 			slib = "lib/hack/ckeditor3/";
 		}
 
-		zapjs.f.require([slib + 'ckeditor'], function(a) {
-			zapjs.f.require([slib + 'adapters/jquery'], function(c) {
+		zapjs.f.require([ slib + 'ckeditor' ], function(a) {
+			zapjs.f.require([ slib + 'adapters/jquery' ], function(c) {
 				$('#' + sFieldName).ckeditor({
 					filebrowserImageUploadUrl : sUploadUrl + 'editor'
 				});
@@ -382,21 +419,17 @@ zapjs.zw = {
 		zapjs.e('zapjs_e_zapjs_f_ajaxsubmit_submit', zapjs.zw.editorsubmit);
 
 	},
-	
-	
-	login_post:function(oElm)
-	{
-		var oData=
-			{
-				loginName:$('#zw_f_login_name').val(),
-				loginPass:$('#zw_f_login_pass').val()
-			};
-		
-		
-		zapjs.zw.api_call("com_srnpr_yeshospital_api_user_UserLoginApi", oData, zapjs.zw.func_success);
-		
+
+	login_post : function(oElm) {
+		var oData = {
+			loginName : $('#zw_f_login_name').val(),
+			loginPass : $('#zw_f_login_pass').val()
+		};
+
+		zapjs.zw.api_call("com_srnpr_yeshospital_api_user_UserLoginApi", oData,
+				zapjs.zw.func_success);
+
 	},
-	
 
 	// 用户登录成功
 	login_sucess : function(oUserInfo) {
@@ -409,28 +442,23 @@ zapjs.zw = {
 		}
 
 	},
-	
-	check_login:function()
-	{
-		if( !zapjs.f.cookie(zapjs.c.cookie_user))
-			{
-				zmapi.open_page('user-login.html','user-login');
-			}
-		
-		
+
+	check_login : function() {
+		if (!zapjs.f.cookie(zapjs.c.cookie_user)) {
+			zmapi.open_page('user-login.html', 'user-login');
+		}
+
 		alert(zapjs.f.cookie(zapjs.c.cookie_user));
-		
+
 	},
-	
-	
-	
+
 	login_out : function(sUrl) {
 		zapjs.f.cookie(zapjs.c.cookie_user, '');
 		zapjs.f.tourl(sUrl);
 	}
 };
 
-if ( typeof define === "function" && define.amd) {
+if (typeof define === "function" && define.amd) {
 	define("zapjs/zapjs.zw", function() {
 		return zapjs.zw;
 	});

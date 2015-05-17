@@ -34,10 +34,26 @@ apiready = function() {
 	}, function(ret, err) {
 	});
 	
-	
-	
-	
-	
+	/*
+	var push = api.require('push');
+	push.bind({
+	    userName:'testName',
+	    userId:'testId'
+	},function(ret,err){
+	    if(ret){
+	        //api.alert({msg:ret.status});
+	    }else{
+	        api.alert({msg:err.msg});
+	    }
+	});
+	push.setListener(
+		    function(ret,err){
+		        if(ret){
+		            api.alert({msg:ret.data});
+		        }
+		    }
+		);
+	*/
 
 }
 // 随意切换按钮
