@@ -35,14 +35,12 @@ zmapi.f = {
 		if (browser.versions.mobile || browser.versions.ios
 				|| browser.versions.android || browser.versions.iPhone
 				|| browser.versions.iPad) {
-
+			
 			// 开始解决IOS7以上的工具条问题
 			var systemType = api.systemType;
 			
-			zmapi.m.alert(api.systemType+api.systemVersion);
 			if (systemType == "ios") {
-				
-				
+
 				var sVersion = parseInt(api.systemVersion);
 				
 				// 如果是IOS7以上版本
