@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.srnpr.zapweb.webfactory.UserFactory;
 import com.srnpr.zapweb.webmethod.RootControl;
 
 /**
@@ -22,12 +23,23 @@ import com.srnpr.zapweb.webmethod.RootControl;
 @Controller
 public class HomeController extends RootControl {
 
+	
+	public String mobileCheckLogin(String sInput) {
+		if (UserFactory.INSTANCE.checkUserLogin()) {
+			return sInput;
+		} else {
+			return "mobile/system-noaccess";
+		}
+	}
+	
+	
+	
 	@RequestMapping(value = "/mb/{url}")
 	public String mb(@PathVariable("url") String sUrl, Model model,
 			HttpServletRequest request) {
 		model.addAttribute("b_page", page_Process.process(sUrl, request));
 		model.addAttribute("b_method", web_method);
-		return web_method.checkLogin("page/mb");
+		return mobileCheckLogin("page/mb");
 	}
 
 	@RequestMapping(value = "/mobile/{url}")

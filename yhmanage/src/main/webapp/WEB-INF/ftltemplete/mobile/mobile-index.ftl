@@ -55,12 +55,19 @@
 
 
 <#assign user_support=b_method.upClass("com.srnpr.zapweb.websupport.UserSupport")>
+<#assign a_mobile_index_user_token="" >
 <#if user_support.checkLogin()>
-	<@m_mobile_body_end p_type="index" p_js=["yesapp/js/yesapp-index.js"] />
-<#else>
-	<@m_mobile_body_end p_type="index"  />
-	<@m_mobile_html_script e_info="$(function(){  zapjs.f.tourl('user-login.html')})" />
+	
+<#assign a_mobile_index_user_token="1" >
 </#if>
+
+<input type="hidden" name="yesapp_mobile_index_user_token" id="yesapp_mobile_index_user_token" value="${a_mobile_index_user_token}" />
+
+
+
+<@m_mobile_body_end p_type="index" p_js=["yesapp/js/yesapp-index.js"] />
+
+
 
 <@m_mobile_html_end />
 

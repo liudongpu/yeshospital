@@ -11,6 +11,9 @@ var yesapp_frame = {
 	},
 
 	init_frame_main : function() {
+		
+		//zmapi.p.user_login();
+		
 		yesapp.api_call('main_page', {
 
 		}, yesapp_frame.init_success_main);

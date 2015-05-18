@@ -49,6 +49,9 @@ var yesapp = {
 		if (o_config.flag_token) {
 
 			zapjs.c.api_token = zapjs.f.cookie(zapjs.c.cookie_user);
+			if (!zapjs.c.api_token) {
+				return false;
+			}
 
 		}
 

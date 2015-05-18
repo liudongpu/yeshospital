@@ -36,6 +36,23 @@ zmapi.f = {
 				|| browser.versions.android || browser.versions.iPhone
 				|| browser.versions.iPad) {
 
+			// 开始解决IOS7以上的工具条问题
+			var systemType = api.systemType;
+			
+			zmapi.m.alert(api.systemType+api.systemVersion);
+			if (systemType == "ios") {
+				
+				
+				var sVersion = parseInt(api.systemVersion);
+				
+				// 如果是IOS7以上版本
+				if (sVersion >= 7) {
+					$('#zmcss_mm_page_header').addClass('zmcss_ios_t_20');
+					$('#zmcss_mm_page_header').after('<div class="zmcss_ios_nav"></div>');
+				}
+
+			}
+
 		} else {
 			// alert(navigator.userAgent);
 			zmapi.c.flag_api = false;
@@ -79,6 +96,41 @@ zmapi.p = {
 				api.closeWin();
 			}
 
+		} else {
+			history.go(-1);
+		}
+	},
+	user_login : function() {
+
+		api.openFrame({
+			name : 'user-login',
+			url : 'user-login',
+			bounces : false
+
+		});
+
+	},
+	login_success : function() {
+
+		if (zmapi.c.flag_api) {
+			api.closeFrame({
+				name : 'user-login'
+			});
+		} else {
+			history.go(-1);
+		}
+	},
+	login_out : function() {
+		if (zmapi.c.flag_api) {
+			
+			//zmapi.m.execjs('root:zmapi.p.user_login()');
+			
+			api.closeToWin({
+				name : 'root'
+			});
+			
+			
+			
 		} else {
 			history.go(-1);
 		}
@@ -133,7 +185,7 @@ zmapi.m = {
 
 	execjs : function(sExecDo) {
 		if (zmapi.c.flag_api) {
-			//api.execScript(oExec);
+			// api.execScript(oExec);
 			var aTarget = sExecDo.split(':');
 
 			var oSet = {
@@ -141,17 +193,29 @@ zmapi.m = {
 				script : aTarget[1]
 			};
 			if (aTarget[0].indexOf('.') > -1) {
-				var aName=aTarget[0].split('.');
-				
-				oSet.name=aName[0];
-				oSet.frameName=aName[1];
-				
+				var aName = aTarget[0].split('.');
+
+				oSet.name = aName[0];
+				oSet.frameName = aName[1];
+
 			}
 			api.execScript(oSet);
-			
-			
-			
+
 		}
+	},
+	setprefs : function(sKey, sVal) {
+		api.setPrefs({
+			key : sKey,
+			value : sVal
+		});
+	},
+	getprefs : function(sKey, fCall) {
+		api.getPrefs({
+			key : sKey
+		}, function(ret, err) {
+			var v = ret.value;
+			fCall(v);
+		});
 	}
 
 };

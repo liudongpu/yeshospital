@@ -16,6 +16,26 @@ zmjs.a = {
 	}
 };
 
+
+zmjs.data={
+	
+		
+		save:function(sKey,sVal)
+		{
+			zapjs.f.cookie(sKey, sVal);
+		},
+		read:function(sKey)
+		{
+			return zapjs.f.cookie(sKey);
+		}
+		
+		
+};
+
+
+
+
+
 zmjs.func = {
 
 	convert_url : function(sUrl) {

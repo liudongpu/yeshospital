@@ -424,25 +424,52 @@ zapjs.zw = {
 		var sCookie = oUserInfo.cookieUser;
 
 		if (sCookie) {
-			zapjs.f.cookie(zapjs.c.cookie_user, sCookie);
-			zapjs.f.tourl($('#zapjs_zw_login_sucess_target').val());
+			//zapjs.f.cookie(zapjs.c.cookie_user, sCookie);
+			// zapjs.f.tourl($('#zapjs_zw_login_sucess_target').val());
+			
+			zapjs.zw.login_save(sCookie);
+			
+			//多个地方写入
+			
+			
+			setTimeout(function(){zmapi.p.login_success();},1000);
+			//zmapi.p.login_success();
+			
 
 		}
 
 	},
-
+	
+	login_save:function(sCookie)
+	{
+		zapjs.f.cookie(zapjs.c.cookie_user, sCookie);
+		zmapi.m.execjs('root:zapjs.zw.login_save("'+sCookie+'")');
+		zmapi.m.execjs('root.frame-main:zapjs.zw.login_save("'+sCookie+'")');
+		zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
+		
+		zmapi.m.setprefs(zapjs.c.cookie_user, sCookie);
+		
+	},
+	
+	// 用户登陆状态 已登陆返回true 未登陆返回false
+	login_status : function(oUserInfo) {
+		return zapjs.f.cookie(zapjs.c.cookie_user, sCookie)?true:false;
+	},
+	
 	check_login : function() {
 		if (!zapjs.f.cookie(zapjs.c.cookie_user)) {
 			zmapi.open_page('user-login.html', 'user-login');
 		}
 
-		alert(zapjs.f.cookie(zapjs.c.cookie_user));
+		
 
 	},
 
-	login_out : function(sUrl) {
+	login_out : function() {
 		zapjs.f.cookie(zapjs.c.cookie_user, '');
-		zapjs.f.tourl(sUrl);
+		zmapi.m.setprefs(zapjs.c.cookie_user, '');
+		//zapjs.f.tourl(sUrl);
+		zmapi.p.login_out();
 	}
 };
 
