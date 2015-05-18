@@ -96,7 +96,7 @@
 
 
 <#macro m_mobile_header_begin p_title="" >
-	<div data-role="header" style="overflow:hidden;">
+	<div data-role="header" style="overflow:hidden;"  data-position="fixed">
 	<h1>${p_title}</h1>
 </#macro>
 
