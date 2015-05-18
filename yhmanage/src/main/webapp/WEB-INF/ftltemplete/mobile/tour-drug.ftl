@@ -12,6 +12,9 @@
 <@m_zapmacro_mobile_form_hidden e_id="yesapp_td_order_code" e_value=a_orderCode />
 <@m_zapmacro_mobile_form_hidden e_id="yesapp_td_member_code" e_value=a_memberCode />
 
+<#assign a_member_info=b_method.upDataOne("yh_member_extend_geracomium","","","","member_code",a_memberCode) />
+<@m_zapmacro_mobile_form_hidden e_id="yesapp_td_account_type" e_value=a_member_info["account_type"] />
+
 <@m_mobile_header_begin p_title=b_page.getWebPage().getPageName() />
 	<@m_mobile_button_back />
 	<@m_zapmacro_mobile_top_operate   b_page.getWebPage().getPageOperate()  "116001016" />

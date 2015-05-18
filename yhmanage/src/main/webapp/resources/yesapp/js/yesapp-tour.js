@@ -151,12 +151,13 @@ var yesapp_tour = {
 		zmjs.form.set('drug_name', o['drug_name']);
 		zmjs.form.set('drug_code', o['drug_code']);
 		zmjs.form.set('manufacturer', o['manufacturer']);
-		manufacturer
+		
 
 	},
 	init_tour_drug : function() {
 		zmjs.form.set('member_code', $('#yesapp_td_member_code').val());
 		zmjs.form.set('tour_code', $('#yesapp_td_order_code').val());
+		zmjs.form.set('account_type', $('#yesapp_td_account_type').val());
 	},
 
 	init_tour_member : function() {
