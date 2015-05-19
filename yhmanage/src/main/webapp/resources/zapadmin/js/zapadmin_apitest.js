@@ -25,22 +25,22 @@ var zapadmin_apitest = {
 			{
 			
 			$('.apitest_show_priv').hide();
-			$('.apitest_show_token').hide();
+			//$('.apitest_show_token').hide();
 			
 			}else if(sType=="467701200004")
 				{
 				$('.apitest_show_priv').hide();
-				$('.apitest_show_token').show();
+				//$('.apitest_show_token').show();
 				}
 			else if(sType=="467701200002")
 			{
 			$('.apitest_show_priv').hide();
-			$('.apitest_show_token').hide();
+			//$('.apitest_show_token').hide();
 			}
 			else
 			{
 			$('.apitest_show_priv').show();
-			$('.apitest_show_token').show();
+			//$('.apitest_show_token').show();
 			}
 	},
 	
@@ -61,7 +61,7 @@ var zapadmin_apitest = {
 		var sId = node.id;
 
 		if (sId.toString().length > 12) {
-
+			$('#manage_apitest_return').html('');
 			zapjs.zw.api_call('com_srnpr_zapweb_webapi_InfoApi?zw_f_uid=' + node.attributes.uid,'', function(oData) {
 				// alert(data);
 				
@@ -101,7 +101,7 @@ var zapadmin_apitest = {
 				}
 				
 				$('#manage_apitest_javadoc').html(aHtml.join(''));
-
+				
 				$('#api_input').val(oData.resultObject.template_input);
 				
 				
@@ -130,7 +130,15 @@ var zapadmin_apitest = {
 		if ($('#manage_apitest_checkbox_apisecret').prop('checked')) {
 			$('#api_secret').val(sMd5);
 		}
-		var sUrl = "../jsonapi/" + $('#api_target').val();
+		
+		var lUrl=location.href;
+		
+		var aSplitUrl=lUrl.split('/');
+		aSplitUrl.pop();
+		aSplitUrl.pop();
+		
+		
+		var sUrl = aSplitUrl.join('/')+"/jsonapi/" + $('#api_target').val();
 		$('#manage_apitest_link').html(sUrl);
 
 		var queryString = $('#manage_apitest_form').formSerialize();
@@ -146,7 +154,7 @@ var zapadmin_apitest = {
 			api_timespan : $('#api_timespan').val()
 		}, function(data, status) {
 
-			$('#manage_apitest_return').html(zapjs.f.tojson(data));
+			$('#manage_apitest_return').text(zapjs.f.tojson(data));
 		});
 
 	},
