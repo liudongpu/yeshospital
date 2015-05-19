@@ -12,6 +12,13 @@ var zapweb_upload = {
 			sSet = '';
 		}
 
+		var sNumber = zapjs.f.upset(sSet, 'zw_s_number');
+		int
+		iMaxNum = 1;
+		if (sNumber != "") {
+			iMaxNum = parseInt(sNumber);
+		}
+
 		return '<input type="hidden" zapweb_attr_target_url="'
 				+ sTargetUpload
 				+ '"  zapweb_attr_set_params="'
@@ -22,7 +29,9 @@ var zapweb_upload = {
 				+ sId
 				+ '" value="'
 				+ sValue
-				+ '"><span class="control-upload_iframe"></span><span class="control-upload"></span>';
+				+ '"  '
+				+ (iMaxNum > 1 ? ('multiple="multiple"') : 0)
+				+ '><span class="control-upload_iframe"></span><span class="control-upload"></span>';
 
 	},
 
@@ -282,7 +291,22 @@ var zapweb_upload = {
 			sTitles = zapjs.f.split($('#' + sUploadTitle).val(), zapjs.c.split);
 		}
 
+		// 如果是添加
 		if (iIndex == -99) {
+
+			// 开始判断数量限制
+			var iMaxNumber = 1;
+			var sMax = zapjs.f.upset(sSetParams, 'zw_s_number');
+			if (sMax != "") {
+				iMaxNumber = parseInt(sMax);
+			}
+			// 定义如果超出最大上传数量限制 则返回
+			if (sFiles.length >= iMaxNumber) {
+				
+				alert("最多允许上传文件数量："+iMaxNumber);
+				return;
+			}
+
 			sFiles.push(sLink);
 			sLinks.push('');
 			sTitles.push('');
@@ -363,7 +387,16 @@ var zapweb_upload = {
 				 * zapweb_upload.upload_show(sField);
 				 */
 
-				zapweb_upload.change_index(sField, -99, o.resultObject);
+				// 如果是多文件上传 则开始插入多个文件
+				if (o.resultList != null && o.resultList.length > 1) {
+					for ( var i in o.resultList) {
+						zapweb_upload
+								.change_index(sField, -99, o.resultList[i]);
+					}
+
+				} else {
+					zapweb_upload.change_index(sField, -99, o.resultObject);
+				}
 
 				if (zapjs.f.callextend("zapjs_e_zapweb_upload_upload_success")) {
 
