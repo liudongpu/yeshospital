@@ -39,7 +39,7 @@ zapjs.zw = {
 	},
 
 	modal_show : function(oSet) {
-		//top.zapjs.f.modal(oSet);
+		// top.zapjs.f.modal(oSet);
 		zapjs.f.modal(oSet);
 	},
 
@@ -70,11 +70,71 @@ zapjs.zw = {
 
 	// 删除函数调用
 	func_delete : function(oElm, sUid) {
-
-		zapjs.zw.func_do(oElm, null, {
-			zw_f_uid : sUid
+		var sModel = '<div id="zapjs_f_id_modal_message" ></div>';
+		$(document.body).append(sModel);
+		$('#zapjs_f_id_modal_message').html(
+				'<div class="w_p_20">您确认删除该条数据吗？</div>');
+		var aButtons = [];
+		aButtons.push({
+			text : '是',
+			handler : function() {
+				$('#zapjs_f_id_modal_message').dialog('close');
+				$('#zapjs_f_id_modal_message').remove();
+				zapjs.zw.func_do(oElm, null, {
+					zw_f_uid : sUid
+				});
+			}
+		}, {
+			text : '否',
+			handler : function() {
+				$('#zapjs_f_id_modal_message').dialog('close');
+				$('#zapjs_f_id_modal_message').remove();
+			}
 		});
 
+		$('#zapjs_f_id_modal_message').dialog({
+			title : '提示消息',
+			width : '400',
+			resizable : true,
+			closed : false,
+			cache : false,
+			modal : true,
+			buttons : aButtons
+		});
+	},
+
+	func_tip : function(oElm, sUid, tip) {
+		var sModel = '<div id="zapjs_f_id_modal_message" ></div>';
+		$(document.body).append(sModel);
+		$('#zapjs_f_id_modal_message').html(
+				'<div class="w_p_20">您确认' + tip + '该条数据吗？</div>');
+		var aButtons = [];
+		aButtons.push({
+			text : '是',
+			handler : function() {
+				$('#zapjs_f_id_modal_message').dialog('close');
+				$('#zapjs_f_id_modal_message').remove();
+				zapjs.zw.func_do(oElm, null, {
+					zw_f_uid : sUid
+				});
+			}
+		}, {
+			text : '否',
+			handler : function() {
+				$('#zapjs_f_id_modal_message').dialog('close');
+				$('#zapjs_f_id_modal_message').remove();
+			}
+		});
+
+		$('#zapjs_f_id_modal_message').dialog({
+			title : '提示消息',
+			width : '400',
+			resizable : true,
+			closed : false,
+			cache : false,
+			modal : true,
+			buttons : aButtons
+		});
 	},
 
 	/*
@@ -82,18 +142,20 @@ zapjs.zw = {
 	 */
 	api_call : function(sTarget, oData, fCallBack) {
 
-		//判断如果传入了oData则自动拼接 否则无所只传入key认证
-		var defaults = oData?{
+		// 判断如果传入了oData则自动拼接 否则无所只传入key认证
+		var defaults = oData ? {
 			api_target : sTarget,
 			api_input : zapjs.f.tojson(oData),
 			api_key : 'jsapi'
-		}:{api_key : 'jsapi',api_input:''};
-		
+		} : {
+			api_key : 'jsapi',
+			api_input : ''
+		};
 
-		//oData = $.extend({}, defaults, oData || {});
+		// oData = $.extend({}, defaults, oData || {});
 
 		zapjs.f.ajaxjson("../jsonapi/" + sTarget, defaults, function(data) {
-			//fCallBack(data);			
+			// fCallBack(data);
 			if (data.resultCode == "1") {
 
 				fCallBack(data);
@@ -103,13 +165,15 @@ zapjs.zw = {
 					content : data.resultMessage
 				});
 			}
-			
+
 		});
 
 	},
 
 	api_link : function(sTarget, sInput) {
-		return "../jsonapi/" + sTarget + "?api_target=" + sTarget + "&api_key=jsapi&api_input=" + (sInput == undefined ? '' : sInput);
+		return "../jsonapi/" + sTarget + "?api_target=" + sTarget
+				+ "&api_key=jsapi&api_input="
+				+ (sInput == undefined ? '' : sInput);
 	},
 
 	// 提交操作
@@ -118,7 +182,9 @@ zapjs.zw = {
 		var oForm = $(oElm).parents("form");
 		if (zapjs.zw.func_regex(oForm)) {
 			zapjs.zw.modal_process();
-			if (zapjs.f.ajaxsubmit(oForm, "../func/" + $(oElm).attr('zapweb_attr_operate_id'), zapjs.zw.func_success, zapjs.zw.func_error)) {
+			if (zapjs.f.ajaxsubmit(oForm, "../func/"
+					+ $(oElm).attr('zapweb_attr_operate_id'),
+					zapjs.zw.func_success, zapjs.zw.func_error)) {
 
 			} else {
 				zapjs.f.modal_close();
@@ -144,12 +210,13 @@ zapjs.zw = {
 				sErrorMsg = "不能为空";
 			}
 
-			//var sTitle = '';
+			// var sTitle = '';
 			if (!sTitle) {
 				if ($(el).attr('zapweb_attr_regex_title')) {
 					sTitle = $(el).attr('zapweb_attr_regex_title');
 				} else {
-					sTitle = $(el).parents('.control-group').find('.control-label').text();
+					sTitle = $(el).parents('.control-group').find(
+							'.control-label').text();
 				}
 			}
 
@@ -162,12 +229,12 @@ zapjs.zw = {
 	},
 
 	/*
-	 * 验证检查
-	 * @return 是否验证通过  true/false
+	 * 验证检查 @return 是否验证通过 true/false
 	 */
 	validate_check : function(sRegId, sVal) {
 		var iReturn = 1;
-		if (sRegId != "" && sRegId != "469923180001" && sRegId.indexOf('46992318') > -1) {
+		if (sRegId != "" && sRegId != "469923180001"
+				&& sRegId.indexOf('46992318') > -1) {
 
 			var rv = zapjs.zw.temp.regex['r_' + sRegId];
 			if (rv) {
@@ -185,7 +252,7 @@ zapjs.zw = {
 
 					} else if (sRegText.indexOf('-') == 0) {
 						sRegText = sRegText.substr(1);
-						//如果是负号  则可以为空
+						// 如果是负号 则可以为空
 						if (sVal == "") {
 							sRegText = "";
 						}
@@ -222,7 +289,7 @@ zapjs.zw = {
 		zapjs.f.message(sMessage);
 	},
 
-	//正则表达式验证form
+	// 正则表达式验证form
 	func_regex : function(oForm) {
 		var bFlag = true;
 
@@ -271,44 +338,47 @@ zapjs.zw = {
 	func_success : function(o) {
 
 		switch (o.resultType) {
-			case "116018010":
-				eval(o.resultObject);
-				break;
-			default:
-				// alert(o.resultMessage);
+		case "116018010":
+			eval(o.resultObject);
+			break;
+		default:
+			// alert(o.resultMessage);
 
-				if (o.resultCode == "1") {
+			if (o.resultCode == "1") {
 
-					if (o.resultMessage == "") {
-						o.resultMessage = "操作成功";
-					}
-
-					zapjs.zw.modal_show({
-						content : o.resultMessage,
-						okfunc : 'zapjs.f.autorefresh()'
-					});
-
-				} else {
-					zapjs.zw.modal_show({
-						content : o.resultMessage
-					});
+				if (o.resultMessage == "") {
+					o.resultMessage = "操作成功";
 				}
 
-				break;
+				zapjs.zw.modal_show({
+					content : o.resultMessage,
+					okfunc : 'zapjs.f.autorefresh()'
+				});
+
+			} else {
+				zapjs.zw.modal_show({
+					content : o.resultMessage
+				});
+			}
+
+			break;
 		}
 
 	},
 
 	func_export : function() {
 
-		//zapjs.f.tourl(zapjs.f.upurl().replace("/page/", "/export/"));
+		// zapjs.f.tourl(zapjs.f.upurl().replace("/page/", "/export/"));
 
 		var sUrl = zapjs.f.upurl().replace("/page/", "/export/");
 
 		var aHtml = [];
 		aHtml.push('<div class="w_p_20">');
-		aHtml.push('<a class="btn" target="_blank" href="' + sUrl + '">导出当前页</a>&nbsp;&nbsp;&nbsp;&nbsp;');
-		aHtml.push('<a class="btn" target="_blank" href="' + zapjs.f.urlreplace(sUrl, zapjs.c.web_paginaion + 'size', -1) + '">导出所有页</a>');
+		aHtml.push('<a class="btn" target="_blank" href="' + sUrl
+				+ '">导出当前页</a>&nbsp;&nbsp;&nbsp;&nbsp;');
+		aHtml.push('<a class="btn" target="_blank" href="'
+				+ zapjs.f.urlreplace(sUrl, zapjs.c.web_paginaion + 'size', -1)
+				+ '">导出所有页</a>');
 		aHtml.push('</div>');
 
 		zapjs.f.window_box({
@@ -369,8 +439,8 @@ zapjs.zw = {
 			slib = "lib/hack/ckeditor3/";
 		}
 
-		zapjs.f.require([slib + 'ckeditor'], function(a) {
-			zapjs.f.require([slib + 'adapters/jquery'], function(c) {
+		zapjs.f.require([ slib + 'ckeditor' ], function(a) {
+			zapjs.f.require([ slib + 'adapters/jquery' ], function(c) {
 				$('#' + sFieldName).ckeditor({
 					filebrowserImageUploadUrl : sUploadUrl + 'editor'
 				});
@@ -379,21 +449,17 @@ zapjs.zw = {
 		zapjs.e('zapjs_e_zapjs_f_ajaxsubmit_submit', zapjs.zw.editorsubmit);
 
 	},
-	
-	
-	login_post:function(oElm)
-	{
-		var oData=
-			{
-				loginName:$(oElm).parents('form').find('#zw_f_login_name').val(),
-				loginPass:$(oElm).parents('form').find('#zw_f_login_pass').val()
-			};
-		
-		
-		zapjs.zw.api_call("com_srnpr_zapweb_webapi_UserLoginApi", oData, zapjs.zw.func_success);
-		
+
+	login_post : function(oElm) {
+		var oData = {
+			loginName : $(oElm).parents('form').find('#zw_f_login_name').val(),
+			loginPass : $(oElm).parents('form').find('#zw_f_login_pass').val()
+		};
+
+		zapjs.zw.api_call("com_srnpr_zapweb_webapi_UserLoginApi", oData,
+				zapjs.zw.func_success);
+
 	},
-	
 
 	// 用户登录成功
 	login_sucess : function(oUserInfo) {
@@ -409,10 +475,66 @@ zapjs.zw = {
 	login_out : function(sUrl) {
 		zapjs.f.cookie(zapjs.c.cookie_user, '');
 		zapjs.f.tourl(sUrl);
+	},
+
+	flow_call : function(oElm, sOrderCode, sFlowCode) {
+		zapjs.zw.api_call('com_srnpr_zapweb_webflow_FlowNextApi', {
+			orderCode : sOrderCode,
+			flowCode : sFlowCode
+		}, zapjs.zw.flow_show);
+	},
+	flow_show : function(oData) {
+		var aHtml = [];
+		aHtml.push('<div style="padding:50px 0px 0px 50px;">');
+		
+
+		
+		if(oData.status.length==0)
+			{
+			aHtml
+			.push('暂无可处理的节点。');
+			}
+		else
+			{
+			aHtml
+			.push('备注信息：<textarea id="zapjs_f_id_flow_show_remark"></textarea>');
+			}
+		
+		for ( var i in oData.status) {
+			var o = oData.status[i];
+
+			aHtml
+					.push('<br/><br/><input type="button" class="btn  btn-success" onclick="zapjs.zw.flow_change(\''
+							+ oData["flowCode"]
+							+ '\',\''
+							+ oData["orderCode"]
+							+ '\',\''
+							+ o["statusCode"]
+							+ '\')" value="处理到'
+							+ o["statusName"] + '"/>');
+
+		}
+
+		zapjs.f.window_box({
+			content : aHtml.join(''),
+			title : '流程处理'
+		});
+	},
+	flow_change : function(sFlowCode, sOrderCode, sStatusCode) {
+		zapjs.zw.api_call('com_srnpr_zapweb_webflow_FlowProcessUserApi', {
+			orderCode : sOrderCode,
+			flowCode : sFlowCode,
+			statusCode : sStatusCode,
+			remark : $('#zapjs_f_id_flow_show_remark').val()
+		}, zapjs.zw.flow_process);
+	},
+	flow_process : function() {
+		zapjs.f.autorefresh();
 	}
+
 };
 
-if ( typeof define === "function" && define.amd) {
+if (typeof define === "function" && define.amd) {
 	define("zapjs/zapjs.zw", function() {
 		return zapjs.zw;
 	});
