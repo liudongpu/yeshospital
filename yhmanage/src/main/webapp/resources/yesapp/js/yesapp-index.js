@@ -41,9 +41,12 @@ apiready = function() {
 	 * push.setListener( function(ret,err){ if(ret){ api.alert({msg:ret.data}); } } );
 	 */
 
-	var user_token = $api.val($api.dom('#yesapp_mobile_index_user_token'));
+	// var user_token = $api.val($api.dom('#yesapp_mobile_index_user_token'));
+	var user_token = "";
 
 	if (user_token == "") {
+
+		var iNumber = 0;
 
 		zmapi.m.getprefs(
 
@@ -51,7 +54,10 @@ apiready = function() {
 			if (!sValue) {
 				zmapi.p.user_login();
 			} else {
-				zapjs.zw.login_save(sValue);
+				if (iNumber == 0) {
+					iNumber = 1;
+					zapjs.zw.login_save(sValue);
+				}
 			}
 		});
 

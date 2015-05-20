@@ -35,18 +35,19 @@ zmapi.f = {
 		if (browser.versions.mobile || browser.versions.ios
 				|| browser.versions.android || browser.versions.iPhone
 				|| browser.versions.iPad) {
-			
+
 			// 开始解决IOS7以上的工具条问题
 			var systemType = api.systemType;
-			
+
 			if (systemType == "ios") {
 
 				var sVersion = parseInt(api.systemVersion);
-				
+
 				// 如果是IOS7以上版本
 				if (sVersion >= 7) {
 					$('#zmcss_mm_page_header').addClass('zmcss_ios_t_20');
-					$('#zmcss_mm_page_header').after('<div class="zmcss_ios_nav"></div>');
+					$('#zmcss_mm_page_header').after(
+							'<div class="zmcss_ios_nav"></div>');
 				}
 
 			}
@@ -120,15 +121,13 @@ zmapi.p = {
 	},
 	login_out : function() {
 		if (zmapi.c.flag_api) {
-			
-			//zmapi.m.execjs('root:zmapi.p.user_login()');
-			
+
+			// zmapi.m.execjs('root:zmapi.p.user_login()');
+
 			api.closeToWin({
 				name : 'root'
 			});
-			
-			
-			
+
 		} else {
 			history.go(-1);
 		}
@@ -207,6 +206,7 @@ zmapi.m = {
 			value : sVal
 		});
 	},
+	// 获取属性值 该回调会执行多次监听 需要判断只执行一次代码
 	getprefs : function(sKey, fCall) {
 		api.getPrefs({
 			key : sKey

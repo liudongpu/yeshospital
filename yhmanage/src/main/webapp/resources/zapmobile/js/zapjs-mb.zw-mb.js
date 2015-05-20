@@ -139,7 +139,7 @@ zapjs.zw = {
 
 		zapjs.f.autorefresh = function() {
 			if (sExecDo) {
-				
+
 				zmapi.m.execjs(sExecDo);
 			}
 			zmjs.page.back_page();
@@ -415,61 +415,64 @@ zapjs.zw = {
 		};
 
 		zapjs.zw.api_call("com_srnpr_yeshospital_api_user_UserLoginApi", oData,
-				zapjs.zw.func_success);
+				zapjs.zw.login_sucess);
 
 	},
 
 	// 用户登录成功
 	login_sucess : function(oUserInfo) {
-		var sCookie = oUserInfo.cookieUser;
+		var sCookie = oUserInfo.userToken;
 
 		if (sCookie) {
-			//zapjs.f.cookie(zapjs.c.cookie_user, sCookie);
+			// zapjs.f.cookie(zapjs.c.cookie_user, sCookie);
 			// zapjs.f.tourl($('#zapjs_zw_login_sucess_target').val());
-			
+
 			zapjs.zw.login_save(sCookie);
-			
-			//多个地方写入
-			
-			
-			setTimeout(function(){zmapi.p.login_success();},1000);
-			//zmapi.p.login_success();
-			
+
+			// 多个地方写入
+
+			setTimeout(function() {
+				
+				zmapi.p.login_success();
+			}, 1000);
+			// zmapi.p.login_success();
 
 		}
 
 	},
-	
-	login_save:function(sCookie)
-	{
+
+	login_save : function(sCookie) {
 		zapjs.f.cookie(zapjs.c.cookie_user, sCookie);
-		zmapi.m.execjs('root:zapjs.zw.login_save("'+sCookie+'")');
-		zmapi.m.execjs('root.frame-main:zapjs.zw.login_save("'+sCookie+'")');
+		zmapi.m.execjs('root:zapjs.zw.login_save("' + sCookie + '")');
+		zmapi.m
+				.execjs('root.frame-main:zapjs.zw.login_save("' + sCookie
+						+ '")');
 		zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
-		
+
 		zmapi.m.setprefs(zapjs.c.cookie_user, sCookie);
-		
+
 	},
-	
+
 	// 用户登陆状态 已登陆返回true 未登陆返回false
 	login_status : function(oUserInfo) {
-		return zapjs.f.cookie(zapjs.c.cookie_user, sCookie)?true:false;
+		return zapjs.f.cookie(zapjs.c.cookie_user, sCookie) ? true : false;
 	},
-	
+
 	check_login : function() {
 		if (!zapjs.f.cookie(zapjs.c.cookie_user)) {
 			zmapi.open_page('user-login.html', 'user-login');
 		}
-
-		
 
 	},
 
 	login_out : function() {
 		zapjs.f.cookie(zapjs.c.cookie_user, '');
 		zmapi.m.setprefs(zapjs.c.cookie_user, '');
-		//zapjs.f.tourl(sUrl);
+		// zapjs.f.tourl(sUrl);
+		// zmapi.m.alert('x');
+		// zmapi.m.execjs('root:zmapi.m.alert("s");');
 		zmapi.p.login_out();
+
 	}
 };
 

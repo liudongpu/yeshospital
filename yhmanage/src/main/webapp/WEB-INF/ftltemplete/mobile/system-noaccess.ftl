@@ -25,6 +25,6 @@
 
  <@m_mobile_body_end />
  
-
+ <@m_mobile_html_initjs e_js="zapjs.zw.login_out()" />
  
  <@m_mobile_html_end />
