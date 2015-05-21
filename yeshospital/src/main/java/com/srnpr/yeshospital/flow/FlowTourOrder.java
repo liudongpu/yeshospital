@@ -21,7 +21,7 @@ public class FlowTourOrder extends RootFlowChange {
 	public MWebResult afterChange() {
 
 		// 购药前核对
-		if (getFlowChange().getStatus().equals("46580001000500020003")) {
+		if (getFlowChange().getStatus().equals("46580001000500020004")) {
 
 			String sOrderCode = getFlowChange().getOrderCode();
 
