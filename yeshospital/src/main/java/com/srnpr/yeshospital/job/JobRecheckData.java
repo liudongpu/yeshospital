@@ -9,11 +9,8 @@ import com.srnpr.zapdata.dbdo.DbUp;
 public class JobRecheckData extends RootJob {
 
 	public void doExecute(JobExecutionContext context) {
-		
-		DbUp
-		.upTable("yh_define")
-		.dataSqlOne(
-				"call proc_yh_recheck_data();",
+
+		DbUp.upTable("yh_define").dataExec("call proc_yh_recheck_data();",
 				new MDataMap());
 
 	}
