@@ -8,8 +8,10 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.srnpr.yeshospital.et.model.EtConfigRsync;
+import com.srnpr.yeshospital.helper.LogHttpHelper;
 import com.srnpr.zapcom.baseclass.BaseClass;
 import com.srnpr.zapcom.basehelper.DateHelper;
+import com.srnpr.zapcom.basehelper.EncodeHelper;
 import com.srnpr.zapcom.basehelper.MapHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.basesupport.WebClientSupport;
@@ -59,24 +61,25 @@ public abstract class EtRsyncBase extends BaseClass {
 		List<String> strings = new ArrayList<String>();
 
 		for (String sKey : mDataMap.upKeys()) {
-			try {
-				strings.add(sKey
-						+ "="
-						+ URLEncoder.encode(mDataMap.get(sKey),
-								TopConst.CONST_BASE_ENCODING));
-			} catch (UnsupportedEncodingException e) {
 
-				e.printStackTrace();
-			}
+			strings.add(sKey + "=" + EncodeHelper.urlEncode(mDataMap.get(sKey)));
+
 		}
 
-		String sBaseUrl = bConfig("yeshospital.et_address")
-				+ etConfigRsync.getUrl() + "?" + StringUtils.join(strings, "&");
+		String sTarget = bConfig("yeshospital.et_address")
+				+ etConfigRsync.getUrl();
+
+		String sRequestData = StringUtils.join(strings, "&");
+
+		String sBaseUrl = sTarget + "?" + sRequestData;
+
+		String sLogCode = LogHttpHelper.AddLog("46580001000200040001", sTarget,
+				EncodeHelper.urlDecode(sRequestData));
 
 		try {
 			sReturn = WebClientSupport.create().doGet(sBaseUrl);
+			LogHttpHelper.UpdateLog(sLogCode, sReturn, 1, 1, 1);
 
-			bLogInfo(965805251, sBaseUrl, sReturn);
 		} catch (Exception e) {
 
 			e.printStackTrace();

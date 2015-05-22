@@ -19,8 +19,6 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 		extends RootApiForManage<TResult, TInput> implements
 		IPostDataApi<TResult, TInput> {
 
-	
-
 	public TResult upResult(TInput tInput, String sLogCode, String sManageCode) {
 
 		return toPost(tInput, sLogCode, sManageCode);
@@ -36,27 +34,15 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 	public MWebResult checkAndInit(IPostDataInput iPostDataInput) {
 		MWebResult mWebResult = new MWebResult();
 
-		MDataMap mDeviceMap = DbUp.upTable("yh_device_info").one(
-				"decive_series", iPostDataInput.getPostDecviceSerial());
+		if (iPostDataInput.getPostType().equals("card")) {
 
-		if (mWebResult.upFlagTrue()) {
-			if (!(mDeviceMap != null && mDeviceMap.size() > 0)) {
-				mWebResult.inErrorMessage(965805101,
-						iPostDataInput.getPostDecviceSerial());
-			}
-		}
-
-		if (mWebResult.upFlagTrue()) {
-			if (!StringUtils.equals(mDeviceMap.get("flag_active"), "1")) {
-				mWebResult.inErrorMessage(965805102,
-						iPostDataInput.getPostDecviceSerial());
-			}
-		}
-
-		if (mWebResult.upFlagTrue()) {
-
-			MDataMap mMemberMap = DbUp.upTable("yh_member_device").one(
-					"decive_code", mDeviceMap.get("decive_code"));
+			MDataMap mMemberMap = DbUp.upTable("yh_member_extend_geracomium").oneWhere("", "", "lpad(post_card,20,'0')=:post_card", "post_card",iPostDataInput.getPostDecviceSerial())
+			;
+			
+			
+		
+			
+			
 
 			if (mMemberMap != null && mMemberMap.size() > 0) {
 
@@ -66,6 +52,39 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 						iPostDataInput.getPostDecviceSerial());
 			}
 
+		} else {
+
+			MDataMap mDeviceMap = DbUp.upTable("yh_device_info").one(
+					"decive_series", iPostDataInput.getPostDecviceSerial());
+
+			if (mWebResult.upFlagTrue()) {
+				if (!(mDeviceMap != null && mDeviceMap.size() > 0)) {
+					mWebResult.inErrorMessage(965805101,
+							iPostDataInput.getPostDecviceSerial());
+				}
+			}
+
+			if (mWebResult.upFlagTrue()) {
+				if (!StringUtils.equals(mDeviceMap.get("flag_active"), "1")) {
+					mWebResult.inErrorMessage(965805102,
+							iPostDataInput.getPostDecviceSerial());
+				}
+			}
+
+			if (mWebResult.upFlagTrue()) {
+
+				MDataMap mMemberMap = DbUp.upTable("yh_member_device").one(
+						"decive_code", mDeviceMap.get("decive_code"));
+
+				if (mMemberMap != null && mMemberMap.size() > 0) {
+
+					memberCode = mMemberMap.get("member_code");
+				} else {
+					mWebResult.inErrorMessage(965805103,
+							iPostDataInput.getPostDecviceSerial());
+				}
+
+			}
 		}
 
 		return mWebResult;

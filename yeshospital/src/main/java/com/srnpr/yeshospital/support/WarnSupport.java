@@ -14,6 +14,7 @@ import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebHelper;
 import com.srnpr.zapweb.webdo.WebTemp;
 import com.srnpr.zapweb.webmodel.MWebResult;
+import com.srnpr.zapweb.webmodel.MWebUpload;
 
 /**
  * 报警检测
@@ -118,6 +119,15 @@ public class WarnSupport extends BaseClass {
 					"define_name", "define_code", sWarnLevel);
 
 			String sMemberMobile = "";
+
+			if (mWebResult.upFlagTrue()) {
+
+				if (DbUp.upTable("yh_member_info").count("member_code",
+						sMemberCode) <= 0) {
+					mWebResult.inErrorMessage(965805805, sMemberCode);
+				}
+
+			}
 
 			/*
 			 * 中度异常：发短信给老人，家属，社区医院。
