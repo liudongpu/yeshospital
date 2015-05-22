@@ -1,5 +1,7 @@
 package com.srnpr.yeshospital.et.rsync;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,8 @@ import com.srnpr.zapcom.basehelper.DateHelper;
 import com.srnpr.zapcom.basehelper.MapHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.basesupport.WebClientSupport;
+import com.srnpr.zapcom.topdo.TopConst;
+import com.srnpr.zapweb.webdo.WebConst;
 
 public abstract class EtRsyncBase extends BaseClass {
 
@@ -55,7 +59,15 @@ public abstract class EtRsyncBase extends BaseClass {
 		List<String> strings = new ArrayList<String>();
 
 		for (String sKey : mDataMap.upKeys()) {
-			strings.add(sKey + "=" + mDataMap.get(sKey));
+			try {
+				strings.add(sKey
+						+ "="
+						+ URLEncoder.encode(mDataMap.get(sKey),
+								TopConst.CONST_BASE_ENCODING));
+			} catch (UnsupportedEncodingException e) {
+
+				e.printStackTrace();
+			}
 		}
 
 		String sBaseUrl = bConfig("yeshospital.et_address")
