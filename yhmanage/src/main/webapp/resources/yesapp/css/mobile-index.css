@@ -35,19 +35,19 @@ html, body {
         }
 
         .cloud {
-            background-image: url(../image/bottombtn0101.png);
+            background-image: url(../image/btn1-1.png);
         }
 
         .client {
-            background-image: url(../image/bottombtn0201.png);
+            background-image: url(../image/btn2-1.png);
         }
 
         .dev {
-            background-image: url(../image/bottombtn0301.png);
+            background-image: url(../image/btn3-1.png);
         }
 
         .doc {
-            background-image: url(../image/bottombtn0401.png);
+            background-image: url(../image/btn4-1.png);
         }
 
         #footer li {
@@ -70,19 +70,19 @@ html, body {
         }
 
         .active .cloud {
-            background-image: url(../image/bottombtn0102.png);
+            background-image: url(../image/btn1-2.png);
         }
 
         .active .client {
-            background-image: url(../image/bottombtn0202.png);
+            background-image: url(../image/btn2-2.png);
         }
 
         .active .dev {
-            background-image: url(../image/bottombtn0302.png);
+            background-image: url(../image/btn3-2.png);
         }
 
         .active .doc {
-            background-image: url(../image/bottombtn0402.png);
+            background-image: url(../image/btn4-2.png);
         }
 
         .active .bottom_btn {
