@@ -2,8 +2,55 @@ var zmapi = {
 
 };
 window.zmapi = zmapi;
+// 配置
 zmapi.c = {
-	flag_api : true
+
+	// 标记是否加载的apicloud版
+	flag_api : true,
+
+	// 是否加载debug模式
+	flag_debug : false,
+	name_storage_debug : 'zmapi_name_storage_debug',
+	// 事件名称
+	event : {
+		login_out : 'zmapi_event_login_out',
+		login_success : 'zmapi_event_loin_success'
+	}
+};
+
+zmapi.d = function(oInfo) {
+	// 如果启用了调试模式
+	if (zmapi.c.flag_debug) {
+		var oElm = zmapi.f.readstorage(zmapi.c.name_storage_debug);
+
+		var sDebug = zmapi.f.readstorage(zmapi.c.name_storage_debug);
+
+		var oElm = {
+			items : []
+		};
+
+		if (sDebug) {
+			oElm = JSON.parse(sDebug);
+		}
+
+		var oItem = {
+			time : new Date(),
+			info : oInfo
+		};
+
+		if (zmapi.c.flag_api) {
+			oItem.page = api.winName;
+		}
+
+		oElm.items.push(oItem);
+
+		sDebug = JSON.stringify(oElm);
+
+		zmapi.f.savestorage(zmapi.c.name_storage_debug, sDebug);
+
+		console.log(sDebug);
+
+	}
 };
 
 zmapi.f = {
@@ -55,8 +102,25 @@ zmapi.f = {
 		} else {
 			// alert(navigator.userAgent);
 			zmapi.c.flag_api = false;
+			// 如果不是手机版 则默认开启调试模式
+			zmapi.f.opendebug();
 		}
 
+	},
+
+	opendebug : function() {
+
+		zmapi.c.flag_debug = true;
+		// zmapi.f.savestorage(zmapi.c.name_storage_debug, '');
+	},
+
+	// 本地存储 h5版
+	savestorage : function(sName, oTarget) {
+		localStorage.setItem(sName, oTarget);
+	},
+	// 读取本地存储 h5版
+	readstorage : function(sName) {
+		return localStorage.getItem(sName);
 	}
 
 };
@@ -112,9 +176,13 @@ zmapi.p = {
 	login_success : function() {
 
 		if (zmapi.c.flag_api) {
+
+			zmapi.m.sendevent(zmapi.c.event.login_success, {});
+
 			api.closeFrame({
 				name : 'user-login'
 			});
+
 		} else {
 			history.go(-1);
 		}
@@ -122,11 +190,14 @@ zmapi.p = {
 	login_out : function() {
 		if (zmapi.c.flag_api) {
 
-			// zmapi.m.execjs('root:zmapi.p.user_login()');
+			var winName = api.winName;
+			if (winName != 'root') {
+				api.closeToWin({
+					name : 'root'
+				});
+			}
 
-			api.closeToWin({
-				name : 'root'
-			});
+			zmapi.m.sendevent(zmapi.c.event.login_out, {});
 
 		} else {
 			history.go(-1);
@@ -181,12 +252,19 @@ zmapi.m = {
 	},
 
 	execjs : function(sExecDo) {
+
+		zmapi.d({
+			'target_name' : 'zmapi.m.execjs',
+			'js' : sExecDo
+		});
+
 		if (zmapi.c.flag_api) {
 			// api.execScript(oExec);
 			var aTarget = sExecDo.split(':');
 
 			var oSet = {
 				name : aTarget[0],
+				frameName : aTarget[0],
 				script : aTarget[1]
 			};
 			if (aTarget[0].indexOf('.') > -1) {
@@ -206,7 +284,7 @@ zmapi.m = {
 			value : sVal
 		});
 	},
-	// 获取属性值 该回调会执行多次监听 需要判断只执行一次代码
+	// 获取属性值
 	getprefs : function(sKey, fCall) {
 		api.getPrefs({
 			key : sKey
@@ -214,6 +292,41 @@ zmapi.m = {
 			var v = ret.value;
 			fCall(v);
 		});
+	},
+
+	// 添加事件监听
+	addevent : function(sName, fCall) {
+
+		zmapi.d({
+			'target_name' : 'zmapi.m.addevent',
+			'event_name' : sName
+		});
+
+		if (zmapi.c.flag_api) {
+			api.addEventListener({
+				name : sName
+			}, function(ret, err) {
+				var v = ret.value;
+				fCall(v);
+			});
+		}
+	},
+	// 发送事件
+	sendevent : function(sName, oJson) {
+
+		zmapi.d({
+			'target_name' : 'zmapi.m.sendevent',
+			'event_name' : sName,
+			'event_data' : oJson
+		});
+
+		if (zmapi.c.flag_api) {
+			api.sendEvent({
+				name : sName,
+				extra : oJson
+			});
+		}
+
 	}
 
 };

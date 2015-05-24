@@ -1,4 +1,24 @@
 apiready = function() {
+
+	var sFlagDebug = $('#yesapp_mobile_index_flag_debug').val();
+
+	if (sFlagDebug == "1") {
+		//zmapi.m.alert('调试模式开启');
+		zmapi.f.opendebug();
+
+		$('header').click(function() {
+			zmapi.p.open_page('system-debug', 'system-debug');
+		});
+
+		// 注册android下的菜单键
+		api.addEventListener({
+			name : 'keymenu'
+		}, function(ret, err) {
+			zmapi.p.open_page('system-debug', 'system-debug');
+		})
+
+	}
+
 	var $header = $api.dom('header');
 	$api.fixIos7Bar($header);
 	var $body = $api.dom('body');
@@ -51,6 +71,7 @@ apiready = function() {
 		zmapi.m.getprefs(
 
 		zapjs.c.cookie_user, function(sValue) {
+
 			if (!sValue) {
 				zmapi.p.user_login();
 			} else {
@@ -64,6 +85,14 @@ apiready = function() {
 		// zapjs.zw.check_login();
 
 	}
+	;
+
+	// 添加退出检测判断事件
+	zmapi.m.addevent(zmapi.c.event.login_out, function(sVal) {
+		zmapi.p.user_login();
+	}
+
+	);
 
 }
 // 随意切换按钮

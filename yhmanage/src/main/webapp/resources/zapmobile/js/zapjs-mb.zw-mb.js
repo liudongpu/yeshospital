@@ -443,13 +443,19 @@ zapjs.zw = {
 
 	login_save : function(sCookie) {
 		zapjs.f.cookie(zapjs.c.cookie_user, sCookie);
+		/*
 		zmapi.m.execjs('root:zapjs.zw.login_save("' + sCookie + '")');
 		zmapi.m
 				.execjs('root.frame-main:zapjs.zw.login_save("' + sCookie
 						+ '")');
+		
+		*/
+		//zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
 		zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
-
 		zmapi.m.setprefs(zapjs.c.cookie_user, sCookie);
+		
+		
+		
 
 	},
 

@@ -48,7 +48,7 @@
 	  	
 	
 </form>
-<input type="hidden" id="zapjs_zw_login_sucess_target" value="mobile-index.html"/>
+<input type="hidden" id="zapjs_zw_login_sucess_target" value="mobile-index"/>
  <button class="btn btn-positive btn-block" onclick="zapjs.zw.login_post(this)">登陆</button>
 
  </div>

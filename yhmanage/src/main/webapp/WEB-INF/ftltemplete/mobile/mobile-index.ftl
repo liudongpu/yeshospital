@@ -64,6 +64,9 @@
 <input type="hidden" name="yesapp_mobile_index_user_token" id="yesapp_mobile_index_user_token" value="${a_mobile_index_user_token}" />
 
 
+<#assign a_mobile_index_flag_debug=RequestParameters['debug']?default("") >
+<input type="hidden" name="yesapp_mobile_index_flag_debug" id="yesapp_mobile_index_flag_debug" value="${a_mobile_index_flag_debug}" />
+
 
 <@m_mobile_body_end p_type="index" p_js=["yesapp/js/yesapp-index.js"] />
 

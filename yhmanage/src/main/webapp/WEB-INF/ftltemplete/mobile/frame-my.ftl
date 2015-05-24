@@ -19,8 +19,8 @@
     <li><a href="#"><img src="../resources/yesapp/demo/fi.png" alt="Finland" class="ui-li-icon">意见反馈</a></li>
     <li><a href="#"><img src="../resources/yesapp/demo/us.png" alt="United States" class="ui-li-icon ui-corner-none">关于</a></li>
 	</ul>
-	
-
+	<div class="zmcss_h_10"></div>
+	 <button class="btn btn-positive btn-block" onclick="zapjs.zw.login_out(this)">退出当期账号</button>
 </div>
  
  
