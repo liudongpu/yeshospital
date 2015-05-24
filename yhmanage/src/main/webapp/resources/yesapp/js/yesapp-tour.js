@@ -148,6 +148,8 @@ var yesapp_tour = {
 		zmjs.form.set('drug_name', o['drug_name']);
 		zmjs.form.set('drug_code', o['drug_code']);
 		zmjs.form.set('manufacturer', o['manufacturer']);
+		zmjs.form.set('drug_usage', o['drug_usage']);
+		
 
 	},
 	init_tour_drug : function() {

@@ -48,7 +48,7 @@ zmapi.d = function(oInfo) {
 		}
 
 		oElm.items.push(oItem);
-		zmapi.m.toast(JSON.stringify(oItem));
+		//zmapi.m.toast(JSON.stringify(oItem));
 		sDebug = JSON.stringify(oElm);
 
 		zmapi.f.savestorage(zmapi.c.name_storage_debug, sDebug);

@@ -31,7 +31,7 @@ public class QueryDrug extends RootApi<RootPageDataResult, QueryDrugInput> {
 		
 
 		return new DataApiSupport().upData("yh_drug_info",
-				"drug_code,drug_name,manufacturer", "spell_info",
+				"drug_code,drug_name,manufacturer,drug_usage", "spell_info",
 				aWhere, mDataMap, 0, 10);
 		
 		
