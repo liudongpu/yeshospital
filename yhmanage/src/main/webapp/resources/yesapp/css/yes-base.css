@@ -34,7 +34,7 @@
 }
 
 /************************************************************************************/
-body,div,a,span {
+body, div, a, span {
 	font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Light",
 		"Segoe UI Web Light", "Segoe UI Web Regular", "Segoe UI",
 		"Segoe UI Symbol", "HelveticaNeue-Light", "Helvetica Neue", Arial;
@@ -54,7 +54,6 @@ body,div,a,span {
 .yb_show_tag {
 	float: left;
 	height: 100%;
-	
 	font-size: 1.2em;
 	padding: 1em;
 	margin-right: 1em;
@@ -63,10 +62,48 @@ body,div,a,span {
 	font-weight: 400;
 }
 
-.yb_span_width_5em
-{
-	display:inline-block;
-	min-width:5em;
+.yb_span_width_5em {
+	display: inline-block;
+	min-width: 5em;
 }
+
+/**表格相关**********************************************************************************/
+
+.yb_list_box
+{
+	background-color:#fff;
+	
+}
+
+.yb_list_box .ui-shadow
+{
+	box-shadow:none;
+	border-radius:0;
+}
+
+
+
+
+.yb_list_box .ui-btn,.yb_list_box .ui-btn:visited,.yb_list_box .ui-btn:hover,.yb_list_box .ui-btn:active
+{
+	background-color:#fff;
+	border-color:#ededed;
+	color:#000;
+	text-shadow:none;
+}
+
+.yb_list_table_title
+{
+	width:5em;
+	
+}
+.yb_list_table_content
+{
+	text-align:right;
+	float:right;
+	color:#c1c1c1;
+}
+
+
 
 

@@ -70,8 +70,11 @@ zmjs.page = {
 	},
 	open_page : function(sUrl) {
 
-		zmjs.a.log(zmjs.func.convert_url(sUrl));
-
+		
+		zmapi.d({target:'zmjs.page.open_page',name:zmjs.func.convert_url(sUrl)});
+		
+		//zmapi.m.alert(zmjs.func.convert_url(sUrl));
+		
 		zmapi.p.open_page(sUrl, zmjs.func.convert_url(sUrl));
 	},
 

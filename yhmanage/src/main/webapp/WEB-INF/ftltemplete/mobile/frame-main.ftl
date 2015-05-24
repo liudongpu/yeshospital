@@ -15,11 +15,11 @@
 	</div>
 	<div class="zmcss_h_10"></div>
 	
-	
+	<div class="yb_list_box">
 	<ul data-role="listview" data-inset="true"  id="yesapp_fm_main_list" >
     
 	</ul>
-	
+	</div>
 	
 	
 	

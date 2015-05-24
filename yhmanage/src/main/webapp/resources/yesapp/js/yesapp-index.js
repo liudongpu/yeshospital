@@ -1,20 +1,24 @@
 apiready = function() {
 
+	
+
 	var sFlagDebug = $('#yesapp_mobile_index_flag_debug').val();
 
 	if (sFlagDebug == "1") {
-		//zmapi.m.alert('调试模式开启');
+		// zmapi.m.alert('调试模式开启');
 		zmapi.f.opendebug();
 
-		$('header').click(function() {
-			zmapi.p.open_page('system-debug', 'system-debug');
-		});
+		$('header').click(
+				function() {
+					zmapi.p.open_page('system-debug?r=' + Math.random(),
+							'system-debug');
+				});
 
 		// 注册android下的菜单键
 		api.addEventListener({
 			name : 'keymenu'
 		}, function(ret, err) {
-			zmapi.p.open_page('system-debug', 'system-debug');
+			// zmapi.p.open_page('system-debug', 'system-debug');
 		})
 
 	}
@@ -54,6 +58,16 @@ apiready = function() {
 	}, function(ret, err) {
 	});
 
+	
+	// 绑定异步执行事件
+	zmapi.m.addevent(zmapi.c.event.exec_js, function(oSet) {
+
+		// zmapi.m.execjs(sVal.execinfo);
+
+		api.execScript(oSet);
+
+	});
+	
 	/*
 	 * var push = api.require('push'); push.bind({ userName:'testName',
 	 * userId:'testId' },function(ret,err){ if(ret){
@@ -62,6 +76,12 @@ apiready = function() {
 	 */
 
 	// var user_token = $api.val($api.dom('#yesapp_mobile_index_user_token'));
+	// 绑定登陆成功时执行操作
+	zmapi.m.addevent(zmapi.c.event.login_success, function(sVal) {
+
+		zmapi.m.execjs('root.frame-main:yesapp_frame.refresh_frame_main()');
+	});
+
 	var user_token = "";
 
 	if (user_token == "") {

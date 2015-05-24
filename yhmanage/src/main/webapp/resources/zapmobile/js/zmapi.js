@@ -13,8 +13,13 @@ zmapi.c = {
 	name_storage_debug : 'zmapi_name_storage_debug',
 	// 事件名称
 	event : {
+		// 退出事件
 		login_out : 'zmapi_event_login_out',
-		login_success : 'zmapi_event_loin_success'
+		// 登陆事件
+		login_success : 'zmapi_event_loin_success',
+		// 异步执行事件
+		exec_js : 'zmapi_event_exec_js',
+		temp_event : ''
 	}
 };
 
@@ -43,7 +48,7 @@ zmapi.d = function(oInfo) {
 		}
 
 		oElm.items.push(oItem);
-
+		zmapi.m.toast(JSON.stringify(oItem));
 		sDebug = JSON.stringify(oElm);
 
 		zmapi.f.savestorage(zmapi.c.name_storage_debug, sDebug);
@@ -135,6 +140,7 @@ zmapi.p = {
 				url : sUrl,
 				bgColor : "#ffffff"
 			});
+
 		} else {
 			location.href = sUrl;
 		}
@@ -163,6 +169,17 @@ zmapi.p = {
 			history.go(-1);
 		}
 	},
+
+	open_frame : function(sName, sUrl) {
+		api.openFrame({
+			name : sName,
+			url : sUrl,
+			bounces : false
+
+		});
+
+	},
+
 	user_login : function() {
 
 		api.openFrame({
@@ -177,7 +194,7 @@ zmapi.p = {
 
 		if (zmapi.c.flag_api) {
 
-			zmapi.m.sendevent(zmapi.c.event.login_success, {});
+			// zmapi.m.sendevent(zmapi.c.event.login_success, {});
 
 			api.closeFrame({
 				name : 'user-login'
@@ -264,7 +281,7 @@ zmapi.m = {
 
 			var oSet = {
 				name : aTarget[0],
-				frameName : aTarget[0],
+				//frameName : aTarget[0],
 				script : aTarget[1]
 			};
 			if (aTarget[0].indexOf('.') > -1) {
@@ -274,7 +291,9 @@ zmapi.m = {
 				oSet.frameName = aName[1];
 
 			}
-			api.execScript(oSet);
+			//api.execScript(oSet);
+			//zmapi.m.alert(sExecDo);
+			zmapi.m.sendevent(zmapi.c.event.exec_js, oSet);
 
 		}
 	},

@@ -38,27 +38,20 @@
 
  	<input id="yesapp_ts_search" type="search" placeholder="请输入老人姓名" onkeyup="yesapp_tour.tour_select_search(this)" onkeypress="yesapp_tour.tour_select_search(this)"/>
 	
-	
-	<ul data-role="listview" data-inset="true" id="yesapp_ts_table">
-	</ul>
-	
+	<div class="yb_list_box">
+		<ul data-role="listview" data-inset="true" id="yesapp_ts_table">
+		</ul>
+	</div>
 	<div class="zmcss_h_20"></div>
 	
 	
 	<div data-role="collapsible">
 	<h2>查看已检查老人<span class="zmcss_f_right" id="yesapp_ts_has_count">0</span></h2>
-    <ul data-role="listview"  id="yesapp_ts_has_check">
-        <li><a href="index.html">Acura</a></li>
-        <li><a href="index.html">Audi</a></li>
-        <li><a href="index.html">BMW</a></li>
-        <li><a href="index.html">Cadillac</a></li>
-        <li><a href="index.html">Chrysler</a></li>
-        <li><a href="index.html">Dodge</a></li>
-        <li><a href="index.html">Ferrari</a></li>
-        <li><a href="index.html">Ford</a></li>
-        <li><a href="index.html">GMC</a></li>
-        <li><a href="index.html">Honda</a></li>
-    </ul>
+	<div class="yb_list_box">
+	    <ul data-role="listview"  id="yesapp_ts_has_check">
+	       
+	    </ul>
+    </div>
 </div>
 	
 	

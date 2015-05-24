@@ -64,7 +64,7 @@
 
 	
 	<div class="zmcss_h_20"></div>
-	<div>
+	<div  class="yb_list_box">
 
 		<ul id="yesapp_tm_ul_drug"  data-role="listview" data-split-icon="delete" data-inset="true">
 		   

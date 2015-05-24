@@ -146,6 +146,19 @@ zapjs.zw = {
 		}
 	},
 
+	// 提交操作并执行一个当前页面的js函数 然后返回上一页 移动端专用
+	func_jsback : function(oElm, sJsInfo) {
+		zapjs.zw.func_call(oElm);
+
+		zapjs.f.autorefresh = function() {
+			if (sJsInfo) {
+
+				eval(sJsInfo);
+			}
+			zmjs.page.back_page();
+		}
+	},
+
 	validate_field : function(el, sRegId, sTitle) {
 		var sVal = $(el).val();
 
@@ -432,7 +445,7 @@ zapjs.zw = {
 			// 多个地方写入
 
 			setTimeout(function() {
-				
+
 				zmapi.p.login_success();
 			}, 1000);
 			// zmapi.p.login_success();
@@ -444,18 +457,16 @@ zapjs.zw = {
 	login_save : function(sCookie) {
 		zapjs.f.cookie(zapjs.c.cookie_user, sCookie);
 		/*
-		zmapi.m.execjs('root:zapjs.zw.login_save("' + sCookie + '")');
-		zmapi.m
-				.execjs('root.frame-main:zapjs.zw.login_save("' + sCookie
-						+ '")');
-		
-		*/
-		//zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
-		zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
+		 * zmapi.m.execjs('root:zapjs.zw.login_save("' + sCookie + '")');
+		 * zmapi.m .execjs('root.frame-main:zapjs.zw.login_save("' + sCookie +
+		 * '")');
+		 * 
+		 */
+		// zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
+		// zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
 		zmapi.m.setprefs(zapjs.c.cookie_user, sCookie);
-		
-		
-		
+
+		zmapi.m.sendevent(zmapi.c.event.login_success, {});
 
 	},
 

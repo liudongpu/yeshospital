@@ -1,9 +1,11 @@
 <#-- 添加页 -->
 <#macro m_zapmacro_mobile_page_add e_page>
 <form class="form-horizontal" method="POST" >
+	<div  class="yb_list_box">
 	<ul data-role="listview" data-inset="true">
 	<@m_zapmacro_mobile_auto_list  e_page.upAddData()   e_page  />
 	</ul>
+	</div>
 </form>
 </#macro>
 
@@ -31,9 +33,11 @@
 
 
 <form class="form-horizontal" method="POST" >
+	<div  class="yb_list_box">
 	<ul data-role="listview" data-inset="true">
 		<@m_zapmacro_mobile_auto_list  e_page.upEditData()   e_page  />
 	</ul>
+	</div>
 </form>
 
 

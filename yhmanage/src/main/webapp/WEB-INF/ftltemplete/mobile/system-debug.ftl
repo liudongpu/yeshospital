@@ -15,6 +15,8 @@
 
 <div class="zmcss_o_a zmcss_w_96">
 <div class="zmcss_h_20"></div>
+ <button class="btn btn-positive btn-block" onclick="yesapp_system.system_debug_clear()">清除日志</button>
+ <div class="zmcss_h_20"></div>
 <div id="system_debug_box">
 </div>
  

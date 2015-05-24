@@ -15,11 +15,7 @@ var yesapp_frame = {
 		// zmapi.p.user_login();
 		yesapp_frame.refresh_frame_main();
 
-		// 绑定登陆成功时执行操作
-		zmapi.m.addevent(zmapi.c.event.login_success, function(sVal) {
-			
-			yesapp_frame.refresh_frame_main();
-		});
+		
 
 	},
 
