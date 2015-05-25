@@ -1,10 +1,18 @@
 var yesapp_frame = {
 
 	qrcode : function() {
-
+		
+		var obj = api.require('scanner');
+		obj.open(function(ret,err) {
+		    api.alert({
+		        title: '扫描结果', 
+		        msg: ret.msg
+		    });
+		});
 	},
 
 	shake : function() {
+		zmapi.m.alert('shake');
 		var obj = api.require('shakeView');
 		obj.open();
 
