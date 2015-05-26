@@ -64,9 +64,9 @@ var yesapp_tour = {
 			var o = oData.pageData[i];
 
 			aHtml
-					.push('<li><a href="javascript:zmjs.page.open_page(\'tour-member?order_code='
+					.push('<li><a href="javascript:zmjs.page.open_page(\'tour-member?u_order_code='
 							+ sOrderCode
-							+ '&member_code='
+							+ '&u_member_code='
 							+ o["member_code"]
 							+ '\')"><span class="yb_span_width_5em">'
 							+ o['member_name']

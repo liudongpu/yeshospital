@@ -3,8 +3,22 @@
 
 <@m_mobile_html_begin />
 <@m_mobile_body_begin />
-<#assign a_orderCode=RequestParameters['order_code']?default("") >
-<#assign a_memberCode=RequestParameters['member_code']?default("") >
+<#assign a_orderCode=RequestParameters['u_order_code']?default("") >
+<#assign a_memberCode=RequestParameters['u_member_code']?default("") >
+
+<#--如果用户编号为空 则开始根据code去取该code对应的用户的最近一张单据-->
+<#if a_memberCode=="">
+
+	<#assign a_postCard=RequestParameters['u_post_card']?default("") >
+
+	<#if a_postCard!="">
+	
+
+	</#if>
+
+
+</#if>
+
 
 <@m_mobile_init_dbcall />
 
@@ -55,8 +69,8 @@
 	<div class="zmcss_h_20"></div>
 
 			<div>
-            	<a <@m_mobile_a_href p_page="member-info?member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">个人信息</a>
-            	<a <@m_mobile_a_href p_page="tour-drug?order_code=${a_orderCode}&member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">购买药物</a>
+            	<a <@m_mobile_a_href p_page="member-info?u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">个人信息</a>
+            	<a <@m_mobile_a_href p_page="tour-drug?u_order_code=${a_orderCode}&u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">购买药物</a>
             	<br/>
             	
             	

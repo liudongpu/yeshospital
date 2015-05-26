@@ -1,20 +1,36 @@
 var yesapp_frame = {
 
 	qrcode : function() {
-		
+
 		var obj = api.require('scanner');
-		obj.open(function(ret,err) {
-		    api.alert({
-		        title: '扫描结果', 
-		        msg: ret.msg
-		    });
+
+		obj.open(function(ret, err) {
+
+			yesapp.exec_scanner(ret.msg);
+
 		});
+
 	},
 
 	shake : function() {
-		zmapi.m.alert('shake');
-		var obj = api.require('shakeView');
-		obj.open();
+		/*
+		 * zmapi.m.alert('shake'); var obj = api.require('shakeView');
+		 * obj.open();
+		 */
+		var obj = api.require('scanner');
+		obj.openView({
+			x : 40,
+			y : 160,
+			w : 200,
+			h : 240
+		}, function(ret, err) {
+			ret.msg
+		});
+
+	},
+
+	// 二维码扫描结果解析
+	frame_see_scanner : function(sText) {
 
 	},
 
@@ -22,8 +38,6 @@ var yesapp_frame = {
 
 		// zmapi.p.user_login();
 		yesapp_frame.refresh_frame_main();
-
-		
 
 	},
 
@@ -43,7 +57,7 @@ var yesapp_frame = {
 			var o = oData.pageData[i];
 
 			aHtml
-					.push('<li  onclick="zmjs.page.open_page(\'tour-select?tour_order='
+					.push('<li  onclick="zmjs.page.open_page(\'tour-select?u_tour_order='
 							+ o["tour_code"] + '\')" ><a href="#">');
 
 			if (o["order_status"] == "46580001000500020001") {

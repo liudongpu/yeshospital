@@ -1,5 +1,11 @@
 var yesapp = {
 
+	config : {
+		// 二维码扫描开始域名
+		scanner_start : 'http://qc.jk.chifaer.com/',
+		api_key : 'appfordoctor'
+	},
+
 	// API列表
 	api_list : {
 		// 用户登陆
@@ -37,7 +43,7 @@ var yesapp = {
 
 	api_call : function(sName, oData, fCallBack) {
 
-		zapjs.c.api_key = 'appfordoctor';
+		zapjs.c.api_key = yesapp.config.api_key;
 
 		var o_config = yesapp.api_list[sName];
 
@@ -70,6 +76,23 @@ var yesapp = {
 			pageCode : sPageCode,
 			queryMap : nQuery
 		}, fCallBack);
+
+	},
+
+	exec_scanner : function(sText) {
+
+		var iIndex = sText.indexOf(yesapp.config.scanner_start);
+
+		if (iIndex == 0) {
+
+			var sCode = sText.substr(yesapp.config.scanner_start.length);
+			// zmapi.m.alert(sCode);
+
+		} else {
+
+			zmapi.m.alert('暂不支持该内容，请重新扫描！');
+
+		}
 
 	}
 

@@ -5,7 +5,7 @@
 <@m_mobile_body_begin />
 
 
-<#assign a_memberCode=RequestParameters['member_code']?default("") >
+<#assign a_memberCode=RequestParameters['u_member_code']?default("") >
 
 
 <#assign b_page=b_method.upControlPage("page_book_d_v_yh_member_extend_geracomium","zw_f_member_code="+a_memberCode) />

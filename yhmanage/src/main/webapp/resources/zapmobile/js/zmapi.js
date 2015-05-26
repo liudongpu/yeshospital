@@ -19,6 +19,8 @@ zmapi.c = {
 		login_success : 'zmapi_event_loin_success',
 		// 异步执行事件
 		exec_js : 'zmapi_event_exec_js',
+		// 打开页面的事件
+		open_page : 'zmapi_event_open_page',
 		temp_event : ''
 	}
 };
@@ -48,7 +50,7 @@ zmapi.d = function(oInfo) {
 		}
 
 		oElm.items.push(oItem);
-		//zmapi.m.toast(JSON.stringify(oItem));
+		// zmapi.m.toast(JSON.stringify(oItem));
 		sDebug = JSON.stringify(oElm);
 
 		zmapi.f.savestorage(zmapi.c.name_storage_debug, sDebug);
@@ -281,7 +283,7 @@ zmapi.m = {
 
 			var oSet = {
 				name : aTarget[0],
-				//frameName : aTarget[0],
+				// frameName : aTarget[0],
 				script : aTarget[1]
 			};
 			if (aTarget[0].indexOf('.') > -1) {
@@ -291,8 +293,8 @@ zmapi.m = {
 				oSet.frameName = aName[1];
 
 			}
-			//api.execScript(oSet);
-			//zmapi.m.alert(sExecDo);
+			// api.execScript(oSet);
+			// zmapi.m.alert(sExecDo);
 			zmapi.m.sendevent(zmapi.c.event.exec_js, oSet);
 
 		}

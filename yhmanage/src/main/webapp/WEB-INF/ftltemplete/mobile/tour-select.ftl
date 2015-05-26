@@ -18,13 +18,13 @@
 
 	
 	
-	<#assign tour_code=RequestParameters['tour_order']?default("") >
+	<#assign a_tour_code=RequestParameters['u_tour_order']?default("") >
 	<#assign app_page=b_method.upClass("com.srnpr.yeshospital.support.AppPageSupport") >
-	<#assign geracomium_code=app_page.upTourOrderInfo(tour_code)["geracomium_code"]>
+	<#assign a_geracomium_code=app_page.upTourOrderInfo(a_tour_code)["geracomium_code"]>
 	
 
-	<@m_zapmacro_mobile_form_hidden e_id="yesapp_ts_tour_code" e_value=tour_code />
-	<@m_zapmacro_mobile_form_hidden e_id="yesapp_ts_geracomium_code" e_value=geracomium_code />
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_ts_tour_code" e_value=a_tour_code />
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_ts_geracomium_code" e_value=a_geracomium_code />
 
 	<div id="yesapp_ts_option" class="zmcss_d_none">
 		<div class="zmcss_h_20"></div>

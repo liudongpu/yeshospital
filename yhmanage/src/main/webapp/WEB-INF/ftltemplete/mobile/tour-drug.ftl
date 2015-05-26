@@ -7,8 +7,8 @@
 
 <#assign b_page=b_method.upControlPage("page_add_m_yh_tour_order_drug","") />
 
-<#assign a_orderCode=RequestParameters['order_code']?default("") >
-<#assign a_memberCode=RequestParameters['member_code']?default("") >
+<#assign a_orderCode=RequestParameters['u_order_code']?default("") >
+<#assign a_memberCode=RequestParameters['u_member_code']?default("") >
 <@m_zapmacro_mobile_form_hidden e_id="yesapp_td_order_code" e_value=a_orderCode />
 <@m_zapmacro_mobile_form_hidden e_id="yesapp_td_member_code" e_value=a_memberCode />
 
