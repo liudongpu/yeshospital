@@ -6,7 +6,7 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import com.srnpr.zapcom.basehelper.FormatHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.basesupport.WebClientSupport;
-import com.srnpr.zapcom.rootclass.RootJob;
+import com.srnpr.zapweb.rootweb.RootJob;
 import com.srnpr.zapweb.websupport.MessageSupport;
 
 public class JobSendMessage extends RootJob {

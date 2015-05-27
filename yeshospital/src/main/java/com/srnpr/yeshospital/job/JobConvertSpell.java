@@ -4,8 +4,8 @@ import org.quartz.JobExecutionContext;
 
 import com.srnpr.yeshospital.helper.SpellHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
-import com.srnpr.zapcom.rootclass.RootJob;
 import com.srnpr.zapdata.dbdo.DbUp;
+import com.srnpr.zapweb.rootweb.RootJob;
 
 /**
  * 
