@@ -81,6 +81,18 @@ body, div, a, span {
 	border-radius:0;
 }
 
+.yb_list_box .ui-listview>.ui-li-has-icon>img:first-child,.yb_list_box  .ui-listview>.ui-li-has-icon>.ui-btn>img:first-child
+{
+	max-width:1.4em;
+	max-height:1.4em;
+	top:.6em;
+	
+}
+
+.yb_list_box .ui-listview>.ui-li-has-icon>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-icon
+{
+	padding-left:3em;
+}
 
 
 
