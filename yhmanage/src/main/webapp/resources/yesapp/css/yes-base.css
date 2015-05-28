@@ -75,7 +75,11 @@ body, div, a, span {
 	
 }
 
-
+.yb_list_box .ui-shadow
+{
+	box-shadow:none;
+	border-radius:0;
+}
 
 
 

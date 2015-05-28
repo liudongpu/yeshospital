@@ -4,6 +4,10 @@
 <#assign a_macro_mobile_resources_version="?v="+a_macro_mobile_system_version >
 <#-- 资源文件路径 -->
 <#assign a_macro_mobile_resources_link="../" >
+
+<#-- 图片文件路径 -->
+<#assign a_macro_mobile_img_link="../" >
+
 <#-- 项目特殊样式 -->
 
 <#assign a_macro_mobile_resources_base_js=["mlib/jquery/jquery-2.1.4.min.js"] >
