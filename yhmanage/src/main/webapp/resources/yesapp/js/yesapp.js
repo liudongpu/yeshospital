@@ -2,7 +2,7 @@ var yesapp = {
 
 	config : {
 		// 二维码扫描开始域名
-		scanner_start : 'http://qc.jk.chifaer.com/',
+		scanner_start : 'http://q.yxl.co/',
 		api_key : 'appfordoctor'
 	},
 
@@ -25,6 +25,12 @@ var yesapp = {
 		query_tour_drug : {
 			api_name : 'com_srnpr_yeshospital_api_app_QueryTourDrug'
 		},
+
+		member_last : {
+			api_name : 'com_srnpr_yeshospital_api_app_MemberLast',
+			flag_token : true
+		},
+
 		delete_tour_drug : {
 			api_name : 'com_srnpr_yeshospital_api_app_DeleteTourDrug'
 		},
@@ -87,6 +93,18 @@ var yesapp = {
 
 			var sCode = sText.substr(yesapp.config.scanner_start.length);
 			// zmapi.m.alert(sCode);
+			// zmjs.page.open_page('');
+
+			yesapp.api_call('member_last', {
+				postCard : sCode
+			},
+					function(o) {
+
+						zmjs.page.open_page('tour-member?u_order_code='
+								+ o["orderCode"] + '&u_member_code='
+								+ o["memberCode"]);
+
+					});
 
 		} else {
 
