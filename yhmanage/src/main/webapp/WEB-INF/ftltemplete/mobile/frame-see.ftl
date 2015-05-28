@@ -10,7 +10,7 @@
 	
 <div class="zmcss_h_20"></div>
 <ul data-role="listview">
-    <li onclick="yesapp_frame.qrcode()"> 扫描二维码</li>
+    <li onclick="yesapp.scanner_code()"> 扫描二维码</li>
     <li onclick="yesapp_frame.shake()">摇一摇</li>
     <li>历史信息</li>
     

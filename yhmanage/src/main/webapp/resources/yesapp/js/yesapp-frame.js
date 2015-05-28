@@ -1,16 +1,6 @@
 var yesapp_frame = {
 
-	qrcode : function() {
-
-		var obj = api.require('scanner');
-
-		obj.open(function(ret, err) {
-
-			yesapp.exec_scanner(ret.msg);
-
-		});
-
-	},
+	
 
 	shake : function() {
 		/*

@@ -85,6 +85,16 @@ var yesapp = {
 
 	},
 
+	scanner_code : function() {
+		var obj = api.require('scanner');
+
+		obj.open(function(ret, err) {
+
+			yesapp.exec_scanner(ret.msg);
+
+		});
+	},
+
 	exec_scanner : function(sText) {
 
 		var iIndex = sText.indexOf(yesapp.config.scanner_start);
@@ -95,8 +105,11 @@ var yesapp = {
 			// zmapi.m.alert(sCode);
 			// zmjs.page.open_page('');
 
+			var sTourCode = $('#yesapp_ts_tour_code').val();
+
 			yesapp.api_call('member_last', {
-				postCard : sCode
+				postCard : sCode,
+				orderCode : sTourCode
 			},
 					function(o) {
 

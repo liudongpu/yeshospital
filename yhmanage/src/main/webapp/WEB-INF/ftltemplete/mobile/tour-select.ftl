@@ -7,7 +7,11 @@
 
 <@m_mobile_header_begin p_title="巡视老人" />
 	<@m_mobile_button_back />
+	<#--
 	<a href="javascript:yesapp_tour.tour_select_option()" data-icon="gear" class="ui-btn-right">操作</a>
+	-->
+<a href="javascript:yesapp_tour.tour_select_option()" data-icon="gear" class="ui-btn-right">操作</a>
+	
 <@m_mobile_header_end />
 
 
@@ -28,9 +32,9 @@
 
 	<div id="yesapp_ts_option" class="zmcss_d_none">
 		<div class="zmcss_h_20"></div>
-    	
-   		<button onclick="yesapp_tour.tour_select_finish()" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-grid">全部已巡视完成</button>
-
+    	<a href="javascript:yesapp_tour.tour_select_finish()" class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-left">全部已巡视完成</a>
+		<a href="javascript:yesapp.scanner_code()" class="ui-btn ui-btn-inline ui-icon-camera ui-btn-icon-left">扫描二维码</a>
+   		
 	</div>
 
 
