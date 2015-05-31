@@ -13,8 +13,7 @@ public class QueryDrug extends RootApi<RootPageDataResult, QueryDrugInput> {
 
 	public RootPageDataResult Process(QueryDrugInput inputParam,
 			MDataMap mRequestMap) {
-		
-		
+
 		MDataMap mDataMap = new MDataMap();
 
 		ArrayList<String> aWhere = new ArrayList<String>();
@@ -24,17 +23,14 @@ public class QueryDrug extends RootApi<RootPageDataResult, QueryDrugInput> {
 
 			aWhere.add("drug_name like :keyword or spell_info like :keyword ");
 		}
-		
-		aWhere.add(" flag_enable=1 ");
-		
-		
-		
 
-		return new DataApiSupport().upData("yh_drug_info",
-				"drug_code,drug_name,manufacturer,drug_usage", "spell_info",
-				aWhere, mDataMap, 0, 10);
-		
-		
+		aWhere.add(" flag_enable=1 ");
+
+		return new DataApiSupport()
+				.upData("yh_drug_info",
+						"drug_code,drug_name,manufacturer,drug_usage,drug_unit,drug_dose,drug_single,drug_source",
+						"spell_info", aWhere, mDataMap, 0, 10);
+
 	}
 
 }

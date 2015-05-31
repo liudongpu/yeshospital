@@ -67,6 +67,20 @@ body, div, a, span {
 	min-width: 5em;
 }
 
+
+.yb_color_red
+{
+	color:red;
+}
+
+
+.w_regex_need
+{
+	color:red;
+	padding-right:5px;
+}
+
+
 /**表格相关**********************************************************************************/
 
 .yb_list_box
@@ -119,4 +133,43 @@ body, div, a, span {
 
 
 
+.yb_list_dialog .ui-listview>.ui-li-static
+{
+	padding: .3em 1em;
+}
 
+
+
+
+
+
+/**流消息格式   yb_grid**********************************************************************************/
+.yb_grid_box
+{
+	
+}
+.yb_grid_item
+{
+	margin-bottom:2em;
+	background-color:#fff;
+	
+	border:solid 1px #ddd;
+	
+}
+
+.yb_grid_info
+{
+	padding:1em;
+	border-bottom:solid 1px #ddd;
+}
+.yb_grid_item .ui-btn
+{
+	padding:0px;
+	background-color:#fff;
+	border:none;
+}
+.yb_grid_item p
+{
+  padding-top: 1em;
+  color: #999;
+  font-weight: normal;}

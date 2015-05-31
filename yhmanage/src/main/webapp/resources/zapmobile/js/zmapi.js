@@ -144,6 +144,7 @@ zmapi.p = {
 			});
 
 		} else {
+			
 			location.href = sUrl;
 		}
 	},

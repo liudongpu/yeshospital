@@ -25,7 +25,8 @@
 
 <div class="zmcss_o_a zmcss_w_96">
 <div class="zmcss_h_20"></div>
-
+	${a_member_info["member_name"]}-年龄：${a_member_info["member_age"]}
+	<div class="zmcss_h_20"></div>
 	<input id="yesapp_ts_search" type="search" placeholder="请输入药物名" onkeyup="yesapp_tour.tour_drug_search(this)"/>
 	
 	  <ul  data-role="listview" data-inset="true"  id="yesapp_ts_table" >

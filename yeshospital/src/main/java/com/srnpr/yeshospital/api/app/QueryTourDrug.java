@@ -22,7 +22,8 @@ public class QueryTourDrug extends
 		// 如果数据库中不存在该用户对应单据的记录 则取出该用户最近一条单据的记录
 		if (DbUp.upTable("yh_tour_order_detail").count("tour_code",
 				inputParam.getOrderCode(), "member_code",
-				inputParam.getMemberCode()) == 0&&DbUp.upTable("yh_tour_order_drug").count("tour_code",
+				inputParam.getMemberCode()) == 0
+				&& DbUp.upTable("yh_tour_order_drug").count("tour_code",
 						inputParam.getOrderCode(), "member_code",
 						inputParam.getMemberCode()) == 0) {
 
@@ -42,7 +43,8 @@ public class QueryTourDrug extends
 					map.inAllValues("zid", "0", "uid", WebHelper.upUuid(),
 							"tour_code", inputParam.getOrderCode(),
 							"create_time", FormatHelper.upDateTime(),
-							"record_code", WebHelper.upCode("TOA"));
+							"record_code", WebHelper.upCode("TOA"), "flag_buy",
+							"0", "number_buy", "0");
 
 					DbUp.upTable("yh_tour_order_drug").dataInsert(map);
 				}
@@ -55,8 +57,10 @@ public class QueryTourDrug extends
 				inputParam.getOrderCode(), "member_code",
 				inputParam.getMemberCode());
 
-		return new DataApiSupport().upData("yh_tour_order_drug",
-				"record_code,drug_code,drug_name,flag_buy,number_buy", "-zid", "", mDataMap, -1, -1);
+		return new DataApiSupport()
+				.upData("yh_tour_order_drug",
+						"uid,record_code,drug_code,drug_name,flag_buy,number_buy,flag_check",
+						"-zid", "", mDataMap, -1, -1);
 	}
 
 }

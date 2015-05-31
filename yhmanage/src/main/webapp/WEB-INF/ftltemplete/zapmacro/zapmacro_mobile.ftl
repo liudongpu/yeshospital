@@ -248,7 +248,7 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 <#macro m_zapmacro_mobile_field_start text="" for="">
 
 	<li class="ui-field-contain">
-	<label  for="${for}">${text}</label>
+	<label  for="${for}"><span class="w_field_title">${text}<span></label>
 	
 
 </#macro>

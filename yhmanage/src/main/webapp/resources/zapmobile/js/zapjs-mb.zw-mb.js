@@ -182,8 +182,8 @@ zapjs.zw = {
 				if ($(el).attr('zapweb_attr_regex_title')) {
 					sTitle = $(el).attr('zapweb_attr_regex_title');
 				} else {
-					sTitle = $(el).parents('.control-group').find(
-							'.control-label').text();
+					sTitle = $(el).prev('label .w_field_title').text().replace(
+							'*', '');
 				}
 			}
 

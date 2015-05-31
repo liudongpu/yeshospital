@@ -20,7 +20,7 @@ public class JobConvertSpell extends RootJob {
 
 		
 		ConvertSpell("yh_member_extend_geracomium", "member_name", "spell_info");
-		ConvertSpell("yh_drug_info", "drug_name", "spell_info");
+		ConvertSpell("yh_drug_info", "concat(drug_name,drug_brand)", "spell_info");
 		
 	}
 
