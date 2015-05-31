@@ -173,13 +173,13 @@ var yesapp_tour = {
 				.append(
 						'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t1\',\'zw_f_tour_info\')">模板</a>');
 		$('#zw_f_agree_info')
-		.prev('label')
-		.append(
-				'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t2\',\'zw_f_agree_info\')">模板</a>');
+				.prev('label')
+				.append(
+						'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t2\',\'zw_f_agree_info\')">模板</a>');
 		$('#zw_f_check_info')
-		.prev('label')
-		.append(
-				'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t3\',\'zw_f_check_info\')">模板</a>');
+				.prev('label')
+				.append(
+						'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t3\',\'zw_f_check_info\')">模板</a>');
 
 		yesapp_tour.refresh_tour_member();
 	},
@@ -225,6 +225,14 @@ var yesapp_tour = {
 							+ (o["flag_buy"] == "1" ? "是" : "否")
 							+ '&nbsp;&nbsp;&nbsp;购买数量：'
 							+ o["number_buy"]
+							+ o["drug_unit"]
+							+ '<br/>'
+							+ o['drug_dose']
+							+ o['drug_single']
+							+ '&nbsp;&nbsp;&nbsp;'
+							+ o['drug_source']
+							+ '&nbsp;&nbsp;&nbsp;'
+							+ o['drug_usage']
 							+ '</p></a><a href="javascript:yesapp_tour.tour_member_option(\''
 							+ i + '\')" >操作</a></li>');
 
