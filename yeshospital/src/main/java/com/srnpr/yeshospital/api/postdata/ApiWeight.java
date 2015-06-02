@@ -28,11 +28,11 @@ public class ApiWeight extends PostDataApi<PostDataResult, WeightInput> {
 					FormatHelper.upDateTime(), "weight",
 					tInput.getWeight().toString());
 
-			WarnSupport warnSupport = new WarnSupport();
-
 			/*
-			 * postDataResult.inOtherResult(warnSupport.warnCheck(upMemberCode(),
-			 * new WarnCheckInfo("46580001000300010005", "46580001000300030006",
+			 * WarnSupport warnSupport = new WarnSupport();
+			 * postDataResult.inOtherResult
+			 * (warnSupport.warnCheck(upMemberCode(), new
+			 * WarnCheckInfo("46580001000300010005", "46580001000300030006",
 			 * tInput.getWeight())));
 			 */
 
@@ -42,7 +42,7 @@ public class ApiWeight extends PostDataApi<PostDataResult, WeightInput> {
 		if (postDataResult.upFlagTrue()) {
 
 			postDataResult.inOtherResult(updateReport("weight_info",
-					bInfo(965805108, tInput.getWeight()), "weight_update"));
+					bInfo(965805111, tInput.getWeight()), "weight_update"));
 
 		}
 

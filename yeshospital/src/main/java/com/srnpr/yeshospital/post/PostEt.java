@@ -13,9 +13,15 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.srnpr.yeshospital.api.model.ElectrocardiogramImageInput;
+import com.srnpr.yeshospital.api.model.GlucoseInput;
 import com.srnpr.yeshospital.api.model.OxygenInput;
 import com.srnpr.yeshospital.api.model.PressureInput;
 import com.srnpr.yeshospital.api.model.WeightInput;
+import com.srnpr.yeshospital.api.postdata.ApiElectrocardiogramImage;
+import com.srnpr.yeshospital.api.postdata.ApiGlucose;
 import com.srnpr.yeshospital.api.postdata.ApiOxygen;
 import com.srnpr.yeshospital.api.postdata.ApiPressure;
 import com.srnpr.yeshospital.api.postdata.ApiWeight;
@@ -39,8 +45,10 @@ public class PostEt extends BaseClass {
 
 		String sRequestString = hRequest.getParameter("datas");
 
-		MWebResult mWebResult = doProcess(EncodeHelper
-				.urlDecode(sRequestString));
+		// bLogInfo(0, sRequestString);
+		//sRequestString=EncodeHelper.urlDecode(sRequestString);
+
+		MWebResult mWebResult = doProcess(sRequestString);
 
 		return String.valueOf(mWebResult.getResultCode());
 	}
@@ -84,11 +92,9 @@ public class PostEt extends BaseClass {
 							FormatHelper.upDateTime(), "add_time", sAddTime,
 							"collect_time", sCollectTime);
 
-					String sCardCode = StringUtils.right(sDataKey, 20);
+					// String sCardCode = StringUtils.right(sDataKey, 20);
 
-					PostDataResult postDataResult = postData(sLogCode,
-							sDataType, sAddTime, sCollectTime, sCardCode,
-							jsonObject);
+					PostDataResult postDataResult = postData(sLogCode);
 
 					if (postDataResult.upFlagTrue()) {
 						iProcess++;
@@ -99,9 +105,11 @@ public class PostEt extends BaseClass {
 					MDataMap mUpdateMap = new MDataMap();
 					mUpdateMap.inAllValues("log_code", sLogCode,
 							"flag_process", "1", "process_result",
-							mPostResult.upJson());
+							mPostResult.upJson(), "result_code",
+							String.valueOf(postDataResult.getResultCode()));
 					DbUp.upTable("yh_log_etpull").dataUpdate(mUpdateMap,
-							"flag_process,process_result", "log_code");
+							"flag_process,process_result,result_code",
+							"log_code");
 
 				}
 
@@ -114,6 +122,21 @@ public class PostEt extends BaseClass {
 		return mWebResult;
 	}
 
+	public PostDataResult postData(String sLogCode) {
+
+		MDataMap mDataMap = DbUp.upTable("yh_log_etpull").one("log_code",
+				sLogCode);
+
+		String sCardCode = StringUtils.right(mDataMap.get("log_datakey"), 20);
+
+		JSONObject jsonObject = JSON.parseObject(mDataMap.get("log_info"));
+
+		return doPostData(sLogCode, mDataMap.get("log_type"),
+				mDataMap.get("add_time"), mDataMap.get("collect_time"),
+				sCardCode, jsonObject);
+
+	}
+
 	/**
 	 * @param sLogCode
 	 * @param sType
@@ -123,7 +146,7 @@ public class PostEt extends BaseClass {
 	 * @param jsonObject
 	 * @return
 	 */
-	public PostDataResult postData(String sLogCode, String sType,
+	public PostDataResult doPostData(String sLogCode, String sType,
 			String sPostClientTime, String sPostProcessTime, String sCardCode,
 			JSONObject jsonObject) {
 
@@ -152,23 +175,58 @@ public class PostEt extends BaseClass {
 						sPostProcessTime);
 
 				iPostDataInput.setDataHeart(jsonObject.getBigDecimal("pulse"));
-				iPostDataInput.setDataOxygen(jsonObject.getBigDecimal("oxygen"));
+				iPostDataInput
+						.setDataOxygen(jsonObject.getBigDecimal("oxygen"));
 				postDataResult = new ApiOxygen().toPost(iPostDataInput,
 						sLogCode, "");
 
-			} else if (sType.equals("BloodPressureV1")) {
+			}
+			// 血压
+			else if (sType.equals("BloodPressureV1")) {
 
 				PressureInput iPostDataInput = new PressureInput();
 				initDate(iPostDataInput, sPostClientTime, sCardCode,
 						sPostProcessTime);
 
 				iPostDataInput.setDataHeart(jsonObject.getBigDecimal("pulse"));
-				iPostDataInput.setDataLower(jsonObject.getBigDecimal("diastolicpressure"));
-				iPostDataInput.setDataUpper(jsonObject.getBigDecimal("systolicpressure"));
+				iPostDataInput.setDataLower(jsonObject
+						.getBigDecimal("diastolicpressure"));
+				iPostDataInput.setDataUpper(jsonObject
+						.getBigDecimal("systolicpressure"));
 				postDataResult = new ApiPressure().toPost(iPostDataInput,
 						sLogCode, "");
 
-			}else {
+			}
+			// 血糖
+			else if (sType.equals("BGDataV1")) {
+
+				GlucoseInput iPostDataInput = new GlucoseInput();
+				initDate(iPostDataInput, sPostClientTime, sCardCode,
+						sPostProcessTime);
+
+				iPostDataInput.setDataGlucose(jsonObject
+						.getBigDecimal("bloodsugar"));
+				iPostDataInput.setDataCheckType("1");
+
+				postDataResult = new ApiGlucose().toPost(iPostDataInput,
+						sLogCode, "");
+
+			}
+			// 心电图片
+			else if (sType.equals("EcgFileV1")) {
+
+				ElectrocardiogramImageInput iPostDataInput = new ElectrocardiogramImageInput();
+				initDate(iPostDataInput, sPostClientTime, sCardCode,
+						sPostProcessTime);
+
+				iPostDataInput.setImageData(jsonObject.getString("ecgdata"));
+
+				postDataResult = new ApiElectrocardiogramImage().toPost(
+						iPostDataInput, sLogCode, "");
+
+			}
+
+			else {
 
 				postDataResult.inErrorMessage(965805110, sType);
 

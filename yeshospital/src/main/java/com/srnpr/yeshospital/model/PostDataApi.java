@@ -34,15 +34,12 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 	public MWebResult checkAndInit(IPostDataInput iPostDataInput) {
 		MWebResult mWebResult = new MWebResult();
 
+		// 判断如果操作类型时刷卡类
 		if (iPostDataInput.getPostType().equals("card")) {
 
-			MDataMap mMemberMap = DbUp.upTable("yh_member_extend_geracomium").oneWhere("", "", "lpad(post_card,20,'0')=:post_card", "post_card",iPostDataInput.getPostDecviceSerial())
-			;
-			
-			
-		
-			
-			
+			MDataMap mMemberMap = DbUp.upTable("yh_member_extend_geracomium")
+					.oneWhere("", "", "lpad(post_card,20,'0')=:post_card",
+							"post_card", iPostDataInput.getPostDecviceSerial());
 
 			if (mMemberMap != null && mMemberMap.size() > 0) {
 

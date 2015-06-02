@@ -2,7 +2,7 @@ var yesapp = {
 
 	config : {
 		// 二维码扫描开始域名
-		scanner_start : 'http://q.yxl.co/',
+		scanner_start : 'http://q.yxl9.cn/',
 		api_key : 'appfordoctor'
 	},
 
