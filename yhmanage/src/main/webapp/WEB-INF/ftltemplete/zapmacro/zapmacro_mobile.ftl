@@ -25,7 +25,24 @@
 </form>
 </#macro>
 
+<#-- 设置页 -->
+<#macro m_zapmacro_mobile_page_set e_page>
 
+
+<form class="form-horizontal" method="POST" >
+	<div  class="yb_list_box">
+	<ul data-role="listview" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+		<#list e_page.upBookData()  as e>
+		
+	  		<@m_zapmacro_mobile_set_field e e_page/>
+	  	
+		</#list>
+	</ul>
+	</div>
+</form>
+
+
+</#macro>
 
 
 <#-- 修改页 -->
@@ -241,6 +258,21 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 	  		<@m_zapmacro_mobile_field_show e_field e_page/>
 	  	
 </#macro>
+
+
+
+<#-- 设置页的自动输出判断 -->
+<#macro m_zapmacro_mobile_set_field e_field   e_page>
+	
+
+<li><a href="#">
+<span class="yb_list_table_title">${e_field.getFieldNote()}</span><span class="yb_list_table_content">${e_field.getPageFieldValue()?default("")}</span></a></li>
+
+	
+	  
+	  	
+</#macro>
+
 
 
 
