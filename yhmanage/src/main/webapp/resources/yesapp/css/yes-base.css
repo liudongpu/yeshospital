@@ -13,6 +13,14 @@
 	top: 5px;
 }
 
+
+/** hack jquerymobile ****************************************************************************/
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
+{
+	text-shadow:none;
+}
+
+
 /** hack bootstrap*******************************************************************/
 .form-horizontal .control-group {
 	width: 96%;
@@ -152,24 +160,40 @@ body, div, a, span {
 /*****************************************************************/
 .zmcss_set_box {
 	background-color: #fff;
-	border-bottom: solid 1px #ddd;
+	border-bottom: solid 1px #ebebeb;
+	border-top: solid 1px #ebebeb;
 }
 
 .zmcss_set_item {
 	clear: both;
-	line-height: 2.5em;
-	min-height: 2.5em;
-	border-top: solid 1px #ddd;
+	line-height: 3em;
+	min-height: 3em;
+	
 }
+
+.zmcss_set_border
+{
+	border-top: solid 1px #ebebeb;
+}
+
 
 .zmcss_set_left {
 	float: left;
 	max-width: 30%;
 	text-indent: .5em;
+	color:#353535;
+	font-weight:bold;
 }
 
 .zmcss_set_right {
 	float: right;
 	text-align: right;
-	color: #d4d4d4;
+	color: #aaaaaa;
+	text-indent:.5em;
+	padding-right:1em;
 }
+.zmcss_set_right span
+{
+	color: #aaaaaa;
+}
+

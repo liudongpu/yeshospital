@@ -11,7 +11,7 @@
 	<div class="yb_list_box" >
 	<ul data-role="listview" data-inset="true">
     <li><a <@m_mobile_a_href p_page="my-info"/>><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-1.png" alt="" class="ui-li-icon ui-corner-none">基本信息 </a></li>
-    <li><a href="#"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-2.png" alt="Germany" class="ui-li-icon">设置</a></li>
+    <li><a <@m_mobile_a_href p_page="my-config"/>><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-2.png" alt="Germany" class="ui-li-icon">设置</a></li>
     </ul>
 	</div>
     <div class="zmcss_h_10"></div>

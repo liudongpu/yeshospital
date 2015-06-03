@@ -47,6 +47,14 @@ var yesapp = {
 			api_name : 'com_srnpr_yeshospital_api_app_FinishTourOrder',
 			flag_token : true
 		},
+		my_info : {
+			api_name : 'com.srnpr.yeshospital.api.app.MyInfo',
+			flag_token : true
+		},
+		my_config : {
+			api_name : 'com.srnpr.yeshospital.api.app.MyConfig',
+			flag_token : true
+		},
 		main_page : {
 			api_name : 'com_srnpr_yeshospital_api_app_FrameMain',
 			flag_token : true

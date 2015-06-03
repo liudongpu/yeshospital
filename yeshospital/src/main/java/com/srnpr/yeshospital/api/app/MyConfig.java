@@ -7,7 +7,7 @@ import com.srnpr.zapweb.simpleapi.SimpleSetInput;
 import com.srnpr.zapweb.simpleapi.SimpleSetResult;
 import com.srnpr.zapweb.webapi.RootApiForToken;
 
-public class MyInfo extends SimpleSet {
+public class MyConfig extends SimpleSet {
 
 	public SimpleSetResult Process(SimpleSetInput inputParam,
 			MDataMap mRequestMap) {
@@ -18,7 +18,7 @@ public class MyInfo extends SimpleSet {
 	public SetConfig upConfig() {
 		SetConfig setConfig = new SetConfig();
 
-		setConfig.setPageCode("page_edit_m_yh_app_member");
+		setConfig.setPageCode("page_edit_m_yh_app_uset");
 
 		return setConfig;
 	}

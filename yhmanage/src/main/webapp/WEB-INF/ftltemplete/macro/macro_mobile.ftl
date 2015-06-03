@@ -1,5 +1,5 @@
 <#-- 系统版本号 -->
-<#assign a_macro_mobile_system_version="2.0.0.11">
+<#assign a_macro_mobile_system_version="2.0.0.13">
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_mobile_resources_version="?v="+a_macro_mobile_system_version >
 <#-- 资源文件路径 -->
@@ -101,7 +101,7 @@
 
 <#macro m_mobile_header_begin p_title="" >
 	
-	<div id="zmcss_mm_page_header" data-role="header" style="overflow:hidden;"  data-position="fixed">
+	<div id="zmcss_mm_page_header" data-role="header" style="overflow:hidden;"  data-position="fixed" >
 	<h1>${p_title}</h1>
 </#macro>
 
