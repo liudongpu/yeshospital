@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,6 @@ import com.srnpr.zapweb.webmethod.RootControl;
 @Controller
 public class HomeController extends RootControl {
 
-	
 	public String mobileCheckLogin(String sInput) {
 		if (UserFactory.INSTANCE.checkUserLogin()) {
 			return sInput;
@@ -31,9 +31,7 @@ public class HomeController extends RootControl {
 			return "mobile/system-noaccess";
 		}
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/mb/{url}")
 	public String mb(@PathVariable("url") String sUrl, Model model,
 			HttpServletRequest request) {
@@ -47,6 +45,12 @@ public class HomeController extends RootControl {
 			HttpServletRequest request) {
 
 		model.addAttribute("b_method", web_method);
+
+		// 如果是需要登录的页面
+		if (StringUtils.startsWithAny(sUrl, new String[] { "my-" })) {
+			return mobileCheckLogin("mobile/" + sUrl);
+		}
+
 		return "mobile/" + sUrl;
 	}
 

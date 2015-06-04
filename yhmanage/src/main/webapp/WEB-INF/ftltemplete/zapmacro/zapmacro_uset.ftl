@@ -104,8 +104,8 @@
 		</@compress>
 		<div  class="zmcss_set_left">${e_item.getFieldNote()}</div>
 
-		<div  class="zmcss_set_right">			
-			<select id="zw_st_select_${e_item.getFiledName()}" name="zw_st_select_${e_item.getFiledName()}" onchange="zapjs.st.change_select('${e_item.getFiledName()}')"  data-role="slider">
+		<div  class="zmcss_set_right zmcss_set_select">			
+			<select id="zw_st_select_${e_item.getFiledName()}" name="zw_st_select_${e_item.getFiledName()}"  onchange="zapjs.st.change_select('${e_item.getFiledName()}')"  data-mini="true" data-role="slider">
 		        <option value="0">否</option>
 		        <option value="1" <#if e_item.getFieldValue()=="1"> selected="selected" </#if> >是</option>
 		    </select>		
