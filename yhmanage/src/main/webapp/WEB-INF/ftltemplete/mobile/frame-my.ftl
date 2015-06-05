@@ -17,9 +17,9 @@
     <div class="zmcss_h_10"></div>
     <div class="yb_list_box" >
     <ul data-role="listview" data-inset="true">
-    <li><a href="#"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-3.png" alt="Great Britain" class="ui-li-icon">修改密码</a></li>
-    <li><a href="#"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-4.png" alt="Finland" class="ui-li-icon">意见反馈</a></li>
-    <li><a href="#"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-5.png" alt="United States" class="ui-li-icon ui-corner-none">关于</a></li>
+    <li><a <@m_mobile_a_href p_page="my-password"/>><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-3.png" alt="Great Britain" class="ui-li-icon">修改密码</a></li>
+    <li><a <@m_mobile_a_href p_page="my-suggestion"/>><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-4.png" alt="Finland" class="ui-li-icon">意见反馈</a></li>
+    <li><a <@m_mobile_a_href p_page="system-static?u_code=about_us"/>><img src="${a_macro_mobile_img_link}resources/yesapp/icons/i-5.png" alt="United States" class="ui-li-icon ui-corner-none">关于</a></li>
 	</ul>
 	</div>
 	<div class="zmcss_h_10"></div>

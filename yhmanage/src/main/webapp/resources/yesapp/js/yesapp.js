@@ -48,13 +48,23 @@ var yesapp = {
 			flag_token : true
 		},
 		my_info : {
-			api_name : 'com.srnpr.yeshospital.api.app.MyInfo',
+			api_name : 'com_srnpr_yeshospital_api_app_MyInfo',
 			flag_token : true
 		},
 		my_config : {
-			api_name : 'com.srnpr.yeshospital.api.app.MyConfig',
+			api_name : 'com_srnpr_yeshospital_api_app_MyConfig',
 			flag_token : true
 		},
+		my_password : {
+			api_name : 'com_srnpr_yeshospital_api_member_ChangeUserPassword',
+			flag_token : true
+		},
+
+		my_suggestion : {
+			api_name : 'com_srnpr_yeshospital_api_member_SuggestionInfo',
+			flag_token : true
+		},
+
 		main_page : {
 			api_name : 'com_srnpr_yeshospital_api_app_FrameMain',
 			flag_token : true
