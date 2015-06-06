@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
@@ -29,6 +30,7 @@ import com.srnpr.yeshospital.support.QrcodeSupport;
 import com.srnpr.zapcom.basehelper.EncodeHelper;
 import com.srnpr.zapcom.basehelper.TestHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
+import com.srnpr.zapweb.helper.WebHelper;
 
 /**
  * Unit test for simple App.
@@ -44,16 +46,20 @@ public class AppTest extends TestHelper
 
 			List<MDataMap> listMaps = new ArrayList<MDataMap>();
 
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/12345678","text","姓名：测试;卡号：12345678"));
+			String sCard="";
+			sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));
+			sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));
+			
 			qrcodeSupport.createImage(listMaps);
 
 		} catch (Exception e) {
