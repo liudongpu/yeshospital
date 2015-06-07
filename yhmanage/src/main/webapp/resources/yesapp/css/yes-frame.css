@@ -7,3 +7,51 @@
 {
 	width:100%;
 }
+
+
+
+.yh_frame_daily_box
+{
+	border-top:solid 1px  #c4e3d0; 
+}
+
+.yh_frame_daily_clear
+{
+	clear:both;
+}
+
+
+.yh_frame_daily_item
+{
+	clear:both;
+	background-color:#fff;
+	border-bottom:solid 1px  #c4e3d0; 
+}
+.yh_frame_daily_left
+{
+	float:left;
+	margin-left:1em;
+}
+
+.yh_frame_daily_right
+{
+	float:left;
+	margin-left:1em;
+}
+
+
+.yh_frame_daily_date
+{
+	
+	
+width: 4em; 
+height: 4em; 
+background-color: #35b667; 
+-webkit-border-radius: 2em; 
+line-height:4em;
+text-align:center;
+color:#fff;
+
+	
+}
+
