@@ -4,13 +4,24 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageTypeSpecifier;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.metadata.IIOInvalidTreeException;
+import javax.imageio.metadata.IIOMetadata;
+import javax.imageio.metadata.IIOMetadataNode;
+import javax.imageio.stream.ImageOutputStream;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -74,8 +85,9 @@ public class QrcodeSupport extends BaseClass {
 				String sFile = filePath + "qrtext_" + WebHelper.upUuid()
 						+ filePix;
 
-				int iItemWidth = 1004;
-				int iItemHeight = 650;
+				//1011*638
+				int iItemWidth = 991;
+				int iItemHeight = 608;
 
 				BufferedImage imageResult = new BufferedImage(iItemWidth,
 						iItemHeight, BufferedImage.TYPE_INT_RGB);
@@ -132,13 +144,12 @@ public class QrcodeSupport extends BaseClass {
 				g.setBackground(Color.WHITE);
 
 				g.fillRect(0, 0, iA4Width, iA4Height);// 填充整个屏幕
-				
+
 				g.dispose();
 
 				int iX = 0;
 				int iY = 0;
-				String sFile = filePath + "img_" + WebHelper.upUuid()
-						+ filePix;
+				String sFile = filePath + "img_" + WebHelper.upUuid() + filePix;
 				// 开始拼接图片
 				for (MDataMap map : listMap) {
 
@@ -154,32 +165,95 @@ public class QrcodeSupport extends BaseClass {
 						iX = 0;
 						iY = iY + height;
 					}
-					
-						
-					
 
 					imageResult.setRGB(iX, iY, width, height, imageArrayFirst,
 							0, width);// 设置左半部分的RGB
-					
-					
-					iX=iX+width;
+
+					iX = iX + width;
 
 				}
-				
+
 				File outFile = new File(sFile);
-				ImageIO.write(imageResult,
-						StringUtils.substringAfterLast(filePix, "."), outFile);// 写图片
-				
-				
+
+				/*
+				 * ImageIO.write(imageResult,
+				 * StringUtils.substringAfterLast(filePix, "."), outFile);// 写图片
+				 */
+				saveGridImage(outFile, imageResult);
+
 			}
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
 		return sTarget;
 
+	}
+
+	/**
+	 * 300DPI保存图片
+	 * 
+	 * @param output
+	 * @param gridImage
+	 * @throws IOException
+	 */
+	private void saveGridImage(File output, RenderedImage gridImage)
+			throws IOException {
+		output.delete();
+
+		final String formatName = "png";
+
+		for (Iterator<ImageWriter> iw = ImageIO
+				.getImageWritersByFormatName(formatName); iw.hasNext();) {
+			ImageWriter writer = iw.next();
+			ImageWriteParam writeParam = writer.getDefaultWriteParam();
+			ImageTypeSpecifier typeSpecifier = ImageTypeSpecifier
+					.createFromBufferedImageType(BufferedImage.TYPE_INT_RGB);
+			IIOMetadata metadata = writer.getDefaultImageMetadata(
+					typeSpecifier, writeParam);
+			if (metadata.isReadOnly()
+					|| !metadata.isStandardMetadataFormatSupported()) {
+				continue;
+			}
+
+			setDPI(metadata);
+
+			final ImageOutputStream stream = ImageIO
+					.createImageOutputStream(output);
+			try {
+				writer.setOutput(stream);
+				writer.write(metadata, new IIOImage(gridImage, null, metadata),
+						writeParam);
+			} finally {
+				stream.close();
+			}
+			break;
+		}
+	}
+
+	private void setDPI(IIOMetadata metadata) throws IIOInvalidTreeException {
+
+		int DPI=300;
+		
+		// for PMG, it's dots per millimeter
+		double dotsPerMilli = 1.0 * DPI / 10 / 2.54;
+
+		IIOMetadataNode horiz = new IIOMetadataNode("HorizontalPixelSize");
+		horiz.setAttribute("value", Double.toString(dotsPerMilli));
+
+		IIOMetadataNode vert = new IIOMetadataNode("VerticalPixelSize");
+		vert.setAttribute("value", Double.toString(dotsPerMilli));
+
+		IIOMetadataNode dim = new IIOMetadataNode("Dimension");
+		dim.appendChild(horiz);
+		dim.appendChild(vert);
+
+		IIOMetadataNode root = new IIOMetadataNode("javax_imageio_1.0");
+		root.appendChild(dim);
+
+		metadata.mergeTree("javax_imageio_1.0", root);
 	}
 
 }
