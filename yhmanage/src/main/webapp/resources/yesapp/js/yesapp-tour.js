@@ -193,7 +193,10 @@ var yesapp_tour = {
 
 	tour_member_tmp_click : function(oEl) {
 
-		$('#' + yesapp_tour.temp.template_id).val($(oEl).text());
+		var sText = $('#' + yesapp_tour.temp.template_id).val();
+		
+
+		$('#' + yesapp_tour.temp.template_id).val(sText + $(oEl).text()+";");
 		zmjs.ui.dialog_close(yesapp_tour.temp.template_code);
 
 	},
