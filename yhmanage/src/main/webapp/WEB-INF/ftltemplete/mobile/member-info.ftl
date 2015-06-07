@@ -41,9 +41,14 @@
     </#list>
     
     
-</ul>
+	</ul>
   </div>
+	<div id="three">
+   
+	<#assign a_report_info=b_method.upControlPage("page_book_v_yh_report_info","zw_f_member_code="+a_memberCode)>
+	<@m_zapmacro_mobile_page_book a_report_info />
 
+  	</div>
 	
 	
 

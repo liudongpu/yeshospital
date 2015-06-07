@@ -13,6 +13,7 @@
 
 
 <@m_mobile_header_begin p_title=a_static_info["static_title"] />
+	<@m_mobile_button_back />
 <@m_mobile_header_end />
 
 
