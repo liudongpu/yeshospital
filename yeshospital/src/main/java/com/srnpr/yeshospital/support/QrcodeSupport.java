@@ -107,7 +107,7 @@ public class QrcodeSupport extends BaseClass {
 						width);// 设置左半部分的RGB
 
 				g.setColor(Color.BLACK);// 设置字体颜色
-				Font font = new Font("微软雅黑", Font.PLAIN, 40);// 添加字体的属性设置
+				Font font = new Font("msyh", Font.PLAIN, 40);// 添加字体的属性设置
 				g.setFont(font);
 				int x = 550;
 				int y = 150;
