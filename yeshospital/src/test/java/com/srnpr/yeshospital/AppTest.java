@@ -38,7 +38,7 @@ import com.srnpr.zapweb.helper.WebHelper;
 public class AppTest extends TestHelper
 
 {
-	@Test
+	
 	public void TestQrCode() {
 		try {
 
@@ -60,7 +60,7 @@ public class AppTest extends TestHelper
 			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
 			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));
 			
-			qrcodeSupport.createImage(listMaps);
+			qrcodeSupport.createImage("D:/x/",listMaps);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

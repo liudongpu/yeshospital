@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -14,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.srnpr.yeshospital.pages.ExportQrcode;
+import com.srnpr.zapweb.webexport.ExportChart;
 import com.srnpr.zapweb.webfactory.UserFactory;
 import com.srnpr.zapweb.webmethod.RootControl;
 
@@ -52,6 +56,15 @@ public class HomeController extends RootControl {
 		}
 
 		return "mobile/" + sUrl;
+	}
+
+	@RequestMapping(value = "/yhqrcode/{operateId}", produces = { "application/binary;charset=UTF-8" })
+	@ResponseBody
+	public String yhqrcode(@PathVariable("operateId") String sOperateId,
+			HttpServletRequest request, HttpServletResponse response) {
+		new ExportQrcode().export(sOperateId, request, response);
+
+		return null;
 	}
 
 }

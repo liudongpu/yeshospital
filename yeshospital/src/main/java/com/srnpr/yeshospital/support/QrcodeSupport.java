@@ -59,11 +59,9 @@ public class QrcodeSupport extends BaseClass {
 		return true;
 	}
 
-	private String filePath = "D:/x/";
-
 	private String filePix = ".png";
 
-	public String createImage(List<MDataMap> listMap) {
+	public String createImage(String filePath, List<MDataMap> listMap) {
 		String sTarget = "";
 
 		try {
@@ -85,7 +83,7 @@ public class QrcodeSupport extends BaseClass {
 				String sFile = filePath + "qrtext_" + WebHelper.upUuid()
 						+ filePix;
 
-				//1011*638
+				// 1011*638
 				int iItemWidth = 991;
 				int iItemHeight = 608;
 
@@ -180,6 +178,8 @@ public class QrcodeSupport extends BaseClass {
 				 * StringUtils.substringAfterLast(filePix, "."), outFile);// 写图片
 				 */
 				saveGridImage(outFile, imageResult);
+				
+				sTarget=sFile;
 
 			}
 
@@ -235,8 +235,8 @@ public class QrcodeSupport extends BaseClass {
 
 	private void setDPI(IIOMetadata metadata) throws IIOInvalidTreeException {
 
-		int DPI=300;
-		
+		int DPI = 300;
+
 		// for PMG, it's dots per millimeter
 		double dotsPerMilli = 1.0 * DPI / 10 / 2.54;
 
