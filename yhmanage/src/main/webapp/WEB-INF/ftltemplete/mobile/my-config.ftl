@@ -11,7 +11,11 @@
 
 
 
+<div class=" zmcss_w_96">
+<div class="zmcss_h_20"></div>
+ <button class="btn btn-positive btn-block" onclick="zapjs.zw.login_out()">退出登陆 </button>
 
+</div>
 
 
  <@m_mobile_body_end  p_js=["zapmobile/js/zapjs-mb.st-mb.js"]/>

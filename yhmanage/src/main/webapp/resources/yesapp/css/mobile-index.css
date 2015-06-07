@@ -61,7 +61,7 @@ html, body {
             background-position-y: 4px;
             padding-top: 16px;
             font-size: 12px;
-            color: #323237;
+            color: #333;
             width: 99%;
             height: 39px;
             background-repeat: no-repeat no-repeat;
@@ -86,7 +86,7 @@ html, body {
         }
 
         .active .bottom_btn {
-            color: #6ab494;
+            color: #35b667;
             background-size: 30px;
         }
 

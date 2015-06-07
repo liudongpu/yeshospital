@@ -17,6 +17,7 @@
 	</ul>
 </div>
 <div class="zmcss_h_10"></div>
+<#--
 <div class="yb_list_box" >
 	<ul data-role="listview">
 	    <li onclick="yesapp_frame.shake()"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/s-2.png" alt="" class="ui-li-icon ui-corner-none">摇一摇</li>
@@ -25,5 +26,6 @@
 	    
 	</ul>
 </div>
+-->
  <@m_mobile_body_end  p_js=["yesapp/js/yesapp-frame.js"]/>
  <@m_mobile_html_end />
