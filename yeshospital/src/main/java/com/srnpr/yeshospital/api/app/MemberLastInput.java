@@ -5,7 +5,7 @@ import com.srnpr.zapcom.topapi.RootInput;
 
 public class MemberLastInput extends RootInput {
 
-	@ZapcomApi(value = "用户卡号")
+	@ZapcomApi(value = "卡号",require=1)
 	private String postCard = "";
 
 	public String getPostCard() {
