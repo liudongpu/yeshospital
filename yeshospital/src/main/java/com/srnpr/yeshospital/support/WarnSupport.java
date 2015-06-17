@@ -212,7 +212,7 @@ public class WarnSupport extends BaseClass {
 									new MDataMap("member_code", sMemberCode))
 							.toString();
 					String sContent = bInfo(965805804, sMemberName, sTypeText,
-							sValueText, sLevelText, sMemberMobile);
+							sValueText, sLevelText, StringUtils.defaultIfBlank(sMemberMobile, ""));
 
 					// 循环关联医院
 					for (MDataMap mHospitalMap : DbUp.upTable(
