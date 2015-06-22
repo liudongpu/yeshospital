@@ -9,6 +9,7 @@ import com.srnpr.yeshospital.model.PostDataApi;
 import com.srnpr.yeshospital.model.PostDataResult;
 import com.srnpr.yeshospital.model.WarnCheckInfo;
 import com.srnpr.yeshospital.support.WarnSupport;
+import com.srnpr.zapcom.basehelper.DateHelper;
 import com.srnpr.zapcom.basehelper.FormatHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
@@ -57,6 +58,29 @@ public class ApiElectrocardiogramImage extends
 
 				if (mWebResult.upFlagTrue()) {
 					sUrl = mWebResult.getResultObject().toString();
+				}
+
+				// 由于心电图与测试结果是两条数据处理 开始特殊处理 判断最后一条心电图信息是否图片为空且与当前时间差距在10分钟内的数据
+				// 如果是空则更新上去
+				if (postDataResult.upFlagTrue()) {
+
+					MDataMap mUpdateMap = DbUp.upTable(
+							"yh_post_electrocardiogram").oneWhere("", "-zid",
+							"", "member_code", upMemberCode());
+
+					if (mUpdateMap != null) {
+						if (StringUtils.isBlank(mUpdateMap.get("image_url"))
+								&& DateHelper.upDateTimeAdd("-600s").compareTo(
+										mUpdateMap.get("create_time")) < 0) {
+
+							mUpdateMap.put("image_url", sUrl);
+
+							DbUp.upTable("yh_post_electrocardiogram")
+									.dataUpdate(mUpdateMap, "image_url", "zid");
+
+						}
+					}
+
 				}
 
 			}

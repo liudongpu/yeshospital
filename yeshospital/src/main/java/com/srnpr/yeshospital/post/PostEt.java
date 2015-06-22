@@ -16,11 +16,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.srnpr.yeshospital.api.model.ElectrocardiogramImageInput;
+import com.srnpr.yeshospital.api.model.ElectrocardiogramStructInput;
 import com.srnpr.yeshospital.api.model.GlucoseInput;
 import com.srnpr.yeshospital.api.model.OxygenInput;
 import com.srnpr.yeshospital.api.model.PressureInput;
 import com.srnpr.yeshospital.api.model.WeightInput;
 import com.srnpr.yeshospital.api.postdata.ApiElectrocardiogramImage;
+import com.srnpr.yeshospital.api.postdata.ApiElectrocardiogramStruct;
 import com.srnpr.yeshospital.api.postdata.ApiGlucose;
 import com.srnpr.yeshospital.api.postdata.ApiOxygen;
 import com.srnpr.yeshospital.api.postdata.ApiPressure;
@@ -43,10 +45,18 @@ public class PostEt extends BaseClass {
 	public String process() {
 		HttpServletRequest hRequest = WebSessionHelper.create().upHttpRequest();
 
-		String sRequestString = hRequest.getParameter("datas");
+		String sRequestString = (String) hRequest.getParameter("datas");
+
+		try {
+			sRequestString = new String(sRequestString.getBytes("ISO-8859-1"),
+					"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+
+			e.printStackTrace();
+		}
 
 		// bLogInfo(0, sRequestString);
-		//sRequestString=EncodeHelper.urlDecode(sRequestString);
+		// sRequestString=EncodeHelper.urlDecode(sRequestString);
 
 		MWebResult mWebResult = doProcess(sRequestString);
 
@@ -84,13 +94,14 @@ public class PostEt extends BaseClass {
 				// 如果该主键的数据不存在时 则开始处理
 				if (DbUp.upTable("yh_log_etpull").count("log_dataid", sDataId) == 0) {
 
+					String sContent = jsonArray.getString(i);
+
 					String sLogCode = WebHelper.upCode("LET");
 					DbUp.upTable("yh_log_etpull").insert("log_code", sLogCode,
 							"log_type", sDataType, "log_dataid", sDataId,
-							"log_datakey", sDataKey, "log_info",
-							jsonArray.getString(i), "create_time",
-							FormatHelper.upDateTime(), "add_time", sAddTime,
-							"collect_time", sCollectTime);
+							"log_datakey", sDataKey, "log_info", sContent,
+							"create_time", FormatHelper.upDateTime(),
+							"add_time", sAddTime, "collect_time", sCollectTime);
 
 					// String sCardCode = StringUtils.right(sDataKey, 20);
 
@@ -213,15 +224,34 @@ public class PostEt extends BaseClass {
 
 			}
 			// 心电图片
-			else if (sType.equals("EcgFileV1")) {
+			else if (sType.equals("EcgPictureV1")) {
 
 				ElectrocardiogramImageInput iPostDataInput = new ElectrocardiogramImageInput();
 				initDate(iPostDataInput, sPostClientTime, sCardCode,
 						sPostProcessTime);
 
-				iPostDataInput.setImageData(jsonObject.getString("ecgdata"));
+				iPostDataInput
+						.setImageData(jsonObject.getString("picturedata"));
 
 				postDataResult = new ApiElectrocardiogramImage().toPost(
+						iPostDataInput, sLogCode, "");
+
+			}
+			// 心电结果
+			else if (sType.equals("EcgStructV1")) {
+
+				ElectrocardiogramStructInput iPostDataInput = new ElectrocardiogramStructInput();
+				initDate(iPostDataInput, sPostClientTime, sCardCode,
+						sPostProcessTime);
+
+				iPostDataInput.setStructMessage(bInfo(965805112,
+						jsonObject.getString("heartrate"),
+						jsonObject.getString("isarrhythmia"),
+						jsonObject.getString("stisnormal"),
+						jsonObject.getString("waveform"),
+						jsonObject.getString("waveform")));
+
+				postDataResult = new ApiElectrocardiogramStruct().toPost(
 						iPostDataInput, sLogCode, "");
 
 			}
