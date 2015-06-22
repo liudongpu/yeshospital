@@ -60,16 +60,30 @@ public class PostEt extends BaseClass {
 
 		MWebResult mWebResult = doProcess(sRequestString);
 
-		return String.valueOf(mWebResult.getResultCode());
+		return String.valueOf(mWebResult.getResultCode()
+				+ mWebResult.getResultMessage());
 	}
 
 	public MWebResult doProcess(String sData) {
 
 		MWebResult mWebResult = new MWebResult();
 
-		if (mWebResult.upFlagTrue()) {
+		JSONArray jsonArray = null;
 
-			JSONArray jsonArray = JSON.parseArray(sData);
+		if (mWebResult.upFlagTrue()) {
+			try {
+				jsonArray = JSON.parseArray(sData);
+				
+				
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				mWebResult.inErrorMessage(965805253);
+			}
+		}
+
+		if (mWebResult.upFlagTrue()) {
 
 			String sCode = LogHttpHelper.AddLog("46580001000200040002", "",
 					sData);
@@ -122,11 +136,14 @@ public class PostEt extends BaseClass {
 							"flag_process,process_result,result_code",
 							"log_code");
 
+				} else {
+					mWebResult.inErrorMessage(965805252, sDataId);
 				}
 
 			}
 
-			LogHttpHelper.UpdateLog(sCode, "", 1, iLength, iProcess);
+			LogHttpHelper.UpdateLog(sCode, mWebResult.upJson(), 1, iLength,
+					iProcess);
 
 		}
 
