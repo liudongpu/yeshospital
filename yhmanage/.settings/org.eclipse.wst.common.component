@@ -7,7 +7,16 @@
         <dependent-module archiveName="yeshospital-1.0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/yeshospital/yeshospital">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="zapweb-2.0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zapweb/zapweb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="zapdata-2.0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zapdata/zapdata">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="zapcom-2.0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zapcom/zapcom">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="zapzero-2.0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zapzero/zapzero">
             <dependency-type>uses</dependency-type>
         </dependent-module>
 		<property name="java-output-path" value="target/classes"/>
