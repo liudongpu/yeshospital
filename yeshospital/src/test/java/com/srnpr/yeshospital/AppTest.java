@@ -91,6 +91,7 @@ public class AppTest extends TestHelper
 		}
 	}
 
+	@Test
 	public void TestPY() {
 		// bLogTest(new EtRsyncGetEntInfo().upHttp(new MDataMap()));
 
@@ -105,8 +106,11 @@ public class AppTest extends TestHelper
 		 * ; bLogTest(new EtRsyncUpdateEnt() .upHttp(new MDataMap("entInfo",
 		 * sEntInfo)));
 		 */
-		// bLogTest(new EtRsyncGetData().upHttp(new
-		// MDataMap("appType","","onlyUnsync", "","PageMax","100")));
+		
+		bLogTest(new EtRsyncGetEntInfo().upHttp(new MDataMap()));
+		
+		 bLogTest(new EtRsyncGetData().upHttp(new
+		 MDataMap("appType","","onlyUnsync", "","PageMax","100")));
 
 		String sData = "[{\"apptype\":\"WeightDataV1\",\"datakey\":\"XXXX\",\"collectdate\":\"xxxx\",\"adddate\":\"xxxx\",\"EntAccount\":\"xxxx\",\"DataId\":\"XXXX\",\"weight\":\"xxxx\"}]";
 
