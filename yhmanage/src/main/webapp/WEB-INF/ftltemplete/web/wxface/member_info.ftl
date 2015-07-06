@@ -3,6 +3,9 @@
 <@m_wx_html_begin p_title="个人信息" />
 <@m_wx_body_begin />
 
+<@m_wx_init_check_login />
+
+
 
 <div class="wxcss_main_width">
 
@@ -11,7 +14,7 @@
 
 </div>
 
-
+ <#assign a_helper=b_method.upClass("com.srnpr.yeshospital.wx.WxPageInfo")>
 
 
     
