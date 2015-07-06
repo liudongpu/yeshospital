@@ -1,5 +1,5 @@
 <#-- 系统版本号 -->
-<#assign a_macro_wx_system_version="2.0.0.29">
+<#assign a_macro_wx_system_version="2.0.0.06">
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_wx_resources_version="?v="+a_macro_wx_system_version >
 <#-- 资源文件路径 -->
@@ -112,11 +112,14 @@
 
 <#-- 检查登陆  -->
 <#macro m_wx_init_check_login>
-	<#assign a_macro_wx_check_login=b_method.upClass("com.srnpr.yeshospital.wx.WxPageInfo").upMemberInfo() >
-${a_macro_wx_check_login.getAccessToken()}
-	<#if a_macro_wx_check_login.getAccessToken()=="">
 
-		<@m_wx_html_script "location.href='wx_bind?bind_token="+a_macro_wx_check_login.getBindToken()+"';" />
+	<#assign a_macro_wx_page_info=b_method.upClass("com.srnpr.yeshospital.wx.WxPageInfo") />
+
+	<#assign a_macro_wx_member_info=a_macro_wx_page_info.upMemberInfo() />
+
+	<#if a_macro_wx_member_info.getAccessToken()=="">
+
+		<@m_wx_html_script "location.href='wx_bind?bind_token="+a_macro_wx_member_info.getBindToken()+"';" />
 	<#else>
 
 		

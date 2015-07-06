@@ -1,4 +1,13 @@
 
+.ui-select .ui-btn,.ui-select .ui-btn:hover,.ui-select .ui-btn:active
+{
+	background-color:#fff;
+	color:#999;
+	border-color:#ccc;
+}
+
+
+
 
 
 .wxcss_main_width
@@ -11,10 +20,17 @@
 
 .wxcss_height_1
 {
-	height:1em;
+	height:1rem;
+}
+.wxcss_height_2
+{
+	height:2rem;
 }
 
-
+.wxcss_base_none
+{
+	display:none;
+}
 
 
 
@@ -22,4 +38,32 @@
 {
 	color:#999999;
 }
+
+.wxcss_show_item
+{
+	line-height:2rem;
+}
+.wxcss_show_title
+{
+	color:#000;
+	font-weight:bold;
+}
+
+.wxcss_show_split
+{
+	border-bottom:solid 1px #d9d9d9;
+	height:1rem;
+	margin-bottom:1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
 

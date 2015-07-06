@@ -26,6 +26,14 @@ public class MemberInfo extends RootApi<MemberInfoResult, MemberInfoInput> {
 
 			if (inputParam.getCode().equals("liudp")) {
 				sOpenId = "liudp";
+			} else if (StringUtils.startsWith(inputParam.getCode(), "yhbt_")) {
+				// 如果是绑定完成后调用到该页面
+				sOpenId = DbUp
+						.upTable("yh_wx_bind")
+						.one("bind_token",
+								StringUtils.substringAfter(
+										inputParam.getCode(), "yhbt_"))
+						.get("wx_openid");
 			} else {
 				sOpenId = new WxSupport().upOpenId(inputParam.getCode());
 			}
@@ -40,10 +48,10 @@ public class MemberInfo extends RootApi<MemberInfoResult, MemberInfoInput> {
 					if (StringUtils.isNotBlank(mDataMap.get("sib_code"))) {
 
 						result.setAccessToken(mDataMap.get("access_token"));
+						result.setSibCode(mDataMap.get("sib_code"));
 
-					} else {
-						result.setBindToken(mDataMap.get("bind_token"));
 					}
+					result.setBindToken(mDataMap.get("bind_token"));
 
 				} else {
 

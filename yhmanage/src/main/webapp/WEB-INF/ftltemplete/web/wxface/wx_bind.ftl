@@ -8,7 +8,11 @@
 
 
 	<@m_wx_html_hidden p_id="wx_bind_bind_token" p_value=a_web_helper.upRequest("bind_token") />
-	<div>
+
+	<@m_wx_html_hidden p_id="wx_bind_member_uid"  />
+
+
+	<div id="wx_bind_member">
 
 		
 
@@ -26,11 +30,64 @@
 		<div>
 			<@m_wx_html_text p_id="wx_bind_user_name"  />
 		</div>
+		
+		<a href="javascript:yeswx.wx_bind_check()" class="ui-btn">确定</a>
+		
 	</div>
 
+	<div id="wx_bind_create" class="wxcss_base_none">
+		<div class="wxcss_height_1"></div>
+		<div class="wxcss_base_note">
+			与老人关系：
+		</div>
+		<div>
+			<select name="wx_bind_sib_relation" id="wx_bind_sib_relation">
+				<option value="46580001000200050001">子女</option>
+				<option value="46580001000200050002">配偶</option>
+				<option value="46580001000200050003">兄弟姐妹</option>
+				<option value="46580001000200050004">亲戚</option>
+				<option value="46580001000200050005">朋友</option>
+				<option value="46580001000200050006">其他</option>
+			</select>
 
+		</div>
 
-	<a href="#" class="ui-btn">确定</a>
+		<div class="wxcss_height_1"></div>
+		<div class="wxcss_base_note">
+			请输入本人姓名：
+		</div>
+		<div>
+			<@m_wx_html_text p_id="wx_bind_sib_name"  />
+		</div>
+		
+		
+		<div class="wxcss_height_1"></div>
+		<div class="wxcss_base_note">
+			请输入本人手机号：
+		</div>
+		<div>
+			<@m_wx_html_text p_id="wx_bind_sib_hone" />
+		</div>
+		
+		
+		<div class="wxcss_height_1"></div>
+		<div class="wxcss_base_note">
+			请输入验证码：
+		</div>
+		<div>
+			<div style="width:50%;float:left;">
+				<@m_wx_html_text p_id="wx_bind_sib_number"  />
+			</div>
+			<div style="width:40%;float:right;">
+				<a href="javascript:yeswx.wx_bind_verify()" class="ui-btn">发送验证码 </a>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="wxcss_height_2"></div>
+		<a href="javascript:yeswx.wx_bind_submit()" class="ui-btn">确定</a>
+	</div>
+
+	
 
 </div>
 

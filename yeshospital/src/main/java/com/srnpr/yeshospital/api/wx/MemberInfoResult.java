@@ -10,6 +10,10 @@ public class MemberInfoResult extends RootResultWeb {
 
 	@ZapcomApi(value = "绑定的令牌，该令牌和用户访问令牌不能同时为空")
 	private String bindToken = "";
+	
+	@ZapcomApi(value = "用户编号")
+	private String sibCode="";
+	
 
 	public String getAccessToken() {
 		return accessToken;
@@ -25,6 +29,14 @@ public class MemberInfoResult extends RootResultWeb {
 
 	public void setBindToken(String bindToken) {
 		this.bindToken = bindToken;
+	}
+
+	public String getSibCode() {
+		return sibCode;
+	}
+
+	public void setSibCode(String sibCode) {
+		this.sibCode = sibCode;
 	}
 
 }

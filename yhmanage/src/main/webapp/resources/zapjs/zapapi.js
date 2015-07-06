@@ -21,15 +21,15 @@ var zapapi = {
 		var defaults = oData ? {
 			api_target : sTarget,
 			api_input : zapapi.f.tojson(oData),
-			api_key : zapapi.api_key
+			api_key : zapapi.c.api_key
 		} : {
-			api_key : zapapi.api_key,
+			api_key : zapapi.c.api_key,
 			api_input : ''
 		};
 
 		// oData = $.extend({}, defaults, oData || {});
 
-		zapjs.f.ajaxjson(zapjs.c.api_url + sTarget, defaults, function(data) {
+		zapapi.f.ajaxjson(zapapi.c.api_url + sTarget, defaults, function(data) {
 
 			if (data.resultCode == "1") {
 
@@ -64,10 +64,10 @@ var zapapi = {
 
 			$.ajax(options);
 
+		},
+		message : function(sMessage) {
+			alert(sMessage);
 		}
-	},
-	message : function(sMessage) {
-		alert(sMessage);
 	}
 
 };
