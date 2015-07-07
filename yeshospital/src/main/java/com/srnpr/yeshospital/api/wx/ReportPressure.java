@@ -28,8 +28,8 @@ public class ReportPressure extends ReportBase {
 		result.setChart(itemChart);
 
 		List<String> listXname = new ArrayList<String>();
-		for (int i = 0; i < 10; i++) {
-			listXname.add(String.valueOf(i*3));
+		for (int i = 0; i < 31; i++) {
+			listXname.add(String.valueOf(i));
 		}
 		ItemAxis xAxis = new ItemAxis();
 		xAxis.setCategories(listXname);
@@ -44,7 +44,7 @@ public class ReportPressure extends ReportBase {
 		
 		ItemSeries itemSeries=new ItemSeries();
 		itemSeries.setName("血压");
-		for (int i = 0; i < 31; i++) {
+		for (int i = 0; i < 15; i++) {
 			itemSeries.getData().add(Double.valueOf(new Random().nextInt(9)));
 		}
 		result.getSeries().add(itemSeries);
