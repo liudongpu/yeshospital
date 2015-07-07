@@ -17,43 +17,33 @@ import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
 import com.srnpr.zapdata.dbdo.DbUp;
 
-public class ReportPressure extends ReportBase {
+public class ReportOxygen extends ReportBase {
 
 	public ReportResult Process(ReportQueryInput inputParam,
 			MDataMap mRequestMap) {
 		ReportResult result = initResult();
 
-		result.getTitle().setText("血压信息");
+		result.getTitle().setText("血氧信息");
 
 		ItemSeries itemSeries = new ItemSeries();
-		itemSeries.setName("舒张压");
-		
-		ItemSeries itemSeries2 = new ItemSeries();
-		itemSeries2.setName("收缩压");
-		/*
-		 * for (int i = 0; i < 15; i++) {
-		 * itemSeries.getData().add(Double.valueOf(new Random().nextInt(9))); }
-		 * result.getSeries().add(itemSeries);
-		 */
+		itemSeries.setName("血氧");
 
 		MDataMap mQueryMap = new MDataMap();
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
 
-		for (MDataMap map : DbUp.upTable("yh_post_pressure").queryAll(
-				"create_time,upper_pressure,lower_pressure", "create_time",
+		for (MDataMap map : DbUp.upTable("yh_post_oxygen").queryAll(
+				"create_time,oxygen", "create_time",
 				"member_code=:member_code", mQueryMap)) {
 
 			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(
 					map.get("create_time")).getTime());
 
-			itemSeries.getData().add(new BigDecimal[] { dTime, new BigDecimal(map.get("upper_pressure")) });
-			itemSeries2.getData().add(new BigDecimal[] { dTime, new BigDecimal(map.get("lower_pressure")) });
-			
+			itemSeries.getData()
+					.add(new BigDecimal[] { dTime,
+							new BigDecimal(map.get("oxygen")) });
 
 		}
 		result.getSeries().add(itemSeries);
-		
-		result.getSeries().add(itemSeries2);
 
 		/*
 		 * ItemSeries itemSeries2=new ItemSeries(); itemSeries2.setName("舒张压");

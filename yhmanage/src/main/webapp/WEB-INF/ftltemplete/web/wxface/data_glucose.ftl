@@ -2,7 +2,7 @@
 
 <@m_wx_html_begin p_title="血糖数据" />
 <@m_wx_body_begin />
-
+<@m_wx_html_js ["lib/highcharts/js/highcharts.js"] />
 
 <@m_wx_init_check_login />
 
@@ -28,10 +28,12 @@
 		<div id="t_${em_index}" class="ui-body-d ui-content">
 		   
 
-			暂无数据
+			<div id="report_${em["member_code"]}" style="width:100%; height:400px;"></div>
+			
+			
 		   
 		</div>
-			
+			<@m_wx_html_initjs e_js="yeswx.report_show('com_srnpr_yeshospital_api_wx_ReportGlucose','"+em["member_code"]+"')" />
 	</#list>
   
   
