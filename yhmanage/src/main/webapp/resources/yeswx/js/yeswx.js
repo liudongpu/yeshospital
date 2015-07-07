@@ -5,6 +5,9 @@ var yeswx = {
 		cookie_user : 'yeswx_cookie_user'
 
 	},
+	temp : {
+		report_width:0
+	},
 
 	init_base : function() {
 		zapapi.c.api_url = "../../jsonapi/";
@@ -54,15 +57,25 @@ var yeswx = {
 		location.href = "member_info?code=" + oResult.linkCode;
 	},
 
-	report_show : function() {
-		zapapi.api_call('com_srnpr_yeshospital_api_wx_ReportPressure', {
-			
-		}, yeswx.report_show_success);
-	},
-	report_show_success : function(oResult) {
-		$('#container').highcharts(oResult);
-	}
+	report_show : function(sTarget, sMemberCode) {
+		if(yeswx.temp.report_width==0)
+			{
+			yeswx.temp.report_width=$('#report_' + sMemberCode).width();
+			}
+		else
+			{
+			$('#report_' + sMemberCode).width(yeswx.temp.report_width);
+			}
+		
 
+		
+
+		zapapi.api_call(sTarget, {
+			memberCode : sMemberCode
+		}, function(oResult) {
+			$('#report_' + sMemberCode).highcharts(oResult);
+		});
+	}
 };
 
 yeswx.init_base();

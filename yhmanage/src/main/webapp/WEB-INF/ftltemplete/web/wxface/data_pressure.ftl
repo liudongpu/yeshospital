@@ -28,12 +28,12 @@
 		<div id="t_${em_index}" class="ui-body-d ui-content">
 		   
 
-			<div id="container" style="width:100%; height:400px;"></div>
+			<div id="report_${em["member_code"]}" style="width:100%; height:400px;"></div>
 			
 			
 		   
 		</div>
-			<@m_wx_html_initjs e_js="yeswx.report_show()" />
+			<@m_wx_html_initjs e_js="yeswx.report_show('com_srnpr_yeshospital_api_wx_ReportPressure','"+em["member_code"]+"')" />
 	</#list>
   
   

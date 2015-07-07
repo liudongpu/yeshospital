@@ -1,5 +1,6 @@
 package com.srnpr.yeshospital.report;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class ItemSeries {
 	
 	private String name="";
 	
-	private List<Double> data=new ArrayList<Double>();
+	private List<BigDecimal[]> data=new ArrayList<BigDecimal[]>();
 
 	public String getName() {
 		return name;
@@ -18,11 +19,11 @@ public class ItemSeries {
 		this.name = name;
 	}
 
-	public List<Double> getData() {
+	public List<BigDecimal[]> getData() {
 		return data;
 	}
 
-	public void setData(List<Double> data) {
+	public void setData(List<BigDecimal[]> data) {
 		this.data = data;
 	}
 	
