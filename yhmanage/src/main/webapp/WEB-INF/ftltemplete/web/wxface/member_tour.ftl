@@ -1,6 +1,6 @@
  <#include "../../macro/macro_wx.ftl" />
 
-<@m_wx_html_begin p_title="购药信息" />
+<@m_wx_html_begin p_title="服药信息" />
 <@m_wx_body_begin />
 
 

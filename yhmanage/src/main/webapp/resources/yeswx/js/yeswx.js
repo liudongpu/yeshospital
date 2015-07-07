@@ -50,9 +50,17 @@ var yeswx = {
 			bindToken : $('#wx_bind_bind_token').val()
 		}, yeswx.wx_bind_submit_success);
 	},
-	wx_bind_submit_success:function(oResult)
-	{
-		location.href="member_info?code="+oResult.linkCode;
+	wx_bind_submit_success : function(oResult) {
+		location.href = "member_info?code=" + oResult.linkCode;
+	},
+
+	report_show : function() {
+		zapapi.api_call('com_srnpr_yeshospital_api_wx_ReportPressure', {
+			
+		}, yeswx.report_show_success);
+	},
+	report_show_success : function(oResult) {
+		$('#container').highcharts(oResult);
 	}
 
 };
