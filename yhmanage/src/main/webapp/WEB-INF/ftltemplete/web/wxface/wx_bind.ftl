@@ -79,7 +79,11 @@
 				<@m_wx_html_text p_id="wx_bind_sib_number"  />
 			</div>
 			<div style="width:40%;float:right;">
-				<a href="javascript:yeswx.wx_bind_verify()" class="ui-btn">发送验证码 </a>
+			<div class="ui-btn ui-input-btn ui-shadow">
+  发送验证码
+  <input id="wx_bind_send_link" type="button" onclick="yeswx.wx_bind_verify()" data-corners="false" data-enhanced="true" value="发送验证码"></input>
+</div>
+				
 			</div>
 			<div style="clear:both;"></div>
 		</div>

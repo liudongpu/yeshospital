@@ -28,7 +28,9 @@
 		<div id="t_${em_index}" class="ui-body-d ui-content">
 		   
 
-			暂无数据
+			<div id="report_${em["member_code"]}" class="wxcss_data_elec_report">暂无数据</div>
+
+			<@m_wx_html_initjs e_js="yeswx.report_elec('com_srnpr_yeshospital_api_wx_ReportElectrocardiogram','"+em["member_code"]+"')" />
 		   
 		</div>
 			

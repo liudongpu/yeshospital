@@ -6,7 +6,7 @@ var yeswx = {
 
 	},
 	temp : {
-		report_width:0
+		report_width : 0
 	},
 
 	init_base : function() {
@@ -36,12 +36,14 @@ var yeswx = {
 
 	},
 	wx_bind_verify : function() {
+		// $('#wx_bind_send_link').button( "disable" );
+
 		zapapi.api_call('com_srnpr_yeshospital_api_wx_VerifyApi', {
 			mobilePhone : $('#wx_bind_sib_hone').val()
 		}, yeswx.wx_bind_verify_success);
 	},
 	wx_bind_verify_success : function() {
-
+		$('#wx_bind_send_link').button("disable");
 	},
 	wx_bind_submit : function() {
 		zapapi.api_call('com_srnpr_yeshospital_api_wx_BindSubmit', {
@@ -58,23 +60,41 @@ var yeswx = {
 	},
 
 	report_show : function(sTarget, sMemberCode) {
-		if(yeswx.temp.report_width==0)
-			{
-			yeswx.temp.report_width=$('#report_' + sMemberCode).width();
-			}
-		else
-			{
+		if (yeswx.temp.report_width == 0) {
+			yeswx.temp.report_width = $('#report_' + sMemberCode).width();
+		} else {
 			$('#report_' + sMemberCode).width(yeswx.temp.report_width);
-			}
-		
-
-		
+		}
 
 		zapapi.api_call(sTarget, {
 			memberCode : sMemberCode
 		}, function(oResult) {
 			$('#report_' + sMemberCode).highcharts(oResult);
 		});
+	},
+	report_elec : function(sTarget, sMemberCode) {
+
+		zapapi.api_call("com_srnpr_yeshospital_api_wx_ReportElectrocardiogram",
+				{
+					memberCode : sMemberCode
+				}, function(oResult) {
+					// $('#report_' + sMemberCode).highcharts(oResult);
+
+					if (oResult.items.length > 0) {
+
+						var aHtml = [];
+
+						for ( var i in oResult.items) {
+							var ot = oResult.items[i];
+							aHtml.push('<div class="wxcss_data_elec_date"><span class="wxcss_base_circle"><span class="wxcss_base_circle_small"></span></span>'+ot["dateTime"]+'</div>');
+							aHtml.push('<div><a><img src="'+ot["imageUrl"]+'"/></a></div>');
+							aHtml.push('<div class="wxcss_show_split"></div>');
+						}
+						
+						$('#report_' + sMemberCode).html(aHtml.join(''));
+					}
+
+				});
 	}
 };
 
