@@ -28,7 +28,7 @@
 		<div id="t_${em_index}" class="ui-body-d ui-content">
 		   
 
-			<#assign a_tourlist=a_macro_wx_dbcall.queryAll("yh_tour_order_drug","","","","tour_code",em["last_tour_order"])>
+			<#assign a_tourlist=a_macro_wx_dbcall.queryAll("yh_tour_order_drug","","","","tour_code",em["last_tour_order"],"member_code",em["member_code"])>
 			<#list a_tourlist as e>
 
 				<div class="wxcss_show_item">
