@@ -69,32 +69,46 @@ var yeswx = {
 		zapapi.api_call(sTarget, {
 			memberCode : sMemberCode
 		}, function(oResult) {
+
+			// 去掉版权
+			oResult.credits = {
+				enabled : false
+			};
+
 			$('#report_' + sMemberCode).highcharts(oResult);
 		});
 	},
 	report_elec : function(sTarget, sMemberCode) {
 
-		zapapi.api_call("com_srnpr_yeshospital_api_wx_ReportElectrocardiogram",
-				{
-					memberCode : sMemberCode
-				}, function(oResult) {
-					// $('#report_' + sMemberCode).highcharts(oResult);
+		zapapi
+				.api_call(
+						"com_srnpr_yeshospital_api_wx_ReportElectrocardiogram",
+						{
+							memberCode : sMemberCode
+						},
+						function(oResult) {
+							// $('#report_' + sMemberCode).highcharts(oResult);
 
-					if (oResult.items.length > 0) {
+							if (oResult.items.length > 0) {
 
-						var aHtml = [];
+								var aHtml = [];
 
-						for ( var i in oResult.items) {
-							var ot = oResult.items[i];
-							aHtml.push('<div class="wxcss_data_elec_date"><span class="wxcss_base_circle"><span class="wxcss_base_circle_small"></span></span>'+ot["dateTime"]+'</div>');
-							aHtml.push('<div><a><img src="'+ot["imageUrl"]+'"/></a></div>');
-							aHtml.push('<div class="wxcss_show_split"></div>');
-						}
-						
-						$('#report_' + sMemberCode).html(aHtml.join(''));
-					}
+								for ( var i in oResult.items) {
+									var ot = oResult.items[i];
+									aHtml
+											.push('<div class="wxcss_data_elec_date"><span class="wxcss_base_circle"><span class="wxcss_base_circle_small"></span></span>'
+													+ ot["dateTime"] + '</div>');
+									aHtml.push('<div><a><img src="'
+											+ ot["imageUrl"] + '"/></a></div>');
+									aHtml
+											.push('<div class="wxcss_show_split"></div>');
+								}
 
-				});
+								$('#report_' + sMemberCode)
+										.html(aHtml.join(''));
+							}
+
+						});
 	}
 };
 

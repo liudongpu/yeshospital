@@ -1,5 +1,5 @@
 <#-- 系统版本号 -->
-<#assign a_macro_wx_system_version="2.0.0.08">
+<#assign a_macro_wx_system_version="2.0.0.09">
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_wx_resources_version="?v="+a_macro_wx_system_version >
 <#-- 资源文件路径 -->
