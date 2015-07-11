@@ -26,10 +26,10 @@ public class ReportPressure extends ReportBase {
 		result.getTitle().setText("血压信息");
 
 		ItemSeries itemSeries = new ItemSeries();
-		itemSeries.setName("舒张压");
+		itemSeries.setName("收缩压");
 		
 		ItemSeries itemSeries2 = new ItemSeries();
-		itemSeries2.setName("收缩压");
+		itemSeries2.setName("舒张压");
 		/*
 		 * for (int i = 0; i < 15; i++) {
 		 * itemSeries.getData().add(Double.valueOf(new Random().nextInt(9))); }
