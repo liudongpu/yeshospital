@@ -98,6 +98,7 @@ var yeswx = {
 									aHtml
 											.push('<div class="wxcss_data_elec_date"><span class="wxcss_base_circle"><span class="wxcss_base_circle_small"></span></span>'
 													+ ot["dateTime"] + '</div>');
+									aHtml.push('<div>'+ ot["dataMessage"] + '<br/><br/></div>');
 									aHtml.push('<div><a><img src="'
 											+ ot["imageUrl"] + '"/></a></div>');
 									aHtml

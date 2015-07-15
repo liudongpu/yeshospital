@@ -14,11 +14,12 @@ public class ReportElectrocardiogram extends
 		MDataMap mQueryMap = new MDataMap();
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
 		for (MDataMap map : DbUp.upTable("yh_post_electrocardiogram").queryAll(
-				"create_time,image_url", "create_time",
+				"create_time,image_url,test_result", "-create_time",
 				"member_code=:member_code and image_url!=''", mQueryMap)) {
 			ReportElectrocardiogramItem item = new ReportElectrocardiogramItem();
 			item.setDateTime(map.get("create_time"));
 			item.setImageUrl(map.get("image_url"));
+			item.setDataMessage(map.get("test_result"));
 			result.getItems().add(item);
 		}
 

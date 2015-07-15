@@ -8,6 +8,8 @@ public class ReportElectrocardiogramItem {
 	private String dateTime = "";
 	@ZapcomApi(value = "图片地址")
 	private String imageUrl = "";
+	@ZapcomApi(value = "测试结果")
+	private String dataMessage="";
 
 	public String getDateTime() {
 		return dateTime;
@@ -23,6 +25,14 @@ public class ReportElectrocardiogramItem {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public String getDataMessage() {
+		return dataMessage;
+	}
+
+	public void setDataMessage(String dataMessage) {
+		this.dataMessage = dataMessage;
 	}
 
 }
