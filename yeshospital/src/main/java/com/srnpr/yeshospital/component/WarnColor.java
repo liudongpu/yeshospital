@@ -29,5 +29,23 @@ public class WarnColor extends ComponentColorChange {
 						"define_code", sKey);
 
 	}
+	
+	
+	
+	public String upExportText(MWebField mWebField, MDataMap mDataMap)
+	{
+		String sValue = mWebField.getPageFieldValue();
+		if (mDataMap.containsKey(mWebField.getFieldName())) {
+			sValue = mDataMap.get(mWebField.getFieldName());
+		}
+
+		//String sReturnString = sValue;
+
+		String sReturnString=WebTemp.upTempDataOne("yh_define", "define_name", "define_code",sValue);
+		
+		return sReturnString;
+	}
+	
+	
 
 }
