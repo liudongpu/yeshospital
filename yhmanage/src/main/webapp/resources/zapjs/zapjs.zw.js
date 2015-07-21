@@ -388,6 +388,34 @@ zapjs.zw = {
 		});
 
 	},
+	func_customexport : function(oElm) {
+
+		// zapjs.f.tourl(zapjs.f.upurl().replace("/page/", "/export/"));
+
+		
+		var sOperate = $(oElm).attr('zapweb_attr_operate_id');
+		
+		var sUrl = zapjs.f.upurl().replace("/page/", "/export/");
+		
+		sUrl=zapjs.f.urlreplace(sUrl, 'source', 'custom');
+		
+		sUrl=sUrl.replace("?","/"+sOperate+"?");
+		var aHtml = [];
+		aHtml.push('<div class="w_p_20">');
+		aHtml.push('<a class="btn" target="_blank" href="' + sUrl
+				+ '">导出当前页</a>&nbsp;&nbsp;&nbsp;&nbsp;');
+		aHtml.push('<a class="btn" target="_blank" href="'
+				+ zapjs.f.urlreplace(sUrl, zapjs.c.web_paginaion + 'size', -1)
+				+ '">导出所有页</a>');
+		aHtml.push('</div>');
+
+		zapjs.f.window_box({
+			content : aHtml.join(''),
+			width : 400,
+			height : 150
+		});
+
+	},
 
 	func_error : function(o) {
 		alert('系统出现错误，请联系技术，谢谢！');
