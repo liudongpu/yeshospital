@@ -21,7 +21,8 @@ public class FlowTourOrder extends RootFlowChange {
 	public MWebResult afterChange() {
 
 		// 购药前核对
-		if (getFlowChange().getStatus().equals("46580001000500020002")||getFlowChange().getStatus().equals("46580001000500020004")) {
+		if (getFlowChange().getStatus().equals("46580001000500020002")
+				|| getFlowChange().getStatus().equals("46580001000500020004")) {
 
 			String sOrderCode = getFlowChange().getOrderCode();
 
@@ -93,6 +94,36 @@ public class FlowTourOrder extends RootFlowChange {
 					"tour_code", sOrderCode);
 			DbUp.upTable("yh_tour_order_info").dataUpdate(mUpdateMap,
 					"sum_card", "tour_code");
+
+			// 如果用户药物信息表中为空 则根据这个单据上的信息来更新用户的服药信息
+			if (DbUp.upTable("yh_member_drug").count("tour_code", sOrderCode) == 0) {
+
+				// 删除所有的用户服药信息
+				for (MDataMap map : listDetails) {
+
+					DbUp.upTable("yh_member_drug").delete("member_code",
+							map.get("member_code"));
+				}
+
+				MDataMap mTourOrdermDataMap = DbUp
+						.upTable("yh_tour_order_info").one("tour_code",
+								sOrderCode);
+
+				// 循环所有购药信息
+				List<MDataMap> listInsert = DbUp
+						.upTable("yh_tour_order_drug")
+						.queryAll(
+								"record_code,member_code,drug_code,tour_code,drug_unit,drug_name,drug_usage,create_time,manufacturer,account_type,flag_check,drug_dose,drug_single,drug_source",
+								"", "", new MDataMap("tour_code", sOrderCode));
+				for (MDataMap map : listInsert) {
+
+					map.put("geracomium_code",
+							mTourOrdermDataMap.get("geracomium_code"));
+
+					DbUp.upTable("yh_member_drug").dataInsert(map);
+				}
+
+			}
 
 		}
 
