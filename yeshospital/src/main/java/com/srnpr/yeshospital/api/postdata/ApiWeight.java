@@ -26,7 +26,7 @@ public class ApiWeight extends PostDataApi<PostDataResult, WeightInput> {
 					WebHelper.upCode("PG"), "member_code", upMemberCode(),
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "weight",
-					tInput.getWeight().toString());
+					tInput.getWeight().toString(),"post_time",tInput.getPostProcessTime());
 
 			/*
 			 * WarnSupport warnSupport = new WarnSupport();

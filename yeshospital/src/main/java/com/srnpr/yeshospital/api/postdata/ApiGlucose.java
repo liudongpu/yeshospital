@@ -32,7 +32,7 @@ public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "glucose",
 					tInput.getDataGlucose().toString(), "test_type",
-					tInput.getDataCheckType());
+					tInput.getDataCheckType(),"post_time",tInput.getPostProcessTime());
 
 			WarnSupport warnSupport = new WarnSupport();
 

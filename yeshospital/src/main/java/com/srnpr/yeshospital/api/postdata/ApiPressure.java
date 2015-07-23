@@ -34,7 +34,7 @@ public class ApiPressure extends PostDataApi<PostDataResult, PressureInput> {
 					FormatHelper.upDateTime(), "heart_rate",
 					tInput.getDataHeart().toString(), "upper_pressure",
 					tInput.getDataUpper().toString(), "lower_pressure",
-					tInput.getDataLower().toString());
+					tInput.getDataLower().toString(),"post_time",tInput.getPostProcessTime());
 
 			WarnSupport warnSupport = new WarnSupport();
 

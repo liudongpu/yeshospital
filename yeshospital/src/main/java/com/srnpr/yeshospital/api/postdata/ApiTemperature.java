@@ -34,7 +34,7 @@ public class ApiTemperature extends
 					WebHelper.upCode("PP"), "member_code", upMemberCode(),
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "temperature",
-					tInput.getDataTemperature().toString());
+					tInput.getDataTemperature().toString(),"post_time",tInput.getPostProcessTime());
 
 			WarnSupport warnSupport = new WarnSupport();
 

@@ -31,7 +31,7 @@ public class ApiElectrocardiogramStruct extends
 					WebHelper.upCode("PG"), "member_code", upMemberCode(),
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "test_result",
-					tInput.getStructMessage().toString());
+					tInput.getStructMessage().toString(),"post_time",tInput.getPostProcessTime());
 
 		}
 

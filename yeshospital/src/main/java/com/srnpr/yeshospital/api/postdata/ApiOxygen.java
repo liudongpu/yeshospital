@@ -32,7 +32,7 @@ public class ApiOxygen extends PostDataApi<PostDataResult, OxygenInput> {
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "oxygen",
 					tInput.getDataOxygen().toString(), "heart_rate",
-					tInput.getDataHeart().toString());
+					tInput.getDataHeart().toString(),"post_time",tInput.getPostProcessTime());
 
 			WarnSupport warnSupport = new WarnSupport();
 
