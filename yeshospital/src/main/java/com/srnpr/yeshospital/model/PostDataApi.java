@@ -129,4 +129,11 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 		return memberCode;
 	};
 
+	/*
+	 * 设置用户编号 该方法用于子逻辑调用
+	 */
+	public void fixMemberCode(String sMemberCode) {
+		memberCode = sMemberCode;
+	}
+
 }

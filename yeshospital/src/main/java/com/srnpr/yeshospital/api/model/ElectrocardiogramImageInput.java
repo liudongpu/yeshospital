@@ -11,6 +11,9 @@ public class ElectrocardiogramImageInput extends PostDataInput {
 	@ZapcomApi(value = "图片类型", verify = "in=base64")
 	private String imageType = "";
 
+	@ZapcomApi(value = "图片链接地址")
+	private String imageUrl = "";
+
 	public String getImageType() {
 		return imageType;
 	}
@@ -25,6 +28,14 @@ public class ElectrocardiogramImageInput extends PostDataInput {
 
 	public void setImageData(String imageData) {
 		this.imageData = imageData;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }

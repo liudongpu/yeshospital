@@ -42,7 +42,11 @@ public class WarnSupport extends BaseClass {
 							+ " and max_value>"
 							+ warnCheckInfo.getDeviceValue().toString() + " ");
 
-			if (mDataMap != null && mDataMap.size() > 0) {
+			// 如果值大于0 才开始进入判断
+			if (mDataMap != null
+					&& mDataMap.size() > 0
+					&& warnCheckInfo.getDeviceValue()
+							.compareTo(BigDecimal.ZERO) > 0) {
 
 				String sWarnLevel = mDataMap.get("warn_type");
 
@@ -68,12 +72,37 @@ public class WarnSupport extends BaseClass {
 								warnCheckInfo.getDeviceValue().toString(),
 								sTypeText);
 
+						String sWarnCode = WebHelper.upCode("WAC");
+						// 插入通用报警信息表
 						DbUp.upTable("yh_warn_info").insert("warn_code",
-								WebHelper.upCode("WAC"), "member_code",
-								sMemberCode, "warn_info", sWarnInfo,
-								"create_time", FormatHelper.upDateTime(),
-								"warn_type", warnCheckInfo.getDeviceType(),
-								"warn_level", sWarnLevel);
+								sWarnCode, "member_code", sMemberCode,
+								"warn_info", sWarnInfo, "create_time",
+								FormatHelper.upDateTime(), "warn_type",
+								warnCheckInfo.getDeviceType(), "warn_level",
+								sWarnLevel);
+
+						MDataMap mMeberInfo = DbUp
+								.upTable("yh_member_extend_geracomium")
+								.oneWhere(
+										"member_code,room_name,member_name,geracomium_code",
+										"", "", "member_code", sMemberCode);
+
+						// 插入养老院报警信息表
+
+						if (mMeberInfo != null && mMeberInfo.size() > 0) {
+
+							DbUp.upTable("yh_count_warn_geracomium").insert(
+									"member_code", sMemberCode, "room_name",
+									mMeberInfo.get("room_name"), "member_name",
+									mMeberInfo.get("member_name"),
+									"geracomium_code",
+									mMeberInfo.get("geracomium_code"),
+									"create_time", FormatHelper.upDateTime(),
+									"warn_code", sWarnCode, "warn_info",
+									sWarnInfo, "warn_type",
+									warnCheckInfo.getDeviceType(),
+									"warn_level", sWarnLevel);
+						}
 
 					}
 				}
@@ -212,7 +241,8 @@ public class WarnSupport extends BaseClass {
 									new MDataMap("member_code", sMemberCode))
 							.toString();
 					String sContent = bInfo(965805804, sMemberName, sTypeText,
-							sValueText, sLevelText, StringUtils.defaultIfBlank(sMemberMobile, ""));
+							sValueText, sLevelText,
+							StringUtils.defaultIfBlank(sMemberMobile, ""));
 
 					// 循环关联医院
 					for (MDataMap mHospitalMap : DbUp.upTable(

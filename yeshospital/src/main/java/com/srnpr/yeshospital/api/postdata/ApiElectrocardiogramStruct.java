@@ -4,6 +4,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 
 import com.srnpr.yeshospital.api.model.ElectrocardiogramStructInput;
+import com.srnpr.yeshospital.api.model.WeightInput;
 import com.srnpr.yeshospital.model.PostDataApi;
 import com.srnpr.yeshospital.model.PostDataResult;
 import com.srnpr.zapcom.basehelper.FormatHelper;
@@ -38,9 +39,7 @@ public class ApiElectrocardiogramStruct extends
 		// 插入报告日志信息
 		if (postDataResult.upFlagTrue()) {
 
-			postDataResult.inOtherResult(updateReport("electrocardiogram_info",
-					bInfo(965805113, tInput.getStructMessage()),
-					"electrocardiogram_update"));
+			postDataResult.inOtherResult(toProcess(tInput));
 
 		}
 
@@ -52,6 +51,19 @@ public class ApiElectrocardiogramStruct extends
 	public PostDataResult Process(ElectrocardiogramStructInput inputParam,
 			MDataMap mRequestMap) {
 		return upResult(inputParam, "", getManageCode());
+	}
+	
+	
+	public MWebResult toProcess(ElectrocardiogramStructInput tInput) {
+		MWebResult mWebResult = new MWebResult();
+
+		if (mWebResult.upFlagTrue()) {
+			mWebResult.inOtherResult(updateReport("electrocardiogram_info",
+					bInfo(965805113, tInput.getStructMessage()),
+					"electrocardiogram_update"));
+		}
+
+		return mWebResult;
 	}
 
 }

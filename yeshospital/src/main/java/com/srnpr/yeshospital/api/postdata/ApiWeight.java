@@ -1,5 +1,6 @@
 package com.srnpr.yeshospital.api.postdata;
 
+import com.srnpr.yeshospital.api.model.OxygenInput;
 import com.srnpr.yeshospital.api.model.WeightInput;
 import com.srnpr.yeshospital.model.PostDataApi;
 import com.srnpr.yeshospital.model.PostDataResult;
@@ -9,6 +10,7 @@ import com.srnpr.zapcom.basehelper.FormatHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebHelper;
+import com.srnpr.zapweb.webmodel.MWebResult;
 
 public class ApiWeight extends PostDataApi<PostDataResult, WeightInput> {
 
@@ -26,7 +28,8 @@ public class ApiWeight extends PostDataApi<PostDataResult, WeightInput> {
 					WebHelper.upCode("PG"), "member_code", upMemberCode(),
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "weight",
-					tInput.getWeight().toString(),"post_time",tInput.getPostProcessTime());
+					tInput.getWeight().toString(), "post_time",
+					tInput.getPostProcessTime());
 
 			/*
 			 * WarnSupport warnSupport = new WarnSupport();
@@ -41,8 +44,7 @@ public class ApiWeight extends PostDataApi<PostDataResult, WeightInput> {
 		// 插入报告日志信息
 		if (postDataResult.upFlagTrue()) {
 
-			postDataResult.inOtherResult(updateReport("weight_info",
-					bInfo(965805111, tInput.getWeight()), "weight_update"));
+			postDataResult.inOtherResult(toProcess(tInput));
 
 		}
 
@@ -53,6 +55,17 @@ public class ApiWeight extends PostDataApi<PostDataResult, WeightInput> {
 
 	public PostDataResult Process(WeightInput inputParam, MDataMap mRequestMap) {
 		return upResult(inputParam, "", getManageCode());
+	}
+
+	public MWebResult toProcess(WeightInput tInput) {
+		MWebResult mWebResult = new MWebResult();
+
+		if (mWebResult.upFlagTrue()) {
+			mWebResult.inOtherResult(updateReport("weight_info",
+					bInfo(965805111, tInput.getWeight()), "weight_update"));
+		}
+
+		return mWebResult;
 	}
 
 }

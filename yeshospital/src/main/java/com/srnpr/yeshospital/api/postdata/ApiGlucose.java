@@ -10,6 +10,7 @@ import com.srnpr.zapcom.basehelper.FormatHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebHelper;
+import com.srnpr.zapweb.webmodel.MWebResult;
 
 public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 	public PostDataResult Process(GlucoseInput inputParam, MDataMap mRequestMap) {
@@ -32,35 +33,15 @@ public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "glucose",
 					tInput.getDataGlucose().toString(), "test_type",
-					tInput.getDataCheckType(),"post_time",tInput.getPostProcessTime());
-
-			WarnSupport warnSupport = new WarnSupport();
-
-			// 如果是餐后测试
-			if (tInput.getDataCheckType().equals("3")) {
-
-				postDataResult.inOtherResult(warnSupport.warnCheck(
-						upMemberCode(), new WarnCheckInfo(
-								"46580001000300010005", "46580001000300030006",
-								tInput.getDataGlucose())));
-
-			} else {
-
-				postDataResult.inOtherResult(warnSupport.warnCheck(
-						upMemberCode(), new WarnCheckInfo(
-								"46580001000300010005", "46580001000300030005",
-								tInput.getDataGlucose())));
-			}
+					tInput.getDataCheckType(), "post_time",
+					tInput.getPostProcessTime());
 
 		}
 
 		// 插入报告日志信息
 		if (postDataResult.upFlagTrue()) {
 
-			postDataResult
-					.inOtherResult(updateReport("glucose_info",
-							bInfo(965805108, tInput.getDataGlucose()),
-							"glucose_update"));
+			postDataResult.inOtherResult(toProcess(tInput));
 
 		}
 
@@ -68,4 +49,38 @@ public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 
 		return postDataResult;
 	}
+
+	public MWebResult toProcess(GlucoseInput tInput) {
+		MWebResult mWebResult = new MWebResult();
+
+		if (mWebResult.upFlagTrue()) {
+			WarnSupport warnSupport = new WarnSupport();
+
+			// 如果是餐后测试
+			if (tInput.getDataCheckType().equals("3")) {
+
+				mWebResult.inOtherResult(warnSupport
+						.warnCheck(upMemberCode(), new WarnCheckInfo(
+								"46580001000300010005", "46580001000300030006",
+								tInput.getDataGlucose())));
+
+			} else {
+
+				mWebResult.inOtherResult(warnSupport
+						.warnCheck(upMemberCode(), new WarnCheckInfo(
+								"46580001000300010005", "46580001000300030005",
+								tInput.getDataGlucose())));
+			}
+		}
+
+		if (mWebResult.upFlagTrue()) {
+			mWebResult
+					.inOtherResult(updateReport("glucose_info",
+							bInfo(965805108, tInput.getDataGlucose()),
+							"glucose_update"));
+		}
+
+		return mWebResult;
+	}
+
 }
