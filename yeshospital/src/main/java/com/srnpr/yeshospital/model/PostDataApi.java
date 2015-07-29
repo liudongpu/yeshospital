@@ -38,7 +38,7 @@ public abstract class PostDataApi<TResult extends IBaseResult, TInput extends IB
 		if (iPostDataInput.getPostType().equals("card")) {
 
 			MDataMap mMemberMap = DbUp.upTable("yh_member_extend_geracomium")
-					.oneWhere("", "", "lpad(post_card,20,'0')=:post_card",
+					.oneWhere("", "member_status", "lpad(post_card,20,'0')=:post_card",
 							"post_card", iPostDataInput.getPostDecviceSerial());
 
 			if (mMemberMap != null && mMemberMap.size() > 0) {
