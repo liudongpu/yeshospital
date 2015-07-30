@@ -34,13 +34,21 @@
 
 
 			<div class="w_right c_right">
-			<a href="javascript:zapadmin.back_url()"><i class="icon-user  icon-white"></i></a>&nbsp;
+			<#if user_info.getLoginName()=="srnpr">
+				<a href="javascript:zapjs.zw.func_do(this,'f99848c8f8c011e29b7a000c298b20i') ">数据</a>&nbsp;
+				<a href="javascript:zapjs.zw.func_do(this,'f99848c8f8c011e29b7a000c298b20x') ">缓存</a>&nbsp;
+				
+			<#else>
 			
-				<a
-					href="javascript:zapjs.zw.func_do(this,'f99848c8f8c011e29b7a000c298b20x')">
+			<a href=""><i class="icon-user  icon-white"></i></a>&nbsp;
+			
+				<a href="">
 		<#if user_info??>${user_info.getRealName()?default("")}</#if></a>
+		</#if>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="javascript:zapjs.zw.login_out('../manage/logout')">退出系统</a>
+			
+		
 			</div>
 
 

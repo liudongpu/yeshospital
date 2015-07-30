@@ -101,7 +101,8 @@ public class WarnSupport extends BaseClass {
 									"warn_code", sWarnCode, "warn_info",
 									sWarnInfo, "warn_type",
 									warnCheckInfo.getDeviceType(),
-									"warn_level", sWarnLevel);
+									"warn_level", sWarnLevel, "process_method",
+									mDataMap.get("template_text"));
 						}
 
 					}
@@ -111,7 +112,8 @@ public class WarnSupport extends BaseClass {
 
 		}
 
-		noticeAll(sMemberCode, sNoticeWarn, checkInfos);
+		// 通知逻辑已切换到其他地方
+		// noticeAll(sMemberCode, sNoticeWarn, checkInfos);
 
 		return mWebResult;
 
