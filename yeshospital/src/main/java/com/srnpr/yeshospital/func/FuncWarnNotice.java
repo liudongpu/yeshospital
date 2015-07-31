@@ -18,13 +18,15 @@ public class FuncWarnNotice extends RootFunc {
 		MWebResult mWebResult = new MWebResult();
 		MDataMap mAddMaps = mDataMap.upSubMap(WebConst.CONST_WEB_FIELD_NAME);
 
+		
+		String sUserCode=UserFactory.INSTANCE.create().getUserCode();
 		if (mWebResult.upFlagTrue()) {
 
 			FlowSupport flowSupport = new FlowSupport();
 
 			mWebResult.inOtherResult(flowSupport.changeStatus("ZF0003",
 					mAddMaps.get("warn_code"), "46580001000300050002",
-					UserFactory.INSTANCE.create().getUserCode(), ""));
+					sUserCode, ""));
 
 		}
 
@@ -32,13 +34,16 @@ public class FuncWarnNotice extends RootFunc {
 
 			MDataMap mUpDataMap = new MDataMap("warn_code",
 					mAddMaps.get("warn_code"), "process_user",
-					UserFactory.INSTANCE.create().getUserCode(),
+					sUserCode,
 					"process_time", FormatHelper.upDateTime());
 
 			DbUp.upTable("yh_count_warn_geracomium").dataUpdate(mUpDataMap,
 					"process_user,process_time", "warn_code");
 
 		}
+		
+		
+		
 
 		if (mWebResult.upFlagTrue()) {
 			mWebResult = new FuncEdit().funcDo(sOperateUid, mDataMap);

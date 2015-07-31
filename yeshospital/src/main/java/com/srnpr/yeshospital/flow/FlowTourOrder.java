@@ -6,6 +6,7 @@ import javax.mail.Store;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.srnpr.yeshospital.support.AdviceSupport;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.rootweb.RootFlowChange;
@@ -32,8 +33,16 @@ public class FlowTourOrder extends RootFlowChange {
 			int iCardCount = 0;
 
 			MDataMap mMemberMap = new MDataMap();
+
+			AdviceSupport adviceSupport = new AdviceSupport();
+
 			for (MDataMap map : listDetails) {
 				mMemberMap.put(map.get("member_code"), "0");
+
+				adviceSupport.createAdvice(map.get("detail_code"),
+						map.get("member_code"), map.get("agree_info"),
+						getFlowChange().getUserCode());
+
 			}
 
 			// 循环所有购药信息

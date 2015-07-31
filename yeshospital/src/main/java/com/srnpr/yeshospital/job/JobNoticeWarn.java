@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 
 import com.srnpr.yeshospital.helper.MessageHelper;
+import com.srnpr.yeshospital.support.AdviceSupport;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.rootweb.RootJobForLock;
@@ -25,6 +26,14 @@ public class JobNoticeWarn extends RootJobForLock {
 					map.get("warn_code"), "46580001000300050003", "timer", "");
 			if (mResult.upFlagTrue()) {
 
+				String sProcess = StringUtils.defaultIfBlank(
+						map.get("process_step"), map.get("process_plan"));
+
+				// 插入健康建议表
+				new AdviceSupport().createAdvice(map.get("warn_code"),
+						map.get("member_code"), sProcess,
+						map.get("process_user"));
+
 				String[] sNotices = map.get("notice_type").split(",");
 
 				if (sNotices.length > 0) {
@@ -32,9 +41,6 @@ public class JobNoticeWarn extends RootJobForLock {
 					String sMemberCode = map.get("member_code");
 
 					String sMemberName = map.get("member_name");
-
-					String sProcess = StringUtils.defaultIfBlank(
-							map.get("process_step"), map.get("process_plan"));
 
 					String sMessageinfo = bInfo(965805806, sMemberName,
 							sWarnInfo, sProcess);
