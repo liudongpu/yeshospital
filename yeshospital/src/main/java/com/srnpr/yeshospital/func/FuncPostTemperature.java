@@ -17,10 +17,15 @@ public class FuncPostTemperature extends FuncPostBase {
 		ApiTemperature api = new ApiTemperature();
 
 		api.fixMemberCode(mDataMap.get("member_code"));
+		
+		
 
 		TemperatureInput input = new TemperatureInput();
 
 		input.setDataTemperature(new BigDecimal(mDataMap.get("temperature")));
+		
+		input.setPostServerCode(mDataMap.get("post_code"));
+		
 		return api.toProcess(input);
 	}
 

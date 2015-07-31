@@ -13,10 +13,11 @@ public class WarnCheckInfo {
 	public WarnCheckInfo() {
 	};
 
-	public WarnCheckInfo(String sType, String sSet, BigDecimal bValue) {
+	public WarnCheckInfo(String sType, String sSet, BigDecimal bValue,String sPostCode) {
 		deviceType = sType;
 		warnSet = sSet;
 		deviceValue = bValue;
+		postCode=sPostCode;
 	};
 
 	/**
@@ -33,6 +34,11 @@ public class WarnCheckInfo {
 	 * 监控值
 	 */
 	private BigDecimal deviceValue = BigDecimal.ZERO;
+
+	/*
+	 * 报警数据编号
+	 */
+	private String postCode = "";
 
 	public String getDeviceType() {
 		return deviceType;
@@ -56,6 +62,14 @@ public class WarnCheckInfo {
 
 	public void setDeviceValue(BigDecimal deviceValue) {
 		this.deviceValue = deviceValue;
+	}
+
+	public String getPostCode() {
+		return postCode;
+	}
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
 	}
 
 }

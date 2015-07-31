@@ -29,8 +29,11 @@ public class ApiPressure extends PostDataApi<PostDataResult, PressureInput> {
 		}
 
 		if (postDataResult.upFlagTrue()) {
+			
+			tInput.setPostServerCode(WebHelper.upCode("PC"));
+			
 			DbUp.upTable("yh_post_pressure").insert("post_code",
-					WebHelper.upCode("PP"), "member_code", upMemberCode(),
+					tInput.getPostServerCode(), "member_code", upMemberCode(),
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "heart_rate",
 					tInput.getDataHeart().toString(), "upper_pressure",
@@ -59,11 +62,13 @@ public class ApiPressure extends PostDataApi<PostDataResult, PressureInput> {
 
 			mWebResult.inOtherResult(warnSupport.warnCheck(upMemberCode(),
 					new WarnCheckInfo("46580001000300010002",
-							"46580001000300030001", tInput.getDataUpper()),
-					new WarnCheckInfo("46580001000300010002",
-							"46580001000300030002", tInput.getDataLower()),
+							"46580001000300030001", tInput.getDataUpper(),
+							tInput.getPostServerCode()), new WarnCheckInfo(
+							"46580001000300010002", "46580001000300030002",
+							tInput.getDataLower(), tInput.getPostServerCode()),
 					new WarnCheckInfo("46580001000300010007",
-							"46580001000300030007", tInput.getDataHeart())));
+							"46580001000300030007", tInput.getDataHeart(),
+							tInput.getPostServerCode())));
 		}
 
 		if (mWebResult.upFlagTrue()) {

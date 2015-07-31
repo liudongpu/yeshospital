@@ -21,7 +21,7 @@ public class FuncPostPressure extends FuncPostBase {
 		input.setDataHeart(new BigDecimal(mDataMap.get("heart_rate")));
 		input.setDataLower(new BigDecimal(mDataMap.get("lower_pressure")));
 		input.setDataUpper(new BigDecimal(mDataMap.get("upper_pressure")));
-
+		input.setPostServerCode(mDataMap.get("post_code"));
 		return api.toProcess(input);
 	}
 

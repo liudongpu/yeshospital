@@ -5,6 +5,11 @@ import org.quartz.JobExecutionContext;
 
 import com.srnpr.yeshospital.helper.MessageHelper;
 import com.srnpr.yeshospital.support.AdviceSupport;
+import com.srnpr.yeshospital.wx.WxConst;
+import com.srnpr.yeshospital.wx.WxSendTemplate;
+import com.srnpr.yeshospital.wx.model.WxTemplageValue;
+import com.srnpr.yeshospital.wx.model.WxTemplateSend;
+import com.srnpr.zapcom.basehelper.FormatHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.rootweb.RootJobForLock;
@@ -42,6 +47,13 @@ public class JobNoticeWarn extends RootJobForLock {
 
 					String sMemberName = map.get("member_name");
 
+					String sWarnType = map.get("warn_type");
+					String sPostCode = map.get("post_code");
+
+					String sLevelName = WebTemp
+							.upTempDataOne("yh_define", "define_name",
+									"define_code", map.get("warn_level"));
+
 					String sMessageinfo = bInfo(965805806, sMemberName,
 							sWarnInfo, sProcess);
 
@@ -50,6 +62,129 @@ public class JobNoticeWarn extends RootJobForLock {
 						if (sType.equals("46580001000300060001")) {
 
 							// 开始微信通知
+
+							for (MDataMap mSibInfo : DbUp
+									.upTable("yh_sib_info").queryByWhere(
+											"member_code", sMemberCode)) {
+
+								for (MDataMap mBindInfo : DbUp.upTable(
+										"yh_wx_bind").queryByWhere("sib_code",
+										mSibInfo.get("sib_code"))) {
+
+									WxSendTemplate wxSendTemplate = new WxSendTemplate();
+
+									WxTemplateSend wxTemplateSend = new WxTemplateSend();
+
+									wxTemplateSend.setTouser(mBindInfo
+											.get("wx_openid"));
+
+									wxTemplateSend.getData().put(
+											"first",
+											new WxTemplageValue(bInfo(
+													965805807, sMemberName)));
+
+									wxTemplateSend.getData().put(
+											"remark",
+											new WxTemplageValue(
+													bInfo(965805808)));
+
+									// 血压信息推送
+									if (sWarnType
+											.equals("46580001000300010002")) {
+										wxTemplateSend
+												.setTemplate_id(WxConst.TEMPLATE_FOR_02);
+
+										MDataMap mValueMap = DbUp.upTable(
+												"yh_post_pressure").one(
+												"post_code", sPostCode);
+
+										wxTemplateSend
+												.getData()
+												.put("keyword1",
+														new WxTemplageValue(
+																mValueMap
+																		.get("upper_pressure")));
+										wxTemplateSend
+												.getData()
+												.put("keyword2",
+														new WxTemplageValue(
+																mValueMap
+																		.get("lower_pressure")));
+										wxTemplateSend.getData().put(
+												"keyword3",
+												new WxTemplageValue(mValueMap
+														.get("heart_rate")));
+										wxTemplateSend.getData()
+												.put("keyword4",
+														new WxTemplageValue(
+																sLevelName));
+
+									} else if (sWarnType
+											.equals("46580001000300010001")) {
+
+										wxTemplateSend
+												.setTemplate_id(WxConst.TEMPLATE_FOR_01);
+										MDataMap mValueMap = DbUp.upTable(
+												"yh_post_temperature").one(
+												"post_code", sPostCode);
+
+										wxTemplateSend.getData().put(
+												"keyword1",
+												new WxTemplageValue(mValueMap
+														.get("temperature")));
+										wxTemplateSend.getData().put(
+												"keyword2",
+												new WxTemplageValue(mValueMap
+														.get("create_time")
+														+ "    " + sLevelName));
+
+									} else if (sWarnType
+											.equals("46580001000300010006")) {
+
+										wxTemplateSend
+												.setTemplate_id(WxConst.TEMPLATE_FOR_06);
+										MDataMap mValueMap = DbUp.upTable(
+												"yh_post_oxygen").one(
+												"post_code", sPostCode);
+										wxTemplateSend.getData().put(
+												"keyword1",
+												new WxTemplageValue(mValueMap
+														.get("oxygen")));
+										wxTemplateSend.getData().put(
+												"keyword2",
+												new WxTemplageValue(mValueMap
+														.get("heart_rate")));
+
+										wxTemplateSend.getData()
+												.put("keyword3",
+														new WxTemplageValue(
+																sLevelName));
+
+									}
+
+									// 开始发送微信并计入日志
+									if (wxTemplateSend.getData().size() > 2) {
+
+										if (DbUp.upTable("yh_log_wx_template")
+												.count("post_code", sPostCode,"open_id",wxTemplateSend.getTouser()) == 0) {
+											String sResult = wxSendTemplate
+													.process(wxTemplateSend);
+
+											DbUp.upTable("yh_log_wx_template")
+													.insert("post_code",
+															sPostCode,
+															"create_time",
+															FormatHelper
+																	.upDateTime(),
+															"wx_result",
+															sResult,"open_id",wxTemplateSend.getTouser());
+
+										}
+									}
+
+								}
+
+							}
 
 						} else if (sType.equals("46580001000300060003")) {
 

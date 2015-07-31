@@ -102,7 +102,8 @@ public class WarnSupport extends BaseClass {
 									sWarnInfo, "warn_type",
 									warnCheckInfo.getDeviceType(),
 									"warn_level", sWarnLevel, "process_method",
-									mDataMap.get("template_text"));
+									mDataMap.get("template_text"), "post_code",
+									warnCheckInfo.getPostCode());
 						}
 
 					}

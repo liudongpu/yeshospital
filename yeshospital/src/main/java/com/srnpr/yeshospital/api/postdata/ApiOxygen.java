@@ -29,8 +29,9 @@ public class ApiOxygen extends PostDataApi<PostDataResult, OxygenInput> {
 		}
 
 		if (postDataResult.upFlagTrue()) {
+			tInput.setPostServerCode(WebHelper.upCode("PC"));
 			DbUp.upTable("yh_post_oxygen").insert("post_code",
-					WebHelper.upCode("PG"), "member_code", upMemberCode(),
+					tInput.getPostServerCode(), "member_code", upMemberCode(),
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "oxygen",
 					tInput.getDataOxygen().toString(), "heart_rate",
@@ -57,11 +58,17 @@ public class ApiOxygen extends PostDataApi<PostDataResult, OxygenInput> {
 		if (mWebResult.upFlagTrue()) {
 			WarnSupport warnSupport = new WarnSupport();
 
-			mWebResult.inOtherResult(warnSupport.warnCheck(upMemberCode(),
-					new WarnCheckInfo("46580001000300010006",
-							"46580001000300030003", tInput.getDataOxygen()),
-					new WarnCheckInfo("46580001000300010007",
-							"46580001000300030007", tInput.getDataHeart())));
+			mWebResult
+					.inOtherResult(warnSupport.warnCheck(
+							upMemberCode(),
+							new WarnCheckInfo("46580001000300010006",
+									"46580001000300030003", tInput
+											.getDataOxygen(), tInput
+											.getPostServerCode()),
+							new WarnCheckInfo("46580001000300010007",
+									"46580001000300030007", tInput
+											.getDataHeart(), tInput
+											.getPostServerCode())));
 		}
 
 		if (mWebResult.upFlagTrue()) {

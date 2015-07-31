@@ -27,9 +27,14 @@ public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 			postDataResult.inOtherResult(checkAndInit(tInput));
 		}
 
+		
+		
 		if (postDataResult.upFlagTrue()) {
+			
+			tInput.setPostServerCode(WebHelper.upCode("PC"));
+			
 			DbUp.upTable("yh_post_glucose").insert("post_code",
-					WebHelper.upCode("PG"), "member_code", upMemberCode(),
+					tInput.getPostServerCode(), "member_code", upMemberCode(),
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "glucose",
 					tInput.getDataGlucose().toString(), "test_type",
@@ -59,17 +64,17 @@ public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 			// 如果是餐后测试
 			if (tInput.getDataCheckType().equals("3")) {
 
-				mWebResult.inOtherResult(warnSupport
-						.warnCheck(upMemberCode(), new WarnCheckInfo(
-								"46580001000300010005", "46580001000300030006",
-								tInput.getDataGlucose())));
+				mWebResult.inOtherResult(warnSupport.warnCheck(upMemberCode(),
+						new WarnCheckInfo("46580001000300010005",
+								"46580001000300030006",
+								tInput.getDataGlucose(), tInput.getPostServerCode())));
 
 			} else {
 
-				mWebResult.inOtherResult(warnSupport
-						.warnCheck(upMemberCode(), new WarnCheckInfo(
-								"46580001000300010005", "46580001000300030005",
-								tInput.getDataGlucose())));
+				mWebResult.inOtherResult(warnSupport.warnCheck(upMemberCode(),
+						new WarnCheckInfo("46580001000300010005",
+								"46580001000300030005",
+								tInput.getDataGlucose(), tInput.getPostServerCode())));
 			}
 		}
 

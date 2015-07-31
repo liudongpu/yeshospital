@@ -31,8 +31,11 @@ public class ApiTemperature extends
 		}
 
 		if (postDataResult.upFlagTrue()) {
+
+			tInput.setPostServerCode(WebHelper.upCode("PC"));
+
 			DbUp.upTable("yh_post_temperature").insert("post_code",
-					WebHelper.upCode("PP"), "member_code", upMemberCode(),
+					tInput.getPostServerCode(), "member_code", upMemberCode(),
 					"log_code", sLogCode, "create_time",
 					FormatHelper.upDateTime(), "temperature",
 					tInput.getDataTemperature().toString(), "post_time",
@@ -58,10 +61,12 @@ public class ApiTemperature extends
 		if (mWebResult.upFlagTrue()) {
 			WarnSupport warnSupport = new WarnSupport();
 
-			mWebResult.inOtherResult(warnSupport
-					.warnCheck(upMemberCode(), new WarnCheckInfo(
-							"46580001000300010001", "46580001000300030004",
-							tInput.getDataTemperature())));
+			mWebResult.inOtherResult(warnSupport.warnCheck(
+					upMemberCode(),
+					new WarnCheckInfo("46580001000300010001",
+							"46580001000300030004",
+							tInput.getDataTemperature(), tInput
+									.getPostServerCode())));
 		}
 
 		if (mWebResult.upFlagTrue()) {

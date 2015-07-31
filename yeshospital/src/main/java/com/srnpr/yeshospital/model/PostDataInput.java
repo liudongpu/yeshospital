@@ -24,6 +24,19 @@ public class PostDataInput extends RootInput implements IPostDataInput {
 	@ZapcomApi(require = 0, value = "传输类型", remark = "设备的传输类型，decive:为终端设备(默认)，card:为刷卡", verify = "in=decive,card")
 	private String postType = "";
 
+	/*
+	 * 服务器端生成的流水编号
+	 */
+	private String postServerCode = "";
+
+	public String getPostServerCode() {
+		return postServerCode;
+	}
+
+	public void setPostServerCode(String postServerCode) {
+		this.postServerCode = postServerCode;
+	}
+
 	public String getPostDecviceSerial() {
 		return postDecviceSerial;
 	}

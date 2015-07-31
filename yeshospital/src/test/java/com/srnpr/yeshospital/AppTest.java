@@ -5,13 +5,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
+import org.junit.Test;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.srnpr.yeshospital.et.rsync.*;
 import com.srnpr.yeshospital.support.QrcodeSupport;
+import com.srnpr.yeshospital.wx.WxSendTemplate;
+import com.srnpr.yeshospital.wx.model.WxTemplageValue;
+import com.srnpr.yeshospital.wx.model.WxTemplateSend;
 import com.srnpr.zapcom.basehelper.TestHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapweb.helper.WebHelper;
@@ -22,7 +28,29 @@ import com.srnpr.zapweb.helper.WebHelper;
 public class AppTest extends TestHelper
 
 {
+
 	
+	public void TestWx() {
+
+		
+		WxSendTemplate wxSendTemplate=new WxSendTemplate();
+		
+		WxTemplateSend wxTemplateSend=new WxTemplateSend();
+		
+		wxTemplateSend.setTouser("o26NLuAyrw0uVrsaX98K6RX5UvWs");
+		wxTemplateSend.setTemplate_id("tA2fR-XFgoMsa0pHUZIW3aAUmaXwUZfgi2KG07880nQ");
+		wxTemplateSend.getData().put("first", new WxTemplageValue("您关注的老人[某某某] "));
+		wxTemplateSend.getData().put("keyword1", new WxTemplageValue("啊"));
+		wxTemplateSend.getData().put("keyword2", new WxTemplageValue("2"));
+		wxTemplateSend.getData().put("keyword3", new WxTemplageValue("3"));
+		wxTemplateSend.getData().put("keyword4", new WxTemplageValue("4"));
+		wxTemplateSend.getData().put("remark", new WxTemplageValue("remark"));
+		
+		bLogTest(wxSendTemplate.process(wxTemplateSend));
+		
+		
+	}
+
 	public void TestQrCode() {
 		try {
 
@@ -30,21 +58,39 @@ public class AppTest extends TestHelper
 
 			List<MDataMap> listMaps = new ArrayList<MDataMap>();
 
-			String sCard="";
-			sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));
-			sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));sCard=StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/"+sCard,"text","姓名：测试;卡号："+sCard));
-			
-			qrcodeSupport.createImage("D:/x/",listMaps);
+			String sCard = "";
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
+					"text", "姓名：测试;卡号：" + sCard));
+
+			qrcodeSupport.createImage("D:/x/", listMaps);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -52,12 +98,11 @@ public class AppTest extends TestHelper
 		}
 	}
 
-	
 	public void TestImage() {
 
 		String sInfoString = "";
 
-		//sInfoString = EncodeHelper.urlEncode(sInfoString);
+		// sInfoString = EncodeHelper.urlEncode(sInfoString);
 
 		decodeBase64ToImage(sInfoString, "D:\\x\\", "1.png");
 	}
@@ -76,7 +121,6 @@ public class AppTest extends TestHelper
 		}
 	}
 
-	
 	public void TestPY() {
 		// bLogTest(new EtRsyncGetEntInfo().upHttp(new MDataMap()));
 
@@ -91,11 +135,11 @@ public class AppTest extends TestHelper
 		 * ; bLogTest(new EtRsyncUpdateEnt() .upHttp(new MDataMap("entInfo",
 		 * sEntInfo)));
 		 */
-		
+
 		bLogTest(new EtRsyncGetEntInfo().upHttp(new MDataMap()));
-		
-		 bLogTest(new EtRsyncGetData().upHttp(new
-		 MDataMap("appType","","onlyUnsync", "","PageMax","100")));
+
+		bLogTest(new EtRsyncGetData().upHttp(new MDataMap("appType", "",
+				"onlyUnsync", "", "PageMax", "100")));
 
 		String sData = "[{\"apptype\":\"WeightDataV1\",\"datakey\":\"XXXX\",\"collectdate\":\"xxxx\",\"adddate\":\"xxxx\",\"EntAccount\":\"xxxx\",\"DataId\":\"XXXX\",\"weight\":\"xxxx\"}]";
 

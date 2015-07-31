@@ -84,5 +84,12 @@
 	<#assign a_order_detail=b_method.upControlPage("page_chart_v_yh_post_glucose","zw_f_member_code="+a_order_code).upChartData()>
 	<@m_zapmacro_common_table a_order_detail />
 
+
+	<div class="zab_info_page_title  w_clear">
+	<span>健康建议</span>
+	</div>
+	<#assign a_order_detail=b_method.upControlPage("page_chart_v_yh_count_advice","zw_f_member_code="+a_order_code).upChartData()>
+	<@m_zapmacro_common_table a_order_detail />
+
 	</#if>	
 

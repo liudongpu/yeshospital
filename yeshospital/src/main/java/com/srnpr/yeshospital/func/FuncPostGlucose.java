@@ -19,6 +19,7 @@ public class FuncPostGlucose extends FuncPostBase {
 		GlucoseInput input = new GlucoseInput();
 
 		input.setDataGlucose(new BigDecimal(mDataMap.get("glucose")));
+		input.setPostServerCode(mDataMap.get("post_code"));
 		return api.toProcess(input);
 	}
 

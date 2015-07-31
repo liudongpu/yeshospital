@@ -18,7 +18,7 @@ public class FuncPostOxygen extends FuncPostBase {
 		OxygenInput input = new OxygenInput();
 		input.setDataHeart(new BigDecimal(mDataMap.get("heart_rate")));
 		input.setDataOxygen(new BigDecimal(mDataMap.get("oxygen")));
-
+		input.setPostServerCode(mDataMap.get("post_code"));
 		return api.toProcess(input);
 	}
 
