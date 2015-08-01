@@ -1,6 +1,9 @@
 
 
+<#include "../macro/macro_report.ftl" />
 
+
+<@m_report_show_js />
 
 
 <#assign a_order_code=RequestParameters['zw_f_member_code']?default("xxxxx") >
@@ -45,23 +48,25 @@
 
 	<div class="zab_info_page_title  w_clear">
 	<span>血压信息</span>
+	<a href="page_chart_r_yh_post_pressure?zw_f_member_code=${a_order_code}" target="_blank">查看全部</a>
 	</div>
-	<#assign a_order_detail=b_method.upControlPage("page_chart_v_yh_post_pressure","zw_f_member_code="+a_order_code).upChartData()>
-	<@m_zapmacro_common_table a_order_detail />
 	
+	<@m_report_highchart_date_show e_page=b_method.upControlPage("page_chart_r_yh_post_pressure","zw_f_member_code="+a_order_code) e_id="yh_post_pressure"/>
 	
 	<div class="zab_info_page_title  w_clear">
 	<span>体温信息</span>
+	<a href="page_chart_r_yh_post_temperature?zw_f_member_code=${a_order_code}" target="_blank">查看全部</a>
 	</div>
-	<#assign a_order_detail=b_method.upControlPage("page_chart_v_yh_post_temperature","zw_f_member_code="+a_order_code).upChartData()>
-	<@m_zapmacro_common_table a_order_detail />
+	
+	<@m_report_highchart_date_show e_page=b_method.upControlPage("page_chart_r_yh_post_temperature","zw_f_member_code="+a_order_code) e_id="yh_post_temperature"/>
 	
 	
 	<div class="zab_info_page_title  w_clear">
 	<span>血氧信息</span>
+	<a href="page_chart_r_yh_post_oxygen?zw_f_member_code=${a_order_code}" target="_blank">查看全部</a>
 	</div>
-	<#assign a_order_detail=b_method.upControlPage("page_chart_v_yh_post_oxygen","zw_f_member_code="+a_order_code).upChartData()>
-	<@m_zapmacro_common_table a_order_detail />
+	
+	<@m_report_highchart_date_show e_page=b_method.upControlPage("page_chart_r_yh_post_oxygen","zw_f_member_code="+a_order_code) e_id="yh_post_oxygen"/>
 	
 	
 	<div class="zab_info_page_title  w_clear">
@@ -80,10 +85,12 @@
 	
 	<div class="zab_info_page_title  w_clear">
 	<span>血糖信息</span>
+	<a href="page_chart_r_yh_post_glucose?zw_f_member_code=${a_order_code}" target="_blank">查看全部</a>
 	</div>
-	<#assign a_order_detail=b_method.upControlPage("page_chart_v_yh_post_glucose","zw_f_member_code="+a_order_code).upChartData()>
-	<@m_zapmacro_common_table a_order_detail />
-
+	
+	<@m_report_highchart_date_show e_page=b_method.upControlPage("page_chart_r_yh_post_glucose","zw_f_member_code="+a_order_code) e_id="yh_post_glucose"/>
+	
+	
 
 	<div class="zab_info_page_title  w_clear">
 	<span>健康建议</span>

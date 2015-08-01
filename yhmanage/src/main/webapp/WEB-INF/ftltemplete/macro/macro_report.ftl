@@ -275,3 +275,116 @@ $(function () {
 
 </#macro>
 
+
+
+<#macro m_report_show_js e_themes="grid">
+	<@m_common_html_js ["../resources/lib/highcharts/js/highcharts.js","../resources/lib/highcharts/js/modules/exporting.js"]/>
+	<#if e_themes!="">
+		<@m_common_html_js ["../resources/lib/highcharts/js/themes/${e_themes}.js"]/>
+	</#if>
+	
+	<style>
+	  .highcharts-contextmenu{
+ 	width:50px !important;
+ }
+ .highcharts-contextmenu div{
+ 	height:20px !important;
+ 	line-height:20px;
+ 	scroll:no  !important;
+ 	overflow-y:hidden  !important;
+ }
+ 
+ .highcharts-container text
+ {
+ 	
+ }
+ 
+	</style>
+	
+	
+	
+</#macro>
+
+<#-- 常规报表的自动输出 -->
+<#macro m_report_highchart_date_show e_page,e_id="container",e_chart_type="line">
+	<#assign e_pagedata=e_page.upChartData() />
+	<#assign dataScope=e_page.getWebPage().getDataScope() />
+	<#assign mapHelper=b_method.upClass("com.srnpr.zapcom.basehelper.MapHelper")>
+	
+	
+	<#assign scopeMap = mapHelper.getDataMapFromDataScop(dataScope?default(""))>
+	
+	<#assign title="${e_page.getWebPage().getPageName()}" />
+	<#assign XAxis=""  />
+	<#assign YAxisTitle=""  />
+	<div style="">
+			<div id="${e_id}" style="min-width: 610px; min-height: 80%; margin: 0 auto"></div>
+	</div>
+	<script>
+		var seriesData_${e_id} = [<#list e_pagedata.getPageHead() as e_list><#if e_list_index=0><#else>{ name:"${e_list?default("")}",data:[<#list e_pagedata.getPageData() as e_list_data><#list e_list_data as e><#if e_index = e_list_index><#if (e?default(""))="">0<#else>${e}</#if><#if e_list_data_has_next>,</#if><#else></#if></#list></#list>]}<#if e_list_has_next>,</#if></#if></#list>];		
+		var categroesData_${e_id} = [<#list e_pagedata.getPageData() as e_list><#list e_list as e><#if e_index = 0>"${e?default("")}"<#else></#if></#list><#if e_list_has_next>,</#if></#list>];
+		var chartTitle_${e_id}="${title?default("")}";
+		var chartSubtitle_${e_id}="";
+		var chartYtitle_${e_id} = "${YAxisTitle?default("")}";
+		zapwebreport_${e_id}={
+		showHighCharts : function (chartTitle,chartSubtitle,categroesData,seriesData,chartYtitle) {
+	        $('#${e_id}').highcharts({
+	            chart: {
+	                type: '${e_chart_type}',
+	                marginRight: 30 
+	            },
+	            <@m_report_js_credits />
+	            
+	            title: {
+	                text: chartTitle
+	            },
+	            subtitle: {
+	                text: chartSubtitle
+	            },
+	            xAxis: {
+	                categories: categroesData
+	            },
+	            yAxis: {
+	                min: 0,
+	                title: {
+	                    text: chartYtitle
+	                }
+	            },
+	            tooltip: {
+	                headerFormat: '<span style="font-size:12px">{point.key}</span><table style="width:150px;">',
+	                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	                    '<td style="padding:0"><b>{point.y} </b></td></tr>',
+	                footerFormat: '</table>',
+	                shared: true,
+	                useHTML: true
+	            },
+	            plotOptions: {
+	                column: {
+	                    pointPadding: 0.1,
+	                    groupPadding: 0.1,
+	                    borderWidth: 0
+	                }
+	            },
+	            series: seriesData
+	        });
+	   }
+};
+
+
+
+
+$(document).ready(function(){
+	 	zapwebreport_${e_id}.showHighCharts(chartTitle_${e_id},chartSubtitle_${e_id},categroesData_${e_id},seriesData_${e_id},chartYtitle_${e_id});
+	});
+
+
+	</script>
+	
+	
+	
+	
+</#macro>
+
+
+
+
