@@ -3,23 +3,34 @@ package com.srnpr.yeshospital;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.entity.StringEntity;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.srnpr.yeshospital.et.rsync.*;
+import com.srnpr.yeshospital.model.TemplateForMsg;
+import com.srnpr.yeshospital.support.MsgSupport;
 import com.srnpr.yeshospital.support.QrcodeSupport;
 import com.srnpr.yeshospital.wx.WxSendTemplate;
 import com.srnpr.yeshospital.wx.model.WxTemplageValue;
 import com.srnpr.yeshospital.wx.model.WxTemplateSend;
+import com.srnpr.zapcom.basehelper.EncodeHelper;
+import com.srnpr.zapcom.basehelper.FormatHelper;
+import com.srnpr.zapcom.basehelper.GsonHelper;
+import com.srnpr.zapcom.basehelper.SecrurityHelper;
 import com.srnpr.zapcom.basehelper.TestHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
+import com.srnpr.zapcom.basesupport.WebClientSupport;
 import com.srnpr.zapweb.helper.WebHelper;
 
 /**
@@ -28,27 +39,32 @@ import com.srnpr.zapweb.helper.WebHelper;
 public class AppTest extends TestHelper
 
 {
-
 	
+	public void TestVerify() {
+
+		bLogTest(new MsgSupport().SendMessageByYtx("17091033037", "1", "123476","7"));
+
+	}
+
 	public void TestWx() {
 
-		
-		WxSendTemplate wxSendTemplate=new WxSendTemplate();
-		
-		WxTemplateSend wxTemplateSend=new WxTemplateSend();
-		
+		WxSendTemplate wxSendTemplate = new WxSendTemplate();
+
+		WxTemplateSend wxTemplateSend = new WxTemplateSend();
+
 		wxTemplateSend.setTouser("o26NLuAyrw0uVrsaX98K6RX5UvWs");
-		wxTemplateSend.setTemplate_id("tA2fR-XFgoMsa0pHUZIW3aAUmaXwUZfgi2KG07880nQ");
-		wxTemplateSend.getData().put("first", new WxTemplageValue("您关注的老人[某某某] "));
+		wxTemplateSend
+				.setTemplate_id("tA2fR-XFgoMsa0pHUZIW3aAUmaXwUZfgi2KG07880nQ");
+		wxTemplateSend.getData().put("first",
+				new WxTemplageValue("您关注的老人[某某某] "));
 		wxTemplateSend.getData().put("keyword1", new WxTemplageValue("啊"));
 		wxTemplateSend.getData().put("keyword2", new WxTemplageValue("2"));
 		wxTemplateSend.getData().put("keyword3", new WxTemplageValue("3"));
 		wxTemplateSend.getData().put("keyword4", new WxTemplageValue("4"));
 		wxTemplateSend.getData().put("remark", new WxTemplageValue("remark"));
-		
+
 		bLogTest(wxSendTemplate.process(wxTemplateSend));
-		
-		
+
 	}
 
 	public void TestQrCode() {
