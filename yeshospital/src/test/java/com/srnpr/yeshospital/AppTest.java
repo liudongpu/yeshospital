@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.srnpr.yeshospital.et.rsync.*;
 import com.srnpr.yeshospital.model.TemplateForMsg;
+import com.srnpr.yeshospital.support.ApicloudSupport;
 import com.srnpr.yeshospital.support.MsgSupport;
 import com.srnpr.yeshospital.support.QrcodeSupport;
 import com.srnpr.yeshospital.wx.WxSendTemplate;
@@ -39,6 +40,16 @@ import com.srnpr.zapweb.helper.WebHelper;
 public class AppTest extends TestHelper
 
 {
+	
+	
+	@Test
+	public void TestPush() {
+
+		bLogTest(new ApicloudSupport().pushMessage("测试通知","您有需要处理的单号:D123456","1234567891"));
+
+		//bLogTest(new ApicloudSupport().createUser("abcd"));
+	}
+	
 	
 	public void TestVerify() {
 

@@ -466,7 +466,7 @@ zapjs.zw = {
 		// zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
 		zmapi.m.setprefs(zapjs.c.cookie_user, sCookie);
 
-		zmapi.m.sendevent(zmapi.c.event.login_success, {});
+		zmapi.m.sendevent(zmapi.c.event.login_success, {push_token:sCookie});
 
 	},
 

@@ -1,7 +1,5 @@
 apiready = function() {
 
-	
-
 	var sFlagDebug = $('#yesapp_mobile_index_flag_debug').val();
 
 	if (sFlagDebug == "1") {
@@ -58,7 +56,6 @@ apiready = function() {
 	}, function(ret, err) {
 	});
 
-	
 	// 绑定异步执行事件
 	zmapi.m.addevent(zmapi.c.event.exec_js, function(oSet) {
 
@@ -67,7 +64,7 @@ apiready = function() {
 		api.execScript(oSet);
 
 	});
-	
+
 	/*
 	 * var push = api.require('push'); push.bind({ userName:'testName',
 	 * userId:'testId' },function(ret,err){ if(ret){
@@ -77,7 +74,39 @@ apiready = function() {
 
 	// var user_token = $api.val($api.dom('#yesapp_mobile_index_user_token'));
 	// 绑定登陆成功时执行操作
-	zmapi.m.addevent(zmapi.c.event.login_success, function(sVal) {
+	zmapi.m.addevent(zmapi.c.event.login_success, function(oVal) {
+
+		var s_push_token = oVal.push_token;
+
+		if (s_push_token != zmapi.c.push_token) {
+
+			zmapi.c.push_token = s_push_token;
+
+			var push = api.require('push');
+			push.bind({
+				userName : s_push_token,
+				userId : s_push_token
+			}, function(ret, err) {
+				if (ret) {
+
+					push
+							.setListener(function(ret, err) {
+								if (ret) {
+
+									zmapi.m.sendevent(zmapi.c.event.push_msg,
+											ret.data);
+
+								}
+							});
+
+				} else {
+					api.alert({
+						msg : err.msg
+					});
+				}
+			});
+		}
+		;
 
 		zmapi.m.execjs('root.frame-main:yesapp_frame.refresh_frame_main()');
 	});
@@ -110,6 +139,18 @@ apiready = function() {
 	// 添加退出检测判断事件
 	zmapi.m.addevent(zmapi.c.event.login_out, function(sVal) {
 		zmapi.p.user_login();
+	}
+
+	);
+
+	// 添加收到push消息时的处理事件
+	zmapi.m.addevent(zmapi.c.event.push_msg, function(sVal) {
+		// zmapi.p.user_login();
+
+		api.alert({
+			msg : sVal
+		});
+
 	}
 
 	);
