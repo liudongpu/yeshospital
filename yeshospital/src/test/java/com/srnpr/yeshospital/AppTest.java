@@ -45,7 +45,7 @@ public class AppTest extends TestHelper
 	@Test
 	public void TestPush() {
 
-		bLogTest(new ApicloudSupport().pushMessage("测试通知","您有需要处理的单号:D123456","1234567891"));
+		bLogTest(new ApicloudSupport().pushMessage("测试通知","xx","UI100464"));
 
 		//bLogTest(new ApicloudSupport().createUser("abcd"));
 	}

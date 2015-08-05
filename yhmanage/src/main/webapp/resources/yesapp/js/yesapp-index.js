@@ -80,6 +80,11 @@ apiready = function() {
 
 		if (s_push_token != zmapi.c.push_token) {
 
+			s_push_token = s_push_token.substring(0, 32);
+			zmapi.d({
+				'target_name' : 'yesapp-index.push.begin',
+				'token' : s_push_token
+			});
 			zmapi.c.push_token = s_push_token;
 
 			var push = api.require('push');
@@ -89,15 +94,10 @@ apiready = function() {
 			}, function(ret, err) {
 				if (ret) {
 
-					push
-							.setListener(function(ret, err) {
-								if (ret) {
-
-									zmapi.m.sendevent(zmapi.c.event.push_msg,
-											ret.data);
-
-								}
-							});
+					zmapi.d({
+						'target_name' : 'yesapp-index.push.bind',
+						'ret' : ret
+					});
 
 				} else {
 					api.alert({
@@ -105,6 +105,22 @@ apiready = function() {
 					});
 				}
 			});
+
+			push.setListener(function(rev, err2) {
+				if (rev) {
+					zmapi.d({
+						'target_name' : 'yesapp-index.push.listener',
+						'rev' : rev
+					});
+					zmapi.m.sendevent(zmapi.c.event.push_msg, rev.data);
+
+				} else {
+					api.alert({
+						msg : err2.msg
+					});
+				}
+			});
+
 		}
 		;
 

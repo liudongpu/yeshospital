@@ -1,5 +1,5 @@
 <#-- 系统版本号 -->
-<#assign a_macro_mobile_system_version="2.0.0.30">
+<#assign a_macro_mobile_system_version="2.0.0.31">
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_mobile_resources_version="?v="+a_macro_mobile_system_version >
 <#-- 资源文件路径 -->

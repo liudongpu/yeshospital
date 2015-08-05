@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.srnpr.yeshospital.pages.ExportQrcode;
+import com.srnpr.zapcom.basemodel.MDataMap;
+import com.srnpr.zapdata.dbdo.DbUp;
+import com.srnpr.zapweb.helper.WebSessionHelper;
+import com.srnpr.zapweb.webdo.WebConst;
 import com.srnpr.zapweb.webfactory.UserFactory;
 import com.srnpr.zapweb.webmethod.RootControl;
 
@@ -21,7 +25,36 @@ import com.srnpr.zapweb.webmethod.RootControl;
 public class HomeController extends RootControl {
 
 	public String mobileCheckLogin(String sInput) {
-		if (UserFactory.INSTANCE.checkUserLogin()) {
+
+		// 开启多重校验模型
+
+		boolean bFlagToken = UserFactory.INSTANCE.checkUserLogin();
+		if (!bFlagToken) {
+			String sCookieUser = WebSessionHelper.create().upCookie(
+					WebConst.CONST_WEB_SESSION_USER);
+
+			if (StringUtils.isNotEmpty(sCookieUser)) {
+
+				Object oUserInfo = DbUp.upTable("za_oauth").dataGet(
+						"user_code",
+						"",
+						new MDataMap("access_token", sCookieUser,
+								"flag_enable", "1"));
+
+				if (oUserInfo != null) {
+					MDataMap mUserMap = DbUp.upTable("za_userinfo").one(
+							"user_code", oUserInfo.toString());
+
+					if (mUserMap != null) {
+						UserFactory.INSTANCE.inUserInfo(mUserMap);
+						bFlagToken = true;
+					}
+				}
+
+			}
+		}
+
+		if (bFlagToken) {
 			return sInput;
 		} else {
 			return "mobile/system-noaccess";

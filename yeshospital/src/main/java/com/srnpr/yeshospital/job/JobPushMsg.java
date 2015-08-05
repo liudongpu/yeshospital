@@ -28,7 +28,7 @@ public class JobPushMsg extends RootJobForLock {
 					.queryByWhere("user_code", mMsgMap.get("member_code"),
 							"flag_enable", "1")) {
 
-				String sToken = mOauthMap.get("access_token");
+				String sToken = mOauthMap.get("access_token").substring(0,32);
 
 				new ApicloudSupport().pushMessage(mMsgMap.get("msg_title"),
 						mMsgMap.get("msg_info"), sToken);
