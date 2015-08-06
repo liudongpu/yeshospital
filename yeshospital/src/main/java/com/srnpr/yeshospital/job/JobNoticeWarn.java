@@ -4,12 +4,16 @@ import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 
 import com.srnpr.yeshospital.helper.MessageHelper;
+import com.srnpr.yeshospital.helper.YesHospitalHelper;
 import com.srnpr.yeshospital.support.AdviceSupport;
+import com.srnpr.yeshospital.support.MemberMsgSupport;
+import com.srnpr.yeshospital.support.MsgSupport;
 import com.srnpr.yeshospital.wx.WxConst;
 import com.srnpr.yeshospital.wx.WxSendTemplate;
 import com.srnpr.yeshospital.wx.model.WxTemplageValue;
 import com.srnpr.yeshospital.wx.model.WxTemplateSend;
 import com.srnpr.zapcom.basehelper.FormatHelper;
+import com.srnpr.zapcom.basehelper.RegexHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.rootweb.RootJobForLock;
@@ -24,6 +28,58 @@ public class JobNoticeWarn extends RootJobForLock {
 
 		FlowSupport flowSupport = new FlowSupport();
 
+		for (MDataMap map : DbUp
+				.upTable("yh_count_warn_geracomium")
+				.queryAll(
+						"",
+						"",
+						"flag_msg=0 and warn_level in('46580001000300020003','46580001000300020004')",
+						new MDataMap())) {
+
+			map.put("flag_msg", "1");
+			DbUp.upTable("yh_count_warn_geracomium").dataUpdate(map,
+					"flag_msg", "zid");
+
+			// 找到对应养老院的处理医生
+			MDataMap mTourMap = DbUp.upTable("yh_tour_order_info").oneWhere(
+					"geracomium_code,create_user", "-create_time", "",
+					"geracomium_code", map.get("geracomium_code"));
+			if (mTourMap != null) {
+
+				MDataMap mMsgMap = new MDataMap();
+
+				String sMsgInfo = bInfo(965805809, map.get("member_name"),
+						map.get("warn_info"));
+				mMsgMap.inAllValues("member_code", mTourMap.get("create_user"),
+						"msg_type", "46580001000200060002", "msg_title",
+						YesHospitalHelper.upDefineName("46580001000200060002"),
+						"msg_info", sMsgInfo, "msg_link",
+						"../mb/page_edit_m_yh_count_warn_geracomium?zw_f_uid="
+								+ map.get("uid"), "out_code",
+						map.get("warn_code"));
+
+				new MemberMsgSupport().createMsg(mMsgMap);
+
+				
+				MDataMap mDoctorMap=DbUp.upTable("za_userinfo").one("user_code",mTourMap.get("create_user"));
+				 //MessageHelper().SendSms(sPhone, sContent);
+				if(mDoctorMap!=null)
+				{
+					String sPhoneString=mDoctorMap.get("user_name");
+					
+					if(RegexHelper.checkRegexField(sPhoneString, "base=mobile"))
+					{
+						new MessageHelper().SendSms(sPhoneString, sMsgInfo);
+					}
+					
+					
+				}
+				
+			}
+
+		}
+
+		// 开始处理通知消息相关
 		for (MDataMap map : DbUp.upTable("yh_count_warn_geracomium")
 				.queryByWhere("process_status", "46580001000300050002")) {
 
@@ -166,7 +222,11 @@ public class JobNoticeWarn extends RootJobForLock {
 									if (wxTemplateSend.getData().size() > 2) {
 
 										if (DbUp.upTable("yh_log_wx_template")
-												.count("post_code", sPostCode,"open_id",wxTemplateSend.getTouser()) == 0) {
+												.count("post_code",
+														sPostCode,
+														"open_id",
+														wxTemplateSend
+																.getTouser()) == 0) {
 											String sResult = wxSendTemplate
 													.process(wxTemplateSend);
 
@@ -177,7 +237,10 @@ public class JobNoticeWarn extends RootJobForLock {
 															FormatHelper
 																	.upDateTime(),
 															"wx_result",
-															sResult,"open_id",wxTemplateSend.getTouser());
+															sResult,
+															"open_id",
+															wxTemplateSend
+																	.getTouser());
 
 										}
 									}

@@ -33,6 +33,7 @@ apiready = function() {
 	api.openFrameGroup({
 		name : 'group',
 		scrollEnabled : false,
+		
 		rect : {
 			x : 0,
 			y : header_h,
@@ -163,9 +164,7 @@ apiready = function() {
 	zmapi.m.addevent(zmapi.c.event.push_msg, function(sVal) {
 		// zmapi.p.user_login();
 
-		api.alert({
-			msg : sVal
-		});
+		
 
 	}
 

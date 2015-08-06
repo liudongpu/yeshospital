@@ -10,10 +10,10 @@ zmapi.c = {
 
 	// 是否加载debug模式
 	flag_debug : false,
-	
-	//绑定推送编号
-	push_token:'',
-	
+
+	// 绑定推送编号
+	push_token : '',
+
 	name_storage_debug : 'zmapi_name_storage_debug',
 	// 事件名称
 	event : {
@@ -25,9 +25,9 @@ zmapi.c = {
 		exec_js : 'zmapi_event_exec_js',
 		// 打开页面的事件
 		open_page : 'zmapi_event_open_page',
-		//收到push消息的事件
-		push_msg:'zmapi_event_push_msg',
-		
+		// 收到push消息的事件
+		push_msg : 'zmapi_event_push_msg',
+
 		temp_event : ''
 	}
 };
@@ -151,7 +151,7 @@ zmapi.p = {
 			});
 
 		} else {
-			
+
 			location.href = sUrl;
 		}
 	},
@@ -356,6 +356,24 @@ zmapi.m = {
 			});
 		}
 
+	},
+
+	scrolltobottom : function(f) {
+		if (zmapi.c.flag_api) {
+			api.addEventListener({
+				name : 'scrolltobottom'
+			}, function(ret, err) {
+				f();
+			});
+		}
+	},
+	/*
+	 * 封装ready操作
+	 */
+	ready : function(f) {
+		apiready = function() {
+			f();
+		};
 	}
 
 };

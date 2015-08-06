@@ -1,7 +1,5 @@
 var yesapp_frame = {
 
-	
-
 	shake : function() {
 		/*
 		 * zmapi.m.alert('shake'); var obj = api.require('shakeView');
@@ -69,6 +67,67 @@ var yesapp_frame = {
 		$('#yesapp_fm_main_list').html(aHtml.join(''));
 
 		$('#yesapp_fm_main_list').listview('refresh');
+
+	},
+	begin_frame_daily : function() {
+
+		yesapp_frame.init_frame_daily();
+
+		zmapi.m.ready(function() {
+			zmapi.m.scrolltobottom(function() {
+				yesapp_frame.refresh_frame_daily();
+			});
+
+		});
+
+	},
+
+	init_frame_daily : function() {
+
+		$('#yh_frame_daily_box').html('');
+		yesapp.scroll_begin();
+		yesapp_frame.refresh_frame_daily();
+
+	},
+
+	refresh_frame_daily : function() {
+
+		if (yesapp.scroll_check()) {
+			yesapp.api_call('daily_page', yesapp.scroll_input({}),
+					yesapp_frame.refresh_frame_daily_success);
+		}
+	},
+
+	refresh_frame_daily_success : function(oData) {
+
+		yesapp.scroll_end(oData);
+
+		var aHtml = [];
+
+		for ( var i in oData.pageData) {
+
+			var o = oData.pageData[i];
+
+			aHtml
+					.push('<div class="yh_frame_daily_item '
+							+ (o["process_status"] == "46580001000200070001" ? ""
+									: "yh_frame_daily_over")
+							+ '"   onclick="zmjs.page.open_page(\''
+							+ o["msg_link"]
+							+ '\')"><div class="zmcss_h_10"></div><div class="yh_frame_daily_left"><div class="yh_frame_daily_date">');
+			aHtml.push(o["create_time"].substring(5, 10));
+			aHtml
+					.push('</div></div><div class="yh_frame_daily_right"><div class="yh_frame_daily_msg"><h3>');
+			aHtml.push(o["msg_title"]);
+			aHtml.push('</h3><p>');
+
+			aHtml.push(o["msg_info"]);
+			aHtml
+					.push('</p></div></div><div class="yh_frame_daily_clear zmcss_h_10"></div></div>');
+
+		}
+
+		$('#yh_frame_daily_box').append(aHtml.join(''));
 
 	}
 

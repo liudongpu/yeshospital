@@ -37,6 +37,11 @@ public class FuncAddDoctor extends RootFunc {
 					mAddMaps.get("doctor_name"), mAddMaps.get("hospital_code"),
 					"467721200003", "4677031800030001");
 
+			MDataMap mUpdateMap = new MDataMap("user_code", sUserCode,
+					"mobile_phone", mAddMaps.get("mobile_phone"));
+			DbUp.upTable("yh_doctor_info").dataUpdate(mUpdateMap, "user_code",
+					"mobile_phone");
+
 		}
 
 		return mWebResult;

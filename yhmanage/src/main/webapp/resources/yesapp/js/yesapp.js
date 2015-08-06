@@ -6,6 +6,13 @@ var yesapp = {
 		api_key : 'appfordoctor'
 	},
 
+	temp : {
+		// 是否加载滑动处理的方法
+		scroll_process : 1,
+		// 滑动加载时的页码
+		scroll_page_index : 0
+	},
+
 	// API列表
 	api_list : {
 		// 用户登陆
@@ -67,6 +74,10 @@ var yesapp = {
 
 		main_page : {
 			api_name : 'com_srnpr_yeshospital_api_app_FrameMain',
+			flag_token : true
+		},
+		daily_page : {
+			api_name : 'com_srnpr_yeshospital_api_app_FrameDaily',
 			flag_token : true
 		}
 	},
@@ -147,6 +158,39 @@ var yesapp = {
 
 			zmapi.m.alert('暂不支持该内容，请重新扫描！');
 
+		}
+
+	},
+
+	/*
+	 * 开始滚动前或者刷新滚动前调用 执行
+	 */
+	scroll_begin : function() {
+
+		yesapp.temp.scroll_process = 1;
+		yesapp.temp.scroll_page_index = 0;
+	},
+
+	scroll_input : function(oInput) {
+		oInput.pageIndex = yesapp.temp.scroll_page_index + 1;
+		return oInput;
+	},
+
+	scroll_check : function() {
+
+		var bFlagCheck = (yesapp.temp.scroll_process == 1);
+		if (bFlagCheck) {
+			yesapp.temp.scroll_process == 0;
+		}
+
+		return bFlagCheck;
+	},
+	scroll_end : function(oData) {
+
+		yesapp.temp.scroll_process == 1;
+		yesapp.temp.scroll_page_index = oData.pageInfo.pageIndex;
+		if (oData.pageInfo.flagNext == 0) {
+			yesapp.temp.scroll_process == 2;
 		}
 
 	}
