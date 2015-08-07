@@ -3,7 +3,8 @@ var yesapp = {
 	config : {
 		// 二维码扫描开始域名
 		scanner_start : 'http://q.yxl9.cn/',
-		api_key : 'appfordoctor'
+		api_key : 'appfordoctor',
+		flag_open : 'yesapp_hidden_flag_open_check'
 	},
 
 	temp : {
@@ -160,6 +161,19 @@ var yesapp = {
 
 		}
 
+	},
+
+	/*
+	 * 判断是否审核流程
+	 */
+	check_open : function() {
+		var bFlag = false;
+
+		if ($('#' + yesapp.config.flag_open).val() == "1") {
+			bFlag = true;
+		}
+
+		return bFlag;
 	},
 
 	/*

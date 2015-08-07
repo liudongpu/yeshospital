@@ -61,20 +61,22 @@ var yesapp_tour = {
 
 		var sOrderCode = $('#yesapp_ts_tour_code').val();
 
+		var bFlagOpen = yesapp.check_open();
+
 		for ( var i in oData.pageData) {
 
 			var o = oData.pageData[i];
 
-			aHtml
-					.push('<li><a href="javascript:zmjs.page.open_page(\'tour-member?u_order_code='
-							+ sOrderCode
-							+ '&u_member_code='
-							+ o["member_code"]
-							+ '\')"><span class="yb_span_width_5em">'
-							+ o['member_name']
-							+ '</span>(房间：'
-							+ o['room_name']
-							+ ')</a></li>');
+			var sLinkUrl = bFlagOpen ? ('member-info?u_member_code=' + o["member_code"])
+					: ('tour-member?u_order_code=' + sOrderCode
+							+ '&u_member_code=' + o["member_code"]);
+
+			aHtml.push('<li><a href="javascript:zmjs.page.open_page(\''
+					+ sLinkUrl
+
+					+ '\')"><span class="yb_span_width_5em">'
+					+ o['member_name'] + '</span>(房间：' + o['room_name']
+					+ ')</a></li>');
 
 		}
 
@@ -194,9 +196,8 @@ var yesapp_tour = {
 	tour_member_tmp_click : function(oEl) {
 
 		var sText = $('#' + yesapp_tour.temp.template_id).val();
-		
 
-		$('#' + yesapp_tour.temp.template_id).val(sText + $(oEl).text()+";");
+		$('#' + yesapp_tour.temp.template_id).val(sText + $(oEl).text() + ";");
 		zmjs.ui.dialog_close(yesapp_tour.temp.template_code);
 
 	},

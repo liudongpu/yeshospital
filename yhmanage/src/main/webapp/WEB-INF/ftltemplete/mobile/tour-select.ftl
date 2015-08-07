@@ -19,7 +19,7 @@
 
 
 <div class="zmcss_o_a zmcss_w_96">
-
+${b_method.upClass("com.srnpr.yeshospital.support.AppPageSupport").upFlagOpen()}
 	
 	
 	<#assign a_tour_code=RequestParameters['u_tour_order']?default("") >
