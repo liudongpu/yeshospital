@@ -108,13 +108,16 @@ var yesapp_frame = {
 
 			var o = oData.pageData[i];
 
+			aHtml.push('<div class="yh_frame_daily_item '
+					+ (o["process_status"] == "46580001000200070001" ? ""
+							: "yh_frame_daily_over") + '"  ');
+			if (o["msg_link"] != "") {
+				aHtml.push(' onclick="zmjs.page.open_page(\'' + o["msg_link"]
+						+ '\') " ');
+			}
+
 			aHtml
-					.push('<div class="yh_frame_daily_item '
-							+ (o["process_status"] == "46580001000200070001" ? ""
-									: "yh_frame_daily_over")
-							+ '"   onclick="zmjs.page.open_page(\''
-							+ o["msg_link"]
-							+ '\')"><div class="zmcss_h_10"></div><div class="yh_frame_daily_left"><div class="yh_frame_daily_date">');
+					.push(' ><div class="zmcss_h_10"></div><div class="yh_frame_daily_left"><div class="yh_frame_daily_date">');
 			aHtml.push(o["create_time"].substring(5, 10));
 			aHtml
 					.push('</div></div><div class="yh_frame_daily_right"><div class="yh_frame_daily_msg"><h3>');

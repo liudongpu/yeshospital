@@ -3,7 +3,7 @@
 
 
 
-<@m_mobile_html_begin />
+<@m_mobile_html_begin  p_js=["yesapp/js/yesapp-frame.js"] />
 <@m_mobile_body_begin />
 <div class=""  data-role="page">
 	<div class="zmcss_h_10"></div>
@@ -32,7 +32,7 @@
  
 
     
- <@m_mobile_body_end  p_js=["yesapp/js/yesapp-frame.js"]/>
+ <@m_mobile_body_end />
  
  <@m_mobile_html_initjs "yesapp_frame.init_frame_main() "/>
  

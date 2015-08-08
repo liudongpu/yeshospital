@@ -97,21 +97,23 @@ zmapi.f = {
 				|| browser.versions.android || browser.versions.iPhone
 				|| browser.versions.iPad) {
 
-			// 开始解决IOS7以上的工具条问题
-			var systemType = api.systemType;
+			zmapi.m.ready(function() {
+				// 开始解决IOS7以上的工具条问题
+				var systemType = api.systemType;
 
-			if (systemType == "ios") {
+				if (systemType == "ios") {
 
-				var sVersion = parseInt(api.systemVersion);
+					var sVersion = parseInt(api.systemVersion);
 
-				// 如果是IOS7以上版本
-				if (sVersion >= 7) {
-					$('#zmcss_mm_page_header').addClass('zmcss_ios_t_20');
-					$('#zmcss_mm_page_header').after(
-							'<div class="zmcss_ios_nav"></div>');
+					// 如果是IOS7以上版本
+					if (sVersion >= 7) {
+						$('#zmcss_mm_page_header').addClass('zmcss_ios_t_20');
+						$('#zmcss_mm_page_header').after(
+								'<div class="zmcss_ios_nav"></div>');
+					}
+
 				}
-
-			}
+			});
 
 		} else {
 			// alert(navigator.userAgent);

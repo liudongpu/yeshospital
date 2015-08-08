@@ -1,5 +1,5 @@
 <#-- 系统版本号 -->
-<#assign a_macro_mobile_system_version="2.0.0.53">
+<#assign a_macro_mobile_system_version="2.0.0.58">
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_mobile_resources_version="?v="+a_macro_mobile_system_version >
 <#-- 资源文件路径 -->
@@ -10,8 +10,8 @@
 
 <#-- 项目特殊样式 -->
 
-<#assign a_macro_mobile_resources_base_js=["mlib/jquery/jquery-2.1.4.min.js"] >
-<#assign a_macro_mobile_resources_thems_js=["mlib/apicloud/script/api.js","mlib/jquery/jquery-plugins-zap-mb.min.js","zapmobile/js/zmapi.js","zapmobile/js/zmjs.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","yesapp/js/yesapp.js"] >
+<#assign a_macro_mobile_resources_base_js=["mlib/apicloud/script/api.js","mlib/jquery/jquery-2.1.4.min.js"] >
+<#assign a_macro_mobile_resources_thems_js=["mlib/jquery/jquery-plugins-zap-mb.min.js","zapmobile/js/zmapi.js","zapmobile/js/zmjs.js","zapmobile/js/zapjs-mb.js","zapmobile/js/zapjs-mb.zw-mb.js","yesapp/js/yesapp.js"] >
 <#assign a_macro_mobile_resources_thems_css=["mlib/apicloud/css/api.css","zapmobile/css/zmcss.css","yesapp/css/yes-base.css"] >
 
 
@@ -44,7 +44,7 @@
 </#macro>
 
 
-<#macro m_mobile_html_begin  p_title="" p_type="" p_css=[]>
+<#macro m_mobile_html_begin  p_title="" p_type="" p_css=[] p_js=[]>
 <!doctype html>
 <html>
 <head>
@@ -57,7 +57,7 @@
 		<@m_mobile_html_css a_macro_mobile_resources_append_css />
 		<@m_mobile_html_js a_macro_mobile_resources_append_js />	
 	</#if>
-
+	<@m_mobile_html_js p_js />
 	<@m_mobile_html_css    a_macro_mobile_resources_thems_css />
 	 <@m_mobile_html_css    p_css />
 	 
