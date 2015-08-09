@@ -41,7 +41,7 @@
 	<div class="zab_info_page_title  w_clear">
 	<span>用药信息</span>
 	</div>
-	<#assign a_order_detail=b_method.upControlPage("page_chart_report_yh_tour_order_drug","zw_f_member_code="+a_order_code).upChartData()>
+	<#assign a_order_detail=b_method.upControlPage("page_chart_r_yh_member_drug","zw_p_size=-1&zw_f_member_code="+a_order_code).upChartData()>
 	<@m_zapmacro_common_table a_order_detail />
 
 	<#if a_order_code!="" >
