@@ -31,7 +31,7 @@ public class QueryMember extends RootApi<RootPageDataResult, QueryMemberInput> {
 			aWhere.add("geracomium_code=:geracomium_code ");
 		}
 		
-		
+		aWhere.add("member_status='46580001000500040001' ");
 
 		return new DataApiSupport().upData("yh_member_extend_geracomium",
 				"member_code,member_name,room_name,spell_info", "spell_info",

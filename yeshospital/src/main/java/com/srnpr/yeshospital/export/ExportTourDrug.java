@@ -168,9 +168,13 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 					sTourCode = mDrugInfo.get("tour_code");
 				}
 
-				hRow.createCell(7).setCellValue(mDetailMap.get("money_all"));
+				if (mDetailMap != null && mDetailMap.size() > 0) {
+					hRow.createCell(7)
+							.setCellValue(mDetailMap.get("money_all"));
 
-				hRow.createCell(8).setCellValue(mDetailMap.get("money_person"));
+					hRow.createCell(8).setCellValue(
+							mDetailMap.get("money_person"));
+				}
 
 				iNowRow++;
 			}
