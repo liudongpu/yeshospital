@@ -18,7 +18,13 @@ public class QueryDrug extends RootApi<RootPageDataResult, QueryDrugInput> {
 
 		ArrayList<String> aWhere = new ArrayList<String>();
 
-		if (StringUtils.isNotBlank(inputParam.getKeyWord())) {
+		// 如果传递有编号 则编号最优先处理
+		if (StringUtils.isNotBlank(inputParam.getDrugCode())) {
+			mDataMap.put("drug_code", inputParam.getDrugCode());
+			aWhere.add(" drug_code=:drug_code ");
+		}
+
+		else if (StringUtils.isNotBlank(inputParam.getKeyWord())) {
 			mDataMap.put("keyword", "%" + inputParam.getKeyWord() + "%");
 
 			aWhere.add("drug_name like :keyword or spell_info like :keyword ");
