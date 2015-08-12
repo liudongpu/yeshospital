@@ -28,8 +28,9 @@ public class MemberAgreeAuto extends
 
 		List<String> lStrings = new ArrayList<String>();
 		for (MDataMap map : listMaps) {
-
-			lStrings.add(map.get("agree_info"));
+			if (StringUtils.isNotBlank(map.get("agree_info"))) {
+				lStrings.add(map.get("agree_info"));
+			}
 
 		}
 

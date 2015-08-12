@@ -12,6 +12,8 @@ zapadmin_single.result = function(sId, sValues, sTexts) {
 			'<a href="page_book_v_yh_member_extend_geracomium?zw_f_member_code='
 					+ sValues + '" target="_blank">查看' + sTexts + '信息</a>');
 
+	
+
 	zapjs.zw.api_call('com_srnpr_yeshospital_api_member_MemberAgreeAuto', {
 		memberCode : sValues
 	}, doctorselectmember);
@@ -25,3 +27,12 @@ function doctorselectmember(oResult) {
 	$('#zw_f_agree_info').val(oResult.agreeInfo);
 
 };
+
+$(
+function(){
+	
+	$('#zw_f_agree_info').css("width","80%").css("min-height","300px");
+}		
+
+);
+
