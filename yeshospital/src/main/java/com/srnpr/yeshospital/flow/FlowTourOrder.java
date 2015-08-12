@@ -1,5 +1,6 @@
 package com.srnpr.yeshospital.flow;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Store;
@@ -94,6 +95,25 @@ public class FlowTourOrder extends RootFlowChange {
 					// 如果在明细中不存在该用户，则表明该记录是多余记录，删除之
 					DbUp.upTable("yh_tour_order_drug").delete("zid",
 							map.get("zid"));
+				}
+
+			}
+
+			// 开始更新明细表上的是否代购字段
+			{
+
+				List<String> aUpdate = new ArrayList<String>();
+				for (String sKey : mMemberMap.keySet()) {
+					if (mMemberMap.get(sKey).equals("0")) {
+						MDataMap mUpdatDetailMap = new MDataMap();
+
+						mUpdatDetailMap.inAllValues("flag_buy", "0",
+								"tour_code", sOrderCode, "member_code", sKey);
+						DbUp.upTable("yh_tour_order_detail").dataUpdate(
+								mUpdatDetailMap, "flag_buy",
+								"tour_code,member_code");
+
+					}
 				}
 
 			}
