@@ -42,6 +42,19 @@
 }
 
 /************************************************************************************/
+
+.zw_page_common_data_ul
+{
+	
+}
+.zw_page_common_data_ul li
+{
+	float:left;
+}
+
+
+
+/************************************************************************************/
 body, div, a, span {
 	font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Light",
 		"Segoe UI Web Light", "Segoe UI Web Regular", "Segoe UI",

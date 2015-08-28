@@ -35,19 +35,19 @@ html, body {
         }
 
         .cloud {
-            background-image: url(../image/btn1-1.png);
+            background-image: url(../imagegen/btn1-1.png);
         }
 
         .client {
-            background-image: url(../image/btn2-1.png);
+            background-image: url(../imagegen/btn2-1.png);
         }
 
         .dev {
-            background-image: url(../image/btn3-1.png);
+            background-image: url(../imagegen/btn3-1.png);
         }
 
         .doc {
-            background-image: url(../image/btn4-1.png);
+            background-image: url(../imagegen/btn4-1.png);
         }
 
         #footer li {
@@ -70,23 +70,23 @@ html, body {
         }
 
         .active .cloud {
-            background-image: url(../image/btn1-2.png);
+            background-image: url(../imagegen/btn1-2.png);
         }
 
         .active .client {
-            background-image: url(../image/btn2-2.png);
+            background-image: url(../imagegen/btn2-2.png);
         }
 
         .active .dev {
-            background-image: url(../image/btn3-2.png);
+            background-image: url(../imagegen/btn3-2.png);
         }
 
         .active .doc {
-            background-image: url(../image/btn4-2.png);
+            background-image: url(../imagegen/btn4-2.png);
         }
 
         .active .bottom_btn {
-            color: #35b667;
+            color: #b63539;
             background-size: 30px;
         }
 

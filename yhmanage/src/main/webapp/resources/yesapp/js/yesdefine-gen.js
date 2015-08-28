@@ -1,20 +1,20 @@
 yesapp.y_define = {
 
 	frams : [ {
-		name : 'frame-main',
+		name : 'frame-people',
 		url : '../mobile/frame-people'
 	}, {
 		name : 'frame-daily',
 		url : '../mobile/frame-daily'
 	}, {
-		name : 'frame-see',
-		url : '../mobile/frame-see'
+		name : 'frame-discover',
+		url : '../mobile/frame-discover'
 	}, {
 		name : 'frame-my',
 		url : '../mobile/frame-my'
 	} ],
 
-	base_init : '',
+	base_init : 'root.frame-people:yesapp_frame.init_frame_people()',
 	channel:'gen',
 	qrcode_link : 'people-link'
 

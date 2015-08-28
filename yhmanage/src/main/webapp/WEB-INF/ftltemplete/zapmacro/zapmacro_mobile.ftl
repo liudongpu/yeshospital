@@ -127,7 +127,7 @@
 	  	
 	</#list>
 	<#--兼容form中input如果只有一个自动提交的情况-->
-	<input style="display:none;"/>
+	<div style="display:none;"><input style="display:none;"/></div>
 </#macro>
 
 
@@ -137,51 +137,55 @@
 <#macro m_zapmacro_mobile_page_pagination e_page  e_pagedata>
 
 <div class="pagination">
-
+<div class="zmcss_h_20"></div>
 	<#if (e_pagedata.getPageSize()>0)>
-  <ul>
+  <ul class="zw_page_common_data_ul">
 	<#if (e_pagedata.getPageIndex()>1)>
-		<li><a href="<@m_zapmacro_mobile_page_pagination_href  e_page  e_pagedata   e_pagedata.getPageIndex()-1/>">上一页</a></li>
+		<li><a class="ui-btn ui-btn-inline"  href="<@m_zapmacro_mobile_page_pagination_href  e_page  e_pagedata   e_pagedata.getPageIndex()-1/>">上一页</a></li>
 	<#else>
-		<li class="disabled"><a>上一页</a></li>
+		<li class="disabled"><a class="ui-btn ui-btn-inline  ui-state-disabled">上一页</a></li>
 	</#if>
 
-    <#local max=(e_pagedata.getPageIndex()+5)>
+    <#local max=(e_pagedata.getPageIndex()+0)>
     <#if (max>e_pagedata.getPageMax())><#local max=e_pagedata.getPageMax()></#if>
     
-    <#local min=(e_pagedata.getPageIndex()-(5+e_pagedata.getPageIndex()-max))>
+    <#local min=(e_pagedata.getPageIndex()-(0+e_pagedata.getPageIndex()-max))>
     <#if (min<1)><#local min=1></#if>
     
 	<#list min..max as e>
 		<#if (e>0)>
-		<li <#if e==e_pagedata.getPageIndex()> class="active"</#if> ><a href="<@m_zapmacro_mobile_page_pagination_href  e_page  e_pagedata   e/>">${e}</a></li>
+		<li <#if e==e_pagedata.getPageIndex()> class="active"</#if> ><a  class="ui-btn ui-btn-inline"  href="<@m_zapmacro_mobile_page_pagination_href  e_page  e_pagedata   e/>">${e}</a></li>
 		</#if>
 	</#list>
 
     <#if (e_pagedata.getPageIndex()<e_pagedata.getPageMax())>
-		<li><a href="<@m_zapmacro_mobile_page_pagination_href  e_page  e_pagedata   e_pagedata.getPageIndex()+1/>">下一页</a></li>
+		<li><a class="ui-btn ui-btn-inline" href="<@m_zapmacro_mobile_page_pagination_href  e_page  e_pagedata   e_pagedata.getPageIndex()+1/>">下一页</a></li>
 	<#else>
-		<li class="disabled"><a>下一页</a></li>
+		<li class="disabled"><a class="ui-btn ui-btn-inline  ui-state-disabled">下一页</a></li>
 	</#if>
+	<li><a class="ui-btn ui-btn-inline  ui-state-disabled">共${e_pagedata.getPageCount()}条</a></li>
+
+
   </ul>
   </#if>
   
   
-	<span class="pagination_label">共${e_pagedata.getPageCount()}条</span>
+	
+<div class="zmcss_h_20"></div>
 </div>
 
 </#macro>
 
 <#macro m_zapmacro_mobile_page_pagination_href  e_page  e_pagedata  e_pageindex>
-${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.getPageCount()),(e_page.upConst("126022016","index="))+(e_pageindex)])}
-</#macro>
+${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.getPageCount()),(e_page.upConst("126022016","index="))+(e_pageindex)])}</#macro>
 
 
 
 <#-- 列表的自动输出 -->
 <#macro m_zapmacro_mobile_table e_pagedata>
 
-<table  class="table  table-condensed table-striped table-bordered table-hover">
+
+<table data-role="table"    class=" ui-shadow table-stripe ">
 	<thead>
 	    <tr>
 	        <#list e_pagedata.getPageHead() as e_list>

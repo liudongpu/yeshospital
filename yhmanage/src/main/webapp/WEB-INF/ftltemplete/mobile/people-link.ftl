@@ -34,6 +34,7 @@
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/1.png"/></div>
             		<div  class="yh_people_link_right">
 						<span>体温信息  ：</span> <a <@m_mobile_a_href p_page="../mb/page_add_m_yh_post_temperature?zw_f_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">添加</a>
+						<a <@m_mobile_a_href p_page="../mb/page_chart_m_yh_post_temperature?zw_f_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">列表</a>
             		</div>
             		
             	</div>
@@ -41,6 +42,7 @@
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/3.png"/></div>
             		<div  class="yh_people_link_right">
 						<span>血糖信息  ：</span> <a <@m_mobile_a_href p_page="../mb/page_add_m_yh_post_glucose?zw_f_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">添加</a>
+						<a <@m_mobile_a_href p_page="../mb/page_chart_m_yh_post_glucose?zw_f_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">列表</a>
             		</div>
             		
             	</div>
@@ -48,6 +50,7 @@
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/2.png"/></div>
             		<div  class="yh_people_link_right">
 						<span>血氧信息  ：</span> <a <@m_mobile_a_href p_page="../mb/page_add_m_yh_post_oxygen?zw_f_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">添加</a>
+						<a <@m_mobile_a_href p_page="../mb/page_chart_m_yh_post_oxygen?zw_f_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">列表</a>
             		</div>
             		
             	</div>
@@ -55,6 +58,7 @@
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/5.png"/></div>
             		<div  class="yh_people_link_right">
 						<span>血压信息  ： </span> <a <@m_mobile_a_href p_page="../mb/page_add_m_yh_post_pressure?zw_f_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">添加</a>
+						<a <@m_mobile_a_href p_page="../mb/page_chart_m_yh_post_pressure?zw_f_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">列表</a>
             		</div>
             		
             	</div>
