@@ -6,12 +6,39 @@ var yesapp = {
 		api_key : 'appfordoctor',
 		flag_open : 'yesapp_hidden_flag_open_check'
 	},
+	
+	
+	y_define:{
+		frams : [ {
+			name : 'frame-main',
+			url : '../mobile/frame-main'
+		}, {
+			name : 'frame-daily',
+			url : '../mobile/frame-daily'
+		}, {
+			name : 'frame-see',
+			url : '../mobile/frame-see'
+		}, {
+			name : 'frame-my',
+			url : '../mobile/frame-my'
+		} ],
+		
+		base_init:'root.frame-main:yesapp_frame.refresh_frame_main()',
+		//渠道类型   默认为医生版   可以为gen版
+		channel:'doctor',
+		
+		qrcode_link:'tour-member'
+		
+	},
+	
 
 	temp : {
 		// 是否加载滑动处理的方法
 		scroll_process : 1,
 		// 滑动加载时的页码
-		scroll_page_index : 0
+		scroll_page_index : 0,
+		//最近一次查询参数
+		last_search:'-1'
 	},
 
 	// API列表
@@ -24,7 +51,8 @@ var yesapp = {
 			api_name : "com_srnpr_zapweb_webapi_RootPageDataApi"
 		},
 		query_member : {
-			api_name : 'com_srnpr_yeshospital_api_app_QueryMember'
+			api_name : 'com_srnpr_yeshospital_api_app_QueryMember',
+			flag_token : true
 		},
 
 		query_drug : {
@@ -149,7 +177,7 @@ var yesapp = {
 			},
 					function(o) {
 
-						zmjs.page.open_page('tour-member?u_order_code='
+						zmjs.page.open_page(yesapp.y_define.qrcode_link+'?u_order_code='
 								+ o["orderCode"] + '&u_member_code='
 								+ o["memberCode"]);
 

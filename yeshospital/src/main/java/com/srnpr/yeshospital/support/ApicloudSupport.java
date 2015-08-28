@@ -17,7 +17,7 @@ public class ApicloudSupport extends BaseClass {
 				sUserId,"type","1");
 		String sRes = call(bConfig("yeshospital.apicloud_url_push")  , mDataMap);
 
-		bLogInfo(0, sRes);
+		//bLogInfo(0, sRes);
 		return true;
 	}
 	

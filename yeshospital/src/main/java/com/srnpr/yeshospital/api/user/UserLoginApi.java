@@ -38,8 +38,10 @@ public class UserLoginApi extends RootApi<UserLoginApiResult, UserLoginInput> {
 
 			OauthSupport oauthSupport = new OauthSupport();
 
+			
+			
 			// 判断 只有指定的医生用户才能登陆app
-			if (mUserInfo.getUserRole().contains("467703180003")) {
+			if (StringUtils.indexOfAny(mUserInfo.getUserRole(), new String[]{"467703180003","467703180004"})>-1) {
 
 				// 插入授权登陆表
 				oauthSupport.dbInsertOauth(mUserInfo.getCookieUser(),

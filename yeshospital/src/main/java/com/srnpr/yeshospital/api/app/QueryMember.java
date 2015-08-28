@@ -6,10 +6,13 @@ import org.apache.commons.lang.StringUtils;
 
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
+import com.srnpr.zapweb.webapi.RootApiForManage;
+import com.srnpr.zapweb.webapi.RootApiForToken;
 import com.srnpr.zapweb.webapi.RootPageDataResult;
 import com.srnpr.zapweb.websupport.DataApiSupport;
 
-public class QueryMember extends RootApi<RootPageDataResult, QueryMemberInput> {
+public class QueryMember extends
+		RootApiForToken<RootPageDataResult, QueryMemberInput> {
 
 	public RootPageDataResult Process(QueryMemberInput inputParam,
 			MDataMap mRequestMap) {
@@ -23,14 +26,18 @@ public class QueryMember extends RootApi<RootPageDataResult, QueryMemberInput> {
 
 			aWhere.add("member_name like :keyword or spell_info like :keyword ");
 		}
-		
-		
+
+		// 如果没有传养老院编号 则自动设置为账号绑定的编号
+		if (StringUtils.isBlank(inputParam.getGeracomiumCode())) {
+			inputParam.setGeracomiumCode(getOauthInfo().getManageCode());
+		}
+
 		if (StringUtils.isNotBlank(inputParam.getGeracomiumCode())) {
-			mDataMap.put("geracomium_code", inputParam.getGeracomiumCode() );
+			mDataMap.put("geracomium_code", inputParam.getGeracomiumCode());
 
 			aWhere.add("geracomium_code=:geracomium_code ");
 		}
-		
+
 		aWhere.add("member_status='46580001000500040001' ");
 
 		return new DataApiSupport().upData("yh_member_extend_geracomium",

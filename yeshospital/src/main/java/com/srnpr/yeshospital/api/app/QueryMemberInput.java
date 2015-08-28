@@ -5,7 +5,7 @@ import com.srnpr.zapcom.topapi.RootInput;
 
 public class QueryMemberInput extends RootInput {
 
-	@ZapcomApi(value = "关键字", require = 1)
+	@ZapcomApi(value = "关键字" )
 	private String keyWord = "";
 
 	@ZapcomApi(value = "养老院编号")

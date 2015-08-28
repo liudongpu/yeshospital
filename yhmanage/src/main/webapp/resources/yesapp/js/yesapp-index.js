@@ -33,7 +33,7 @@ apiready = function() {
 	api.openFrameGroup({
 		name : 'group',
 		scrollEnabled : false,
-		
+
 		rect : {
 			x : 0,
 			y : header_h,
@@ -41,19 +41,7 @@ apiready = function() {
 			h : rect_h
 		},
 		index : 0,
-		frames : [ {
-			name : 'frame-main',
-			url : '../mobile/frame-main'
-		}, {
-			name : 'frame-daily',
-			url : '../mobile/frame-daily'
-		}, {
-			name : 'frame-see',
-			url : '../mobile/frame-see'
-		}, {
-			name : 'frame-my',
-			url : '../mobile/frame-my'
-		} ]
+		frames : yesapp.y_define.frams
 	}, function(ret, err) {
 	});
 
@@ -125,7 +113,7 @@ apiready = function() {
 		}
 		;
 
-		zmapi.m.execjs('root.frame-main:yesapp_frame.refresh_frame_main()');
+		zmapi.m.execjs(yesapp.y_define.base_init);
 	});
 
 	var user_token = "";
@@ -163,8 +151,6 @@ apiready = function() {
 	// 添加收到push消息时的处理事件
 	zmapi.m.addevent(zmapi.c.event.push_msg, function(sVal) {
 		// zmapi.p.user_login();
-
-		
 
 	}
 

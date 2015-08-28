@@ -132,6 +132,49 @@ var yesapp_frame = {
 
 		$('#yh_frame_daily_box').append(aHtml.join(''));
 
+	},
+	init_frame_people : function() {
+
+		// zmapi.p.user_login();
+		yesapp_frame.search_frame_people('#yesapp_ts_search');
+
+	},
+	 search_frame_people : function(oEl) {
+
+		var sText = zapjs.f.trim($(oEl).val());
+
+		if (sText != yesapp.temp.last_search  ) {
+
+			yesapp.api_call('query_member', {
+				keyWord : sText
+			}, yesapp_frame.search_frame_people_success);
+
+		}
+
+	},
+	search_frame_people_success : function(oData) {
+		yesapp.temp.last_search=zapjs.f.trim($('#yesapp_ts_search').val());
+		var aHtml = [];
+
+		for ( var i in oData.pageData) {
+
+			var o = oData.pageData[i];
+
+			var sLinkUrl = ('people-link?u_member_code=' + o["member_code"])
+					;
+
+			aHtml.push('<li><a href="javascript:zmjs.page.open_page(\''
+					+ sLinkUrl
+
+					+ '\')"><span class="yb_span_width_5em">'
+					+ o['member_name'] + '</span>(房间：' + o['room_name']
+					+ ')</a></li>');
+
+		}
+
+		$('#yesapp_ts_table').html(aHtml.join(''));
+		$('#yesapp_ts_table').listview('refresh');
+
 	}
 
 };

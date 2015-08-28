@@ -1,0 +1,29 @@
+.yh_people_link_box
+{
+	background-color:#fff;
+}
+
+
+.yh_people_link_item
+{
+	clear:both;
+}
+
+.yh_people_link_left
+{
+	float:left;
+	height:4em;
+	margin:0.4em;
+}
+
+
+.yh_people_link_left img
+{
+	width:3em;
+	height:3em;
+	border:solid 1px #ebebeb;
+}
+.yh_people_link_right span
+{
+	text-indent:1em;
+}
