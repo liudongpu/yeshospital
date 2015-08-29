@@ -341,7 +341,7 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 			
 		<@m_zapmacro_mobile_field_end />
 	  	<@m_mobile_init_extendlib />
-	  	<@m_zapmacro_mobile_html_script "$(function () {$('#${e_field.getPageFieldName()}').mobiscroll().calendar({theme: 'mobiscroll',lang: 'zh',dateFormat: 'yyyy-mm-dd',  display: 'bottom', controls: ['calendar', 'date']});});" />
+	  	<@m_zapmacro_mobile_html_script "$(function () {$('#${e_field.getPageFieldName()}').mobiscroll().calendar({lang: 'zh',dateFormat: 'yy-mm-dd',  display: 'bottom', controls: ['calendar', 'date']});});" />
 	
 	  
 </#macro>
