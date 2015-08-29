@@ -1,5 +1,5 @@
 <#-- 系统版本号 -->
-<#assign a_macro_mobile_system_version="2.0.1.10">
+<#assign a_macro_mobile_system_version="2.0.1.11">
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_mobile_resources_version="?v="+a_macro_mobile_system_version >
 <#-- 资源文件路径 -->
@@ -157,6 +157,10 @@
 
 
 
-
+<#-- 初始化扩展包  -->
+<#macro m_mobile_init_extendlib>
+	<@m_mobile_html_css ["mlib/mobiscroll/css/mobiscroll.custom-2.16.1.min.css"] />
+	<@m_mobile_html_js ["mlib/mobiscroll/js/mobiscroll.custom-2.16.1.min.js"] />
+</#macro>
 
 
