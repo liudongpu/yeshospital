@@ -28,12 +28,12 @@
 		<div id="t_${em_index}" class="ui-body-d ui-content">
 		   
 
-			<#assign a_tourlist=a_macro_wx_dbcall.queryAll("yh_member_agree","","-create_time","","member_code",em["member_code"])>
+			<#assign a_tourlist=a_macro_wx_dbcall.queryAll("yh_member_agree","","-create_time","","member_code",em["member_code"],"process_status","46580001000200090001")>
 			<#list a_tourlist as e>
 
 				${e["create_time"]}
 				<br/><br/>
-				${e["agree_info"]}
+				${e["process_text"]}
 
 				<div class="wxcss_show_split"></div>
 			</#list>
