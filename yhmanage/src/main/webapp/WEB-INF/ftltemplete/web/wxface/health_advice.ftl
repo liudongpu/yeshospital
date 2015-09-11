@@ -33,7 +33,7 @@
 
 				${e["create_time"]}
 				<br/><br/>
-				${e["advice_info"]}
+				${e["process_text"]}
 
 				<div class="wxcss_show_split"></div>
 			</#list>
