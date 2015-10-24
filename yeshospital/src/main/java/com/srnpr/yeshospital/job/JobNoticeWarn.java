@@ -1,5 +1,7 @@
 package com.srnpr.yeshospital.job;
 
+import java.util.ArrayList;
+
 import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 
@@ -28,6 +30,8 @@ public class JobNoticeWarn extends RootJobForLock {
 
 		FlowSupport flowSupport = new FlowSupport();
 
+		
+		//开始执行短信通知对象
 		for (MDataMap map : DbUp
 				.upTable("yh_count_warn_geracomium")
 				.queryAll(
@@ -44,36 +48,79 @@ public class JobNoticeWarn extends RootJobForLock {
 			MDataMap mTourMap = DbUp.upTable("yh_tour_order_info").oneWhere(
 					"geracomium_code,create_user", "-create_time", "",
 					"geracomium_code", map.get("geracomium_code"));
-			if (mTourMap != null) {
-
-				MDataMap mMsgMap = new MDataMap();
-
-				String sMsgInfo = bInfo(965805809, map.get("member_name"),
-						map.get("warn_info"));
-				mMsgMap.inAllValues("member_code", mTourMap.get("create_user"),
-						"msg_type", "46580001000200060002", "msg_title",
-						YesHospitalHelper.upDefineName("46580001000200060002"),
-						"msg_info", sMsgInfo, "msg_link",
-						"../mb/page_edit_m_yh_count_warn_geracomium?zw_f_uid="
-								+ map.get("uid"), "out_code",
-						map.get("warn_code"));
-
-				new MemberMsgSupport().createMsg(mMsgMap);
-
+			
+			
+			//通知对象  结构为用户账户编号 手机号
+			MDataMap mNoticeMap=new MDataMap();
+			
+			if(mTourMap != null)
+			{
+				mNoticeMap.put(mTourMap.get("create_user"), "");
 				
 				MDataMap mDoctorMap=DbUp.upTable("za_userinfo").one("user_code",mTourMap.get("create_user"));
 				 //MessageHelper().SendSms(sPhone, sContent);
 				if(mDoctorMap!=null)
 				{
-					String sPhoneString=mDoctorMap.get("user_name");
+					mNoticeMap.put(mTourMap.get("create_user"), mDoctorMap.get("user_name"));
+				}
+			}
+			
+			
+			
+			for(MDataMap mDoctorMap:DbUp.upTable("yh_doctor_geracomium").queryByWhere("geracomium_code",map.get("geracomium_code"),"flag_enable","1"))
+			{
+				
+				MDataMap mDocInfo=DbUp.upTable("yh_doctor_info").one("doctor_code",mDoctorMap.get("doctor_code"));
+				mNoticeMap.put(mDocInfo.get("user_code"), mDocInfo.get("mobile_phone"));
+				
+			}
+			
+			
+			
+			
+			
+			if (mNoticeMap != null&&mNoticeMap.size()>0) {
+
+				
+				
+				for(String sKey:mNoticeMap.keySet())
+				{
 					
-					if(RegexHelper.checkRegexField(sPhoneString, "base=mobile"))
+					MDataMap mMsgMap = new MDataMap();
+
+					String sMsgInfo = bInfo(965805809, map.get("member_name"),
+							map.get("warn_info"));
+					mMsgMap.inAllValues("member_code",sKey,
+							"msg_type", "46580001000200060002", "msg_title",
+							YesHospitalHelper.upDefineName("46580001000200060002"),
+							"msg_info", sMsgInfo, "msg_link",
+							"../mb/page_edit_m_yh_count_warn_geracomium?zw_f_uid="
+									+ map.get("uid"), "out_code",
+							map.get("warn_code"));
+
+					new MemberMsgSupport().createMsg(mMsgMap);
+
+					
+					
+					 //MessageHelper().SendSms(sPhone, sContent);
+					if(StringUtils.isNotBlank(mNoticeMap.get(sKey)))
 					{
-						new MessageHelper().SendSms(sPhoneString, sMsgInfo);
+						String sPhoneString=mNoticeMap.get(sKey);
+						
+						if(RegexHelper.checkRegexField(sPhoneString, "base=mobile"))
+						{
+							new MessageHelper().SendSms(sPhoneString, sMsgInfo);
+						}
+						
+						
 					}
 					
-					
 				}
+				
+				
+				
+				
+				
 				
 			}
 
