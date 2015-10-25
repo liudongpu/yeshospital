@@ -12,7 +12,7 @@
 <div class="yb_list_box" >
 	<ul data-role="listview">
 	    <li onclick="yesapp.scanner_code()"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/s-1.png" alt="" class="ui-li-icon ui-corner-none"> 扫描二维码</li>
-	    
+	     <li onclick="zmjs.page.open_page('my-mould')"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/s-2.png" alt="" class="ui-li-icon ui-corner-none"> 模板管理</li>
 	    
 	</ul>
 </div>

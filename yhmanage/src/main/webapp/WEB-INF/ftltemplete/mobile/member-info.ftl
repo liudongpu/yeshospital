@@ -6,13 +6,14 @@
 
 
 <#assign a_memberCode=RequestParameters['u_member_code']?default("") >
-
+<#assign a_member_info=b_method.upDataOne("yh_member_extend_geracomium","","","","member_code",a_memberCode) />
 
 <#assign b_page=b_method.upControlPage("page_book_d_v_yh_member_extend_geracomium","zw_f_member_code="+a_memberCode) />
 
 
 <@m_mobile_header_begin p_title="个人信息" />
 	<@m_mobile_button_back />
+	<a <@m_mobile_a_href p_page="../mb/page_edit_d_v_yh_member_extend_geracomium?zw_f_uid="+a_member_info["uid"] /> class="ui-btn ui-btn-inline">修改</a>
 <@m_mobile_header_end />
 
 	<div class="zmcss_h_20"></div>

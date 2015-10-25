@@ -138,9 +138,17 @@ body, div, a, span {
 	color: #c1c1c1;
 }
 
+.yb_list_dialog, .ui-popup .yb_list_dialog
+{
+	
+	overflow-y:scroll;
+}
+
 .yb_list_dialog .ui-listview>.ui-li-static {
 	padding: .3em 1em;
 }
+
+
 
 /**流消息格式   yb_grid**********************************************************************************/
 .yb_grid_box {

@@ -1,5 +1,8 @@
 package com.srnpr.yeshospital.support;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.srnpr.zapcom.baseclass.BaseClass;
@@ -10,6 +13,8 @@ import com.srnpr.zapweb.helper.WebHelper;
 import com.srnpr.zapweb.usermodel.MUserInfo;
 import com.srnpr.zapweb.webfactory.UserFactory;
 import com.srnpr.zapweb.websupport.UserSupport;
+
+import freemarker.core.LibraryLoad;
 
 public class AppInfoSupport extends BaseClass {
 
@@ -25,15 +30,14 @@ public class AppInfoSupport extends BaseClass {
 
 		String sUserCode = mUserInfo.getUserCode();
 
-		sUid = FormatHelper.upStringFromObject(DbUp.upTable("yh_app_member")
-				.dataGet("uid", "", new MDataMap("member_code", sUserCode)));
+		sUid = FormatHelper.upStringFromObject(
+				DbUp.upTable("yh_app_member").dataGet("uid", "", new MDataMap("member_code", sUserCode)));
 
 		if (StringUtils.isBlank(sUid)) {
 			sUid = WebHelper.upUuid();
 
-			DbUp.upTable("yh_app_member").insert("uid", sUid, "member_code",
-					sUserCode, "create_time", FormatHelper.upDateTime(),
-					"member_name", mUserInfo.getRealName(), "nick_name",
+			DbUp.upTable("yh_app_member").insert("uid", sUid, "member_code", sUserCode, "create_time",
+					FormatHelper.upDateTime(), "member_name", mUserInfo.getRealName(), "nick_name",
 					mUserInfo.getRealName());
 		}
 
@@ -53,18 +57,69 @@ public class AppInfoSupport extends BaseClass {
 
 		String sUserCode = mUserInfo.getUserCode();
 
-		sUid = FormatHelper.upStringFromObject(DbUp.upTable("yh_app_uset")
-				.dataGet("uid", "", new MDataMap("member_code", sUserCode)));
+		sUid = FormatHelper.upStringFromObject(
+				DbUp.upTable("yh_app_uset").dataGet("uid", "", new MDataMap("member_code", sUserCode)));
 
 		if (StringUtils.isBlank(sUid)) {
 			sUid = WebHelper.upUuid();
 
-			DbUp.upTable("yh_app_uset").insert("uid", sUid, "member_code",
-					sUserCode, "create_time", FormatHelper.upDateTime());
+			DbUp.upTable("yh_app_uset").insert("uid", sUid, "member_code", sUserCode, "create_time",
+					FormatHelper.upDateTime());
 		}
 
 		return sUid;
 
 	}
+
+	public List<String> upMouldInfo(String sTypeCode) {
+		
+		String sUserCode=UserFactory.INSTANCE.create().getUserCode();
+		List<MDataMap> listMaps = DbUp.upTable("yh_mould_info").queryAll("mould_content,user_code", "",
+				" mould_type=:mould_type and  (user_code=:user_code or user_code='0' )",
+				new MDataMap("mould_type", sTypeCode, "user_code", sUserCode));
+
+		List<String> lReturn = new ArrayList<String>();
+		for (MDataMap map : listMaps) {
+			if (map.get("user_code").equals(sUserCode)) {
+				lReturn.add(map.get("mould_content"));
+			}
+
+		}
+
+		if (lReturn.size() == 0) {
+			for (MDataMap map : listMaps) {
+				if (map.get("user_code").equals("0")) {
+					lReturn.add(map.get("mould_content"));
+				}
+
+			}
+		}
+
+		return lReturn;
+	}
+	
+	
+	
+	public String upMouldInitCode() {
+		String sUserCode=UserFactory.INSTANCE.create().getUserCode();
+		
+		if(DbUp.upTable("yh_mould_info").count("user_code",sUserCode)==0)
+		{
+			
+			for(MDataMap map:DbUp.upTable("yh_mould_info").queryByWhere("user_code","0"))
+			{
+				
+				map.inAllValues("zid", "0","uid",WebHelper.upUuid(),"user_code",sUserCode,"create_time",FormatHelper.upDateTime());
+				DbUp.upTable("yh_mould_info").dataInsert(map);
+			}
+			
+		}
+		
+		
+
+		return sUserCode;
+	}
+	
+	
 
 }

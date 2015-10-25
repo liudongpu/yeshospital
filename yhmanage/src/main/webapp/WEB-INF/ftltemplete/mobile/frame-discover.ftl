@@ -13,6 +13,7 @@
 	<ul data-role="listview">
 	    <li onclick="yesapp.scanner_code()"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/s-1.png" alt="" class="ui-li-icon ui-corner-none"> 扫描二维码</li>
 	    
+	   
 	    
 	</ul>
 </div>

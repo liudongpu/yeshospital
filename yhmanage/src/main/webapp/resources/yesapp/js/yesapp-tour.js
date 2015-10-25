@@ -167,6 +167,7 @@ var yesapp_tour = {
 
 	init_tour_member : function() {
 
+		$('.yb_list_dialog').css('max-height',$( window ).height() - 200);
 		zmjs.form.set('member_code', $('#yesapp_tm_member_code').val());
 		zmjs.form.set('tour_code', $('#yesapp_tm_order_code').val());
 
