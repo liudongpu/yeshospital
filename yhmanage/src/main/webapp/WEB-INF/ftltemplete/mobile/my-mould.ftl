@@ -11,12 +11,12 @@
 
 <@m_mobile_header_begin p_title="模板管理" />
 	<@m_mobile_button_back />
-	 
+	 <a <@m_mobile_a_href p_page="../mb/page_add_d_yh_mould_info" /> class="ui-btn ui-btn-inline">添加</a>
 	
 <@m_mobile_header_end />
 
 
-<div class=" zmcss_w_96">
+<div class=" ">
 	<div class="zmcss_h_20"></div>
 	
 		<div data-role="tabs" id="tabs">
@@ -35,7 +35,7 @@
 	<ul data-role="listview">
 	<#list a_list as el>
     
-    	<li >${el["mould_content"]}</li>
+    	<li ><a <@m_mobile_a_href p_page="../mb/page_edit_d_yh_mould_info?zw_f_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
     	
     </#list>
 	</ul>
@@ -45,7 +45,7 @@
     <ul data-role="listview">
 	<#list a_list as el>
     
-    	<li >${el["mould_content"]}</li>
+    	<li ><a <@m_mobile_a_href p_page="../mb/page_edit_d_yh_mould_info?zw_f_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
     	
     </#list>
 	</ul>
@@ -56,7 +56,7 @@
     <ul data-role="listview">
 	<#list a_list as el>
     
-    	<li >${el["mould_content"]}</li>
+    	<li ><a <@m_mobile_a_href p_page="../mb/page_edit_d_yh_mould_info?zw_f_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
     	
     </#list>
 	</ul>

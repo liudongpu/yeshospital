@@ -58,6 +58,9 @@ var yesapp = {
 		query_drug : {
 			api_name : 'com_srnpr_yeshospital_api_app_QueryDrug'
 		},
+		query_icd: {
+			api_name : 'com_srnpr_yeshospital_api_app_QueryIcd'
+		},
 		query_tour_drug : {
 			api_name : 'com_srnpr_yeshospital_api_app_QueryTourDrug'
 		},
