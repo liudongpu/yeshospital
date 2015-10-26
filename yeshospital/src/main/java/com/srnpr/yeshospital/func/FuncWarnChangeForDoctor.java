@@ -24,12 +24,8 @@ public class FuncWarnChangeForDoctor extends RootFunc {
 		String sUserCode = UserFactory.INSTANCE.create().getUserCode();
 		if (mWebResult.upFlagTrue()) {
 
-			
-
-			DbUp.upTable("yh_warn_process_log").insert("order_code",
-					mAddMaps.get("warn_code"), "remark",
-					mAddMaps.get("process_plan"), "create_time",
-					FormatHelper.upDateTime(), "create_user", sUserCode);
+			DbUp.upTable("yh_warn_process_log").insert("order_code", mAddMaps.get("warn_code"), "remark",
+					mAddMaps.get("process_plan"), "create_time", FormatHelper.upDateTime(), "create_user", sUserCode);
 
 		}
 
@@ -41,6 +37,14 @@ public class FuncWarnChangeForDoctor extends RootFunc {
 			 * mWebResult.setResultObject(FormatHelper.formatString(
 			 * bConfig("zapweb.to_url_js"), mAddMaps.get("referer")));
 			 */
+		}
+
+		if (mWebResult.upFlagTrue()) {
+			MDataMap mUpdateMap = new MDataMap("warn_code", mAddMaps.get("warn_code"), "plan_time",
+					FormatHelper.upDateTime(), "plan_user", sUserCode);
+
+			DbUp.upTable("yh_count_warn_geracomium").dataUpdate(mUpdateMap, "plan_time,plan_user", "warn_code");
+
 		}
 
 		return mWebResult;
