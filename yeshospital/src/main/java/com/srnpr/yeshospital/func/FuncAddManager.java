@@ -32,10 +32,20 @@ public class FuncAddManager extends RootFunc {
 
 		if (mWebResult.upFlagTrue()) {
 
-			String sUserCode = UserFactory.INSTANCE.createUser(
-					mAddMaps.get("mobile_phone"), mAddMaps.get("a_password"),
-					mAddMaps.get("manager_name"), mAddMaps.get("geracomium_code"),
-					"467721200004", "4677031800040001");
+			String sGenCode = mAddMaps.get("geracomium_code");
+
+			String sUserRole = "4677031800040001";
+
+			if (DbUp.upTable("yh_geracomium_info")
+					.dataGet("geracomium_type", "",
+							new MDataMap("geracomium_code", sGenCode))
+					.toString().equals("46580001000500050002")) {
+				sUserRole = "4677031800040002";
+			}
+
+			UserFactory.INSTANCE.createUser(mAddMaps.get("mobile_phone"),
+					mAddMaps.get("a_password"), mAddMaps.get("manager_name"),
+					sGenCode, "467721200004", sUserRole);
 
 		}
 
