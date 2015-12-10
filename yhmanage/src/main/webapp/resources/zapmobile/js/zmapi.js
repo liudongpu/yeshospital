@@ -106,12 +106,13 @@ zmapi.f = {
 					var sVersion = parseInt(api.systemVersion);
 
 					// 如果是IOS7以上版本
+					/*
 					if (sVersion >= 7) {
 						$('#zmcss_mm_page_header').addClass('zmcss_ios_t_20');
 						$('#zmcss_mm_page_header').after(
 								'<div class="zmcss_ios_nav"></div>');
 					}
-
+					*/
 				}
 			});
 
