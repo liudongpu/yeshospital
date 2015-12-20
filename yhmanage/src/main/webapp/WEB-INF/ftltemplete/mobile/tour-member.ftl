@@ -70,7 +70,8 @@
 
 			<div>
             	<a <@m_mobile_a_href p_page="member-info?u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">个人信息</a>
-            	<a <@m_mobile_a_href p_page="tour-drug?u_order_code=${a_orderCode}&u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">添加药物</a>
+            	<a <@m_mobile_a_href p_page="tour-drug?u_order_code=${a_orderCode}&u_member_code=${a_memberCode}&u_drug_type=46580001000400020001" /> class="ui-btn ui-btn-inline">添加药物</a>
+            	<a <@m_mobile_a_href p_page="tour-drug?u_order_code=${a_orderCode}&u_member_code=${a_memberCode}&u_drug_type=46580001000400020002" /> class="ui-btn ui-btn-inline">添加化验</a>
             	<br/>
             	
             	

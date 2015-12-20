@@ -10,6 +10,8 @@ public class QueryDrugInput extends RootInput {
 
 	@ZapcomApi(value = "药品编号")
 	private String drugCode = "";
+	@ZapcomApi(value = "药品类型")
+	private String drugType = "";
 
 	public String getKeyWord() {
 		return keyWord;
@@ -25,6 +27,14 @@ public class QueryDrugInput extends RootInput {
 
 	public void setDrugCode(String drugCode) {
 		this.drugCode = drugCode;
+	}
+
+	public String getDrugType() {
+		return drugType;
+	}
+
+	public void setDrugType(String drugType) {
+		this.drugType = drugType;
 	}
 
 }

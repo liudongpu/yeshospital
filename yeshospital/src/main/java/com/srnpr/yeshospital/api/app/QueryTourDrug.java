@@ -80,7 +80,7 @@ public class QueryTourDrug extends
 
 		return new DataApiSupport()
 				.upData("yh_tour_order_drug",
-						"uid,record_code,drug_code,drug_name,flag_buy,number_buy,flag_check,drug_unit,drug_usage,drug_dose,drug_single,drug_source",
+						"uid,record_code,drug_code,drug_name,flag_buy,number_buy,flag_check,drug_unit,drug_usage,drug_dose,drug_single,drug_source,drug_type",
 						"-zid", "", mDataMap, -1, -1);
 	}
 

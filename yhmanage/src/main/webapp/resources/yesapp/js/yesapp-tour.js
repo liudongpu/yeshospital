@@ -110,7 +110,8 @@ var yesapp_tour = {
 		if (sText != "" && sText != yesapp_tour.temp.last_search) {
 
 			yesapp.api_call('query_drug', {
-				keyWord : sText
+				keyWord : sText,
+				drugType : $('#yesapp_td_drug_type').val()
 			}, yesapp_tour.tour_drug_search_success);
 
 		}
@@ -163,6 +164,7 @@ var yesapp_tour = {
 		zmjs.form.set('member_code', $('#yesapp_td_member_code').val());
 		zmjs.form.set('tour_code', $('#yesapp_td_order_code').val());
 		zmjs.form.set('account_type', $('#yesapp_td_account_type').val());
+		zmjs.form.set('drug_type', $('#yesapp_td_drug_type').val());
 	},
 
 	init_tour_member : function() {
@@ -278,7 +280,13 @@ var yesapp_tour = {
 	tour_member_edit : function(iIndex) {
 		var o = yesapp_tour.temp.obj_temp[iIndex];
 
-		zmjs.page.open_page('../mb/page_edit_m_yh_tour_order_drug?zw_f_uid='
+		var sUrl="../mb/page_edit_m_yh_tour_order_drug?zw_f_uid=";
+		if(o["drug_type"]=="46580001000400020002")
+			{
+			sUrl="../mb/page_edit_m_yh_tour_order_drug_c?zw_f_uid=";
+			}
+		
+		zmjs.page.open_page(sUrl
 				+ o['uid']);
 
 		zmjs.ui.dialog_close('yesapp_tm_dialog_option');

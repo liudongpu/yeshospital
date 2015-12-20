@@ -5,12 +5,18 @@
 <@m_mobile_body_begin />
 
 
-<#assign b_page=b_method.upControlPage("page_add_m_yh_tour_order_drug","") />
+<#assign a_drugType=RequestParameters['u_drug_type']?default("") >
 
+<#if a_drugType=="46580001000400020001">
+	<#assign b_page=b_method.upControlPage("page_add_m_yh_tour_order_drug","") />
+<#else>
+	<#assign b_page=b_method.upControlPage("page_add_m_yh_tour_order_drug_c","") />
+</#if>
 <#assign a_orderCode=RequestParameters['u_order_code']?default("") >
 <#assign a_memberCode=RequestParameters['u_member_code']?default("") >
 <@m_zapmacro_mobile_form_hidden e_id="yesapp_td_order_code" e_value=a_orderCode />
 <@m_zapmacro_mobile_form_hidden e_id="yesapp_td_member_code" e_value=a_memberCode />
+<@m_zapmacro_mobile_form_hidden e_id="yesapp_td_drug_type" e_value=a_drugType />
 
 <#assign a_member_info=b_method.upDataOne("yh_member_extend_geracomium","","","","member_code",a_memberCode) />
 <@m_zapmacro_mobile_form_hidden e_id="yesapp_td_account_type" e_value=a_member_info["account_type"] />
