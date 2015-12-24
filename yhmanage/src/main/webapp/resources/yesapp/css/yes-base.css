@@ -97,6 +97,18 @@ body, div, a, span {
 	padding-right: 5px;
 }
 
+
+/*提示消息*/
+.yb_message_box
+{
+	
+	    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    padding: 15px;
+   
+}
+
 /**表格相关**********************************************************************************/
 .yb_list_box {
 	background-color: #fff;
