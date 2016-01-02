@@ -50,7 +50,7 @@
 								<div class="w_h_20"></div>
 								<div class="w_al_center c_login_desc">官方联系电话：400-005-5050</div>
 							</div>
-							<div class="c_login_version">当前系统版本：2.0.0.1</div>
+							<div class="c_login_version">当前系统版本：${b_method.upClass("com.srnpr.zapcom.basesupport.VersionSupport").upVersionFullName()}</div>
 
 						</div>
 

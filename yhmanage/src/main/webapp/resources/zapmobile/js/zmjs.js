@@ -68,6 +68,10 @@ zmjs.page = {
 	back_page : function(sName) {
 		zmapi.p.close_window(sName);
 	},
+	refresh_page : function(sName) {
+		location.href=location.href;
+	},
+	
 	back_root : function() {
 		zmapi.p.close_goto("root");
 	}

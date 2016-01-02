@@ -146,6 +146,19 @@ zapjs.zw = {
 		}
 	},
 
+	// 提交操作并且执行一个跨页面的刷新并且刷新当前页面 移动端专用
+	func_dorefresh : function(oElm, sExecDo) {
+		zapjs.zw.func_call(oElm);
+
+		zapjs.f.autorefresh = function() {
+			if (sExecDo) {
+
+				zmapi.m.execjs(sExecDo);
+			}
+			zmjs.page.refresh_page();
+		}
+	},
+
 	// 提交操作并执行一个当前页面的js函数 然后返回上一页 移动端专用
 	func_jsback : function(oElm, sJsInfo) {
 		zapjs.zw.func_call(oElm);
@@ -466,7 +479,9 @@ zapjs.zw = {
 		// zmapi.m.execjs('root.frame-main:yesapp_frame.init_frame_main()');
 		zmapi.m.setprefs(zapjs.c.cookie_user, sCookie);
 
-		zmapi.m.sendevent(zmapi.c.event.login_success, {push_token:sCookie});
+		zmapi.m.sendevent(zmapi.c.event.login_success, {
+			push_token : sCookie
+		});
 
 	},
 

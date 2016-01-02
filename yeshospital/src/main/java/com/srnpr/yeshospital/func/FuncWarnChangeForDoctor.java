@@ -25,7 +25,7 @@ public class FuncWarnChangeForDoctor extends RootFunc {
 		if (mWebResult.upFlagTrue()) {
 
 			DbUp.upTable("yh_warn_process_log").insert("order_code", mAddMaps.get("warn_code"), "remark",
-					mAddMaps.get("process_plan"), "create_time", FormatHelper.upDateTime(), "create_user", sUserCode);
+					mAddMaps.get("process_method"), "create_time", FormatHelper.upDateTime(), "create_user", sUserCode);
 
 		}
 

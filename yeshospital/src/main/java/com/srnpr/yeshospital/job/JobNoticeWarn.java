@@ -94,7 +94,7 @@ public class JobNoticeWarn extends RootJobForLock {
 							"msg_type", "46580001000200060002", "msg_title",
 							YesHospitalHelper.upDefineName("46580001000200060002"),
 							"msg_info", sMsgInfo, "msg_link",
-							"../mb/page_edit_m_yh_count_warn_geracomium?zw_f_uid="
+							"../mobile/daily-warn?zw_f_uid="
 									+ map.get("uid"), "out_code",
 							map.get("warn_code"));
 
@@ -135,7 +135,7 @@ public class JobNoticeWarn extends RootJobForLock {
 			if (mResult.upFlagTrue()) {
 
 				String sProcess = StringUtils.defaultIfBlank(
-						map.get("process_step"), map.get("process_plan"));
+						map.get("process_step"), map.get("process_method"));
 
 				// 插入健康建议表
 				new AdviceSupport().createAdvice(map.get("warn_code"),

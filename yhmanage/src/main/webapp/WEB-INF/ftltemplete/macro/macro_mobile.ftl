@@ -1,12 +1,27 @@
 <#-- 系统版本号 -->
-<#assign a_macro_mobile_system_version="2.0.1.21">
+<#assign a_macro_mobile_system_version="2.0.1.23">
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_mobile_resources_version="?v="+a_macro_mobile_system_version >
+
+
+
+
+
 <#-- 资源文件路径 -->
 <#assign a_macro_mobile_resources_link="../" >
 
 <#-- 图片文件路径 -->
 <#assign a_macro_mobile_img_link="../" >
+
+
+
+<#if (b_method.upConfig("zapcom.model")=="default")>
+	<#assign a_macro_mobile_resources_version="?v="+a_macro_mobile_system_version+.now >
+	<#assign a_macro_mobile_resources_link="../" >
+	
+</#if>
+
+
 
 <#-- 项目特殊样式 -->
 

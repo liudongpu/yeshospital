@@ -2,7 +2,7 @@ var yesapp_tour = {
 
 	temp : {
 		// 最近一次搜索词
-		last_search : '',
+		last_search : 'undefined',
 		// 临时保存交换变量
 		obj_temp : null,
 		template_code : '',
@@ -10,7 +10,9 @@ var yesapp_tour = {
 	},
 
 	init_tour_select : function() {
-		yesapp_tour.refresh_tour_select();
+		//yesapp_tour.refresh_tour_select();
+		
+		yesapp_tour.tour_select_search($('#yesapp_ts_search'));
 	},
 
 	refresh_tour_select : function() {
@@ -45,11 +47,12 @@ var yesapp_tour = {
 
 		var sText = zapjs.f.trim($(oEl).val());
 
-		if (sText != "" && sText != yesapp_tour.temp.last_search) {
-
+		if ( sText != yesapp_tour.temp.last_search) {
+			yesapp_tour.temp.last_search=sText;
 			yesapp.api_call('query_member', {
 				keyWord : sText,
-				geracomiumCode : $('#yesapp_ts_geracomium_code').val()
+				geracomiumCode : $('#yesapp_ts_geracomium_code').val(),
+				tourCode:$('#yesapp_ts_tour_code').val()
 			}, yesapp_tour.tour_select_search_success);
 
 		}
@@ -65,18 +68,17 @@ var yesapp_tour = {
 
 		for ( var i in oData.pageData) {
 
-			var o = oData.pageData[i];
+			
+			if(oData.pageData[i]["flag_check"]=="0")
+			aHtml.push(yesapp_tour.tour_select_search_item(oData.pageData[i],sOrderCode,bFlagOpen));
 
-			var sLinkUrl = bFlagOpen ? ('member-info?u_member_code=' + o["member_code"])
-					: ('tour-member?u_order_code=' + sOrderCode
-							+ '&u_member_code=' + o["member_code"]);
+		}
+		
+		for ( var i in oData.pageData) {
 
-			aHtml.push('<li><a href="javascript:zmjs.page.open_page(\''
-					+ sLinkUrl
-
-					+ '\')"><span class="yb_span_width_5em">'
-					+ o['member_name'] + '</span>(房间：' + o['room_name']
-					+ ')</a></li>');
+			
+			if(oData.pageData[i]["flag_check"]=="1")
+			aHtml.push(yesapp_tour.tour_select_search_item(oData.pageData[i],sOrderCode,bFlagOpen));
 
 		}
 
@@ -84,6 +86,22 @@ var yesapp_tour = {
 		$('#yesapp_ts_table').listview('refresh');
 
 	},
+	tour_select_search_item:function(o,sOrderCode,bFlagOpen)
+	{
+		var sLinkUrl = bFlagOpen ? ('member-info?u_member_code=' + o["member_code"])
+				: ('tour-member?u_order_code=' + sOrderCode
+						+ '&u_member_code=' + o["member_code"]);
+
+		return ('<li><a href="javascript:zmjs.page.open_page(\''
+				+ sLinkUrl
+
+				+ '\')"><span class="yb_span_width_5em">'
+				+ o['member_name'] + '</span>(房间：' + o['room_name']+")"
+				+(o["flag_check"]=="1"?'<span class="yb_color_focus">--已查</span>':'')
+				+ '</a></li>');
+		
+	},
+	
 
 	tour_select_option : function() {
 

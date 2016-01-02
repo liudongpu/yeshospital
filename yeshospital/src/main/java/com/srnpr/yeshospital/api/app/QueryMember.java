@@ -6,16 +6,15 @@ import org.apache.commons.lang.StringUtils;
 
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
+import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.webapi.RootApiForManage;
 import com.srnpr.zapweb.webapi.RootApiForToken;
 import com.srnpr.zapweb.webapi.RootPageDataResult;
 import com.srnpr.zapweb.websupport.DataApiSupport;
 
-public class QueryMember extends
-		RootApiForToken<RootPageDataResult, QueryMemberInput> {
+public class QueryMember extends RootApiForToken<RootPageDataResult, QueryMemberInput> {
 
-	public RootPageDataResult Process(QueryMemberInput inputParam,
-			MDataMap mRequestMap) {
+	public RootPageDataResult Process(QueryMemberInput inputParam, MDataMap mRequestMap) {
 
 		MDataMap mDataMap = new MDataMap();
 
@@ -40,9 +39,31 @@ public class QueryMember extends
 
 		aWhere.add("member_status='46580001000500040001' ");
 
-		return new DataApiSupport().upData("yh_member_extend_geracomium",
-				"member_code,member_name,room_name,spell_info", "spell_info",
-				aWhere, mDataMap, 0, 10);
+		RootPageDataResult result = new DataApiSupport().upData("yh_member_extend_geracomium",
+				"member_code,member_name,room_name,spell_info", "spell_info", aWhere, mDataMap, 0, 0);
+
+		if (StringUtils.isNotBlank(inputParam.getTourCode())) {
+			MDataMap mExist = new MDataMap();
+
+			for (MDataMap map : DbUp.upTable("yh_tour_order_detail").queryByWhere("tour_code",
+					inputParam.getTourCode())) {
+				mExist.put(map.get("member_code"), map.get("member_code"));
+
+			}
+
+			if (mExist != null && mExist.size() > 0) {
+				for (int i = 0, j = result.getPageData().size(); i < j; i++) {
+
+					result.getPageData().get(i).put("flag_check",
+							mExist.containsKey(result.getPageData().get(i).get("member_code")) ? "1" : "0");
+
+				}
+
+			}
+
+		}
+
+		return result;
 
 	}
 

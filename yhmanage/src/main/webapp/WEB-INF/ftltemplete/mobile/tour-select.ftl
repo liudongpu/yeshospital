@@ -54,7 +54,7 @@ ${b_method.upClass("com.srnpr.yeshospital.support.AppPageSupport").upFlagOpen()}
 	</div>
 	<div class="zmcss_h_20"></div>
 	
-	
+	<#--
 	<div data-role="collapsible">
 	<h2>查看已检查老人<span class="zmcss_f_right" id="yesapp_ts_has_count">0</span></h2>
 	<div class="yb_list_box">
@@ -62,6 +62,7 @@ ${b_method.upClass("com.srnpr.yeshospital.support.AppPageSupport").upFlagOpen()}
 	       
 	    </ul>
     </div>
+    -->
 </div>
 	
 	
