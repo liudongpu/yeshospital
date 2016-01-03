@@ -76,7 +76,7 @@ public class HomeController extends RootControl {
 		model.addAttribute("b_method", web_method);
 
 		// 如果是需要登录的页面
-		if (!StringUtils.startsWithAny(sUrl, new String[] { "frame-" })) {
+		if (!StringUtils.startsWithAny(sUrl, new String[] { "frame-" ,"user-"})) {
 			return mobileCheckLogin("mobile/" + sUrl);
 		}
 
