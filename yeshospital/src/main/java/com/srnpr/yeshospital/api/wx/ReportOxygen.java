@@ -12,6 +12,7 @@ import com.srnpr.yeshospital.report.ItemChart;
 import com.srnpr.yeshospital.report.ItemSeries;
 import com.srnpr.yeshospital.report.ItemTitle;
 import com.srnpr.yeshospital.report.ReportResult;
+import com.srnpr.yeshospital.topdo.YhConst;
 import com.srnpr.zapcom.basehelper.DateHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
@@ -19,8 +20,7 @@ import com.srnpr.zapdata.dbdo.DbUp;
 
 public class ReportOxygen extends ReportBase {
 
-	public ReportResult Process(ReportQueryInput inputParam,
-			MDataMap mRequestMap) {
+	public ReportResult Process(ReportQueryInput inputParam, MDataMap mRequestMap) {
 		ReportResult result = initResult();
 
 		result.getTitle().setText("血氧信息");
@@ -31,16 +31,12 @@ public class ReportOxygen extends ReportBase {
 		MDataMap mQueryMap = new MDataMap();
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
 
-		for (MDataMap map : DbUp.upTable("yh_post_oxygen").queryAll(
-				"create_time,oxygen", "create_time",
-				"member_code=:member_code", mQueryMap)) {
+		for (MDataMap map : DbUp.upTable("yh_post_oxygen").query("create_time,oxygen", "create_time",
+				"member_code=:member_code", mQueryMap, 0, YhConst.REPORT_MAX_SIZE)) {
 
-			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(
-					map.get("create_time")).getTime());
+			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(map.get("create_time")).getTime());
 
-			itemSeries.getData()
-					.add(new BigDecimal[] { dTime,
-							new BigDecimal(map.get("oxygen")) });
+			itemSeries.getData().add(new BigDecimal[] { dTime, new BigDecimal(map.get("oxygen")) });
 
 		}
 		result.getSeries().add(itemSeries);

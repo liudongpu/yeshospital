@@ -11,6 +11,9 @@ import com.srnpr.zapcom.topapi.RootApi;
 public abstract class ReportBase  extends RootApi<ReportResult, ReportQueryInput>  {
 
 	
+	
+	
+	
 	public ReportResult initResult()
 	{
 		ReportResult result =new ReportResult();

@@ -87,6 +87,30 @@ var yeswx = {
 			oResult.credits = {
 				enabled : false
 			};
+			
+			oResult.tooltip={};
+			oResult.tooltip.dateTimeLabelFormats = {
+			    millisecond:"%y-%m-%d %H:%M:%S",
+			    second:"%y-%m-%d %H:%M:%S",
+			    minute:"%Y-%m-%d %H:%M",
+			    hour:"%Y-%m-%d %H:%M",
+			    day:"%Y-%m-%d",
+			    week:"%Y-%m-%d",
+			    month:"%B %Y",
+			    year:"%Y"
+			};
+			
+
+			oResult.xAxis.dateTimeLabelFormats = {
+				millisecond : '%H:%M:%S',
+				second : '%H:%M:%S',
+				minute : '%H:%M',
+				hour : '%m-%d',
+				day : '%m-%d',
+				week : '%m-%d',
+				month : '%Y-%m',
+				year : '%Y'
+			};
 
 			$('#report_' + sMemberCode).highcharts(oResult);
 		});

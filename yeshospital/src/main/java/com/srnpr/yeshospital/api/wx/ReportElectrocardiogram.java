@@ -2,22 +2,20 @@ package com.srnpr.yeshospital.api.wx;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.srnpr.yeshospital.topdo.YhConst;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
 import com.srnpr.zapdata.dbdo.DbUp;
 
-public class ReportElectrocardiogram extends
-		RootApi<ReportElectrocardiogramResult, ReportQueryInput> {
+public class ReportElectrocardiogram extends RootApi<ReportElectrocardiogramResult, ReportQueryInput> {
 
-	public ReportElectrocardiogramResult Process(ReportQueryInput inputParam,
-			MDataMap mRequestMap) {
+	public ReportElectrocardiogramResult Process(ReportQueryInput inputParam, MDataMap mRequestMap) {
 		ReportElectrocardiogramResult result = new ReportElectrocardiogramResult();
 
 		MDataMap mQueryMap = new MDataMap();
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
-		for (MDataMap map : DbUp.upTable("yh_post_electrocardiogram").queryAll(
-				"create_time,image_url,test_result", "-create_time",
-				"member_code=:member_code and image_url!=''", mQueryMap)) {
+		for (MDataMap map : DbUp.upTable("yh_post_electrocardiogram").query("create_time,image_url,test_result",
+				"-create_time", "member_code=:member_code and image_url!=''", mQueryMap, 0, YhConst.REPORT_MAX_SIZE)) {
 			ReportElectrocardiogramItem item = new ReportElectrocardiogramItem();
 			item.setDateTime(map.get("create_time"));
 			item.setImageUrl(map.get("image_url"));
@@ -25,11 +23,9 @@ public class ReportElectrocardiogram extends
 			String sDataMessage = map.get("test_result");
 
 			// 去重结果展示
-			if (StringUtils.isNotBlank(sDataMessage)
-					&& StringUtils.split(sDataMessage, ",").length == 5) {
+			if (StringUtils.isNotBlank(sDataMessage) && StringUtils.split(sDataMessage, ",").length == 5) {
 
-				sDataMessage = StringUtils.substringBeforeLast(sDataMessage,
-						",");
+				sDataMessage = StringUtils.substringBeforeLast(sDataMessage, ",");
 
 			}
 

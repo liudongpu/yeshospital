@@ -12,6 +12,7 @@ import com.srnpr.yeshospital.report.ItemChart;
 import com.srnpr.yeshospital.report.ItemSeries;
 import com.srnpr.yeshospital.report.ItemTitle;
 import com.srnpr.yeshospital.report.ReportResult;
+import com.srnpr.yeshospital.topdo.YhConst;
 import com.srnpr.zapcom.basehelper.DateHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
@@ -19,15 +20,14 @@ import com.srnpr.zapdata.dbdo.DbUp;
 
 public class ReportPressure extends ReportBase {
 
-	public ReportResult Process(ReportQueryInput inputParam,
-			MDataMap mRequestMap) {
+	public ReportResult Process(ReportQueryInput inputParam, MDataMap mRequestMap) {
 		ReportResult result = initResult();
 
 		result.getTitle().setText("血压信息");
 
 		ItemSeries itemSeries = new ItemSeries();
 		itemSeries.setName("收缩压");
-		
+
 		ItemSeries itemSeries2 = new ItemSeries();
 		itemSeries2.setName("舒张压");
 		/*
@@ -39,20 +39,17 @@ public class ReportPressure extends ReportBase {
 		MDataMap mQueryMap = new MDataMap();
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
 
-		for (MDataMap map : DbUp.upTable("yh_post_pressure").queryAll(
-				"create_time,upper_pressure,lower_pressure", "create_time",
-				"member_code=:member_code", mQueryMap)) {
+		for (MDataMap map : DbUp.upTable("yh_post_pressure").query("create_time,upper_pressure,lower_pressure",
+				"create_time", "member_code=:member_code", mQueryMap, 0, YhConst.REPORT_MAX_SIZE)) {
 
-			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(
-					map.get("create_time")).getTime());
+			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(map.get("create_time")).getTime());
 
 			itemSeries.getData().add(new BigDecimal[] { dTime, new BigDecimal(map.get("upper_pressure")) });
 			itemSeries2.getData().add(new BigDecimal[] { dTime, new BigDecimal(map.get("lower_pressure")) });
-			
 
 		}
 		result.getSeries().add(itemSeries);
-		
+
 		result.getSeries().add(itemSeries2);
 
 		/*
