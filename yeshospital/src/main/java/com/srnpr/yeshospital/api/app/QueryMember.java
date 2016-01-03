@@ -51,13 +51,10 @@ public class QueryMember extends RootApiForToken<RootPageDataResult, QueryMember
 
 			}
 
-			if (mExist != null && mExist.size() > 0) {
-				for (int i = 0, j = result.getPageData().size(); i < j; i++) {
+			for (int i = 0, j = result.getPageData().size(); i < j; i++) {
 
-					result.getPageData().get(i).put("flag_check",
-							mExist.containsKey(result.getPageData().get(i).get("member_code")) ? "1" : "0");
-
-				}
+				result.getPageData().get(i).put("flag_check",
+						mExist.containsKey(result.getPageData().get(i).get("member_code")) ? "1" : "0");
 
 			}
 

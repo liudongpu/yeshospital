@@ -46,7 +46,7 @@ var yesapp_tour = {
 	tour_select_search : function(oEl) {
 
 		var sText = zapjs.f.trim($(oEl).val());
-
+		
 		if ( sText != yesapp_tour.temp.last_search) {
 			yesapp_tour.temp.last_search=sText;
 			yesapp.api_call('query_member', {
@@ -59,7 +59,7 @@ var yesapp_tour = {
 
 	},
 	tour_select_search_success : function(oData) {
-
+		
 		var aHtml = [];
 
 		var sOrderCode = $('#yesapp_ts_tour_code').val();
@@ -81,7 +81,7 @@ var yesapp_tour = {
 			aHtml.push(yesapp_tour.tour_select_search_item(oData.pageData[i],sOrderCode,bFlagOpen));
 
 		}
-
+		
 		$('#yesapp_ts_table').html(aHtml.join(''));
 		$('#yesapp_ts_table').listview('refresh');
 
