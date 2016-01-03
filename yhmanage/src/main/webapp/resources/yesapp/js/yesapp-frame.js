@@ -144,7 +144,7 @@ var yesapp_frame = {
 		var sText = zapjs.f.trim($(oEl).val());
 
 		if (sText != yesapp.temp.last_search  ) {
-
+			yesapp.temp.last_search=sText;
 			yesapp.api_call('query_member', {
 				keyWord : sText
 			}, yesapp_frame.search_frame_people_success);
@@ -153,7 +153,7 @@ var yesapp_frame = {
 
 	},
 	search_frame_people_success : function(oData) {
-		yesapp.temp.last_search=zapjs.f.trim($('#yesapp_ts_search').val());
+		//yesapp.temp.last_search=zapjs.f.trim($('#yesapp_ts_search').val());
 		var aHtml = [];
 
 		for ( var i in oData.pageData) {

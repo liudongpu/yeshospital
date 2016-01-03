@@ -35,6 +35,19 @@ var yeswx = {
 		$('#wx_bind_member_uid').val(oResult.memberUid);
 
 	},
+
+	wx_bind_delete : function(sSibCode, sMemberCode) {
+		zapapi.api_call('com_srnpr_yeshospital_api_wx_BindDelete', {
+			sibCode : sSibCode,
+			memberCode : sMemberCode
+		}, yeswx.wx_bind_delete_success);
+	},
+	wx_bind_delete_success : function(oResult) {
+
+		location.href = location.href;
+
+	},
+
 	wx_bind_verify : function() {
 		// $('#wx_bind_send_link').button( "disable" );
 
@@ -98,7 +111,8 @@ var yeswx = {
 									aHtml
 											.push('<div class="wxcss_data_elec_date"><span class="wxcss_base_circle"><span class="wxcss_base_circle_small"></span></span>'
 													+ ot["dateTime"] + '</div>');
-									aHtml.push('<div>'+ ot["dataMessage"] + '<br/><br/></div>');
+									aHtml.push('<div>' + ot["dataMessage"]
+											+ '<br/><br/></div>');
 									aHtml.push('<div><a><img src="'
 											+ ot["imageUrl"] + '"/></a></div>');
 									aHtml

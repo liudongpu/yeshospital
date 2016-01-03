@@ -153,6 +153,13 @@
 </#macro>
 
 
+
+<#macro m_mobile_event_input p_js="">
+ oninput="${p_js}" onkeyup="${p_js}" onkeypress="${p_js}"
+</#macro>
+
+
+
 <#-- 返回按钮  -->
 <#macro m_mobile_button_back >
 

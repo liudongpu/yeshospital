@@ -10,8 +10,8 @@ var yesapp_tour = {
 	},
 
 	init_tour_select : function() {
-		//yesapp_tour.refresh_tour_select();
-		
+		// yesapp_tour.refresh_tour_select();
+
 		yesapp_tour.tour_select_search($('#yesapp_ts_search'));
 	},
 
@@ -46,62 +46,69 @@ var yesapp_tour = {
 	tour_select_search : function(oEl) {
 
 		var sText = zapjs.f.trim($(oEl).val());
-		
-		if ( sText != yesapp_tour.temp.last_search) {
-			yesapp_tour.temp.last_search=sText;
+
+		if (sText != yesapp_tour.temp.last_search) {
+			yesapp_tour.temp.last_search = sText;
 			yesapp.api_call('query_member', {
 				keyWord : sText,
 				geracomiumCode : $('#yesapp_ts_geracomium_code').val(),
-				tourCode:$('#yesapp_ts_tour_code').val()
+				tourCode : $('#yesapp_ts_tour_code').val()
 			}, yesapp_tour.tour_select_search_success);
 
 		}
 
 	},
 	tour_select_search_success : function(oData) {
-		
+
 		var aHtml = [];
 
 		var sOrderCode = $('#yesapp_ts_tour_code').val();
 
 		var bFlagOpen = yesapp.check_open();
 
+		var iCount0 = 0, iCount1 = 0;
+
 		for ( var i in oData.pageData) {
 
-			
-			if(oData.pageData[i]["flag_check"]=="0")
-			aHtml.push(yesapp_tour.tour_select_search_item(oData.pageData[i],sOrderCode,bFlagOpen));
+			if (oData.pageData[i]["flag_check"] == "0") {
+				aHtml.push(yesapp_tour.tour_select_search_item(
+						oData.pageData[i], sOrderCode, bFlagOpen));
+				iCount0++;
+			}
 
 		}
-		
+
 		for ( var i in oData.pageData) {
 
-			
-			if(oData.pageData[i]["flag_check"]=="1")
-			aHtml.push(yesapp_tour.tour_select_search_item(oData.pageData[i],sOrderCode,bFlagOpen));
+			if (oData.pageData[i]["flag_check"] == "1") {
+				aHtml.push(yesapp_tour.tour_select_search_item(
+						oData.pageData[i], sOrderCode, bFlagOpen));
+				iCount1++;
+			}
 
 		}
-		
+
+		$('#yesapp_ts_count').html('未检查：' + iCount0 + "人/已检查：" + iCount1 + "人");
 		$('#yesapp_ts_table').html(aHtml.join(''));
 		$('#yesapp_ts_table').listview('refresh');
 
 	},
-	tour_select_search_item:function(o,sOrderCode,bFlagOpen)
-	{
+	tour_select_search_item : function(o, sOrderCode, bFlagOpen) {
 		var sLinkUrl = bFlagOpen ? ('member-info?u_member_code=' + o["member_code"])
-				: ('tour-member?u_order_code=' + sOrderCode
-						+ '&u_member_code=' + o["member_code"]);
+				: ('tour-member?u_order_code=' + sOrderCode + '&u_member_code=' + o["member_code"]);
 
 		return ('<li><a href="javascript:zmjs.page.open_page(\''
 				+ sLinkUrl
 
 				+ '\')"><span class="yb_span_width_5em">'
-				+ o['member_name'] + '</span>(房间：' + o['room_name']+")"
-				+(o["flag_check"]=="1"?'<span class="yb_color_focus">--已查</span>':'')
-				+ '</a></li>');
-		
+				+ o['member_name']
+				+ '</span>(房间：'
+				+ o['room_name']
+				+ ")"
+				+ (o["flag_check"] == "1" ? '<span class="yb_color_focus">--已查</span>'
+						: '') + '</a></li>');
+
 	},
-	
 
 	tour_select_option : function() {
 
@@ -187,7 +194,7 @@ var yesapp_tour = {
 
 	init_tour_member : function() {
 
-		$('.yb_list_dialog').css('max-height',$( window ).height() - 200);
+		$('.yb_list_dialog').css('max-height', $(window).height() - 200);
 		zmjs.form.set('member_code', $('#yesapp_tm_member_code').val());
 		zmjs.form.set('tour_code', $('#yesapp_tm_order_code').val());
 
@@ -298,14 +305,12 @@ var yesapp_tour = {
 	tour_member_edit : function(iIndex) {
 		var o = yesapp_tour.temp.obj_temp[iIndex];
 
-		var sUrl="../mb/page_edit_m_yh_tour_order_drug?zw_f_uid=";
-		if(o["drug_type"]=="46580001000400020002")
-			{
-			sUrl="../mb/page_edit_m_yh_tour_order_drug_c?zw_f_uid=";
-			}
-		
-		zmjs.page.open_page(sUrl
-				+ o['uid']);
+		var sUrl = "../mb/page_edit_m_yh_tour_order_drug?zw_f_uid=";
+		if (o["drug_type"] == "46580001000400020002") {
+			sUrl = "../mb/page_edit_m_yh_tour_order_drug_c?zw_f_uid=";
+		}
+
+		zmjs.page.open_page(sUrl + o['uid']);
 
 		zmjs.ui.dialog_close('yesapp_tm_dialog_option');
 	},

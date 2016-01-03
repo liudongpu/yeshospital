@@ -9,7 +9,7 @@
 	<div class="zmcss_h_10"></div>
 	<div class="zmcss_w_96 ">
 	  <div style="width:86%;" class="zmcss_f_left">
- 	<input id="yesapp_ts_search" type="search" placeholder="请输入老人姓名" onkeyup="yesapp_frame.search_frame_people(this)" onkeypress="yesapp_frame.search_frame_people(this)"/>
+ 	<input id="yesapp_ts_search" type="search" placeholder="请输入老人姓名" <@m_mobile_event_input "yesapp_frame.search_frame_people(this)"/> />
 	</div>
 	<div style="width:10%;" class="zmcss_f_right">
 	
