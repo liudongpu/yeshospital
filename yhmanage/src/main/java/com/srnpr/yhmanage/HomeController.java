@@ -1,5 +1,8 @@
 package com.srnpr.yhmanage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.srnpr.yeshospital.pages.ExportQrcode;
+import com.srnpr.zapcom.basehelper.GsonHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebSessionHelper;
 import com.srnpr.zapweb.webdo.WebConst;
 import com.srnpr.zapweb.webfactory.UserFactory;
 import com.srnpr.zapweb.webmethod.RootControl;
+import com.srnpr.zapweb.webmethod.WebUpload;
+import com.srnpr.zapweb.webmodel.MWebResult;
 
 /**
  * Handles requests for the application home page.
@@ -91,5 +97,34 @@ public class HomeController extends RootControl {
 
 		return null;
 	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/yhupload/{url}", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String yhupload(@PathVariable("url") String sUrl, Model model,
+			HttpServletRequest request) {
+		
+		
+		
+		 MWebResult mResult=new GsonHelper().fromJson( WebUpload.create().uploadFile(request, "realsave"),new MWebResult());
+		 
+		 
+		
+		 
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 
+		 map.put("jsonrpc", "2.0");
+		 map.put("result", mResult);
+		 map.put("id", sUrl);
+		 
+		
+		return GsonHelper.toJson(map);
+		
+	}
+	
+	
 
 }

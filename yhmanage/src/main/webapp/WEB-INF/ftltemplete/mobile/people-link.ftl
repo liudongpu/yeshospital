@@ -27,6 +27,7 @@
             		<div  class="yh_people_link_right">
 						
 						<span>个人信息  ：</span> <a <@m_mobile_a_href p_page="member-info?u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">查看</a>
+						<a <@m_mobile_a_href p_page="people-pic?u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">图片</a>
             		</div>
             		
             	</div>

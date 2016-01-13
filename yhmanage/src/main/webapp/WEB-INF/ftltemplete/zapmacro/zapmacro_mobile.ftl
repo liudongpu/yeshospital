@@ -379,7 +379,7 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 
 
 <#-- 字段：上传 -->
-<#macro m_zapmacro_mobile_field_upload e_field e_page>
+<#macro back_m_zapmacro_mobile_field_upload e_field e_page>
 	<@m_zapmacro_mobile_field_start text=e_field.getFieldNote() for=e_field.getPageFieldName() />
 		<input type="hidden" zapweb_attr_target_url="${e_page.upConfig("zapweb.upload_target")}" zapweb_attr_set_params="${e_field.getSourceParam()}"    id="${e_field.getPageFieldName()}" name="${e_field.getPageFieldName()}" value="${e_field.getPageFieldValue()}">
 		<span class="control-upload_iframe"></span>
@@ -393,6 +393,40 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 	  
 	  
 </#macro>
+
+
+<#-- 字段：上传 -->
+<#macro m_zapmacro_mobile_field_upload e_field e_page>
+	<@m_zapmacro_mobile_field_start text=e_field.getFieldNote() for=e_field.getPageFieldName() />
+		<input type="hidden" zapweb_attr_target_url="${e_page.upConfig("zapweb.upload_target")}" zapweb_attr_set_params="${e_field.getSourceParam()}"    id="${e_field.getPageFieldName()}" name="${e_field.getPageFieldName()}" value="${e_field.getPageFieldValue()}">
+		
+			<div class="zapweb_webfile">
+    		<!--用来存放item-->
+    			<div id="${e_field.getPageFieldName()}_fileList" class="zapweb_webfile_list"></div>
+    			<div id="${e_field.getPageFieldName()}_filePicker">选择图片</div>
+			</div>
+			
+			<script type="text/javascript" src="${a_macro_mobile_resources_link}resources/lib/webupload/webuploader.min.js"></script>
+			<script type="text/javascript" src="${a_macro_mobile_resources_link}resources/zapweb/js/zapweb_webfile.js"></script>
+			
+			<script>
+			
+			$(function(){zapweb_webfile.upload('${e_field.getPageFieldName()}')});
+			
+			
+			
+			</script>
+			
+			
+	<@m_zapmacro_mobile_field_end />
+	
+	
+	  
+	  
+	  
+</#macro>
+
+
 
 
 
