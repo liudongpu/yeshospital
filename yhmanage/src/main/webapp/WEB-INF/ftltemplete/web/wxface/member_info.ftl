@@ -37,6 +37,11 @@
 				   </div>
 				   <div class="wxcss_show_split"></div>
 				   
+				   
+				   <div class="wxcss_show_item">
+				   	<span class="wxcss_show_title" >老人相册：</span><a href="member_pic?u_member_code=${e["member_code"]}">点击查看</a>
+				   </div>
+				   
 				   <div class="wxcss_show_item">
 				   	<span class="wxcss_show_title" >养老院：</span>${a_macro_wx_dbcall.dataGet("yh_geracomium_info","geracomium_name","","geracomium_code",e["geracomium_code"])  }
 				   </div>

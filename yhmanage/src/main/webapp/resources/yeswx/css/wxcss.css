@@ -90,3 +90,39 @@ body {
 .wxcss_data_elec_report img {
 	width: 100%;
 }
+
+
+
+
+
+.wxcss_member_pic_box
+{
+	
+	
+	
+}
+.wxcss_member_pic_item
+{
+	margin:20px;
+	border:solid 1px #ccc;
+	
+	
+}
+
+.wxcss_member_pic_title
+{
+	background-color:#ebebeb;
+	min-height:40px;
+	line-height:40px;
+	text-align:center;
+	
+}
+.wxcss_member_pic_info
+{
+	padding:10px;
+	background-color:#fff;
+}
+.wxcss_member_pic_item img
+{
+	width:100%;
+}

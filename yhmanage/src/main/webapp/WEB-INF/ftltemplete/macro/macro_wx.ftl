@@ -145,3 +145,17 @@
 	<input type="text" name="${p_id}" id="${p_id}" value="${p_value}"/>
 </#macro>
 
+
+
+<#-- 图像元素  -->
+<#macro m_wx_html_img p_link="" p_alt="" p_width=-1 p_img="" >
+
+<#if p_img!="" >
+<#if p_link!=""><a href="${p_link}"></#if>
+
+<#if ((p_width>-1)&&((p_img?ends_with(".jpg"))||(p_img?ends_with(".jpeg"))||(p_img?ends_with(".png"))))><#local p_img=p_img?replace(".jpg","-"+(p_width)+"-1000.jpg")?replace(".jpeg","-"+(p_width)+"-1000.jpeg")?replace(".png","-"+(p_width)+"-1000.png")?replace(".com/",".com/qsize/")?replace(".cn/",".cn/qsize/") /></#if>
+<img src="${p_img}" alt="${p_alt}" /><#if p_link!=""></a></#if>
+
+</#if>
+</#macro>
+
