@@ -27,10 +27,21 @@
             		<div  class="yh_people_link_right">
 						
 						<span>个人信息  ：</span> <a <@m_mobile_a_href p_page="member-info?u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">查看</a>
-						<a <@m_mobile_a_href p_page="people-pic?u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">图片</a>
+						
             		</div>
             		
             	</div>
+            	
+            	<div class="yh_people_link_item">
+            		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/6.jpg"/></div>
+            		<div  class="yh_people_link_right">
+						
+						<span>相册信息  ：</span> <a <@m_mobile_a_href p_page="people-pic?u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">照片管理</a>
+						
+            		</div>
+            		
+            	</div>
+            	
             	<div class="yh_people_link_item">
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/1.png"/></div>
             		<div  class="yh_people_link_right">

@@ -36,20 +36,15 @@ public class HomeController extends RootControl {
 
 		boolean bFlagToken = UserFactory.INSTANCE.checkUserLogin();
 		if (!bFlagToken) {
-			String sCookieUser = WebSessionHelper.create().upCookie(
-					WebConst.CONST_WEB_SESSION_USER);
+			String sCookieUser = WebSessionHelper.create().upCookie(WebConst.CONST_WEB_SESSION_USER);
 
 			if (StringUtils.isNotEmpty(sCookieUser)) {
 
-				Object oUserInfo = DbUp.upTable("za_oauth").dataGet(
-						"user_code",
-						"",
-						new MDataMap("access_token", sCookieUser,
-								"flag_enable", "1"));
+				Object oUserInfo = DbUp.upTable("za_oauth").dataGet("user_code", "",
+						new MDataMap("access_token", sCookieUser, "flag_enable", "1"));
 
 				if (oUserInfo != null) {
-					MDataMap mUserMap = DbUp.upTable("za_userinfo").one(
-							"user_code", oUserInfo.toString());
+					MDataMap mUserMap = DbUp.upTable("za_userinfo").one("user_code", oUserInfo.toString());
 
 					if (mUserMap != null) {
 						UserFactory.INSTANCE.inUserInfo(mUserMap);
@@ -68,21 +63,19 @@ public class HomeController extends RootControl {
 	}
 
 	@RequestMapping(value = "/mb/{url}")
-	public String mb(@PathVariable("url") String sUrl, Model model,
-			HttpServletRequest request) {
+	public String mb(@PathVariable("url") String sUrl, Model model, HttpServletRequest request) {
 		model.addAttribute("b_page", page_Process.process(sUrl, request));
 		model.addAttribute("b_method", web_method);
 		return mobileCheckLogin("page/mb");
 	}
 
 	@RequestMapping(value = "/mobile/{url}")
-	public String mobile(@PathVariable("url") String sUrl, Model model,
-			HttpServletRequest request) {
+	public String mobile(@PathVariable("url") String sUrl, Model model, HttpServletRequest request) {
 
 		model.addAttribute("b_method", web_method);
 
 		// 如果是需要登录的页面
-		if (!StringUtils.startsWithAny(sUrl, new String[] { "frame-" ,"user-","mobile-"})) {
+		if (!StringUtils.startsWithAny(sUrl, new String[] { "frame-", "user-", "mobile-" })) {
 			return mobileCheckLogin("mobile/" + sUrl);
 		}
 
@@ -91,40 +84,28 @@ public class HomeController extends RootControl {
 
 	@RequestMapping(value = "/yhqrcode/{operateId}", produces = { "application/binary;charset=UTF-8" })
 	@ResponseBody
-	public String yhqrcode(@PathVariable("operateId") String sOperateId,
-			HttpServletRequest request, HttpServletResponse response) {
+	public String yhqrcode(@PathVariable("operateId") String sOperateId, HttpServletRequest request,
+			HttpServletResponse response) {
 		new ExportQrcode().export(sOperateId, request, response);
 
 		return null;
 	}
-	
-	
-	
-	
-	
+
 	@RequestMapping(value = "/yhupload/{url}", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public String yhupload(@PathVariable("url") String sUrl, Model model,
-			HttpServletRequest request) {
-		
-		
-		
-		 MWebResult mResult=new GsonHelper().fromJson( WebUpload.create().uploadFile(request, "realsave"),new MWebResult());
-		 
-		 
-		
-		 
-		 Map<String, Object> map=new HashMap<String, Object>();
-		 
-		 map.put("jsonrpc", "2.0");
-		 map.put("result", mResult);
-		 map.put("id", sUrl);
-		 
-		
+	public String yhupload(@PathVariable("url") String sUrl, Model model, HttpServletRequest request) {
+
+		MWebResult mResult = WebUpload.create().doRemoteUpload(request,
+				StringUtils.defaultIfBlank(request.getParameter("zw_s_target"), "yhupload"));
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("jsonrpc", "2.0");
+		map.put("result", mResult);
+		map.put("id", sUrl);
+
 		return GsonHelper.toJson(map);
-		
+
 	}
-	
-	
 
 }

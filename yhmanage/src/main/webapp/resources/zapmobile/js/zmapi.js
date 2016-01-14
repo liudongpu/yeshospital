@@ -107,12 +107,11 @@ zmapi.f = {
 
 					// 如果是IOS7以上版本
 					/*
-					if (sVersion >= 7) {
-						$('#zmcss_mm_page_header').addClass('zmcss_ios_t_20');
-						$('#zmcss_mm_page_header').after(
-								'<div class="zmcss_ios_nav"></div>');
-					}
-					*/
+					 * if (sVersion >= 7) {
+					 * $('#zmcss_mm_page_header').addClass('zmcss_ios_t_20');
+					 * $('#zmcss_mm_page_header').after( '<div
+					 * class="zmcss_ios_nav"></div>'); }
+					 */
 				}
 			});
 
@@ -269,6 +268,44 @@ zmapi.m = {
 			alert(s.content);
 		}
 	},
+
+	confirm : function(f_ok, options) {
+
+		var defaults = {
+			title : '提示消息',
+			msg : '确认要执行该操作?',
+
+			oktext : '确认',
+			canceltext : '取消',
+
+			okfunc : null
+		};
+		var s = $.extend({}, defaults, options || {});
+
+		if (zmapi.c.flag_api) {
+			api.confirm({
+				title : s.title,
+				msg : s.msg,
+				buttons : [ s.oktext, s.canceltext ]
+			}, function(ret, err) {
+				if (ret) {
+
+					if (ret.buttonIndex == 1) {
+						f_ok();
+					}
+
+				} else {
+					// alert(JSON.stringify(err));
+				}
+			});
+		} else {
+			if (confirm(s.msg)) {
+				f_ok();
+			}
+		}
+
+	},
+
 	toast : function(sContent) {
 		if (zmapi.c.flag_api) {
 			api.toast({

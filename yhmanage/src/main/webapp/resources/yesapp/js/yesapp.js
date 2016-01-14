@@ -69,7 +69,10 @@ var yesapp = {
 			api_name : 'com_srnpr_yeshospital_api_app_MemberLast',
 			flag_token : true
 		},
-
+		member_pic : {
+			api_name : 'com_srnpr_yeshospital_api_app_MemberPic',
+			flag_token : true
+		},
 		delete_tour_drug : {
 			api_name : 'com_srnpr_yeshospital_api_app_DeleteTourDrug'
 		},
