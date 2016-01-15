@@ -28,8 +28,7 @@ public class FlowTourOrder extends RootFlowChange {
 
 			String sOrderCode = getFlowChange().getOrderCode();
 
-			List<MDataMap> listDetails = DbUp.upTable("yh_tour_order_detail")
-					.queryByWhere("tour_code", sOrderCode);
+			List<MDataMap> listDetails = DbUp.upTable("yh_tour_order_detail").queryByWhere("tour_code", sOrderCode);
 
 			int iCardCount = 0;
 
@@ -40,15 +39,13 @@ public class FlowTourOrder extends RootFlowChange {
 			for (MDataMap map : listDetails) {
 				mMemberMap.put(map.get("member_code"), "0");
 
-				adviceSupport.createAdvice(map.get("detail_code"),
-						map.get("member_code"), map.get("agree_info"),
+				adviceSupport.createAdvice(map.get("detail_code"), map.get("member_code"), map.get("agree_info"),
 						getFlowChange().getUserCode());
 
 			}
 
 			// 循环所有购药信息
-			List<MDataMap> listDrugs = DbUp.upTable("yh_tour_order_drug")
-					.queryByWhere("tour_code", sOrderCode);
+			List<MDataMap> listDrugs = DbUp.upTable("yh_tour_order_drug").queryByWhere("tour_code", sOrderCode);
 			for (MDataMap map : listDrugs) {
 
 				// 判断是否在明细中存在该用户
@@ -61,11 +58,8 @@ public class FlowTourOrder extends RootFlowChange {
 						if (mMemberMap.get(map.get("member_code")).equals("0")) {
 
 							// 只有医保才需要取医保卡 计数器才开始增加
-							if (StringUtils.isNotBlank(map.get("account_type"))
-									&& StringUtils
-											.contains(
-													"46580001000500010002,46580001000500010003",
-													map.get("account_type"))) {
+							if (StringUtils.isNotBlank(map.get("account_type")) && StringUtils
+									.contains("46580001000500010002,46580001000500010003", map.get("account_type"))) {
 								iCardCount++;
 							}
 
@@ -74,9 +68,8 @@ public class FlowTourOrder extends RootFlowChange {
 						}
 					} else {
 
-						int iLastCount = DbUp.upTable("yh_tour_order_drug")
-								.count("member_code", map.get("member_code"),
-										"drug_name", map.get("drug_name"));
+						int iLastCount = DbUp.upTable("yh_tour_order_drug").count("member_code", map.get("member_code"),
+								"drug_name", map.get("drug_name"));
 
 						// 判断该药物名称是否第一次添加 如果是第一次添加则将flag_check置为0 下次会出现小红点
 
@@ -84,8 +77,7 @@ public class FlowTourOrder extends RootFlowChange {
 
 							map.put("flag_check", "0");
 
-							DbUp.upTable("yh_tour_order_drug").dataUpdate(map,
-									"flag_check", "zid");
+							DbUp.upTable("yh_tour_order_drug").dataUpdate(map, "flag_check", "zid");
 
 						}
 
@@ -93,8 +85,7 @@ public class FlowTourOrder extends RootFlowChange {
 
 				} else {
 					// 如果在明细中不存在该用户，则表明该记录是多余记录，删除之
-					DbUp.upTable("yh_tour_order_drug").delete("zid",
-							map.get("zid"));
+					DbUp.upTable("yh_tour_order_drug").delete("zid", map.get("zid"));
 				}
 
 			}
@@ -103,14 +94,19 @@ public class FlowTourOrder extends RootFlowChange {
 			{
 
 				List<String> aUpdate = new ArrayList<String>();
+
+				// 首先将明细上的是否代购都置为0
+
+				DbUp.upTable("yh_tour_order_detail").dataUpdate(new MDataMap("flag_buy", "0", "tour_code", sOrderCode),
+						"flag_buy", "tour_code");
+
+				// 循环单据 如果明细上有代购才更新为1
 				for (String sKey : mMemberMap.keySet()) {
-					if (mMemberMap.get(sKey).equals("0")) {
+					if (mMemberMap.get(sKey).equals("1")) {
 						MDataMap mUpdatDetailMap = new MDataMap();
 
-						mUpdatDetailMap.inAllValues("flag_buy", "0",
-								"tour_code", sOrderCode, "member_code", sKey);
-						DbUp.upTable("yh_tour_order_detail").dataUpdate(
-								mUpdatDetailMap, "flag_buy",
+						mUpdatDetailMap.inAllValues("flag_buy", "1", "tour_code", sOrderCode, "member_code", sKey);
+						DbUp.upTable("yh_tour_order_detail").dataUpdate(mUpdatDetailMap, "flag_buy",
 								"tour_code,member_code");
 
 					}
@@ -119,10 +115,8 @@ public class FlowTourOrder extends RootFlowChange {
 			}
 
 			MDataMap mUpdateMap = new MDataMap();
-			mUpdateMap.inAllValues("sum_card", String.valueOf(iCardCount),
-					"tour_code", sOrderCode);
-			DbUp.upTable("yh_tour_order_info").dataUpdate(mUpdateMap,
-					"sum_card", "tour_code");
+			mUpdateMap.inAllValues("sum_card", String.valueOf(iCardCount), "tour_code", sOrderCode);
+			DbUp.upTable("yh_tour_order_info").dataUpdate(mUpdateMap, "sum_card", "tour_code");
 
 			// 如果用户药物信息表中为空 则根据这个单据上的信息来更新用户的服药信息
 			if (DbUp.upTable("yh_member_drug").count("tour_code", sOrderCode) == 0) {
@@ -130,24 +124,18 @@ public class FlowTourOrder extends RootFlowChange {
 				// 删除所有的用户服药信息
 				for (MDataMap map : listDetails) {
 
-					DbUp.upTable("yh_member_drug").delete("member_code",
-							map.get("member_code"));
+					DbUp.upTable("yh_member_drug").delete("member_code", map.get("member_code"));
 				}
 
-				MDataMap mTourOrdermDataMap = DbUp
-						.upTable("yh_tour_order_info").one("tour_code",
-								sOrderCode);
+				MDataMap mTourOrdermDataMap = DbUp.upTable("yh_tour_order_info").one("tour_code", sOrderCode);
 
 				// 循环所有购药信息
-				List<MDataMap> listInsert = DbUp
-						.upTable("yh_tour_order_drug")
-						.queryAll(
-								"record_code,member_code,drug_code,tour_code,drug_unit,drug_name,drug_usage,create_time,manufacturer,account_type,flag_check,drug_dose,drug_single,drug_source",
-								"", "", new MDataMap("tour_code", sOrderCode));
+				List<MDataMap> listInsert = DbUp.upTable("yh_tour_order_drug").queryAll(
+						"record_code,member_code,drug_code,tour_code,drug_unit,drug_name,drug_usage,create_time,manufacturer,account_type,flag_check,drug_dose,drug_single,drug_source",
+						"", "", new MDataMap("tour_code", sOrderCode));
 				for (MDataMap map : listInsert) {
 
-					map.put("geracomium_code",
-							mTourOrdermDataMap.get("geracomium_code"));
+					map.put("geracomium_code", mTourOrdermDataMap.get("geracomium_code"));
 
 					DbUp.upTable("yh_member_drug").dataInsert(map);
 				}
@@ -161,14 +149,11 @@ public class FlowTourOrder extends RootFlowChange {
 
 			String sOrderCode = getFlowChange().getOrderCode();
 
-			MDataMap mUpdateMap = DbUp
-					.upTable("yh_tour_order_detail")
-					.oneWhere(
-							"ifnull(sum(money_all),0) as sum_money,ifnull(sum(money_person),0) as sum_pay",
-							"", "", "tour_code", sOrderCode);
+			MDataMap mUpdateMap = DbUp.upTable("yh_tour_order_detail").oneWhere(
+					"ifnull(sum(money_all),0) as sum_money,ifnull(sum(money_person),0) as sum_pay", "", "", "tour_code",
+					sOrderCode);
 			mUpdateMap.put("tour_code", sOrderCode);
-			DbUp.upTable("yh_tour_order_info").dataUpdate(mUpdateMap,
-					"sum_money,sum_pay", "tour_code");
+			DbUp.upTable("yh_tour_order_info").dataUpdate(mUpdateMap, "sum_money,sum_pay", "tour_code");
 
 		}
 
