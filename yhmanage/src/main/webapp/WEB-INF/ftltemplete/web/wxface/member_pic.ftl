@@ -21,7 +21,7 @@
             				
             				<div class="wxcss_member_pic_info">
             					<a href="${el["pic_url"]}" target="_blank">
-            					<@m_wx_html_img p_img=el["pic_url"] p_width=320/>
+            					<@m_wx_html_img p_img=el["pic_url"] />
 								</a>
             				</div>
             				 <div class="wxcss_member_pic_title">${el["create_time"]}</div>
