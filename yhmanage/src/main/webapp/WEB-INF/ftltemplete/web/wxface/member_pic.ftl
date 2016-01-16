@@ -34,7 +34,7 @@
             		</#list>
 
 					<#if (a_memberlist?size==0)>
-						<div class="wxcss_member_pic_title">暂无照片</div>
+						<div class="wxcss_base_message">暂无照片</div>
 					</#if>
 				</div>
 

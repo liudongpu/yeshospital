@@ -11,11 +11,15 @@
 	
 	<#assign a_member_geracomium=a_macro_wx_dbcall.upOneWhere("yh_member_extend_geracomium","geracomium_code","","member_code in(select member_code from yh_sib_info where sib_code='"+a_macro_wx_member_info.getSibCode()+"') ")>
 	
-	<div data-role="header">
-    <h1>机构公告</h1>
-	</div>
+	
 	
 	<#if (a_member_geracomium?size>0) >
+	
+		<#assign a_geracomiuminfo=a_macro_wx_dbcall.upOneWhere("yh_geracomium_info","geracomium_name","","","geracomium_code",a_member_geracomium["geracomium_code"])>
+	
+		<div class="wxcss_base_title">
+    		${a_geracomiuminfo["geracomium_name"]}
+		</div>
 		
 		<#assign a_memberlist=a_macro_wx_dbcall.queryAll("yh_geracomium_notice","","-zid","","geracomium_code",a_member_geracomium["geracomium_code"])>
 		  
@@ -42,7 +46,7 @@
             		</#list>
 
 					<#if (a_memberlist?size==0)>
-						<div class="wxcss_member_notice_title">暂无公告</div>
+						<div class="wxcss_base_message">暂无公告</div>
 					</#if>
 				</div>
 	<#else>

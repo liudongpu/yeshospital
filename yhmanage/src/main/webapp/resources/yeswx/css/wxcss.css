@@ -34,6 +34,37 @@ body {
 .wxcss_base_note {
 	color: #999999;
 }
+.wxcss_base_title
+{
+	background-color: #19ac40;
+  border-color: #19ac40;
+  color: #fff;
+  text-shadow: 0 0px 0 #eeeeee;
+  font-weight: bold;
+	
+	  font-size: 1em;
+  min-height: 1.1em;
+  text-align: center;
+  
+  padding: .7em 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+}
+
+.wxcss_base_message {
+	margin:15px;
+	
+	padding:10px;
+	font-weight:bold;
+	border:solid 1px ;
+	    color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+	
+}
+
 
 .wxcss_base_circle {
 	background-color: #cae5c8;
