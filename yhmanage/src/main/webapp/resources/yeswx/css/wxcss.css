@@ -178,6 +178,11 @@ body {
 	font-weight:bold;
 }
 
+.wxcss_member_notice_info img
+{
+	max-width:100%;
+}
+
 .wxcss_member_notice_time
 {
 	color:#999;
