@@ -33,7 +33,7 @@ public class ReportHeart extends ReportBase {
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
 
 		for (MDataMap map : DbUp.upTable("yh_post_pressure").query(
-				"create_time,heart_rate", "create_time",
+				"create_time,heart_rate", "-create_time",
 				"member_code=:member_code", mQueryMap,0,YhConst.REPORT_MAX_SIZE)) {
 
 			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(

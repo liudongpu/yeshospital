@@ -33,7 +33,7 @@ public class ReportGlucose extends ReportBase {
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
 
 		for (MDataMap map : DbUp.upTable("yh_post_glucose").query(
-				"create_time,glucose", "create_time",
+				"create_time,glucose", "-create_time",
 				"member_code=:member_code", mQueryMap, 0, YhConst.REPORT_MAX_SIZE)) {
 
 			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(

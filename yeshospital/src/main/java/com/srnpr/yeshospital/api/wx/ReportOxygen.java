@@ -31,7 +31,7 @@ public class ReportOxygen extends ReportBase {
 		MDataMap mQueryMap = new MDataMap();
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
 
-		for (MDataMap map : DbUp.upTable("yh_post_oxygen").query("create_time,oxygen", "create_time",
+		for (MDataMap map : DbUp.upTable("yh_post_oxygen").query("create_time,oxygen", "-create_time",
 				"member_code=:member_code", mQueryMap, 0, YhConst.REPORT_MAX_SIZE)) {
 
 			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(map.get("create_time")).getTime());

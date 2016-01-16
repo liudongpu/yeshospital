@@ -40,7 +40,7 @@ public class ReportPressure extends ReportBase {
 		mQueryMap.inAllValues("member_code", inputParam.getMemberCode());
 
 		for (MDataMap map : DbUp.upTable("yh_post_pressure").query("create_time,upper_pressure,lower_pressure",
-				"create_time", "member_code=:member_code", mQueryMap, 0, YhConst.REPORT_MAX_SIZE)) {
+				"-create_time", "member_code=:member_code", mQueryMap, 0, YhConst.REPORT_MAX_SIZE)) {
 
 			BigDecimal dTime = new BigDecimal(DateHelper.parseDate(map.get("create_time")).getTime());
 
