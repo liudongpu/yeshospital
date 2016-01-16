@@ -8,7 +8,7 @@
 	<@m_wx_init_dbcall />
 	<div data-role="header">
     <h1>照片列表</h1>
-</div>
+	</div>
 	
 	<#assign a_memberlist=a_macro_wx_dbcall.queryAll("yh_member_pic","uid,pic_url,create_time","-zid","","member_code",a_memberCode)>
 	

@@ -14,7 +14,23 @@
 <@m_mobile_init_dbcall />
 <#assign a_memberlist=a_macro_mobile_dbcall.queryAll("yh_member_pic","uid,pic_url,create_time","-zid","","member_code",a_memberCode)>
 
+<style>
+.ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb
+{
+	
+	padding-left:7em;
+	min-height:4.4em;
+  
+}
 
+.ui-listview .ui-li-has-thumb>img:first-child, .ui-listview .ui-li-has-thumb>.ui-btn>img:first-child, .ui-listview .ui-li-has-thumb .ui-li-thumb
+{
+	top:0.2em;
+	left:0.2em;
+}
+
+
+</style>
 
 <div class="zmcss_o_a zmcss_w_96">
 	<div class="zmcss_h_20"></div>
@@ -65,7 +81,7 @@
             			
             			<li><a href="#">
 					        
-					    <@m_mobile_html_img p_img=el["pic_url"] p_width=100/>
+					    <@m_mobile_html_img p_img=el["pic_url"] />
 					    <p>上传时间：<br/>${el["create_time"]}</p></a>
 					        <a href="javascript:yesapp_pic.del('${el["uid"]}')" >删除</a>
 					    </li>
