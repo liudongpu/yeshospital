@@ -11,7 +11,7 @@ public class BindCheckInput extends RootInput {
 	@ZapcomApi(value = "老人姓名", require = 1)
 	private String userName = "";
 
-	@ZapcomApi(value = "绑定编号", require = 1)
+	@ZapcomApi(value = "绑定编号", require = 0)
 	private String bindToken = "";
 
 	public String getBindToken() {
