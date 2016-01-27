@@ -22,6 +22,7 @@ public class FuncPostPressure extends FuncPostBase {
 		input.setDataLower(new BigDecimal(mDataMap.get("lower_pressure")));
 		input.setDataUpper(new BigDecimal(mDataMap.get("upper_pressure")));
 		input.setPostServerCode(mDataMap.get("post_code"));
+		input.setPostProcessTime(mDataMap.get("post_time"));
 		return api.toProcess(input);
 	}
 

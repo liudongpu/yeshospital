@@ -348,12 +348,12 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 <#-- 字段：日期 时分秒-->
 <#macro m_zapmacro_mobile_field_datesfm e_field>
 	<@m_zapmacro_mobile_field_start text=e_field.getFieldNote() for=e_field.getPageFieldName() />
-		<input type="text"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',realDateFmt:'yyyy-MM-dd HH-mm-ss',realTimeFmt:'HH:mm:ss HH-mm-ss'})"  id="${e_field.getPageFieldName()}" name="${e_field.getPageFieldName()}" value="${e_field.getPageFieldValue()}">
-	<@m_zapmacro_mobile_field_end />
-	  
-	  
-	<@m_zapmacro_mobile_html_script "zapjs.f.require(['lib/datepicker/WdatePicker'],function(a){});" />
-	  
+		<input type="text"    id="${e_field.getPageFieldName()}" name="${e_field.getPageFieldName()}" value="${e_field.getPageFieldValue()}" />
+			
+		<@m_zapmacro_mobile_field_end />
+	  	<@m_mobile_init_extendlib />
+	  	<@m_zapmacro_mobile_html_script "$(function () {$('#${e_field.getPageFieldName()}').mobiscroll().calendar({lang: 'zh',dateFormat: 'yy-mm-dd',timeFormat:'HH:ii:ss',  display: 'bottom', controls: ['calendar', 'time']});});" />
+	
 </#macro>
 <#-- 字段：输入框 -->
 <#macro m_zapmacro_mobile_field_text e_field>

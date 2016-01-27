@@ -1,5 +1,6 @@
 package com.srnpr.yeshospital.func;
 
+import com.srnpr.yeshospital.support.ProcRefreshSupport;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.webdo.WebConst;
@@ -27,6 +28,8 @@ public class FuncAddTourDetail extends RootFunc {
 
 		if (mWebResult.upFlagTrue()) {
 			mWebResult = new FuncAdd().funcDo(sOperateUid, mDataMap);
+
+			new ProcRefreshSupport().refreshCountAgree(mAddMaps);
 
 		}
 

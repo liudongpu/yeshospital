@@ -26,6 +26,8 @@ public class FuncPostTemperature extends FuncPostBase {
 		
 		input.setPostServerCode(mDataMap.get("post_code"));
 		
+		input.setPostProcessTime(mDataMap.get("post_time"));
+		
 		return api.toProcess(input);
 	}
 

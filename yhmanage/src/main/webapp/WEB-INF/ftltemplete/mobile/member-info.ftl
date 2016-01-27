@@ -34,11 +34,11 @@
     <ul data-role="listview">
     <@m_mobile_init_dbcall />
 
-	<#assign a_list=a_macro_mobile_dbcall.queryAll("yh_tour_order_detail","","-zid","","member_code",a_memberCode) >
+	<#assign a_list=a_macro_mobile_dbcall.queryAll("yh_tour_order_detail","create_time,tour_info,agree_info,check_info,(select doctor_name from yh_doctor_info where user_code=yh_tour_order_detail.create_user) as doctor_name","-zid","","member_code",a_memberCode) >
     <#list a_list as el>
     
     	<li data-role="list-divider">${el["create_time"]}</li>
-    	<li><div style="white-space: normal;">查房记录：${el["tour_info"]}<br/>查房建议：${el["agree_info"]}<br/>检验信息：${el["check_info"]}</div></li>
+    	<li><div style="white-space: normal;"><b>查房记录：</b>${el["tour_info"]}<br/><b>查房建议：</b>${el["agree_info"]}<br/><b>健康建议：</b>${el["check_info"]}<br/><b>操作人：</b>${el["doctor_name"]}</div></li>
     </#list>
     
     
