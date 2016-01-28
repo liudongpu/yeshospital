@@ -18,6 +18,17 @@
 	</ul>
 </div>
 <div class="zmcss_h_10"></div>
+
+
+<div class="yb_list_box" >
+	<ul data-role="listview">
+	    <li onclick="zmjs.page.open_page('../mb/page_add_w_yh_geracomium_notice')"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/s-3.png" alt="" class="ui-li-icon ui-corner-none">发布公告</li>
+	   	<li onclick="zmjs.page.open_page('../mb/page_chart_w_yh_geracomium_notice')"><img src="${a_macro_mobile_img_link}resources/yesapp/icons/s-4.png" alt="" class="ui-li-icon ui-corner-none">公告列表</li>
+	   
+	    
+	</ul>
+</div>
+
 <#--
 <div class="yb_list_box" >
 	<ul data-role="listview">

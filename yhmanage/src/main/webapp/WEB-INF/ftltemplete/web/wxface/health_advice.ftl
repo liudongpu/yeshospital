@@ -31,7 +31,7 @@
 			<#assign a_tourlist=a_macro_wx_dbcall.queryAll("yh_count_agree","","-create_time","","member_code",em["member_code"],"process_status","46580001000200090001")>
 			<#list a_tourlist as e>
 
-				${e["create_time"]}
+				${e["process_time"]}
 				<br/><br/>
 				${e["process_text"]}
 
