@@ -4,7 +4,7 @@
 <@m_mobile_html_begin />
 <@m_mobile_body_begin />
 
-
+ <@m_mobile_init_dbcall />
 <#assign a_memberCode=RequestParameters['u_member_code']?default("") >
 <#assign a_member_info=b_method.upDataOne("yh_member_extend_geracomium","","","","member_code",a_memberCode) />
 
@@ -29,10 +29,22 @@
   </div>
   <div id="one" class="ui-body-d ui-content">
     <@m_zapmacro_mobile_page_book b_page />	
+    <#assign a_druglist=a_macro_mobile_dbcall.queryAll("yh_member_drug","drug_name","-zid","","member_code",a_memberCode) >
+
+<div class="zmcss_h_20"></div>
+    服药信息：
+    <div class="zmcss_h_10"></div>
+    <ul >
+    <#list a_druglist as el>
+		<li >${el["drug_name"]}</li>
+	</#list>
+	</ul>
+	<div class="zmcss_h_20"></div>
+	
   </div>
   <div id="two">
     <ul data-role="listview">
-    <@m_mobile_init_dbcall />
+   
 
 	<#assign a_list=a_macro_mobile_dbcall.queryAll("yh_tour_order_detail","create_time,tour_info,agree_info,check_info,(select doctor_name from yh_doctor_info where user_code=yh_tour_order_detail.create_user) as doctor_name","-zid","","member_code",a_memberCode) >
     <#list a_list as el>
