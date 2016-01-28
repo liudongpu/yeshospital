@@ -8,6 +8,7 @@ import javax.mail.Store;
 import org.apache.commons.lang.StringUtils;
 
 import com.srnpr.yeshospital.support.AdviceSupport;
+import com.srnpr.yeshospital.support.ProcRefreshSupport;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.rootweb.RootFlowChange;
@@ -21,6 +22,14 @@ public class FlowTourOrder extends RootFlowChange {
 	}
 
 	public MWebResult afterChange() {
+
+		// 更新化验执行单
+		if (getFlowChange().getStatus().equals("46580001000500020002")
+				|| getFlowChange().getStatus().equals("46580001000500020003")) {
+
+			new ProcRefreshSupport().refreshCountDetail(new MDataMap("tour_code", getFlowChange().getOrderCode()));
+
+		}
 
 		// 购药前核对
 		if (getFlowChange().getStatus().equals("46580001000500020002")

@@ -83,7 +83,7 @@
 						
 								<li class="c_header">+&nbsp;${el["menu_name"]}</li> 
 						<#elseif el['menu_code']?length==24>
-								<li><a  href="../${el['menu_link']}" onclick="zapadmin.menu_click(this)" target="main_iframe">${el["menu_name"]}</a></li>
+								<li><a  href="<#if (el['menu_link'][0..3]!="http")>../</#if>${el['menu_link']}" onclick="zapadmin.menu_click(this)" target="main_iframe">${el["menu_name"]}</a></li>
 						</#if> 
 								
 					</#list>

@@ -11,4 +11,10 @@ public class ProcRefreshSupport {
 
 	}
 
+	public void refreshCountDetail(MDataMap map) {
+
+		DbUp.upTable("yh_define").dataExec("call proc_yh_refresh_count_detail(:tour_code);", map);
+
+	}
+
 }
