@@ -14,4 +14,9 @@ public class YhConst {
 	 */
 	public final static int REPORT_MAX_SIZE = 20;
 
+	/**
+	 * 社区养老-养老院编号
+	 */
+	public final static String VISIT_GERACOMIUM_CODE = "GC001";
+
 }
