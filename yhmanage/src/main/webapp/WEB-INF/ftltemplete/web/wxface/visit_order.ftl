@@ -112,8 +112,11 @@
 	
 	<#assign a_memberlist=a_macro_wx_dbcall.queryAll("yh_member_extend_geracomium","","","member_code in(select member_code from yh_sib_info where sib_code='"+a_macro_wx_member_info.getSibCode()+"') ")>
 	
-	<#assign a_sibinfo=a_macro_wx_dbcall.upOne("yh_sib_info","sib_code",a_macro_wx_member_info.getSibCode())>
+	<#assign a_sibinfo={} >
 	
+	<#if (a_macro_wx_member_info.getSibCode()!="") >
+		<#assign a_sibinfo=a_macro_wx_dbcall.upOne("yh_sib_info","sib_code",a_macro_wx_member_info.getSibCode())>
+	</#if>
 	
 	<#if (a_memberlist?size>0) >
 		<div data-role="tabs" id="tabs">
