@@ -16,7 +16,7 @@
 <#assign a_macro_wx_resources_thems_js=["zapjs/zapapi.js","zapjs/zapfunc.js","yeswx/js/yeswx.js"] >
 
 <#-- ,"mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css" -->
-<#assign a_macro_wx_resources_thems_css=["mlib/jquery.mobile.wx/themes/jm-wx.min.css","mlib/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css","yeswx/css/wxcss.css"] >
+<#assign a_macro_wx_resources_thems_css=["mlib/jquery.mobile.wx/themes/jm-wx.min.css","mlib/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css","mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css","yeswx/css/wxcss.css"] >
 
 
 
@@ -144,6 +144,28 @@
 <#macro m_wx_html_text p_id="" p_value="">
 	<input type="text" name="${p_id}" id="${p_id}" value="${p_value}"/>
 </#macro>
+
+<#macro m_wx_html_tarea p_id="" p_value="">
+	<textarea name="${p_id}" id="${p_id}">${p_value}</textarea>
+</#macro>
+
+
+<#macro m_wx_html_select p_id="" p_value="" p_source={} p_label="">
+	
+	<select name="${p_id}" id="${p_id}">
+		<#if p_label!="">
+	    	<option value="">${p_label}</option>
+	  	</#if>
+
+		<#list p_source as e_key>
+			<option value="${e_key["v"]}" <#if p_value==e_key["v"]> selected="selected" </#if> >${e_key["t"]}</option>
+		</#list>
+
+	</select>
+	
+</#macro>
+
+
 
 
 

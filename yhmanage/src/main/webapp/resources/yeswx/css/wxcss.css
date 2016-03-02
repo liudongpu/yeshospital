@@ -121,6 +121,34 @@ body {
 .wxcss_data_elec_report img {
 	width: 100%;
 }
+.wxcss_form_item 
+{
+	
+	width:100%;
+	
+}
+
+
+.wxcss_form_label {
+	color: #999999;
+	width:90px;
+	float:left;
+	line-height:40px;
+}
+
+.wxcss_form_info {
+	
+	
+	margin-left:90px;
+}
+
+
+
+
+.wxcss_form_split{
+	clear:both;
+	
+}
 
 
 

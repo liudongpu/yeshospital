@@ -17,13 +17,21 @@ public class VisitSupport {
 
 		MDataMap mMemberMap = new MDataMap();
 
+		String sMemberUpdateField = "";
+
 		if (mResult.upFlagTrue()) {
 
-			mMemberMap = inValueIfnotBlank(mMemberMap, "card_code", input.getCardCode(), "member_name",
-					input.getMemberName(), "member_age", input.getMemberAge(), "room_name", input.getRoomName(),
-					"member_sex", input.getMemberSex(), "member_phone", input.getMemberPhone(), "hospital_code",
-					input.getHospitalCode(), "create_user", input.getCreateUser(), "geracomium_code",
+			mMemberMap = inValueIfnotBlank(mMemberMap, "member_age", input.getMemberAge(), "room_name",
+					input.getRoomName(), "member_sex", input.getMemberSex(), "member_phone", input.getMemberPhone(),
+					"hospital_code", input.getHospitalCode());
+
+			sMemberUpdateField = StringUtils.join(mMemberMap.upKeys(), ",");
+
+			mMemberMap = inValueIfnotBlank(mMemberMap, "member_name", input.getMemberName(), "card_code",
+					input.getCardCode(), "create_user", input.getCreateUser(), "geracomium_code",
 					YhConst.VISIT_GERACOMIUM_CODE);
+
+			// member_age,room_name,member_sex,member_phone,hospital_code
 
 		}
 
@@ -48,8 +56,8 @@ public class VisitSupport {
 						mMemberMap.put("member_code", mExistMember.get("member_code"));
 						input.setMemberCode(mExistMember.get("member_code"));
 
-						DbUp.upTable("yh_member_extend_geracomium").dataUpdate(mMemberMap,
-								"member_age,room_name,member_sex,member_phone,hospital_code", "member_code");
+						DbUp.upTable("yh_member_extend_geracomium").dataUpdate(mMemberMap, sMemberUpdateField,
+								"member_code");
 
 					} else {
 						mResult.inErrorMessage(965805301);
@@ -92,24 +100,45 @@ public class VisitSupport {
 				input.setSibPhone(input.getMemberPhone());
 			}
 
-			if (StringUtils.isNotBlank(input.getSibPhone())) {
-				MDataMap mExistSib = DbUp.upTable("yh_sib_info").one("member_code", input.getMemberCode(),
-						"mobile_phone", input.getSibPhone());
+			MDataMap mSibMap = inValueIfnotBlank(new MDataMap(), "sib_name", input.getSibName(), "mobile_phone",
+					input.getSibPhone(), "relation_deep", input.getRelationDeep());
 
-				if (mExistSib != null && mExistSib.size() > 0) {
+			if (StringUtils.isNotBlank(input.getSibCode())) {
 
-					input.setSibCode(mExistSib.get("sib_code"));
+				String sUpdateFields = StringUtils.join(mSibMap.upKeys(), ",");
 
-				} else {
-					MDataMap mSibMap = inValueIfnotBlank(new MDataMap(), "sib_code", WebHelper.upCode("VSC"),
-							"member_code", input.getMemberCode(), "sib_name", input.getSibName(), "mobile_phone",
-							input.getSibPhone(), "relation_deep", input.getRelationDeep());
+				mSibMap.inAllValues("sib_code", input.getSibCode());
+				DbUp.upTable("yh_sib_info").dataUpdate(mSibMap, sUpdateFields, "sib_code");
 
-					mSibMap.inAllValues("create_time", FormatHelper.upDateTime(), "create_user", input.getCreateUser());
+			} else {
 
-					DbUp.upTable("yh_sib_info").dataInsert(mSibMap);
+				if (StringUtils.isNotBlank(input.getSibPhone())) {
+					MDataMap mExistSib = DbUp.upTable("yh_sib_info").one("member_code", input.getMemberCode(),
+							"mobile_phone", input.getSibPhone());
 
-					input.setSibCode(mSibMap.get("sib_code"));
+					if (mExistSib != null && mExistSib.size() > 0) {
+
+						input.setSibCode(mExistSib.get("sib_code"));
+
+					} else {
+
+						mSibMap.inAllValues("sib_code", WebHelper.upCode("VSC"), "create_time",
+								FormatHelper.upDateTime(), "create_user", input.getCreateUser(), "member_code",
+								input.getMemberCode());
+
+						DbUp.upTable("yh_sib_info").dataInsert(mSibMap);
+
+						input.setSibCode(mSibMap.get("sib_code"));
+					}
+
+				}
+
+				// 建立绑定关系
+				if (StringUtils.isNotBlank(input.getBindToken())) {
+					DbUp.upTable("yh_wx_bind").dataUpdate(
+							new MDataMap("bind_token", input.getBindToken(), "sib_code", input.getSibCode()),
+							"sib_code", "bind_token");
+
 				}
 
 			}

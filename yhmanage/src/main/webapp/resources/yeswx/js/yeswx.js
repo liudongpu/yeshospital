@@ -72,6 +72,35 @@ var yeswx = {
 		location.href = "member_info?code=" + oResult.linkCode;
 	},
 
+	visit_order_submit : function(iIndex) {
+		zapapi.api_call('com_srnpr_yeshospital_api_visit_VisitOrder', {
+			memberName : $('#member_name_' + iIndex).val(),
+			memberAge : $('#member_age_' + iIndex).val(),
+			roomName : $('#room_name_' + iIndex).val(),
+			memberPhone : $('#member_phone_' + iIndex).val(),
+			cardCode : $('#card_code_' + iIndex).val(),
+			visitTime : $('#visit_date_' + iIndex).val() + ' '
+					+ $('#visit_time_' + iIndex).find("option:selected").text() + ":00",
+			visitNote : $('#visit_note_' + iIndex).val(),
+			memberSex : $('#member_sex_' + iIndex).val(),
+			sibName : $('#sib_name_' + iIndex).val(),
+			relationDeep : $('#relation_deep_' + iIndex).val(),
+			sibPhone : $('#sib_phone_' + iIndex).val(),
+			//memberName : $('#member_name_' + iIndex).val(),
+			hospitalCode : $('#hospital_code_' + iIndex).val(),
+			sibCode : $('#sib_code_' + iIndex).val(),
+			bindToken : $('#bind_token_' + iIndex).val(),
+			sourceSystem:'wx'
+		}, yeswx.visit_order_submit_success);
+	},
+	
+	visit_order_submit_success : function(oResult) {
+		//location.href = "member_info?code=" + oResult.linkCode;
+		//zapapi.f.message("您的预约已成功，如果有问题请与客服人员联系。");
+		$('#visit_order_popup p').html('<p>您的预约已成功，如果有问题请与客服人员联系。</p>');
+		$('#visit_order_popup').popup( "open", {positionTo: "window"} );
+	},
+
 	report_show : function(sTarget, sMemberCode) {
 		if (yeswx.temp.report_width == 0) {
 			yeswx.temp.report_width = $('#report_' + sMemberCode).width();
@@ -87,19 +116,18 @@ var yeswx = {
 			oResult.credits = {
 				enabled : false
 			};
-			
-			oResult.tooltip={};
+
+			oResult.tooltip = {};
 			oResult.tooltip.dateTimeLabelFormats = {
-			    millisecond:"%y-%m-%d %H:%M:%S",
-			    second:"%y-%m-%d %H:%M:%S",
-			    minute:"%Y-%m-%d %H:%M",
-			    hour:"%Y-%m-%d %H:%M",
-			    day:"%Y-%m-%d",
-			    week:"%Y-%m-%d",
-			    month:"%B %Y",
-			    year:"%Y"
+				millisecond : "%y-%m-%d %H:%M:%S",
+				second : "%y-%m-%d %H:%M:%S",
+				minute : "%Y-%m-%d %H:%M",
+				hour : "%Y-%m-%d %H:%M",
+				day : "%Y-%m-%d",
+				week : "%Y-%m-%d",
+				month : "%B %Y",
+				year : "%Y"
 			};
-			
 
 			oResult.xAxis.dateTimeLabelFormats = {
 				millisecond : '%H:%M:%S',

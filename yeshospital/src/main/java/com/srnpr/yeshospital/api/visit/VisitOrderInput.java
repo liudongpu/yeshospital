@@ -6,17 +6,17 @@ import com.srnpr.zapcom.topapi.RootInput;
 
 public class VisitOrderInput extends RootInput {
 
-	@ZapcomApi(value = "老人姓名")
+	@ZapcomApi(value = "老人姓名", require = 1)
 	private String memberName = "";
 	@ZapcomApi(value = "老人编号", remark = "此参数优先级高")
 	private String memberCode = "";
-	@ZapcomApi(value = "老人年龄")
+	@ZapcomApi(value = "老人年龄", require = 1)
 	private String memberAge = "";
-	@ZapcomApi(value = "老人住址")
+	@ZapcomApi(value = "老人住址", require = 1)
 	private String roomName = "";
-	@ZapcomApi(value = "老人电话")
+	@ZapcomApi(value = "老人电话", require = 1)
 	private String memberPhone = "";
-	@ZapcomApi(value = "身份证号")
+	@ZapcomApi(value = "身份证号", require = 1)
 	private String cardCode = "";
 
 	@ZapcomApi(value = "预约时间", require = 1)
@@ -40,6 +40,8 @@ public class VisitOrderInput extends RootInput {
 	private String createUser = "";
 	@ZapcomApi(value = "来源系统", verify = "in=wx,manage", remark = "微信,后台系统")
 	private String sourceSystem = "";
+	@ZapcomApi(value = "绑定编号")
+	private String bindToken = "";
 
 	public String getMemberName() {
 		return memberName;
@@ -167,5 +169,13 @@ public class VisitOrderInput extends RootInput {
 
 	public void setVisitTime(String visitTime) {
 		this.visitTime = visitTime;
+	}
+
+	public String getBindToken() {
+		return bindToken;
+	}
+
+	public void setBindToken(String bindToken) {
+		this.bindToken = bindToken;
 	}
 }
