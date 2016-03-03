@@ -44,11 +44,10 @@ var yesapp_frame = {
 
 			var o = oData.pageData[i];
 
-			aHtml
-					.push('<li  onclick="zmjs.page.open_page(\'tour-select?u_tour_order='
-							+ o["tour_code"] + '\')" ><a href="#">');
+			aHtml.push('<li  onclick="zmjs.page.open_page(\'' + o["a_link"]
+					+ '\')" ><a href="#">');
 
-			if (o["order_status"] == "46580001000500020001") {
+			if (o["a_status"] == "0") {
 
 				aHtml
 						.push('<div class="zmcss_f_left yb_show_tag zmcss_c_red">进行中</div>');
@@ -57,9 +56,8 @@ var yesapp_frame = {
 						.push('<div class="zmcss_f_left yb_show_tag zmcss_c_green">已完成</div>');
 			}
 
-			aHtml.push('<h2>' + o["a_geracomium_name"] + '</h2>' + '<p>'
-					+ o["a_tour_date"] + '<br/>已检查：' + o["a_check_member"]
-					+ '人 共计：' + o["a_all_member"] + '人</p>');
+			aHtml.push('<p>' + o["a_name"]+'<br/>'+ o["a_date"]
+					+ '<br/>' + o["a_text"] + '</p>');
 			aHtml.push('</a></li>');
 
 		}
@@ -139,12 +137,12 @@ var yesapp_frame = {
 		yesapp_frame.search_frame_people('#yesapp_ts_search');
 
 	},
-	 search_frame_people : function(oEl) {
+	search_frame_people : function(oEl) {
 
 		var sText = zapjs.f.trim($(oEl).val());
 
-		if (sText != yesapp.temp.last_search  ) {
-			yesapp.temp.last_search=sText;
+		if (sText != yesapp.temp.last_search) {
+			yesapp.temp.last_search = sText;
 			yesapp.api_call('query_member', {
 				keyWord : sText
 			}, yesapp_frame.search_frame_people_success);
@@ -153,15 +151,14 @@ var yesapp_frame = {
 
 	},
 	search_frame_people_success : function(oData) {
-		//yesapp.temp.last_search=zapjs.f.trim($('#yesapp_ts_search').val());
+		// yesapp.temp.last_search=zapjs.f.trim($('#yesapp_ts_search').val());
 		var aHtml = [];
 
 		for ( var i in oData.pageData) {
 
 			var o = oData.pageData[i];
 
-			var sLinkUrl = ('people-link?u_member_code=' + o["member_code"])
-					;
+			var sLinkUrl = ('people-link?u_member_code=' + o["member_code"]);
 
 			aHtml.push('<li><a href="javascript:zmjs.page.open_page(\''
 					+ sLinkUrl

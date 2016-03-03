@@ -21,6 +21,27 @@
 }
 
 
+.ui-field-contain>label, .ui-field-contain .ui-controlgroup-label, .ui-field-contain>.ui-rangeslider>label {
+  float: left;
+  width: 25%;
+  display:inline-block;
+  
+ 
+}
+
+.ui-field-contain
+{
+	padding:0.6em 0 0.2em 0;
+}
+
+.ui-field-contain .control_book
+{
+	
+	min-width:100px;
+	min-height:30px;
+}
+
+
 /** hack bootstrap*******************************************************************/
 .form-horizontal .control-group {
 	width: 96%;

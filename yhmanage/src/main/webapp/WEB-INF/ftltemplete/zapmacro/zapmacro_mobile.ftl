@@ -305,6 +305,7 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 		      		${e_field.getPageFieldValue()?default("")}
 		      		</#if>
 	      		</div>
+	      		<div class="zmcss_w_clear"></div>
 	<@m_zapmacro_mobile_field_end />
 </#macro>
 
