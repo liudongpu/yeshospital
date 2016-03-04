@@ -40,8 +40,7 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 
 	private HttpServletResponse httpServletResponse = null;
 
-	public void exportExcel(String sOperateId, HttpServletRequest request,
-			HttpServletResponse response) {
+	public void exportExcel(String sOperateId, HttpServletRequest request, HttpServletResponse response) {
 
 		MWebPage mPage = WebUp.upPage(sOperateId);
 
@@ -51,14 +50,12 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 
 		MDataMap mOptionMap = new MDataMap("optionExport", "1");
 
-		exportName = mPage.getPageName() + "-"
-				+ FormatHelper.upDateTime(new Date(), "yyyy-MM-dd-HH-mm-ss");
+		exportName = mPage.getPageName() + "-" + FormatHelper.upDateTime(new Date(), "yyyy-MM-dd-HH-mm-ss");
 
 		String sAgent = request.getHeader("USER-AGENT");
 
 		if (StringUtils.isNotEmpty(sAgent)) {
-			boolean bFlagIE = request.getHeader("USER-AGENT").toLowerCase()
-					.indexOf("msie") > 0 ? true : false;
+			boolean bFlagIE = request.getHeader("USER-AGENT").toLowerCase().indexOf("msie") > 0 ? true : false;
 
 			if (bFlagIE) {
 				try {
@@ -70,8 +67,7 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 			} else {
 
 				try {
-					exportName = new String(exportName.getBytes("UTF-8"),
-							"ISO8859-1");
+					exportName = new String(exportName.getBytes("UTF-8"), "ISO8859-1");
 				} catch (UnsupportedEncodingException e) {
 
 					e.printStackTrace();
@@ -90,13 +86,10 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 		exportExcelFile(pageData, httpServletResponse);
 	}
 
-	public void exportExcelFile(MPageData mPageData,
-			HttpServletResponse hResponse) {
+	public void exportExcelFile(MPageData mPageData, HttpServletResponse hResponse) {
 
 		if (StringUtils.isEmpty(exportName)) {
-			exportName = "export-"
-					+ FormatHelper
-							.upDateTime(new Date(), "yyyy-MM-dd-HH-mm-ss");
+			exportName = "export-" + FormatHelper.upDateTime(new Date(), "yyyy-MM-dd-HH-mm-ss");
 		}
 		/*
 		 * hResponse.setContentType("application/binary;charset=ISO8859_1"); try
@@ -106,8 +99,7 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 		 */
 		hResponse.setContentType("application/binary;charset=UTF-8");
 
-		hResponse.setHeader("Content-disposition", "attachment; filename="
-				+ exportName + ".xls");// 组装附件名称和格式
+		hResponse.setHeader("Content-disposition", "attachment; filename=" + exportName + ".xls");// 组装附件名称和格式
 
 		ServletOutputStream outputStream = null;
 		try {
@@ -131,6 +123,8 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);// 加粗
 
 		hHeaderStyle.setFont(font);
+
+		int iPageHeadSize = mPageData.getPageHead().size();
 
 		mPageData.getPageHead().add("总金额");
 		mPageData.getPageHead().add("个人承担金额");
@@ -157,23 +151,19 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 
 				hRow.createCell(1).setCellValue(sLastMember);
 
-				MDataMap mDrugInfo = DbUp.upTable("yh_tour_order_drug").one(
-						"record_code", lRow.get(0));
+				MDataMap mDrugInfo = DbUp.upTable("yh_tour_order_drug").one("record_code", lRow.get(0));
 
-				MDataMap mDetailMap = DbUp.upTable("yh_tour_order_detail").one(
-						"tour_code", mDrugInfo.get("tour_code"), "member_code",
-						mDrugInfo.get("member_code"));
+				MDataMap mDetailMap = DbUp.upTable("yh_tour_order_detail").one("tour_code", mDrugInfo.get("tour_code"),
+						"member_code", mDrugInfo.get("member_code"));
 
 				if (StringUtils.isBlank(sTourCode)) {
 					sTourCode = mDrugInfo.get("tour_code");
 				}
 
 				if (mDetailMap != null && mDetailMap.size() > 0) {
-					hRow.createCell(7)
-							.setCellValue(mDetailMap.get("money_all"));
+					hRow.createCell(iPageHeadSize).setCellValue(mDetailMap.get("money_all"));
 
-					hRow.createCell(8).setCellValue(
-							mDetailMap.get("money_person"));
+					hRow.createCell(iPageHeadSize + 1).setCellValue(mDetailMap.get("money_person"));
 				}
 
 				iNowRow++;
@@ -196,14 +186,12 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 
 			if (StringUtils.isNotBlank(sTourCode)) {
 
-				MDataMap mTourMap = DbUp.upTable("yh_tour_order_info").one(
-						"tour_code", sTourCode);
+				MDataMap mTourMap = DbUp.upTable("yh_tour_order_info").one("tour_code", sTourCode);
 
 				HSSFRow hRow = sheet.createRow(iNowRow);
 
 				hRow.createCell(0).setCellValue("单据总计");
-				hRow.createCell(1).setCellValue(
-						"社保卡总数:" + mTourMap.get("sum_card"));
+				hRow.createCell(1).setCellValue("社保卡总数:" + mTourMap.get("sum_card"));
 			}
 
 		}
@@ -237,8 +225,7 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 		this.pageData = pageData;
 	}
 
-	public void export(String sOperateId, HttpServletRequest request,
-			HttpServletResponse response) {
+	public void export(String sOperateId, HttpServletRequest request, HttpServletResponse response) {
 		exportExcel(sOperateId, request, response);
 
 		doExport();
