@@ -16,7 +16,7 @@
 
 
 
-<div class="zmcss_o_a zmcss_w_96">
+<div class="zmcss_o_a zmcss_w_96 yb_page_book">
 	${b_method.upClass("com.srnpr.yeshospital.support.AppPageSupport").upFlagOpen()}
 	
 	

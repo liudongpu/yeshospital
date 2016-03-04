@@ -21,7 +21,7 @@
 }
 
 
-.ui-field-contain>label, .ui-field-contain .ui-controlgroup-label, .ui-field-contain>.ui-rangeslider>label {
+.yb_page_book .ui-field-contain>label,.yb_page_book .ui-field-contain .ui-controlgroup-label,.yb_page_book .ui-field-contain>.ui-rangeslider>label {
   float: left;
   width: 25%;
   display:inline-block;
@@ -29,12 +29,12 @@
  
 }
 
-.ui-field-contain
+.yb_page_book .ui-field-contain
 {
 	padding:0.6em 0 0.2em 0;
 }
 
-.ui-field-contain .control_book
+.yb_page_book .ui-field-contain .control_book
 {
 	
 	min-width:100px;
