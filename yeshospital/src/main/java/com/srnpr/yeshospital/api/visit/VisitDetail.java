@@ -20,7 +20,7 @@ public class VisitDetail extends RootApiForToken<RootPageDataResult, VisitDetail
 
 		if (inputParam.getOptCode().equals("1")) {
 
-			if (DbUp.upTable("visit_detail_code").count("visit_order_code", inputParam.getVisitOrderCode(),
+			if (DbUp.upTable("yh_visit_order_detail").count("visit_order_code", inputParam.getVisitOrderCode(),
 					"money_code", inputParam.getMoneyCode(), "flag_enable", "1") == 0) {
 				mDataMap.inAllValues("visit_detail_code", WebHelper.upCode("VD"), "create_time", DateHelper.upNow(),
 						"create_user", getUserCode(), "money_code", inputParam.getMoneyCode(), "money_number",
