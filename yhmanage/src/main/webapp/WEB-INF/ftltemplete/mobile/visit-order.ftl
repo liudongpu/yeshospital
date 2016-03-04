@@ -42,8 +42,10 @@
 	<div data-role="popup" id="popup_nested" data-dismissible="false"  data-overlay-theme="a" data-theme="a" style="margin:0;min-width:300px; ">
 	    <div data-role="collapsibleset"  data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0;">
 	        
-	        <div data-role="header" data-theme="a">
-		    <h1>选择</h1>
+	        <div data-role="header" data-theme="a" >
+		    <h1 >选择</h1>
+		    <a href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline ">Delete</a>
+		    
 		    </div>
 		    <div role="main" class="ui-content">
 		    
@@ -54,9 +56,9 @@
 			            <ul data-role="listview">
 			            	<#list a_visit_money as eb>
 								<#if eb["parent_code"]==ea["define_code"]>
-									<#--<li><a href="javascript:yesapp_visit.change_number('${eb["define_code"]}','${eb["define_name"]}','${eb["visit_money"]}','${eb["visit_unit"]}')" >${eb["define_name"]} &nbsp;&nbsp;${eb["visit_money"]}/${eb["visit_unit"]}</a></li>
+									<#--<li><a href="javascript:yesapp_visit.visit_add('${eb["define_code"]}','${eb["define_name"]}','${eb["visit_money"]}','${eb["visit_unit"]}')" >${eb["define_name"]} &nbsp;&nbsp;${eb["visit_money"]}/${eb["visit_unit"]}</a></li>
 										-->
-									<li><a  href="javascript:yesapp_visit.change_number('${eb["define_code"]}')" >${eb["define_name"]} &nbsp;&nbsp;${eb["visit_money"]}/${eb["visit_unit"]}</a></li>
+									<li><a  href="javascript:yesapp_visit.visit_add('${eb["define_code"]}')" >${eb["define_name"]} &nbsp;&nbsp;${eb["visit_money"]}/${eb["visit_unit"]}</a></li>
 
 								</#if>
 							</#list>
@@ -75,14 +77,16 @@
 	
 	
 	<div data-role="popup" id="popup_money" data-dismissible="false"  data-overlay-theme="a" data-theme="a" style="margin:0;min-width:300px; ">
-		<div data-role="header" data-theme="a">
+		<div data-role="header" data-theme="a" data-icon="delete">
 	    <h1>请输入数量</h1>
+	    <a href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline ">Delete</a>
+		    
 	    </div>
 	    <div role="main" class="ui-content">
 	        <h3 class="ui-title"></h3>
-	    <p>This action cannot be undone.</p>
-	        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">确定</a>
-	        
+	    <p><input data-clear-btn="false" name="yesapp_vo_number" pattern="[0-9]*" id="yesapp_vo_number" value="" type="number"/></p>
+	        <a href="javascript:yesapp_visit.visit_edit()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline " >确认修改</a>
+	        <a href="javascript:yesapp_visit.visit_del()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline " >删除</a>
 	    </div>
 	</div>
 	
@@ -91,10 +95,15 @@
 	</ul>
 	<div class="zmcss_h_20"></div>
 	处理备注：
-	<textarea  id="yesapp_vo_process">
-	</textarea>
+	<#if a_visit_info["visit_order_status"]=="46580001000200110002">
+	<textarea  id="yesapp_vo_process"></textarea>
 	<div class="zmcss_h_20"></div>
-	<a href="#" class="ui-btn ui-corner-all ui-shadow  ui-btn-a" >已出诊完成</a>
+	<a href="javascript:yesapp_visit.change_visit_status()" class="ui-btn ui-corner-all ui-shadow  ui-btn-a" >已出诊完成</a>
+	<#else>
+
+		${a_visit_info["process_remark"]}
+	</#if>
+	
 	<div class="zmcss_h_20"></div>
 	<div class="zmcss_h_20"></div>
 </div>

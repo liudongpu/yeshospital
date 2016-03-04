@@ -116,6 +116,10 @@ var yesapp = {
 		visit_detail : {
 			api_name : 'com_srnpr_yeshospital_api_visit_VisitDetail',
 			flag_token : true
+		},
+		visit_status : {
+			api_name : 'com_srnpr_yeshospital_api_visit_VisitStatus',
+			flag_token : true
 		}
 	},
 

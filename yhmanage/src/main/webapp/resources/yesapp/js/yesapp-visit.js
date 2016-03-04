@@ -1,18 +1,59 @@
 var yesapp_visit = {
 
+	temp : {
+		// 费用编号
+		mcode : ''
+	},
+
 	init_visit_order : function() {
 		yesapp_visit.refresh_visit_detail(3, '', 0);
 	},
 
-	change_number : function(sCode) {
+	visit_add : function(sCode) {
 
-		/*
-		 * $('#popup_money').popup("open", { positionTo : "window" });
-		 */
 		$('#popup_nested').popup("close");
 
 		yesapp_visit.refresh_visit_detail(1, sCode, 1);
 
+	},
+	visit_edit : function() {
+		yesapp_visit.refresh_visit_detail(5, yesapp_visit.temp.mcode, $(
+				'#yesapp_vo_number').val());
+		$('#popup_money').popup("close");
+	},
+
+	visit_del : function() {
+		yesapp_visit.refresh_visit_detail(4, yesapp_visit.temp.mcode, $(
+				'#yesapp_vo_number').val());
+		$('#popup_money').popup("close");
+	},
+
+	change_number : function(sCode, sNumber) {
+
+		/*
+		 * $('#popup_money').popup("open", { positionTo : "window" });
+		 */
+
+		yesapp_visit.temp.mcode = sCode;
+
+		$('#yesapp_vo_number').val(sNumber);
+		$('#popup_money').popup("open", {
+			positionTo : "window"
+		});
+
+		// yesapp_visit.refresh_visit_detail(1, sCode, 1);
+
+	},
+
+	change_visit_status : function() {
+		yesapp.api_call('visit_status', {
+			visitOrderCode : $('#yesapp_vo_visit_code').val(),
+			visitProcess : $('#yesapp_vo_process').val()
+		}, yesapp_visit.change_visit_status_success);
+	},
+	change_visit_status_success : function(oData) {
+		zmapi.m.execjs("root.frame-main:yesapp_frame.init_frame_main()");
+		zmjs.page.refresh_page();
 	},
 
 	refresh_visit_detail : function(sType, sMoneyCode, iNumber) {
@@ -28,14 +69,15 @@ var yesapp_visit = {
 
 		// var sOrderCode = $('#yesapp_ts_tour_code').val();
 
-		
 		for ( var i in oData.pageData) {
 
 			var o = oData.pageData[i];
 
 			aHtml
-					.push('<li><a href="javascript:yesapp_visit.refresh_visit_detail(\''
-							+ i
+					.push('<li><a href="javascript:yesapp_visit.change_number(\''
+							+ o['visit_detail_code']
+							+ '\',\''
+							+ o["money_number"]
 							+ '\')"><h2>'
 
 							+ o['money_name']
@@ -47,8 +89,10 @@ var yesapp_visit = {
 							+ o["money_number"]
 							+ '<br/>'
 
-							+ '</p></a><a href="javascript:yesapp_tour.tour_member_option(\''
-							+ i + '\')" >操作</a></li>');
+							+ '</p></a><a href="javascript:yesapp_visit.change_number(\''
+							+ o['visit_detail_code']
+							+ '\',\''
+							+ o["money_number"] + '\')" >操作</a></li>');
 
 		}
 
