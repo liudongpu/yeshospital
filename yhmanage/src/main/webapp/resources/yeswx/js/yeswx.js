@@ -20,6 +20,12 @@ var yeswx = {
 		zapfunc.d(sCookie);
 
 	},
+	
+	wx_close:function()
+	{
+		
+		WeixinJSBridge.invoke("closeWindow");
+	},
 
 	wx_bind_check : function() {
 		zapapi.api_call('com_srnpr_yeshospital_api_wx_BindCheck', {

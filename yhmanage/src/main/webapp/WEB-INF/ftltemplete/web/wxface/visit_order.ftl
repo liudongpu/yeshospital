@@ -154,7 +154,7 @@
     <div role="main" class="ui-content">
        
     <p>This action cannot be undone.</p>
-        <a href="#" class="ui-btn  " data-rel="back">确定</a>
+        <a href="javascript:yeswx.wx_close()" class="ui-btn  " >确定</a>
         
     </div>
 </div>
