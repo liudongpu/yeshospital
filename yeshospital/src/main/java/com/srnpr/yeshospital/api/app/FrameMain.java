@@ -34,7 +34,7 @@ public class FrameMain extends RootApiForToken<RootPageDataResult, RootInput> {
 
 		listMaps.addAll(new DataApiSupport().upData("yh_visit_order_info",
 				"concat('visit-order?u_visit_order=',visit_order_code) as a_link,left(visit_time,16) as a_date,case visit_order_status when '46580001000200110002' then 0 else 1 end as a_status,(select concat('姓名：',member_name,'&nbsp;电话：',member_phone,  '<br/>地址：',room_name) from yh_member_extend_geracomium where yh_member_extend_geracomium.member_code=yh_visit_order_info.member_code) as a_name,visit_note as a_text,visit_time as a_order",
-				"-visit_time", "process_user='" + sUserCode + "'", mDataMap, 0, 10).getPageData());
+				"-visit_time", "process_user='" + sUserCode + "' and visit_order_status!='46580001000200110004' ", mDataMap, 0, 10).getPageData());
 
 		Collections.sort(listMaps, new Comparator<MDataMap>() {
 
