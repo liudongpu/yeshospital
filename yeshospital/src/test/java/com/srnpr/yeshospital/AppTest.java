@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.srnpr.yeshospital.et.rsync.*;
+import com.srnpr.yeshospital.job.JobRecheckAge;
 import com.srnpr.yeshospital.model.TemplateForMsg;
 import com.srnpr.yeshospital.support.ApicloudSupport;
 import com.srnpr.yeshospital.support.MsgSupport;
@@ -40,9 +41,15 @@ import com.srnpr.zapweb.helper.WebHelper;
 public class AppTest extends TestHelper
 
 {
-	
-	
 	@Test
+	public void TeatSex()
+	{
+		bLogTest(new JobRecheckAge().upSexFromCard("110228193703271"));
+	}
+	
+	
+	
+	
 	public void TestPush() {
 
 		bLogTest(new ApicloudSupport().pushMessage("测试通知","xx","UI100464"));
