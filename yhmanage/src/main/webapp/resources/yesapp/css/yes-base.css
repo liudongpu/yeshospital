@@ -1,3 +1,8 @@
+textarea {
+	overflow-y: visible;
+}
+
+
 /*****************************************************************/
 .bar {
 	background-color: #f2f2f2;

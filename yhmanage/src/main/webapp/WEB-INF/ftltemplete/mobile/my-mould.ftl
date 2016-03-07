@@ -31,7 +31,7 @@
   
   
   <div id="one" class="ui-body-d ui-content">
-    <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","","","","mould_type","46580001000200100001","user_code",a_user_code) >
+    <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","",""," mould_type=:mould_type and parent_code=0  and  (user_code=:user_code or user_code='0' )","mould_type","46580001000200100001","user_code",a_user_code) >
 	<ul data-role="listview">
 	<#list a_list as el>
     
@@ -41,7 +41,7 @@
 	</ul>
   </div>
   <div id="two">
-  	 <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","","","","mould_type","46580001000200100002","user_code",a_user_code) >
+  	 <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","",""," mould_type=:mould_type and parent_code=0 and  (user_code=:user_code or user_code='0' )","mould_type","46580001000200100002","user_code",a_user_code) >
     <ul data-role="listview">
 	<#list a_list as el>
     
@@ -52,7 +52,7 @@
   </div>
 	<div id="three">
    
-	 <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","","","","mould_type","46580001000200100003","user_code",a_user_code) >
+	 <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","",""," mould_type=:mould_type and parent_code=0 and  (user_code=:user_code or user_code='0' )","mould_type","46580001000200100003","user_code",a_user_code) >
     <ul data-role="listview">
 	<#list a_list as el>
     

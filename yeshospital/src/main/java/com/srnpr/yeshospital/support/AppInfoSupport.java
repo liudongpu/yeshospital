@@ -102,7 +102,7 @@ public class AppInfoSupport extends BaseClass {
 	
 	public String upMouldInitCode() {
 		String sUserCode=UserFactory.INSTANCE.create().getUserCode();
-		
+		/*
 		if(DbUp.upTable("yh_mould_info").count("user_code",sUserCode)==0)
 		{
 			
@@ -114,7 +114,7 @@ public class AppInfoSupport extends BaseClass {
 			}
 			
 		}
-		
+		*/
 		
 
 		return sUserCode;

@@ -224,8 +224,12 @@ var yesapp_tour = {
 	tour_member_tmp_click : function(oEl) {
 
 		var sText = $('#' + yesapp_tour.temp.template_id).val();
-
+		autosize($('#' + yesapp_tour.temp.template_id));
 		$('#' + yesapp_tour.temp.template_id).val(sText + $(oEl).text() + ";");
+		// $('#' + yesapp_tour.temp.template_id).css('overflow-y','visible');
+		// $('#' + yesapp_tour.temp.template_id).focus();
+
+		autosize.update($('#' + yesapp_tour.temp.template_id));
 		zmjs.ui.dialog_close(yesapp_tour.temp.template_code);
 
 	},
