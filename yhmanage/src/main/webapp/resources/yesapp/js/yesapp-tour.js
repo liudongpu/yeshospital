@@ -206,11 +206,25 @@ var yesapp_tour = {
 				.prev('label')
 				.append(
 						'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t2\',\'zw_f_agree_info\')">模板</a>');
-		$('#zw_f_check_info')
-				.prev('label')
-				.append(
-						'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t3\',\'zw_f_check_info\')">模板</a>');
 
+		if ($('#yesapp_tm_last_tour_info').val()) {
+			
+			autosize($('#zw_f_tour_info' ));
+			autosize($('#zw_f_agree_info' ));
+			
+			$('#zw_f_tour_info').val($('#yesapp_tm_last_tour_info').val());
+
+			$('#zw_f_agree_info').val($('#yesapp_tm_last_agree_info').val());
+			
+			autosize.update($('#zw_f_tour_info' ));
+			autosize.update($('#zw_f_agree_info' ));
+			
+		}
+
+		/*
+		 * $('#zw_f_check_info') .prev('label') .append( '<a
+		 * href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t3\',\'zw_f_check_info\')">模板</a>');
+		 */
 		yesapp_tour.refresh_tour_member();
 	},
 
@@ -225,7 +239,7 @@ var yesapp_tour = {
 
 		var sText = $('#' + yesapp_tour.temp.template_id).val();
 		autosize($('#' + yesapp_tour.temp.template_id));
-		$('#' + yesapp_tour.temp.template_id).val(sText + $(oEl).text() + ";");
+		$('#' + yesapp_tour.temp.template_id).val(sText + oEl);
 		// $('#' + yesapp_tour.temp.template_id).css('overflow-y','visible');
 		// $('#' + yesapp_tour.temp.template_id).focus();
 

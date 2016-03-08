@@ -71,55 +71,32 @@ public class AppInfoSupport extends BaseClass {
 
 	}
 
-	public List<String> upMouldInfo(String sTypeCode) {
-		
-		String sUserCode=UserFactory.INSTANCE.create().getUserCode();
-		List<MDataMap> listMaps = DbUp.upTable("yh_mould_info").queryAll("mould_content,user_code", "",
-				" mould_type=:mould_type and  (user_code=:user_code or user_code='0' )",
-				new MDataMap("mould_type", sTypeCode, "user_code", sUserCode));
+	public List<MDataMap> upMouldList(String sWhere, String... sParmas) {
+		String sUserCode = UserFactory.INSTANCE.create().getUserCode();
 
-		List<String> lReturn = new ArrayList<String>();
-		for (MDataMap map : listMaps) {
-			if (map.get("user_code").equals(sUserCode)) {
-				lReturn.add(map.get("mould_content"));
-			}
+		MDataMap mDataMap = new MDataMap("user_code", sUserCode);
+		mDataMap.inAllValues(sParmas);
 
-		}
-
-		if (lReturn.size() == 0) {
-			for (MDataMap map : listMaps) {
-				if (map.get("user_code").equals("0")) {
-					lReturn.add(map.get("mould_content"));
-				}
-
-			}
-		}
-
-		return lReturn;
+		return DbUp.upTable("yh_mould_info").queryAll("", "", sWhere + "  and  (user_code=:user_code or user_code='0' )", mDataMap);
 	}
-	
-	
-	
+
 	public String upMouldInitCode() {
-		String sUserCode=UserFactory.INSTANCE.create().getUserCode();
+		String sUserCode = UserFactory.INSTANCE.create().getUserCode();
 		/*
-		if(DbUp.upTable("yh_mould_info").count("user_code",sUserCode)==0)
-		{
-			
-			for(MDataMap map:DbUp.upTable("yh_mould_info").queryByWhere("user_code","0"))
-			{
-				
-				map.inAllValues("zid", "0","uid",WebHelper.upUuid(),"user_code",sUserCode,"create_time",FormatHelper.upDateTime());
-				DbUp.upTable("yh_mould_info").dataInsert(map);
-			}
-			
-		}
-		*/
-		
+		 * if(DbUp.upTable("yh_mould_info").count("user_code",sUserCode)==0) {
+		 * 
+		 * for(MDataMap
+		 * map:DbUp.upTable("yh_mould_info").queryByWhere("user_code","0")) {
+		 * 
+		 * map.inAllValues("zid",
+		 * "0","uid",WebHelper.upUuid(),"user_code",sUserCode,"create_time",
+		 * FormatHelper.upDateTime());
+		 * DbUp.upTable("yh_mould_info").dataInsert(map); }
+		 * 
+		 * }
+		 */
 
 		return sUserCode;
 	}
-	
-	
 
 }

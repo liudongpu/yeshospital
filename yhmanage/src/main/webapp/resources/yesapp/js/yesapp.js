@@ -120,6 +120,10 @@ var yesapp = {
 		visit_status : {
 			api_name : 'com_srnpr_yeshospital_api_visit_VisitStatus',
 			flag_token : true
+		},
+		mould_list : {
+			api_name : 'com_srnpr_yeshospital_api_app_MouldList',
+			flag_token : true
 		}
 	},
 

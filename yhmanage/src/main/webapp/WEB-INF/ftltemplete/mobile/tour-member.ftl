@@ -6,6 +6,9 @@
 <#assign a_orderCode=RequestParameters['u_order_code']?default("") >
 <#assign a_memberCode=RequestParameters['u_member_code']?default("") >
 
+<#assign a_app_info=b_method.upClass("com.srnpr.yeshospital.support.AppInfoSupport") />
+
+
 <#--如果用户编号为空 则开始根据code去取该code对应的用户的最近一张单据-->
 <#if a_memberCode=="">
 
@@ -28,6 +31,18 @@
 <#if a_uid=="" >
 
 <#assign b_page=b_method.upControlPage("page_add_m_yh_tour_order_detail","") />
+
+
+
+<#assign a_tour_detail=a_macro_mobile_dbcall.query("yh_tour_order_detail","","-zid","",0,1,"member_code",a_memberCode) >
+
+<#if (a_tour_detail?size>0)>
+
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_tm_last_tour_info" e_value=a_tour_detail[0]["tour_info"] />
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_tm_last_agree_info" e_value=a_tour_detail[0]["agree_info"] />
+</#if>
+
+
 
 <#else>
 <#assign b_page=b_method.upControlPage("page_edit_m_yh_tour_order_detail","zw_f_uid="+a_uid) />
@@ -112,59 +127,59 @@
 
 
 
- <div data-role="popup" id="yesapp_tm_dialog_t1" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="width:100%">
-    <div data-role="header">
-    <h1></h1>
-    <a href="#" data-rel="back" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete  ui-btn-icon-notext">关闭</a>
-    </div>
-    <div role="main" class="ui-content yb_list_dialog">
-       <ol data-role="listview">
-       
-       		<#list b_method.upClass("com.srnpr.yeshospital.support.AppInfoSupport").upMouldInfo("46580001000200100001") as el>
-       			<li onclick="yesapp_tour.tour_member_tmp_click(this)">${el}</li>
-       		</#list>
-		    
-		    
-		    
-		</ol>
-       
-    </div>
-</div>
 
- <div data-role="popup" id="yesapp_tm_dialog_t2" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="width:100%">
-    <div data-role="header">
-    <h1></h1>
-    <a href="#" data-rel="back" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete  ui-btn-icon-notext">关闭</a>
-    </div>
-    <div role="main" class="ui-content yb_list_dialog">
-       <ol data-role="listview">
-			
-			<#list b_method.upClass("com.srnpr.yeshospital.support.AppInfoSupport").upMouldInfo("46580001000200100002") as el>
-       			<li onclick="yesapp_tour.tour_member_tmp_click(this)">${el}</li>
-       		</#list>
-			
-			
+<#macro a_m_tour_dialog_mould p_id="" p_type="">
+	<div data-role="popup" id="${p_id}" data-dismissible="false"  data-overlay-theme="a" data-theme="a" style="margin:0;min-width:300px; max-width:100%;">
+	    <div  data-content-theme="a"  style="margin:0;">
+	        
+	        <div data-role="header" data-theme="a" >
+		    <h1 >选择</h1>
+		    <a href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline ">Delete</a>
 		    
-		</ol>
-       
-    </div>
-</div>
+		    </div>
+		    <div class="ui-content" data-inset="false" data-mini="true" data-role="collapsibleset" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" >
+		    	<#assign a_visit_money= a_app_info.upMouldList("mould_type=:mould_type  ","mould_type",p_type)  />
+		    	<#list a_visit_money as ea>
+		    	<#if ea["parent_code"]=="0">
+			    	<div data-role="collapsible" <#if ea_index==0> data-collapsed="false" </#if> >
+			        <h2>${ea["mould_content"]}</h2>
+			            <ol data-role="listview" class="yb_list_view">
+			            	<#list a_visit_money as eb>
+								<#if eb["parent_code"]==ea["model_code"]>
+									
+									<li><a  href="javascript:yesapp_tour.tour_member_tmp_click('${eb["mould_content"]}')" ><p  class="yb_space">${eb["mould_content"]}</p></a></li>
+
+								</#if>
+							</#list>
+
+			            </ol>
+			        </div>
+			    	</#if>
+		    	</#list>
+	        
+		       
+		       
+		    </div><!-- /collapsible set -->
+	    
+	    </div><!-- /popup -->
+	</div><!-- /popup -->
+</#macro>
 
 
-<div data-role="popup" id="yesapp_tm_dialog_t3" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="width:100%">
-    <div data-role="header">
-    <h1></h1>
-    <a href="#" data-rel="back" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete  ui-btn-icon-notext">关闭</a>
-    </div>
-    <div role="main" class="ui-content yb_list_dialog">
-       <ol data-role="listview">
-			<#list b_method.upClass("com.srnpr.yeshospital.support.AppInfoSupport").upMouldInfo("46580001000200100003") as el>
-       			<li onclick="yesapp_tour.tour_member_tmp_click(this)">${el}</li>
-       		</#list>
-		</ol>
-       
-    </div>
-</div>
+
+
+
+
+
+<@a_m_tour_dialog_mould p_id="yesapp_tm_dialog_t1" p_type="46580001000200100001" />
+
+<@a_m_tour_dialog_mould p_id="yesapp_tm_dialog_t2" p_type="46580001000200100002" />
+
+
+
+
+
+
  
 
 

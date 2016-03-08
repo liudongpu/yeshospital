@@ -2,7 +2,6 @@ textarea {
 	overflow-y: visible;
 }
 
-
 /*****************************************************************/
 .bar {
 	background-color: #f2f2f2;
@@ -18,34 +17,26 @@ textarea {
 	top: 5px;
 }
 
-
 /** hack jquerymobile ****************************************************************************/
-.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
-{
-	text-shadow:none;
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+	text-shadow: none;
 }
 
-
-.yb_page_book .ui-field-contain>label,.yb_page_book .ui-field-contain .ui-controlgroup-label,.yb_page_book .ui-field-contain>.ui-rangeslider>label {
-  float: left;
-  width: 25%;
-  display:inline-block;
-  
- 
+.yb_page_book .ui-field-contain>label, .yb_page_book .ui-field-contain .ui-controlgroup-label,
+	.yb_page_book .ui-field-contain>.ui-rangeslider>label {
+	float: left;
+	width: 25%;
+	display: inline-block;
 }
 
-.yb_page_book .ui-field-contain
-{
-	padding:0.6em 0 0.2em 0;
+.yb_page_book .ui-field-contain {
+	padding: 0.6em 0 0.2em 0;
 }
 
-.yb_page_book .ui-field-contain .control_book
-{
-	
-	min-width:100px;
-	min-height:30px;
+.yb_page_book .ui-field-contain .control_book {
+	min-width: 100px;
+	min-height: 30px;
 }
-
 
 /** hack bootstrap*******************************************************************/
 .form-horizontal .control-group {
@@ -68,23 +59,23 @@ textarea {
 }
 
 /************************************************************************************/
-
-.zw_page_common_data_ul
-{
+.zw_page_common_data_ul {
 	
 }
-.zw_page_common_data_ul li
-{
-	float:left;
+
+.zw_page_common_data_ul li {
+	float: left;
 }
-
-
 
 /************************************************************************************/
 body, div, a, span {
 	font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Light",
 		"Segoe UI Web Light", "Segoe UI Web Regular", "Segoe UI",
 		"Segoe UI Symbol", "HelveticaNeue-Light", "Helvetica Neue", Arial;
+}
+
+.yb_space {
+	white-space: pre-wrap !important;
 }
 
 .yb_body {
@@ -123,28 +114,35 @@ body, div, a, span {
 	padding-right: 5px;
 }
 
-
 /*提示消息*/
-.yb_message_box
-{
+.yb_message_box {
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+	padding: 15px;
+}
+
+.yb_color_focus {
+	color: #3c763d;
+}
+
+.yb_message_desc {
+	color: #3c763d;
+	font-size: 80%;
+}
+
+/**列表相关**********************************************************************************/
+.yb_list_view {
 	
-	    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    padding: 15px;
-   
 }
 
-.yb_color_focus
-{
-	color: #3c763d;
-}
-.yb_message_desc
-{
-	color: #3c763d;
-	font-size:80%;
+.yb_list_view .ui-listview>li p {
+	margin: 0;
 }
 
+.yb_list_view .ui-btn {
+	padding: .1em 3.5em .1em 1em;
+}
 
 /**表格相关**********************************************************************************/
 .yb_list_box {
@@ -187,17 +185,13 @@ body, div, a, span {
 	color: #c1c1c1;
 }
 
-.yb_list_dialog, .ui-popup .yb_list_dialog
-{
-	
-	overflow-y:scroll;
+.yb_list_dialog, .ui-popup .yb_list_dialog {
+	overflow-y: scroll;
 }
 
 .yb_list_dialog .ui-listview>.ui-li-static {
 	padding: .3em 1em;
 }
-
-
 
 /**流消息格式   yb_grid**********************************************************************************/
 .yb_grid_box {
@@ -238,52 +232,46 @@ body, div, a, span {
 	clear: both;
 	line-height: 3em;
 	min-height: 3em;
-	
 }
 
-.zmcss_set_border
-{
+.zmcss_set_border {
 	border-top: solid 1px #ebebeb;
 }
-
 
 .zmcss_set_left {
 	float: left;
 	max-width: 30%;
 	text-indent: .5em;
-	color:#353535;
-	font-weight:bold;
+	color: #353535;
+	font-weight: bold;
 }
 
 .zmcss_set_right {
 	float: right;
 	text-align: right;
 	color: #aaaaaa;
-	text-indent:.5em;
-	padding-right:1em;
+	text-indent: .5em;
+	padding-right: 1em;
 }
-.zmcss_set_right span
-{
+
+.zmcss_set_right span {
 	color: #aaaaaa;
 }
-.zmcss_set_select
-{
-	line-height:0em;
+
+.zmcss_set_select {
+	line-height: 0em;
 }
-
-
-
-
-
 
 .webuploader-container {
 	position: relative;
 }
+
 .webuploader-element-invisible {
 	position: absolute !important;
-	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-    clip: rect(1px,1px,1px,1px);
+	clip: rect(1px, 1px, 1px, 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
 }
+
 .webuploader-pick {
 	position: relative;
 	display: inline-block;
@@ -295,117 +283,116 @@ body, div, a, span {
 	border-radius: 3px;
 	overflow: hidden;
 }
+
 .webuploader-pick-hover {
 	background: #00a2d4;
 }
 
 .webuploader-pick-disable {
 	opacity: 0.6;
-	pointer-events:none;
+	pointer-events: none;
 }
 
-
-
-.zapweb_webfile
-{
-	
-	float:left;
+.zapweb_webfile {
+	float: left;
 }
 
 .zapweb_webfile .thumbnail {
-    width: 110px;
-    height: 110px;
+	width: 110px;
+	height: 110px;
 }
+
 .zapweb_webfile .thumbnail img {
-    width: 100%;
+	width: 100%;
 }
+
 .zapweb_webfile_list {
-    width: 100%;
-    overflow: hidden;
+	width: 100%;
+	overflow: hidden;
 }
+
 .zapweb_webfile  .file-item {
-    float: left;
-    position: relative;
-    margin: 0 20px 20px 0;
-    padding: 4px;
+	float: left;
+	position: relative;
+	margin: 0 20px 20px 0;
+	padding: 4px;
 }
+
 .zapweb_webfile  .file-item .error {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    background: red;
-    color: white;
-    text-align: center;
-    height: 20px;
-    font-size: 14px;
-    line-height: 23px;
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	right: 4px;
+	background: red;
+	color: white;
+	text-align: center;
+	height: 20px;
+	font-size: 14px;
+	line-height: 23px;
 }
+
 .zapweb_webfile .file-item .info {
-    position: absolute;
-    left: 4px;
-    bottom: 4px;
-    right: 4px;
-    height: 20px;
-    line-height: 20px;
-    text-indent: 5px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow : ellipsis;
-    font-size: 12px;
-    z-index: 10;
+	position: absolute;
+	left: 4px;
+	bottom: 4px;
+	right: 4px;
+	height: 20px;
+	line-height: 20px;
+	text-indent: 5px;
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	z-index: 10;
 }
+
 .zapweb_webfile .upload-state-done:after {
-    content:"\f00c";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 32px;
-    position: absolute;
-    bottom: 0;
-    right: 4px;
-    color: #4cae4c;
-    z-index: 99;
+	content: "\f00c";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 32px;
+	position: absolute;
+	bottom: 0;
+	right: 4px;
+	color: #4cae4c;
+	z-index: 99;
 }
+
 .zapweb_webfile  .progress {
-    position: absolute;
-    right: 4px;
-    bottom: 4px;
-    height: 3px;
-    left: 4px;
-    height: 4px;
-    overflow: hidden;
-    z-index: 15;
-    margin:0;
-    padding: 0;
-    border-radius: 0;
-    background: transparent;
+	position: absolute;
+	right: 4px;
+	bottom: 4px;
+	height: 3px;
+	left: 4px;
+	height: 4px;
+	overflow: hidden;
+	z-index: 15;
+	margin: 0;
+	padding: 0;
+	border-radius: 0;
+	background: transparent;
 }
+
 .zapweb_webfile  .progress span {
-    display: block;
-    overflow: hidden;
-    width: 0;
-    height: 100%;
-    
-    -webit-transition: width 200ms linear;
-    -moz-transition: width 200ms linear;
-    -o-transition: width 200ms linear;
-    -ms-transition: width 200ms linear;
-    transition: width 200ms linear;
-    -webkit-animation: progressmove 2s linear infinite;
-    -moz-animation: progressmove 2s linear infinite;
-    -o-animation: progressmove 2s linear infinite;
-    -ms-animation: progressmove 2s linear infinite;
-    animation: progressmove 2s linear infinite;
-    -webkit-transform: translateZ(0);
+	display: block;
+	overflow: hidden;
+	width: 0;
+	height: 100%;
+	-webit-transition: width 200ms linear;
+	-moz-transition: width 200ms linear;
+	-o-transition: width 200ms linear;
+	-ms-transition: width 200ms linear;
+	transition: width 200ms linear;
+	-webkit-animation: progressmove 2s linear infinite;
+	-moz-animation: progressmove 2s linear infinite;
+	-o-animation: progressmove 2s linear infinite;
+	-ms-animation: progressmove 2s linear infinite;
+	animation: progressmove 2s linear infinite;
+	-webkit-transform: translateZ(0);
 }
-
-
-
-
-

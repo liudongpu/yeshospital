@@ -2,7 +2,11 @@
 <#include "../zapmacro/zapmacro_uset.ftl" />
 
 
-<#assign a_user_code=b_method.upClass("com.srnpr.yeshospital.support.AppInfoSupport").upMouldInitCode() />
+
+
+
+<#assign a_app_info=b_method.upClass("com.srnpr.yeshospital.support.AppInfoSupport") />
+
  <@m_mobile_init_dbcall />
 
 
@@ -31,32 +35,32 @@
   
   
   <div id="one" class="ui-body-d ui-content">
-    <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","",""," mould_type=:mould_type and parent_code=0  and  (user_code=:user_code or user_code='0' )","mould_type","46580001000200100001","user_code",a_user_code) >
+    <#assign a_list=a_app_info.upMouldList("mould_type=:mould_type and parent_code=0 ","mould_type","46580001000200100001") >
 	<ul data-role="listview">
 	<#list a_list as el>
     
-    	<li ><a <@m_mobile_a_href p_page="../mb/page_edit_d_yh_mould_info?zw_f_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
+    	<li ><a <@m_mobile_a_href p_page="mould-list?u_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
     	
     </#list>
 	</ul>
   </div>
   <div id="two">
-  	 <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","",""," mould_type=:mould_type and parent_code=0 and  (user_code=:user_code or user_code='0' )","mould_type","46580001000200100002","user_code",a_user_code) >
+  	 <#assign a_list=a_app_info.upMouldList("mould_type=:mould_type  and parent_code=0 ","mould_type","46580001000200100002") >
     <ul data-role="listview">
 	<#list a_list as el>
     
-    	<li ><a <@m_mobile_a_href p_page="../mb/page_edit_d_yh_mould_info?zw_f_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
+    	<li ><a <@m_mobile_a_href p_page="mould-list?u_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
     	
     </#list>
 	</ul>
   </div>
 	<div id="three">
    
-	 <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_mould_info","",""," mould_type=:mould_type and parent_code=0 and  (user_code=:user_code or user_code='0' )","mould_type","46580001000200100003","user_code",a_user_code) >
+	 <#assign a_list=a_app_info.upMouldList("mould_type=:mould_type  and parent_code=0 ","mould_type","46580001000200100003") >
     <ul data-role="listview">
 	<#list a_list as el>
     
-    	<li ><a <@m_mobile_a_href p_page="../mb/page_edit_d_yh_mould_info?zw_f_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
+    	<li ><a <@m_mobile_a_href p_page="mould-list?u_uid="+el["uid"] /> >${el["mould_content"]}</a></li>
     	
     </#list>
 	</ul>
