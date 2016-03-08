@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.srnpr.yeshospital.pages.ExportQrcode;
+import com.srnpr.yeshospital.support.DocSupport;
 import com.srnpr.zapcom.basehelper.GsonHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapdata.dbdo.DbUp;
@@ -106,6 +107,15 @@ public class HomeController extends RootControl {
 
 		return GsonHelper.toJson(map);
 
+	}
+
+	@RequestMapping(value = "/yhmemberreport/{operateId}", produces = { "application/binary;charset=UTF-8" })
+	@ResponseBody
+	public String yhmemberreport(@PathVariable("operateId") String sOperateId, HttpServletRequest request,
+			HttpServletResponse response) {
+		new DocSupport().exportDoc(sOperateId, request, response);
+
+		return null;
 	}
 
 }

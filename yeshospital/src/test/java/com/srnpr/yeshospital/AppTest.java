@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
@@ -21,6 +23,7 @@ import com.srnpr.yeshospital.et.rsync.*;
 import com.srnpr.yeshospital.job.JobRecheckAge;
 import com.srnpr.yeshospital.model.TemplateForMsg;
 import com.srnpr.yeshospital.support.ApicloudSupport;
+import com.srnpr.yeshospital.support.DocSupport;
 import com.srnpr.yeshospital.support.MsgSupport;
 import com.srnpr.yeshospital.support.QrcodeSupport;
 import com.srnpr.yeshospital.wx.WxSendTemplate;
@@ -33,6 +36,7 @@ import com.srnpr.zapcom.basehelper.SecrurityHelper;
 import com.srnpr.zapcom.basehelper.TestHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.basesupport.WebClientSupport;
+import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebHelper;
 
 /**
@@ -41,26 +45,45 @@ import com.srnpr.zapweb.helper.WebHelper;
 public class AppTest extends TestHelper
 
 {
+
 	@Test
-	public void TeatSex()
-	{
+	public void testDoc() {
+
+		DocSupport docSupport = new DocSupport();
+
+		Map<String, Object> dataMap = upMemberInfo("MI150520100001");
+
+		//docSupport.createWord("D:/x/doc/bj001.xml", dataMap);
+
+	}
+
+	public Map<String, Object> upMemberInfo(String sMemberCode) {
+
+		MDataMap mMemberMap = DbUp.upTable("yh_member_extend_geracomium").oneWhere(
+				"member_code as mcode,member_name as mname,member_age as mage,geracomium_code as gcode,room_name as mroom,card_code as mcard",
+				"", "", "member_code", sMemberCode);
+
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.putAll(mMemberMap);
+
+		return result;
+
+	}
+
+	public void TeatSex() {
 		bLogTest(new JobRecheckAge().upSexFromCard("110228193703271"));
 	}
-	
-	
-	
-	
+
 	public void TestPush() {
 
-		bLogTest(new ApicloudSupport().pushMessage("测试通知","xx","UI100464"));
+		bLogTest(new ApicloudSupport().pushMessage("测试通知", "xx", "UI100464"));
 
-		//bLogTest(new ApicloudSupport().createUser("abcd"));
+		// bLogTest(new ApicloudSupport().createUser("abcd"));
 	}
-	
-	
+
 	public void TestVerify() {
 
-		bLogTest(new MsgSupport().SendMessageByYtx("17091033037", "1", "123476","7"));
+		bLogTest(new MsgSupport().SendMessageByYtx("17091033037", "1", "123476", "7"));
 
 	}
 
@@ -71,10 +94,8 @@ public class AppTest extends TestHelper
 		WxTemplateSend wxTemplateSend = new WxTemplateSend();
 
 		wxTemplateSend.setTouser("o26NLuAyrw0uVrsaX98K6RX5UvWs");
-		wxTemplateSend
-				.setTemplate_id("tA2fR-XFgoMsa0pHUZIW3aAUmaXwUZfgi2KG07880nQ");
-		wxTemplateSend.getData().put("first",
-				new WxTemplageValue("您关注的老人[某某某] "));
+		wxTemplateSend.setTemplate_id("tA2fR-XFgoMsa0pHUZIW3aAUmaXwUZfgi2KG07880nQ");
+		wxTemplateSend.getData().put("first", new WxTemplageValue("您关注的老人[某某某] "));
 		wxTemplateSend.getData().put("keyword1", new WxTemplageValue("啊"));
 		wxTemplateSend.getData().put("keyword2", new WxTemplageValue("2"));
 		wxTemplateSend.getData().put("keyword3", new WxTemplageValue("3"));
@@ -94,35 +115,25 @@ public class AppTest extends TestHelper
 
 			String sCard = "";
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 			sCard = StringUtils.substring(WebHelper.upUuid(), 0, 8);
-			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard,
-					"text", "姓名：测试;卡号：" + sCard));
+			listMaps.add(new MDataMap("url", "http://q.yxl9.cn/" + sCard, "text", "姓名：测试;卡号：" + sCard));
 
 			qrcodeSupport.createImage("D:/x/", listMaps);
 
@@ -141,12 +152,10 @@ public class AppTest extends TestHelper
 		decodeBase64ToImage(sInfoString, "D:\\x\\", "1.png");
 	}
 
-	public static void decodeBase64ToImage(String base64, String path,
-			String imgName) {
+	public static void decodeBase64ToImage(String base64, String path, String imgName) {
 
 		try {
-			FileOutputStream write = new FileOutputStream(new File(path
-					+ imgName));
+			FileOutputStream write = new FileOutputStream(new File(path + imgName));
 			byte[] bImages = Base64.decodeBase64(base64);
 			write.write(bImages);
 			write.close();
@@ -172,8 +181,7 @@ public class AppTest extends TestHelper
 
 		bLogTest(new EtRsyncGetEntInfo().upHttp(new MDataMap()));
 
-		bLogTest(new EtRsyncGetData().upHttp(new MDataMap("appType", "",
-				"onlyUnsync", "", "PageMax", "100")));
+		bLogTest(new EtRsyncGetData().upHttp(new MDataMap("appType", "", "onlyUnsync", "", "PageMax", "100")));
 
 		String sData = "[{\"apptype\":\"WeightDataV1\",\"datakey\":\"XXXX\",\"collectdate\":\"xxxx\",\"adddate\":\"xxxx\",\"EntAccount\":\"xxxx\",\"DataId\":\"XXXX\",\"weight\":\"xxxx\"}]";
 
