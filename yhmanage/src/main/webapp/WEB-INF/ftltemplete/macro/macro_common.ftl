@@ -1,5 +1,5 @@
 <#-- 系统版本号 -->
-<#assign a_macro_common_system_version="2.0.0.1">
+<#assign a_macro_common_system_version=b_method.upConfig("zapcom.version")>
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_common_resources_version="?v="+a_macro_common_system_version >
 <#-- 资源文件路径 -->

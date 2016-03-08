@@ -1,5 +1,5 @@
 <#-- 系统版本号 -->
-<#assign a_macro_wx_system_version="2.0.0.24">
+<#assign a_macro_wx_system_version=b_method.upConfig("zapcom.version") >
 <#-- 资源附加后缀版本 -->
 <#assign a_macro_wx_resources_version="?v="+a_macro_wx_system_version >
 <#-- 资源文件路径 -->
