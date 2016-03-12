@@ -28,7 +28,9 @@ zmapi.c = {
 		// 收到push消息的事件
 		push_msg : 'zmapi_event_push_msg',
 
-		temp_event : ''
+		temp_event : '',
+		
+		sub_select:'zmapi_event_sub_select'
 	}
 };
 

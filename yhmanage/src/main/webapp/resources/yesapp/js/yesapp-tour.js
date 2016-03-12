@@ -201,24 +201,24 @@ var yesapp_tour = {
 		$('#zw_f_tour_info')
 				.prev('label')
 				.append(
-						'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t1\',\'zw_f_tour_info\')">模板</a>');
+						'<a href="javascript:yesapp_tour.tour_member_template(\'46580001000200100001\',\'zw_f_tour_info\')">模板</a>');
 		$('#zw_f_agree_info')
 				.prev('label')
 				.append(
-						'<a href="javascript:yesapp_tour.tour_member_template(\'yesapp_tm_dialog_t2\',\'zw_f_agree_info\')">模板</a>');
+						'<a href="javascript:yesapp_tour.tour_member_template(\'46580001000200100002\',\'zw_f_agree_info\')">模板</a>');
 
 		if ($('#yesapp_tm_last_tour_info').val()) {
-			
-			autosize($('#zw_f_tour_info' ));
-			autosize($('#zw_f_agree_info' ));
-			
+
+			autosize($('#zw_f_tour_info'));
+			autosize($('#zw_f_agree_info'));
+
 			$('#zw_f_tour_info').val($('#yesapp_tm_last_tour_info').val());
 
 			$('#zw_f_agree_info').val($('#yesapp_tm_last_agree_info').val());
-			
-			autosize.update($('#zw_f_tour_info' ));
-			autosize.update($('#zw_f_agree_info' ));
-			
+
+			autosize.update($('#zw_f_tour_info'));
+			autosize.update($('#zw_f_agree_info'));
+
 		}
 
 		/*
@@ -229,7 +229,10 @@ var yesapp_tour = {
 	},
 
 	tour_member_template : function(sCode, sId) {
-		zmjs.ui.dialog_open(sCode);
+		// zmjs.ui.dialog_open(sCode);
+
+		zmjs.page.open_page('sub-select?u_mould_type=' + sCode);
+
 		yesapp_tour.temp.template_code = sCode;
 		yesapp_tour.temp.template_id = sId;
 
@@ -244,8 +247,16 @@ var yesapp_tour = {
 		// $('#' + yesapp_tour.temp.template_id).focus();
 
 		autosize.update($('#' + yesapp_tour.temp.template_id));
-		zmjs.ui.dialog_close(yesapp_tour.temp.template_code);
+		// zmjs.ui.dialog_close(yesapp_tour.temp.template_code);
 
+	},
+
+	tour_sub_select_text : function() {
+
+		zmapi.m.getprefs('yesapp-sub-select-text', function(sText) {
+
+			yesapp_tour.tour_member_tmp_click(sText);
+		});
 	},
 
 	refresh_tour_member : function() {
