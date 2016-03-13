@@ -183,9 +183,12 @@
  
 
 
- <@m_mobile_body_end p_js=["yesapp/js/yesapp-tour.js"]/>
+ <@m_mobile_body_end p_js=["yesapp/js/yesapp-tour.js","yesapp/js/yesapp-sub.js"]/>
  
   <@m_mobile_html_initjs e_js="yesapp_tour.init_tour_member()" />
+
+<@m_mobile_html_initjs e_js="yesapp_sub.init_sub_mould('tour-member','46580001000200100001','zw_f_tour_info')" />
+<@m_mobile_html_initjs e_js="yesapp_sub.init_sub_mould('tour-member','46580001000200100002','zw_f_agree_info')" />
  <@m_mobile_html_end />
 
 

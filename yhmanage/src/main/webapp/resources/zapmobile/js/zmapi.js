@@ -29,8 +29,9 @@ zmapi.c = {
 		push_msg : 'zmapi_event_push_msg',
 
 		temp_event : '',
-		
-		sub_select:'zmapi_event_sub_select'
+
+		sub_select : 'zmapi_event_sub_select',
+		sub_func : 'zmapi_event_sub_func'
 	}
 };
 
@@ -350,19 +351,23 @@ zmapi.m = {
 		}
 	},
 	setprefs : function(sKey, sVal) {
-		api.setPrefs({
-			key : sKey,
-			value : sVal
-		});
+		if (zmapi.c.flag_api) {
+			api.setPrefs({
+				key : sKey,
+				value : sVal
+			});
+		}
 	},
 	// 获取属性值
 	getprefs : function(sKey, fCall) {
-		api.getPrefs({
-			key : sKey
-		}, function(ret, err) {
-			var v = ret.value;
-			fCall(v);
-		});
+		if (zmapi.c.flag_api) {
+			api.getPrefs({
+				key : sKey
+			}, function(ret, err) {
+				var v = ret.value;
+				fCall(v);
+			});
+		}
 	},
 
 	// 添加事件监听

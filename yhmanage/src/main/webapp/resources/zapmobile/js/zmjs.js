@@ -30,9 +30,11 @@ zmjs.data = {
 zmjs.func = {
 
 	convert_url : function(sUrl) {
-
-		if (sUrl.indexOf('/') > -1) {
-			sUrl = sUrl.substr(sUrl.indexOf('/'));
+		
+		while ((sUrl.indexOf('/') > -1)) {
+			
+			sUrl = sUrl.substring(sUrl.indexOf('/')+1);
+			
 		}
 		if (sUrl.indexOf('.') > -1) {
 			sUrl = sUrl.substr(0, sUrl.indexOf('.'));
@@ -69,9 +71,9 @@ zmjs.page = {
 		zmapi.p.close_window(sName);
 	},
 	refresh_page : function(sName) {
-		location.href=location.href;
+		location.href = location.href;
 	},
-	
+
 	back_root : function() {
 		zmapi.p.close_goto("root");
 	}

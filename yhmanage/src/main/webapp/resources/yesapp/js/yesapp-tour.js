@@ -198,6 +198,7 @@ var yesapp_tour = {
 		zmjs.form.set('member_code', $('#yesapp_tm_member_code').val());
 		zmjs.form.set('tour_code', $('#yesapp_tm_order_code').val());
 
+		/*
 		$('#zw_f_tour_info')
 				.prev('label')
 				.append(
@@ -206,7 +207,7 @@ var yesapp_tour = {
 				.prev('label')
 				.append(
 						'<a href="javascript:yesapp_tour.tour_member_template(\'46580001000200100002\',\'zw_f_agree_info\')">模板</a>');
-
+		*/
 		if ($('#yesapp_tm_last_tour_info').val()) {
 
 			autosize($('#zw_f_tour_info'));
@@ -230,9 +231,9 @@ var yesapp_tour = {
 
 	tour_member_template : function(sCode, sId) {
 		// zmjs.ui.dialog_open(sCode);
-
+		zmapi.m.setprefs(zmapi.c.event.sub_func, "tour-member:yesapp_tour.tour_sub_select_text()");
 		zmjs.page.open_page('sub-select?u_mould_type=' + sCode);
-
+		
 		yesapp_tour.temp.template_code = sCode;
 		yesapp_tour.temp.template_id = sId;
 
@@ -253,7 +254,7 @@ var yesapp_tour = {
 
 	tour_sub_select_text : function() {
 
-		zmapi.m.getprefs('yesapp-sub-select-text', function(sText) {
+		zmapi.m.getprefs(zmapi.c.event.sub_select, function(sText) {
 
 			yesapp_tour.tour_member_tmp_click(sText);
 		});

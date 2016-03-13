@@ -28,7 +28,7 @@
     <ul>
       <li><a href="#one" data-ajax="false">查房记录模板</a></li>
       <li><a href="#two" data-ajax="false">查房建议模板</a></li>
-      <li><a href="#three" data-ajax="false">检验信息模板</a></li>
+      <li><a href="#three" data-ajax="false">报警回复模板</a></li>
     </ul>
   </div>
   <div class="zmcss_h_20"></div>
@@ -56,7 +56,7 @@
   </div>
 	<div id="three">
    
-	 <#assign a_list=a_app_info.upMouldList("mould_type=:mould_type  and parent_code=0 ","mould_type","46580001000200100003") >
+	 <#assign a_list=a_app_info.upMouldList("mould_type=:mould_type  and parent_code=0 ","mould_type","46580001000200100004") >
     <ul data-role="listview">
 	<#list a_list as el>
     
