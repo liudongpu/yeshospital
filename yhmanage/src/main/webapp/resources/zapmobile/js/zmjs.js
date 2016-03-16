@@ -30,11 +30,11 @@ zmjs.data = {
 zmjs.func = {
 
 	convert_url : function(sUrl) {
-		
+
 		while ((sUrl.indexOf('/') > -1)) {
-			
-			sUrl = sUrl.substring(sUrl.indexOf('/')+1);
-			
+
+			sUrl = sUrl.substring(sUrl.indexOf('/') + 1);
+
 		}
 		if (sUrl.indexOf('.') > -1) {
 			sUrl = sUrl.substr(0, sUrl.indexOf('.'));
@@ -102,7 +102,7 @@ zmjs.form = {
 	},
 	get : function(sId) {
 		return $('#' + zmjs.config.form_add + sId).val();
-		2
+
 	}
 
 };

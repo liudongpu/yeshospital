@@ -17,7 +17,7 @@ public class QueryDrug extends RootApi<RootPageDataResult, QueryDrugInput> {
 
 		ArrayList<String> aWhere = new ArrayList<String>();
 
-		// 如果传递有类型 
+		// 如果传递有类型
 		if (StringUtils.isNotBlank(inputParam.getDrugType())) {
 			mDataMap.put("drug_type", inputParam.getDrugType());
 			aWhere.add(" drug_type=:drug_type ");
@@ -38,8 +38,8 @@ public class QueryDrug extends RootApi<RootPageDataResult, QueryDrugInput> {
 		aWhere.add(" flag_enable=1 ");
 
 		return new DataApiSupport().upData("yh_drug_info",
-				"drug_code,drug_name,manufacturer,drug_usage,drug_unit,drug_dose,drug_single,drug_source", "spell_info",
-				aWhere, mDataMap, 0, 10);
+				"drug_code,drug_name,manufacturer,drug_usage,drug_unit,drug_dose,drug_single,drug_source,drug_price,product_name,drug_title",
+				"spell_info", aWhere, mDataMap, 0, 10);
 
 	}
 

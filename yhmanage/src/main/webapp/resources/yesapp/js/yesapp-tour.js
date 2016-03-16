@@ -183,6 +183,16 @@ var yesapp_tour = {
 		zmjs.form.set('drug_dose', o['drug_dose']);
 		zmjs.form.set('drug_single', o['drug_single']);
 		zmjs.form.set('drug_source', o['drug_source']);
+		if (o['product_name'] != "") {
+			zmjs.form.set('product_name', o['product_name']);
+		} else {
+			zmjs.form.set('product_name', o['drug_title']);
+		}
+		if (o['drug_price'] != "") {
+			zmjs.form.set('drug_price', o['drug_price']);
+		} else {
+			zmjs.form.set('drug_price', '');
+		}
 
 	},
 	init_tour_drug : function() {
@@ -190,6 +200,13 @@ var yesapp_tour = {
 		zmjs.form.set('tour_code', $('#yesapp_td_order_code').val());
 		zmjs.form.set('account_type', $('#yesapp_td_account_type').val());
 		zmjs.form.set('drug_type', $('#yesapp_td_drug_type').val());
+
+		if (zmjs.form.get("number_buy") == "")
+
+		{
+			zmjs.form.set('number_buy', 1);
+		}
+
 	},
 
 	init_tour_member : function() {
@@ -199,15 +216,11 @@ var yesapp_tour = {
 		zmjs.form.set('tour_code', $('#yesapp_tm_order_code').val());
 
 		/*
-		$('#zw_f_tour_info')
-				.prev('label')
-				.append(
-						'<a href="javascript:yesapp_tour.tour_member_template(\'46580001000200100001\',\'zw_f_tour_info\')">模板</a>');
-		$('#zw_f_agree_info')
-				.prev('label')
-				.append(
-						'<a href="javascript:yesapp_tour.tour_member_template(\'46580001000200100002\',\'zw_f_agree_info\')">模板</a>');
-		*/
+		 * $('#zw_f_tour_info') .prev('label') .append( '<a
+		 * href="javascript:yesapp_tour.tour_member_template(\'46580001000200100001\',\'zw_f_tour_info\')">模板</a>');
+		 * $('#zw_f_agree_info') .prev('label') .append( '<a
+		 * href="javascript:yesapp_tour.tour_member_template(\'46580001000200100002\',\'zw_f_agree_info\')">模板</a>');
+		 */
 		if ($('#yesapp_tm_last_tour_info').val()) {
 
 			autosize($('#zw_f_tour_info'));
@@ -231,9 +244,10 @@ var yesapp_tour = {
 
 	tour_member_template : function(sCode, sId) {
 		// zmjs.ui.dialog_open(sCode);
-		zmapi.m.setprefs(zmapi.c.event.sub_func, "tour-member:yesapp_tour.tour_sub_select_text()");
+		zmapi.m.setprefs(zmapi.c.event.sub_func,
+				"tour-member:yesapp_tour.tour_sub_select_text()");
 		zmjs.page.open_page('sub-select?u_mould_type=' + sCode);
-		
+
 		yesapp_tour.temp.template_code = sCode;
 		yesapp_tour.temp.template_id = sId;
 
