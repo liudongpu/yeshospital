@@ -16,7 +16,8 @@ public class VisitStatus extends RootApiForToken<MWebResult, VisitStatusInput> {
 		MWebResult result = new MWebResult();
 
 		if (result.upFlagTrue()) {
-			new FlowSupport().changeStatus("ZF0004", inputParam.getVisitOrderCode(), "46580001000200110003", getUserCode(), "");
+			new FlowSupport().changeStatus("ZF0004", inputParam.getVisitOrderCode(), "46580001000200110003",
+					getUserCode(), "");
 
 		}
 
@@ -26,9 +27,11 @@ public class VisitStatus extends RootApiForToken<MWebResult, VisitStatusInput> {
 
 				MDataMap mUpdateMap = new MDataMap();
 				mUpdateMap.inAllValues("visit_order_code", inputParam.getVisitOrderCode(), "process_remark",
-						inputParam.getVisitProcess(), "process_time", DateHelper.upNow());
+						inputParam.getVisitProcess(), "tour_info", inputParam.getTourInfo(), "agree_info",
+						inputParam.getAgreeInfo(), "process_time", DateHelper.upNow());
 
-				DbUp.upTable("yh_visit_order_info").dataUpdate(mUpdateMap, "process_remark,process_time", "visit_order_code");
+				DbUp.upTable("yh_visit_order_info").dataUpdate(mUpdateMap,
+						"process_remark,tour_info,agree_info,process_time", "visit_order_code");
 
 			}
 		}

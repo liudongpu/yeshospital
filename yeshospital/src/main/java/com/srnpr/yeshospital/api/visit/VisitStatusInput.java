@@ -24,4 +24,24 @@ public class VisitStatusInput extends RootInput {
 		this.visitProcess = visitProcess;
 	}
 
+	private String tourInfo = "";
+
+	private String agreeInfo = "";
+
+	public String getTourInfo() {
+		return tourInfo;
+	}
+
+	public void setTourInfo(String tourInfo) {
+		this.tourInfo = tourInfo;
+	}
+
+	public String getAgreeInfo() {
+		return agreeInfo;
+	}
+
+	public void setAgreeInfo(String agreeInfo) {
+		this.agreeInfo = agreeInfo;
+	}
+
 }

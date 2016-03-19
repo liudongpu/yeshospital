@@ -25,6 +25,7 @@
 	<#assign a_visit_info=b_method.upDataOne("yh_visit_order_info","","","","visit_order_code",a_visit_code) />
 	
 	<@m_zapmacro_mobile_form_hidden e_id="yesapp_vo_visit_code" e_value=a_visit_code />
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_vo_hospital_code" e_value=a_visit_info["hospital_code"] />
 
 	<#assign b_visit_page=b_method.upControlPage("page_book_m_yh_visit_order_info","zw_f_member_code="+a_visit_info["member_code"]) />
 	<@m_zapmacro_mobile_page_book b_visit_page />	
@@ -38,6 +39,8 @@
 	
 	
 	<#assign a_visit_money=a_macro_mobile_dbcall.queryAll("yh_visit_money","","define_code","","hospital_code",a_visit_info["hospital_code"]) >
+	<a href="javascript:yesapp_visit.visit_dialog()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left " >添加费用</a>
+	<#--
 	<a href="#popup_nested" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left " >添加费用</a>
 	<div data-role="popup" id="popup_nested" data-dismissible="false"  data-overlay-theme="a" data-theme="a" style="margin:0;min-width:300px; ">
 	    <div data-role="collapsibleset"  data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0;">
@@ -56,8 +59,7 @@
 			            <ul data-role="listview">
 			            	<#list a_visit_money as eb>
 								<#if eb["parent_code"]==ea["define_code"]>
-									<#--<li><a href="javascript:yesapp_visit.visit_add('${eb["define_code"]}','${eb["define_name"]}','${eb["visit_money"]}','${eb["visit_unit"]}')" >${eb["define_name"]} &nbsp;&nbsp;${eb["visit_money"]}/${eb["visit_unit"]}</a></li>
-										-->
+									
 									<li><a  href="javascript:yesapp_visit.visit_add('${eb["define_code"]}')" >${eb["define_name"]} &nbsp;&nbsp;${eb["visit_money"]}/${eb["visit_unit"]}</a></li>
 
 								</#if>
@@ -69,12 +71,12 @@
 		    	</#list>
 	        
 		        
-		    </div><!-- /collapsible set -->
+		    </div>
 	    
-	    </div><!-- /popup -->
-	</div><!-- /popup -->
+	    </div>
+	</div>
 	
-	
+	-->
 	
 	<div data-role="popup" id="popup_money" data-dismissible="false"  data-overlay-theme="a" data-theme="a" style="margin:0;min-width:300px; ">
 		<div data-role="header" data-theme="a" data-icon="delete">
@@ -93,6 +95,28 @@
 	<ul  data-role="listview" data-inset="true"  id="yesapp_vo_table" >
 		    
 	</ul>
+	
+	<div class="zmcss_h_20"></div>
+	查房记录：
+	<#if a_visit_info["visit_order_status"]=="46580001000200110002">
+	<textarea  id="yesapp_vo_tour"></textarea>
+	
+	<#else>
+
+		${a_visit_info["tour_info"]}
+	</#if>
+
+	<div class="zmcss_h_20"></div>
+	查房建议：
+	<#if a_visit_info["visit_order_status"]=="46580001000200110002">
+	<textarea  id="yesapp_vo_agree"></textarea>
+	
+	<#else>
+
+		${a_visit_info["agree_info"]}
+	</#if>
+	
+	
 	<div class="zmcss_h_20"></div>
 	处理备注：
 	<#if a_visit_info["visit_order_status"]=="46580001000200110002">

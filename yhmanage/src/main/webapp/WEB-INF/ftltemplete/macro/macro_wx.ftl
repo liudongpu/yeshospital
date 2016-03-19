@@ -16,7 +16,7 @@
 <#assign a_macro_wx_resources_thems_js=["zapjs/zapapi.js","zapjs/zapfunc.js","yeswx/js/yeswx.js"] >
 
 <#-- ,"mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css" -->
-<#assign a_macro_wx_resources_thems_css=["mlib/jquery.mobile.wx/themes/jm-wx.min.css","mlib/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css","mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css","yeswx/css/wxcss.css"] >
+<#assign a_macro_wx_resources_thems_css=["mlib/weui/weui.min.css","mlib/jquery.mobile.wx/themes/jm-wx.min.css","mlib/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css","mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css","yeswx/css/wxcss.css"] >
 
 
 

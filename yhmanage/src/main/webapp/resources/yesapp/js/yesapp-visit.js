@@ -9,6 +9,23 @@ var yesapp_visit = {
 		yesapp_visit.refresh_visit_detail(3, '', 0);
 	},
 
+	visit_dialog : function() {
+
+		zmapi.m.setprefs(zmapi.c.event.sub_func,
+				"visit-order:yesapp_visit.visit_select()");
+
+		zmjs.page.open_page('sub-visit?u_hospital_code='
+				+ $('#yesapp_vo_hospital_code').val());
+
+	},
+	visit_select : function() {
+		zmapi.m.getprefs(zmapi.c.event.sub_select, function(sSelect) {
+
+			yesapp_visit.refresh_visit_detail(1, sSelect, 1);
+
+		});
+	},
+
 	visit_add : function(sCode) {
 
 		$('#popup_nested').popup("close");
@@ -48,7 +65,9 @@ var yesapp_visit = {
 	change_visit_status : function() {
 		yesapp.api_call('visit_status', {
 			visitOrderCode : $('#yesapp_vo_visit_code').val(),
-			visitProcess : $('#yesapp_vo_process').val()
+			visitProcess : $('#yesapp_vo_process').val(),
+			tourInfo : $('#yesapp_vo_tour').val(),
+			agreeInfo : $('#yesapp_vo_agree').val()
 		}, yesapp_visit.change_visit_status_success);
 	},
 	change_visit_status_success : function(oData) {

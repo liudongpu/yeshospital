@@ -72,7 +72,7 @@
 		
 		
 		<div class="wxcss_height_2"></div>
-		<a href="javascript:yeswx.visit_order_submit(${e_index})" class="ui-btn">立即预约</a>
+		<a href="javascript:yeswx.visit_order_submit(${e_index})" class="weui_btn weui_btn_warn">立即预约</a>
 		<div class="wxcss_height_2"></div>
 	</div>
 </#macro>
