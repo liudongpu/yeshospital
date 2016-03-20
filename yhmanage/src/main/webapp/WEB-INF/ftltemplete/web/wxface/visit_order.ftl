@@ -29,30 +29,30 @@
 
 <#macro m_visit_order_form e_index e_info e_sib>
 	
-	<div id="yeswx_tab_item_t_${e_index}" class="wxcss_base_none">
+	<div id="yeswx_tab_item_t_${e_index}" <#if e_index!=0>class="wxcss_base_none" </#if> >
 	
 		
 		<div class="wxcss_height_1"></div>
 			
-			
-		<#assign a_visitlist=a_macro_wx_dbcall.queryAll("yh_visit_order_info","","-zid","","member_code",e_info["member_code"])>
-		<#if (a_visitlist?size>0)>
-				<#assign a_visitinfo=a_visitlist[0]>
-					<div class="weui_cells_title">${e_info["member_name"]}的最近一次预约信息</div>
-				<div class="weui_panel weui_panel_access">
-		           
-		            <div class="weui_panel_bd">
-		                <div class="weui_media_box weui_media_text">
-		                    <#assign a_defineinfo=a_macro_wx_dbcall.upOne("yh_define","define_code",a_visitinfo["visit_order_status"])>
-		                    <p class="weui_media_desc">预约时间:${a_visitinfo["visit_time"]} 当前状态:${a_defineinfo["define_name"]}</p>
-		                </div>
-		                
-		            </div>
-		            <a href="visit_list?u_member_code=${a_visitinfo["member_code"]}" class="weui_panel_ft">查看更多</a>
-		        </div>
-			<div class="wxcss_height_1"></div>
+		<#if e_info["member_code"]??>	
+			<#assign a_visitlist=a_macro_wx_dbcall.queryAll("yh_visit_order_info","","-zid","","member_code",e_info["member_code"])>
+			<#if (a_visitlist?size>0)>
+					<#assign a_visitinfo=a_visitlist[0]>
+						<div class="weui_cells_title">${e_info["member_name"]}的最近一次预约信息</div>
+					<div class="weui_panel weui_panel_access">
+			           
+			            <div class="weui_panel_bd">
+			                <div class="weui_media_box weui_media_text">
+			                    <#assign a_defineinfo=a_macro_wx_dbcall.upOne("yh_define","define_code",a_visitinfo["visit_order_status"])>
+			                    <p class="weui_media_desc">预约时间:${a_visitinfo["visit_time"]} 当前状态:${a_defineinfo["define_name"]}</p>
+			                </div>
+			                
+			            </div>
+			            <a href="visit_list?u_member_code=${a_visitinfo["member_code"]}" class="weui_panel_ft">查看更多</a>
+			        </div>
+				<div class="wxcss_height_1"></div>
+			</#if>
 		</#if>
-		
 		
 		<div class="weui_cells_title">创建预约信息</div>
 		<div class="weui_cells weui_cells_form">
