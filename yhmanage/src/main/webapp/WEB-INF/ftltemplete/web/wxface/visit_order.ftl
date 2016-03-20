@@ -33,7 +33,7 @@
 	
 		
 		<div class="wxcss_height_1"></div>
-			
+		
 		<#if e_info["member_code"]??>	
 			<#assign a_visitlist=a_macro_wx_dbcall.queryAll("yh_visit_order_info","","-zid","","member_code",e_info["member_code"])>
 			<#if (a_visitlist?size>0)>
@@ -48,13 +48,13 @@
 			                </div>
 			                
 			            </div>
-			            <a href="visit_list?u_member_code=${a_visitinfo["member_code"]}" class="weui_panel_ft">查看更多</a>
+			            <a href="visit_list?u_member_code=${a_visitinfo["member_code"]}" class="weui_panel_ft">查看更多历史信息</a>
 			        </div>
 				<div class="wxcss_height_1"></div>
 			</#if>
 		</#if>
-		
-		<div class="weui_cells_title">创建预约信息</div>
+		<div class="wxcss_page_title">出诊预约</div>
+		<div class="weui_cells_title">预约信息</div>
 		<div class="weui_cells weui_cells_form">
 		<@m_visit_order_text p_label="预约医院" p_name="hospital_code_"+e_index  p_text=""  p_type="t_hospitalcode" p_css="weui_cell_select weui_select_after"/>
 		

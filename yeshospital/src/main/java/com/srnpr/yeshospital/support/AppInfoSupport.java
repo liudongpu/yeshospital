@@ -2,6 +2,7 @@ package com.srnpr.yeshospital.support;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -77,7 +78,8 @@ public class AppInfoSupport extends BaseClass {
 		MDataMap mDataMap = new MDataMap("user_code", sUserCode);
 		mDataMap.inAllValues(sParmas);
 
-		return DbUp.upTable("yh_mould_info").queryAll("", "", sWhere + "  and  (user_code=:user_code or user_code='0' )", mDataMap);
+		return DbUp.upTable("yh_mould_info").queryAll("", "",
+				sWhere + "  and  (user_code=:user_code or user_code='0' )", mDataMap);
 	}
 
 	public String upMouldInitCode() {
@@ -97,6 +99,12 @@ public class AppInfoSupport extends BaseClass {
 		 */
 
 		return sUserCode;
+	}
+
+	public List<Map<String, Object>> upVisitDetail(String sVisitOrderCode) {
+		return DbUp.upTable("yh_visit_order_detail").dataSqlList(
+				"SELECT c.define_name as v_name,sum(a.visit_money*a.money_number) as v_sm FROM yeshospital.yh_visit_order_detail a left join yh_visit_money b  on a.money_code=b.define_code left join yh_visit_money c on b.parent_code=c.define_code where visit_order_code=:visit_code and a.flag_enable=1 group by b.parent_code order by c.define_code",
+				new MDataMap("visit_code", sVisitOrderCode));
 	}
 
 }

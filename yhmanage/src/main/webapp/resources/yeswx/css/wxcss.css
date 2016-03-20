@@ -31,6 +31,15 @@ body {
 	display: none;
 }
 
+.wxcss_color_1
+{
+	color:#3cc51f;
+}
+.wxcss_color_2
+{
+	color:#de7c23;
+}
+
 .wxcss_base_note {
 	color: #999999;
 }
@@ -150,10 +159,24 @@ body {
 	
 }
 
+.wxcss_page_title
+{
+	  text-align: center;
+  font-size: 34px;
+  color: #3cc51f;
+  font-weight: 400;
+  margin: 0 15%;
+}
 
-
-
-
+.wxcss_list_ul
+{
+	
+}
+.wxcss_list_ul li
+{
+	list-style-type:none;
+	
+}
 .wxcss_member_pic_box
 {
 	
