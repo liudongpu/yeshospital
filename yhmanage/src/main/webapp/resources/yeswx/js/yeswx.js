@@ -20,10 +20,25 @@ var yeswx = {
 		zapfunc.d(sCookie);
 
 	},
-	
-	wx_close:function()
-	{
-		
+	tab_select : function(iIndex, sTab) {
+		var iCount = parseInt($('#yeswx_tab_count_' + sTab).val());
+
+		for (var i = 1; i < iCount + 1; i++) {
+			if (i == iIndex) {
+				$('#yeswx_tab_nav_' + sTab + '_' + i).addClass(
+						'weui_bar_item_on');
+				$('#yeswx_tab_item_' + sTab + '_' + i).show();
+			} else {
+				$('#yeswx_tab_nav_' + sTab + '_' + i).removeClass(
+						'weui_bar_item_on');
+				$('#yeswx_tab_item_' + sTab + '_' + i).hide();
+			}
+		}
+
+	},
+
+	wx_close : function() {
+
 		WeixinJSBridge.invoke("closeWindow");
 	},
 
@@ -86,25 +101,29 @@ var yeswx = {
 			memberPhone : $('#member_phone_' + iIndex).val(),
 			cardCode : $('#card_code_' + iIndex).val(),
 			visitTime : $('#visit_date_' + iIndex).val() + ' '
-					+ $('#visit_time_' + iIndex).find("option:selected").text() + ":00",
+					+ $('#visit_time_' + iIndex).find("option:selected").text()
+					+ ":00",
 			visitNote : $('#visit_note_' + iIndex).val(),
 			memberSex : $('#member_sex_' + iIndex).val(),
 			sibName : $('#sib_name_' + iIndex).val(),
 			relationDeep : $('#relation_deep_' + iIndex).val(),
 			sibPhone : $('#sib_phone_' + iIndex).val(),
-			//memberName : $('#member_name_' + iIndex).val(),
+			// memberName : $('#member_name_' + iIndex).val(),
 			hospitalCode : $('#hospital_code_' + iIndex).val(),
 			sibCode : $('#sib_code_' + iIndex).val(),
 			bindToken : $('#bind_token_' + iIndex).val(),
-			sourceSystem:'wx'
+			sourceSystem : 'wx'
 		}, yeswx.visit_order_submit_success);
 	},
-	
+
 	visit_order_submit_success : function(oResult) {
-		//location.href = "member_info?code=" + oResult.linkCode;
-		//zapapi.f.message("您的预约已成功，如果有问题请与客服人员联系。");
-		$('#visit_order_popup p').html('<p>您的预约已成功，如果有问题请与客服人员联系。</p>');
-		$('#visit_order_popup').popup( "open", {positionTo: "window"} );
+		/*
+		 * $('#visit_order_popup p').html('<p>您的预约已成功，如果有问题请与客服人员联系。</p>');
+		 * $('#visit_order_popup').popup( "open", {positionTo: "window"} );
+		 */
+		$('#vo_main_page').hide();
+		$('#vo_main_success').show();
+
 	},
 
 	report_show : function(sTarget, sMemberCode) {

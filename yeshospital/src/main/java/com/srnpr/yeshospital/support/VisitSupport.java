@@ -107,8 +107,16 @@ public class VisitSupport {
 
 				String sUpdateFields = StringUtils.join(mSibMap.upKeys(), ",");
 
-				mSibMap.inAllValues("sib_code", input.getSibCode());
-				DbUp.upTable("yh_sib_info").dataUpdate(mSibMap, sUpdateFields, "sib_code");
+				mSibMap.inAllValues("sib_code", input.getSibCode(), "member_code", input.getMemberCode());
+
+				if (DbUp.upTable("yh_sib_info").count("sib_code", input.getSibCode(), "member_code",
+						input.getMemberCode()) > 0) {
+					DbUp.upTable("yh_sib_info").dataUpdate(mSibMap, sUpdateFields, "sib_code,member_code");
+				} else {
+					mSibMap.inAllValues("create_time", FormatHelper.upDateTime(), "create_user", input.getCreateUser());
+
+					DbUp.upTable("yh_sib_info").dataInsert(mSibMap);
+				}
 
 			} else {
 

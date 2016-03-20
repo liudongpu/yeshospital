@@ -8,6 +8,16 @@
 <#-- 图片文件路径 -->
 <#assign a_macro_wx_img_link="../../" >
 
+
+
+<#if (b_method.upConfig("zapcom.model")=="default")>
+	<#assign a_macro_wx_resources_version="?v="+a_macro_wx_resources_version+.now >
+	
+	
+</#if>
+
+
+
 <#-- 项目特殊样式 -->
 
 
@@ -16,8 +26,15 @@
 <#assign a_macro_wx_resources_thems_js=["zapjs/zapapi.js","zapjs/zapfunc.js","yeswx/js/yeswx.js"] >
 
 <#-- ,"mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css" -->
-<#assign a_macro_wx_resources_thems_css=["mlib/weui/weui.min.css","mlib/jquery.mobile.wx/themes/jm-wx.min.css","mlib/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css","mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css","yeswx/css/wxcss.css"] >
+<#assign a_macro_wx_resources_thems_css=["mlib/jquery.mobile.wx/themes/jm-wx.min.css","mlib/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css","mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css","yeswx/css/wxcss.css"] >
 
+
+<#macro m_wx_weui>
+<#assign a_macro_wx_resources_base_js=["mlib/jquery/jquery-2.1.4.min.js"] >
+
+<#assign a_macro_wx_resources_thems_css=["mlib/weui/weui.min.css","yeswx/css/wxcss.css"] >
+
+</#macro>
 
 
 <#macro m_wx_html_js e_list>
@@ -71,7 +88,7 @@
 <#macro m_wx_body_begin>
 
 </head>
-<body>
+<body ontouchstart>
 
 </#macro>
 
@@ -142,17 +159,17 @@
 	<input type="hidden" name="${p_id}" id="${p_id}" value="${p_value}"/>
 </#macro>
 <#macro m_wx_html_text p_id="" p_value="">
-	<input type="text" name="${p_id}" id="${p_id}" value="${p_value}"/>
+	<input class="weui_input" type="text" name="${p_id}" id="${p_id}" value="${p_value}"/>
 </#macro>
 
 <#macro m_wx_html_tarea p_id="" p_value="">
-	<textarea name="${p_id}" id="${p_id}">${p_value}</textarea>
+	<textarea class="weui_textarea" rows="3" placeholder="请输入内容" name="${p_id}" id="${p_id}">${p_value}</textarea>
 </#macro>
 
 
 <#macro m_wx_html_select p_id="" p_value="" p_source={} p_label="">
 	
-	<select name="${p_id}" id="${p_id}">
+	<select class="weui_select" name="${p_id}" id="${p_id}">
 		<#if p_label!="">
 	    	<option value="">${p_label}</option>
 	  	</#if>
