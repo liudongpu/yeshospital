@@ -35,7 +35,7 @@
 				                <div class="weui_cell_bd weui_cell_primary">
 				                    <p>${ed["v_name"]}</p>
 				                </div>
-				                <div class="weui_cell_ft wxcss_color_2">${ed["v_sm"]?string.number}</div>
+				                <div class="weui_cell_ft wxcss_color_2">${ed["v_sm"]?string.currency}</div>
 				            </div>
 				            </#list>
 				        </div>
