@@ -32,13 +32,13 @@
 	<div id="yeswx_tab_item_t_${e_index}" class="wxcss_base_none">
 	
 		
-		<div class="wxcss_height_2"></div>
+		<div class="wxcss_height_1"></div>
 			
 			
 		<#assign a_visitlist=a_macro_wx_dbcall.queryAll("yh_visit_order_info","","-zid","","member_code",e_info["member_code"])>
 		<#if (a_visitlist?size>0)>
 				<#assign a_visitinfo=a_visitlist[0]>
-					<div class="weui_cells_title">${e_info["member_name"]}历史预约信息</div>
+					<div class="weui_cells_title">${e_info["member_name"]}的最近一次预约信息</div>
 				<div class="weui_panel weui_panel_access">
 		           
 		            <div class="weui_panel_bd">
@@ -48,9 +48,9 @@
 		                </div>
 		                
 		            </div>
-		            <a href="javascript:void(0);" class="weui_panel_ft">查看更多</a>
+		            <a href="visit_list?u_member_code=${a_visitinfo["member_code"]}" class="weui_panel_ft">查看更多</a>
 		        </div>
-			<div class="wxcss_height_2"></div>
+			<div class="wxcss_height_1"></div>
 		</#if>
 		
 		
@@ -74,7 +74,7 @@
 		
 		
 		
-		<@m_visit_order_text p_label="预约时间" p_name="visit_time_"+e_index  p_text=""  p_type="t_visittime"/>
+		<@m_visit_order_text p_label="预约时间" p_name="visit_time_"+e_index  p_text=""  p_type="t_visittime" p_css="weui_cell_select weui_select_after"/>
 		
 		<@m_visit_order_text p_label="预约需求" p_name="visit_note_"+e_index  p_text=""  p_type="tarea"/>
 		</div>
@@ -149,22 +149,20 @@
 		<div  id="tabs">
 		  
 		  
-			<div class="weui_tab">
+			
 	            <div class="weui_navbar">
 	            	<@m_wx_html_hidden p_id="yeswx_tab_count_t" p_value=(a_memberlist?size) />
 	            	<#list a_memberlist as e>
 						<div id="yeswx_tab_nav_t_${e_index+1}" class="weui_navbar_item" onclick="yeswx.tab_select(${e_index+1},'t')">
-						${e["member_name"]}
+							${e["member_name"]}
 						</div>
 						</#list>
 	            
 	            
 	               
 	            </div>
-	            <div class="weui_tab_bd">
-	
-	            </div>
-	       	 </div>
+	            
+	       	 
 		  
 		  
 			<#list a_memberlist as e>
