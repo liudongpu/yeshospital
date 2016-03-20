@@ -1,6 +1,6 @@
  <#include "../../macro/macro_wx.ftl" />
 <@m_wx_weui/>
-<@m_wx_html_begin p_title="预约信息" />
+<@m_wx_html_begin p_title="历史信息" />
 
 <@m_wx_body_begin />
 
