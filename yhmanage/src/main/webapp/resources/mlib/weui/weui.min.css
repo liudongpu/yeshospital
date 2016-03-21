@@ -22,6 +22,8 @@
  }
  
  .weui_navbar_item.weui_bar_item_on {
-  	background-color: #008a17;
-  	color:#fff;
+  	
+  	color:#3cc51f;
+  	
+  	font-weight:bold;
 }

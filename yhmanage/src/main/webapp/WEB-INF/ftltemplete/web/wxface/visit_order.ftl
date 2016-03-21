@@ -48,7 +48,7 @@
 			                </div>
 			                
 			            </div>
-			            <a href="visit_list?u_member_code=${a_visitinfo["member_code"]}" class="weui_panel_ft">查看更多历史信息</a>
+			            <a href="visit_list?u_member_code=${a_visitinfo["member_code"]}" target="_blank" class="weui_panel_ft">查看更多历史信息</a>
 			        </div>
 				<div class="wxcss_height_1"></div>
 			</#if>
