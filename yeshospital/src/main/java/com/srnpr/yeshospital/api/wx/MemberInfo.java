@@ -34,7 +34,7 @@ public class MemberInfo extends RootApi<MemberInfoResult, MemberInfoInput> {
 
 				// 最后加载 返回跳转之类的从库里面读
 				if (StringUtils.isBlank(sOpenId)) {
-					sOpenId = DbUp.upTable("yh_wx_bind").one("bind_token",
+					sOpenId = DbUp.upTable("yh_wx_bind").one("access_token",
 
 							inputParam.getCode()).get("wx_openid");
 				}
