@@ -186,6 +186,26 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 
 			if (StringUtils.isNotBlank(sTourCode)) {
 
+				MDataMap mTourMap = DbUp.upTable("yh_tour_invoice").oneWhere(
+						"sum(case money_type when '46580001000400040001' then money_all else 0 end) as a_ma,sum(case money_type when '46580001000400040001' then money_person else 0 end) as a_mp,sum(case money_type when '46580001000400040001' then 0 else money_all end) as b_ma,sum(case money_type when '46580001000400040001' then 0 else money_person end) as b_mp",
+						"", "", "tour_code", sTourCode);
+
+				HSSFRow hRow = sheet.createRow(iNowRow);
+
+				hRow.createCell(0).setCellValue("购药总金额:" + mTourMap.get("a_ma"));
+				hRow.createCell(1).setCellValue("购药自费金额:" + mTourMap.get("a_mp"));
+				hRow.createCell(2).setCellValue("化验总金额:" + mTourMap.get("b_ma"));
+				hRow.createCell(3).setCellValue("化验自费金额:" + mTourMap.get("b_mp"));
+			}
+
+		}
+
+		if (true) {
+
+			iNowRow++;
+
+			if (StringUtils.isNotBlank(sTourCode)) {
+
 				MDataMap mTourMap = DbUp.upTable("yh_tour_order_info").one("tour_code", sTourCode);
 
 				HSSFRow hRow = sheet.createRow(iNowRow);
