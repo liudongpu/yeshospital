@@ -55,6 +55,9 @@
 				   <div class="wxcss_show_item">
 				   	<span class="wxcss_show_title" >既往病史：</span><br/>${e["medical_history"]}
 				   </div>
+				   <div class="wxcss_show_item">
+				   	<span class="wxcss_show_title" >报警信息：</span><a href="member_warn?u_member_code=${e["member_code"]}">点击查看</a>
+				   </div>
 				</div>
 					
 			</#list>
