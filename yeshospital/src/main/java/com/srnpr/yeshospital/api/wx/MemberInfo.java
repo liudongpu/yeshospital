@@ -9,6 +9,7 @@ import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
 import com.srnpr.zapdata.dbdo.DbUp;
 import com.srnpr.zapweb.helper.WebHelper;
+import com.srnpr.zapweb.helper.WebSessionHelper;
 
 public class MemberInfo extends RootApi<MemberInfoResult, MemberInfoInput> {
 
@@ -32,18 +33,20 @@ public class MemberInfo extends RootApi<MemberInfoResult, MemberInfoInput> {
 			} else {
 				sOpenId = new WxSupport().upOpenId(inputParam.getCode());
 
-				// 最后加载 返回跳转之类的从库里面读
-				if (StringUtils.isBlank(sOpenId)) {
-					sOpenId = DbUp.upTable("yh_wx_bind").one("access_token",
+			}
 
-							inputParam.getCode()).get("wx_openid");
+			if (StringUtils.isBlank(sOpenId)) {
+				Object o = WebSessionHelper.create().upSession("wx_openid");
+				if (o != null) {
+					sOpenId = o.toString();
 				}
-
 			}
 
 			if (StringUtils.isNotBlank(sOpenId)) {
 
 				MDataMap mDataMap = DbUp.upTable("yh_wx_bind").one("wx_openid", sOpenId);
+
+				WebSessionHelper.create().inSession("wx_openid", sOpenId);
 
 				if (mDataMap != null && mDataMap.size() > 0) {
 
