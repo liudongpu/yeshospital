@@ -46,7 +46,12 @@
     	<li><div style="white-space: normal;"><b>查房记录：</b>${el["tour_info"]}(${el["doctor_name"]})<br/><b>查房建议：</b>${el["agree_info"]}(${el["doctor_name"]})<br/></div></li>
     </#list>
     
+    <#assign a_list=a_macro_mobile_dbcall.queryAll("yh_visit_order_info","create_time,tour_info,agree_info,(select doctor_name from yh_doctor_info where user_code=yh_visit_order_info.process_user) as doctor_name","-zid","member_code=:member_code and visit_order_status ='46580001000200110003'","member_code",a_memberCode) >
+    <#list a_list as el>
     
+    	<li data-role="list-divider">${el["create_time"]}</li>
+    	<li><div style="white-space: normal;"><b>查房记录：</b>${el["tour_info"]}(${el["doctor_name"]})<br/><b>查房建议：</b>${el["agree_info"]}(${el["doctor_name"]})<br/></div></li>
+    </#list>
 	</ul>
   </div>
 	<div id="three">
@@ -54,6 +59,8 @@
 	<#assign a_report_info=b_method.upControlPage("page_book_v_yh_report_info","zw_f_member_code="+a_memberCode)>
 	<@m_zapmacro_mobile_page_book a_report_info />
 	-->
+		<div class="zmcss_h_20"></div>
+		<a <@m_mobile_a_href p_page="people-link?u_opt_type=data&u_member_code="+a_memberCode /> class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-grid ui-btn-icon-left">维护测量数据</a>
 		<div class="zmcss_h_20"></div>
 		
 		<div  data-role="collapsibleset">

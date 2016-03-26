@@ -12,7 +12,7 @@
 <@m_mobile_header_end />
 
 <@m_mobile_init_dbcall />
-<#assign a_memberlist=a_macro_mobile_dbcall.queryAll("yh_member_pic","uid,pic_url,create_time","-zid","","member_code",a_memberCode)>
+<#assign a_memberlist=a_macro_mobile_dbcall.queryAll("yh_member_pic","uid,pic_url,create_time,pic_remark","-zid","","member_code",a_memberCode)>
 
 <style>
 .ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb
@@ -74,7 +74,7 @@
             	
             	<div id="yeaspp_pp_show">
             	
-            		<ul data-role="listview" data-split-icon="delete" data-split-theme="a" data-inset="true">
+            		<ul data-role="listview" data-split-icon="edit" data-split-theme="a" data-inset="true">
             	
             		<#list a_memberlist as el>
             	
@@ -82,8 +82,9 @@
             			<li><a href="#">
 					        
 					    <@m_mobile_html_img p_img=el["pic_url"] />
-					    <p>上传时间：<br/>${el["create_time"]}</p></a>
-					        <a href="javascript:yesapp_pic.del('${el["uid"]}')" >删除</a>
+					    <p>上传时间：<br/>${el["create_time"]}<br/>描述：<label id="pr_${el["uid"]}">${el["pic_remark"]}</label></p>
+					    </a>
+					        <a href="javascript:yesapp_pic.pic_dialog('${el["uid"]}')" >操作</a>
 					    </li>
             			
             	
@@ -104,6 +105,26 @@
 	
 	
  </div>
+ 
+ 
+ 	<div data-role="popup" id="popup_change" data-dismissible="false"  data-overlay-theme="a" data-theme="a" style="margin:0;min-width:300px; ">
+		<div data-role="header" data-theme="a" data-icon="delete">
+	    <h1>请输入描述信息</h1>
+	    <a href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline ">Delete</a>
+		    
+	    </div>
+	    <div role="main" class="ui-content">
+	        <h3 class="ui-title"></h3>
+	    <p>
+	    	<textarea data-clear-btn="false" name="yesapp_vo_text"  id="yesapp_vo_text" ></textarea>
+	    </p>
+	        <a href="javascript:yesapp_pic.pic_edit()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline " >确认修改</a>
+	        <a href="javascript:yesapp_pic.pic_del()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline " >删除</a>
+	    </div>
+	</div>
+	
+ 
+ 
 
  <@m_mobile_body_end  />
  

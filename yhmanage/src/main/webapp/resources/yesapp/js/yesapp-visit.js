@@ -117,6 +117,12 @@ var yesapp_visit = {
 
 		$('#yesapp_vo_table').html(aHtml);
 		$('#yesapp_vo_table').listview('refresh');
+	},
+	visit_next:function()
+	{
+		zmjs.page.open_page('../web/wxface/visit_next?u_member_code='
+				+ $('#yesapp_vo_member_code').val()+'&u_sib_code='
+				+ $('#yesapp_vo_sib_code').val());
 	}
 
 };

@@ -1,5 +1,7 @@
 var yesapp_pic = {
 
+	temp_uid : '',
+
 	upload : function(sId) {
 
 		var sPickId = sId + "_filePicker";
@@ -76,7 +78,8 @@ var yesapp_pic = {
 
 			yesapp.api_call('member_pic', {
 				memberCode : $('#yesapp_pp_member_code').val(),
-				picImg : response.result.resultObject
+				picImg : response.result.resultObject,
+				optType : '1'
 			}, yesapp_pic.show);
 
 		});
@@ -103,15 +106,35 @@ var yesapp_pic = {
 	show : function(o_list) {
 		var a_html = [];
 
-		location.href = location.href;
+		location.href = "people-pic?u_member_code="+$('#yesapp_pp_member_code').val();
 	},
 
-	del : function(s_uid) {
+	pic_dialog : function(sUid) {
+		// $('#yesapp_vo_uid').val(sNumber);
+		yesapp_pic.temp_uid = sUid;
+
+		$('#yesapp_vo_text').val($('#pr_'+sUid).text());
+		$('#popup_change').popup("open", {
+			positionTo : "window"
+		});
+	},
+	pic_edit : function() {
+
+		yesapp.api_call('member_pic', {
+			memberCode : $('#yesapp_pp_member_code').val(),
+			picUid : yesapp_pic.temp_uid,
+			picRemark : $('#yesapp_vo_text').val(),
+			optType : '5'
+		}, yesapp_pic.show);
+
+	},
+	pic_del : function() {
 
 		zmapi.m.confirm(function() {
 			yesapp.api_call('member_pic', {
 				memberCode : $('#yesapp_pp_member_code').val(),
-				deleteUid : s_uid
+				picUid : yesapp_pic.temp_uid,
+				optType : '4'
 			}, yesapp_pic.show);
 		});
 

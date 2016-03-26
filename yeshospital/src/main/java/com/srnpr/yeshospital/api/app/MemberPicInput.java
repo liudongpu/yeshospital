@@ -11,8 +11,12 @@ public class MemberPicInput extends RootInput {
 	private String createCode = "";
 	@ZapcomApi(value = "图片")
 	private String picImg = "";
-	@ZapcomApi(value = "删除编号")
-	private String deleteUid = "";
+	@ZapcomApi(value = "编号")
+	private String picUid = "";
+	@ZapcomApi(value = "操作编号")
+	private String optType = "";
+	@ZapcomApi(value = "备注")
+	private String picRemark = "";
 
 	public String getMemberCode() {
 		return memberCode;
@@ -38,12 +42,28 @@ public class MemberPicInput extends RootInput {
 		this.picImg = picImg;
 	}
 
-	public String getDeleteUid() {
-		return deleteUid;
+	public String getPicUid() {
+		return picUid;
 	}
 
-	public void setDeleteUid(String deleteUid) {
-		this.deleteUid = deleteUid;
+	public void setPicUid(String picUid) {
+		this.picUid = picUid;
+	}
+
+	public String getOptType() {
+		return optType;
+	}
+
+	public void setOptType(String optType) {
+		this.optType = optType;
+	}
+
+	public String getPicRemark() {
+		return picRemark;
+	}
+
+	public void setPicRemark(String picRemark) {
+		this.picRemark = picRemark;
 	}
 
 }

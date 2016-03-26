@@ -26,6 +26,8 @@
 	
 	<@m_zapmacro_mobile_form_hidden e_id="yesapp_vo_visit_code" e_value=a_visit_code />
 	<@m_zapmacro_mobile_form_hidden e_id="yesapp_vo_hospital_code" e_value=a_visit_info["hospital_code"] />
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_vo_member_code" e_value=a_visit_info["member_code"] />
+	<@m_zapmacro_mobile_form_hidden e_id="yesapp_vo_sib_code" e_value=a_visit_info["sib_code"] />
 
 	<#assign b_visit_page=b_method.upControlPage("page_book_m_yh_visit_order_info","zw_f_member_code="+a_visit_info["member_code"]) />
 	<@m_zapmacro_mobile_page_book b_visit_page />	
@@ -40,6 +42,11 @@
 	
 	<#assign a_visit_money=a_macro_mobile_dbcall.queryAll("yh_visit_money","","define_code","","hospital_code",a_visit_info["hospital_code"]) >
 	<a href="javascript:yesapp_visit.visit_dialog()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left " >添加费用</a>
+	
+	<a href="javascript:yesapp_visit.visit_next()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left " >预约</a>
+	
+	<a <@m_mobile_a_href p_page="member-info?u_member_code="+a_visit_info["member_code"] /> class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-user ui-btn-icon-left " >个人信息</a>
+	
 	<#--
 	<a href="#popup_nested" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left " >添加费用</a>
 	<div data-role="popup" id="popup_nested" data-dismissible="false"  data-overlay-theme="a" data-theme="a" style="margin:0;min-width:300px; ">

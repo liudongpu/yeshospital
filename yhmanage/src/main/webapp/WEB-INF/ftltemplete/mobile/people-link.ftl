@@ -5,6 +5,8 @@
 <@m_mobile_body_begin />
 
 <#assign a_memberCode=RequestParameters['u_member_code']?default("") >
+<#assign a_optType=RequestParameters['u_opt_type']?default("") >
+
 <@m_mobile_header_begin p_title="用户操作" />
 	<@m_mobile_button_back />
 	 
@@ -21,7 +23,7 @@
 			<div class="yh_people_link_box">
             	<div class="zmcss_h_20"></div>
             	<div class="zmcss_h_20"></div>
-            	
+            	<#if (a_optType=="") >
             	<div class="yh_people_link_item">
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/4.png"/></div>
             		<div  class="yh_people_link_right">
@@ -41,7 +43,7 @@
             		</div>
             		
             	</div>
-            	
+            	</#if>
             	<div class="yh_people_link_item">
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/1.png"/></div>
             		<div  class="yh_people_link_right">
