@@ -216,3 +216,22 @@
 
 
 
+<#macro m_wx_html_msg_empty p_data>
+
+
+	<#if (p_data?size==0)>
+	
+	    <div class="weui_msg">
+	        <div class="weui_icon_area"><i class="weui_icon_safe weui_icon_safe_warn"></i></div>
+	        <div class="weui_text_area">
+	            <h2 class="weui_msg_title">提示消息</h2>
+	            <p class="weui_msg_desc">暂时没有数据</p>
+	        </div>
+	        
+	    </div>
+	
+	</#if>
+
+</#macro>
+
+

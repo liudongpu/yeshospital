@@ -1,5 +1,5 @@
  <#include "../../macro/macro_wx.ftl" />
-
+<@m_wx_weui/>
 <@m_wx_html_begin p_title="血氧数据" />
 <@m_wx_body_begin />
 <@m_wx_html_js ["lib/highcharts/js/highcharts.js"] />
@@ -15,17 +15,10 @@
 
 
 <div data-role="tabs" id="tabs">
-  <div data-role="navbar">
-    <ul>
-    
-    	<#list a_memberlist as e>
-			<li><a href="#t_${e_index}" data-ajax="false">${e["member_name"]}</a></li>
-		</#list>
-    </ul>
-  </div>
-  
+  <@m_wx_html_tab p_data=a_memberlist p_field="member_name" />
+  	<div class="wxcss_height_1"></div>
 	<#list a_memberlist as em>
-		<div id="t_${em_index}" class="ui-body-d ui-content">
+		<div id="yeswx_tab_item_t_${em_index+1}" <#if em_index!=0>class="wxcss_base_none" </#if> > 
 		   
 
 			<div id="report_${em["member_code"]}" style="width:100%; height:400px;"></div>
@@ -50,5 +43,5 @@
 
 <@m_wx_body_end />
  
- 
+ <@m_wx_html_initjs e_js="yeswx.tab_select(1,'t')" />
 <@m_wx_html_end />

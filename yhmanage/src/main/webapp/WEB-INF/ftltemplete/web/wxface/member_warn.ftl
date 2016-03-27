@@ -35,7 +35,7 @@
 		
 	</#list>
 
-
+	<@m_wx_html_msg_empty p_data=a_visitlist />
 
 <@m_wx_body_end />
 
