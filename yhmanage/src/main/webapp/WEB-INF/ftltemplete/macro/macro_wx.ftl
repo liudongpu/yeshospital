@@ -198,3 +198,21 @@
 </#if>
 </#macro>
 
+
+
+
+<#macro m_wx_html_tab p_data p_field >
+	
+	    <div class="weui_navbar">
+	    	<@m_wx_html_hidden p_id="yeswx_tab_count_t" p_value=(a_memberlist?size) />
+	    	<#list p_data as e>
+				<div id="yeswx_tab_nav_t_${e_index+1}" class="weui_navbar_item" onclick="yeswx.tab_select(${e_index+1},'t')">
+					${e[p_field]}
+				</div>
+			</#list>
+	    </div>
+  	
+</#macro>
+
+
+

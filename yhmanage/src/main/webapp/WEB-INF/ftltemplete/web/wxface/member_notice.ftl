@@ -1,5 +1,5 @@
  <#include "../../macro/macro_wx.ftl" />
-
+<@m_wx_weui/>
 <@m_wx_html_begin p_title="机构公告" />
 <@m_wx_body_begin />
 
@@ -17,9 +17,7 @@
 	
 		<#assign a_geracomiuminfo=a_macro_wx_dbcall.upOneWhere("yh_geracomium_info","geracomium_name","","","geracomium_code",a_member_geracomium["geracomium_code"])>
 	
-		<div class="wxcss_base_title">
-    		${a_geracomiuminfo["geracomium_name"]}
-		</div>
+		
 		
 		<#assign a_memberlist=a_macro_wx_dbcall.queryAll("yh_geracomium_notice","","-zid","","geracomium_code",a_member_geracomium["geracomium_code"])>
 		  

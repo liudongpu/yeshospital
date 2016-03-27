@@ -35,20 +35,10 @@
 		  
 		  
 			
-	            <div class="weui_navbar">
-	            	<@m_wx_html_hidden p_id="yeswx_tab_count_t" p_value=(a_memberlist?size) />
-	            	<#list a_memberlist as e>
-						<div id="yeswx_tab_nav_t_${e_index+1}" class="weui_navbar_item" onclick="yeswx.tab_select(${e_index+1},'t')">
-							${e["member_name"]}
-						</div>
-						</#list>
 	            
-	            
-	               
-	            </div>
 	            
 	       	 
-		  
+		  	<@m_wx_html_tab p_data=a_memberlist p_field="member_name" />
 		  
 			<#list a_memberlist as e>
 

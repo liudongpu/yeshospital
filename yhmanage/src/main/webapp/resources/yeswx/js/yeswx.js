@@ -58,10 +58,13 @@ var yeswx = {
 	},
 
 	wx_bind_delete : function(sSibCode, sMemberCode) {
-		zapapi.api_call('com_srnpr_yeshospital_api_wx_BindDelete', {
-			sibCode : sSibCode,
-			memberCode : sMemberCode
-		}, yeswx.wx_bind_delete_success);
+
+		if (confirm("确认要解除绑定关系么？")) {
+			zapapi.api_call('com_srnpr_yeshospital_api_wx_BindDelete', {
+				sibCode : sSibCode,
+				memberCode : sMemberCode
+			}, yeswx.wx_bind_delete_success);
+		}
 	},
 	wx_bind_delete_success : function(oResult) {
 
@@ -82,6 +85,8 @@ var yeswx = {
 	wx_bind_submit : function() {
 		zapapi.api_call('com_srnpr_yeshospital_api_wx_BindSubmit', {
 			relationCode : $('#wx_bind_sib_relation').val(),
+			cardCode : $('#wx_bind_card_code').val(),
+			userName : $('#wx_bind_user_name').val(),
 			myName : $('#wx_bind_sib_name').val(),
 			mobilePhone : $('#wx_bind_sib_hone').val(),
 			verifyCode : $('#wx_bind_sib_number').val(),
