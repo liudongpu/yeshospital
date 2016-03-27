@@ -11,7 +11,7 @@
 	
 	<#assign a_member_geracomium=a_macro_wx_dbcall.upOneWhere("yh_member_extend_geracomium","geracomium_code","","member_code in(select member_code from yh_sib_info where sib_code='"+a_macro_wx_member_info.getSibCode()+"') ")>
 	
-	
+	<div class="wxcss_height_1"></div>
 	
 	<#if (a_member_geracomium?size>0) >
 	
@@ -25,27 +25,24 @@
             		<#list a_memberlist as el>
             	
             			
-            			<div class="wxcss_member_notice_item">
-            				<div class="wxcss_member_notice_title">${el["notice_name"]}</div>
-            				
-            				<div class="wxcss_member_notice_time">${el["create_time"]}</div>
-            				<div class="wxcss_member_notice_info">
-            					
-            					${el["notice_info"]}
-								
-            				</div>
-            				 
-            			</div>
-					        
+            			
 					   
-					   
+					   <div class="weui_panel">
+				            <div class="weui_panel_hd">${el["create_time"]}</div>
+				            <div class="weui_panel_bd">
+				                <div class="weui_media_box weui_media_text">
+				                    	<h4 class="weui_media_title">${el["notice_name"]}</h4>
+				                    	${el["notice_info"]}
+				                    
+				                </div>
+				            </div>
+				        </div>
             			
             	
             		</#list>
 
-					<#if (a_memberlist?size==0)>
-						<div class="wxcss_base_message">暂无公告</div>
-					</#if>
+					
+					<@m_wx_html_msg_empty p_data=a_memberlist />
 				</div>
 	<#else>
 		<a href="wx_bind?bind_token=${a_macro_wx_member_info.getBindToken()}" class="ui-btn">绑定老人信息</a>
