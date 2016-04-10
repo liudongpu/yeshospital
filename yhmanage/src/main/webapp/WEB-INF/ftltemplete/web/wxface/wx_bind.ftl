@@ -37,14 +37,14 @@
                     <input class="weui_input" placeholder="请输入验证码" type="number" id="wx_bind_sib_number" name="wx_bind_sib_number" />
                 </div>
                 <div class="weui_cell_ft">
-                    <a href="javascript:yeswx.wx_bind_verify();" class="weui_btn weui_btn_mini weui_btn_primary">发送验证码</a>
+                    <a id="wx_bind_send_link" href="javascript:yeswx.wx_bind_verify();" class="weui_btn weui_btn_mini weui_btn_primary">发送验证码</a>
                 </div>
             </div>
 			            
 	</div>
 	<div class="weui_cells_tips">提示：目前只支持已入住养老院的老人信息的绑定</div>
 	<div class="weui_btn_area">
-		  		<a href="javascript:yeswx.wx_bind_submit()" class="weui_btn weui_btn_primary">确定</a>
+		  		<a  href="javascript:yeswx.wx_bind_submit()" class="weui_btn weui_btn_primary">确定</a>
 		  	</div>
 
 

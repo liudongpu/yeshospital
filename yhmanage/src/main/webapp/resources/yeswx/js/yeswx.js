@@ -6,7 +6,9 @@ var yeswx = {
 
 	},
 	temp : {
-		report_width : 0
+		report_width : 0,
+
+		last_msg : 0
 	},
 
 	init_base : function() {
@@ -75,13 +77,33 @@ var yeswx = {
 	wx_bind_verify : function() {
 		// $('#wx_bind_send_link').button( "disable" );
 
-		zapapi.api_call('com_srnpr_yeshospital_api_wx_VerifyApi', {
-			mobilePhone : $('#wx_bind_sib_hone').val()
-		}, yeswx.wx_bind_verify_success);
+		if (yeswx.temp.last_msg < 5) {
+			zapapi.api_call('com_srnpr_yeshospital_api_wx_VerifyApi', {
+				mobilePhone : $('#wx_bind_sib_hone').val()
+			}, yeswx.wx_bind_verify_success);
+		}
 	},
 	wx_bind_verify_success : function() {
-		$('#wx_bind_send_link').button("disable");
+		yeswx.temp.last_msg = 60;
+		$('#wx_bind_send_link').addClass("weui_btn_disabled ");
+		yeswx.wx_verify_check();
 	},
+
+	wx_verify_check : function() {
+		if (yeswx.temp.last_msg > 0) {
+			$('#wx_bind_send_link').text(yeswx.temp.last_msg + '秒后重试');
+			yeswx.temp.last_msg = yeswx.temp.last_msg - 1;
+			setTimeout(function() {
+				yeswx.wx_verify_check();
+			}, 1000);
+
+		} else {
+			$('#wx_bind_send_link').removeClass("weui_btn_disabled ");
+			$('#wx_bind_send_link').text('发送验证码');
+		}
+
+	},
+
 	wx_bind_submit : function() {
 		zapapi.api_call('com_srnpr_yeshospital_api_wx_BindSubmit', {
 			relationCode : $('#wx_bind_sib_relation').val(),
