@@ -33,7 +33,7 @@
             		</div>
             		
             	</div>
-            	
+            	</#if>
             	<div class="yh_people_link_item">
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/6.jpg"/></div>
             		<div  class="yh_people_link_right">
@@ -43,7 +43,7 @@
             		</div>
             		
             	</div>
-            	</#if>
+            	
             	<div class="yh_people_link_item">
             		<div  class="yh_people_link_left"><img src="${a_macro_mobile_img_link}resources/yesapp/iconpeople/1.png"/></div>
             		<div  class="yh_people_link_right">

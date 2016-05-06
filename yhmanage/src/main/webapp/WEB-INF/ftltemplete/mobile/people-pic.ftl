@@ -79,7 +79,7 @@
             		<#list a_memberlist as el>
             	
             			
-            			<li><a href="#">
+            			<li><a  <@m_mobile_a_href p_page="pic-big?u_pic_code="+el["uid"] /> >
 					        
 					    <@m_mobile_html_img p_img=el["pic_url"] />
 					    <p>上传时间：<br/>${el["create_time"]}<br/>描述：<label id="pr_${el["uid"]}">${el["pic_remark"]}</label></p>

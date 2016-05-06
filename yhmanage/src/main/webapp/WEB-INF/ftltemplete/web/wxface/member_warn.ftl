@@ -21,7 +21,7 @@
             <div class="weui_panel_bd">
                 <div class="weui_media_box weui_media_text">
                     <h4 class="weui_media_title">${el["warn_info"]}</h4>
-                    <p class="weui_media_desc">处理建议：${el["process_method"]}</p>
+                    <p class="weui_media_desc">处理措施：${el["process_step"]}</p>
                     <ul class="weui_media_info">
                         <li class="weui_media_info_meta">${el["v_warn_level"]}</li>
                         <li class="weui_media_info_meta">${el["warn_code"]}</li>
