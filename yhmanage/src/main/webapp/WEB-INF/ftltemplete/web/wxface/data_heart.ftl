@@ -21,7 +21,16 @@
 	<#list a_memberlist as em>
 		<div id="yeswx_tab_item_t_${em_index+1}" <#if em_index!=0>class="wxcss_base_none" </#if> > 
 		   
-
+			<div class="weui_cells weui_cells_access">
+		  		<a class="weui_cell" href="grid_list?u_data_type=heart&u_member_code=${em["member_code"]}">
+		  			<div class="weui_cell_bd weui_cell_primary">
+			            <p>数据列表</p>
+			        </div>
+			        <div class="weui_cell_ft">
+            		</div>
+		   		</a>
+		   	</div>
+		   <br/>
 			<div id="report_${em["member_code"]}" style="width:100%; height:400px;"></div>
 			
 			
