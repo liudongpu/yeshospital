@@ -40,7 +40,7 @@ public class QueryMember extends RootApiForToken<RootPageDataResult, QueryMember
 		aWhere.add("member_status='46580001000500040001' ");
 
 		RootPageDataResult result = new DataApiSupport().upData("yh_member_extend_geracomium",
-				"member_code,member_name,room_name,spell_info", "room_name", aWhere, mDataMap, 0, 0);
+				"member_code,member_name,room_name,spell_info", "length(room_name),room_name", aWhere, mDataMap, 0, 0);
 
 		if (StringUtils.isNotBlank(inputParam.getTourCode())) {
 			MDataMap mExist = new MDataMap();
