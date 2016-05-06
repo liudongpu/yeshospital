@@ -62,22 +62,23 @@ var yesapp_mould = {
 
 			var o = oData.pageData[i];
 
-			if (o["init_code"] == "") {
-				var sJs = 'yesapp_mould.change_number(\'' + o['model_code']
-						+ '\',\'' + o["mould_content"] + '\')';
+			// if (o["init_code"] == "") {
+			var sJs = 'yesapp_mould.change_number(\'' + o['model_code']
+					+ '\',\'' + o["mould_content"] + '\')';
 
-				aHtml.push('<li><a href="javascript:' + sJs + '"><p   class="yb_space">'
+			aHtml.push('<li><a href="javascript:' + sJs
+					+ '"><p   class="yb_space">'
 
-				+ o['mould_content'] + '</p>'
+					+ o['mould_content'] + '</p>'
 
-				+ '</a></li>');
-			} else {
-				aHtml.push('<li><p  class="yb_space yb_color_focus">'
+					+ '</a></li>');
+			// } else {
+			// aHtml.push('<li><p class="yb_space yb_color_focus">'
 
-						+ o['mould_content'] + ' </p>'
+			// + o['mould_content'] + ' </p>'
 
-						+ '');
-			}
+			// + '');
+			// }
 
 		}
 

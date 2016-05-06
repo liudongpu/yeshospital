@@ -62,18 +62,18 @@ public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 			WarnSupport warnSupport = new WarnSupport();
 
 			// 如果是餐后测试
-			if (tInput.getDataCheckType().equals("3")) {
+			if (tInput.getDataCheckType().equals("46580001000300070001")) {
 
 				mWebResult.inOtherResult(warnSupport.warnCheck(upMemberCode(),
 						new WarnCheckInfo("46580001000300010005",
-								"46580001000300030006",
+								"46580001000300030005",
 								tInput.getDataGlucose(), tInput.getPostServerCode())));
 
 			} else {
 
 				mWebResult.inOtherResult(warnSupport.warnCheck(upMemberCode(),
 						new WarnCheckInfo("46580001000300010005",
-								"46580001000300030005",
+								"46580001000300030006",
 								tInput.getDataGlucose(), tInput.getPostServerCode())));
 			}
 		}

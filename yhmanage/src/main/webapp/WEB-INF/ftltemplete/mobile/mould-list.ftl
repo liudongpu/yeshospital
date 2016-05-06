@@ -22,7 +22,6 @@
 	<div class="zmcss_h_20"></div>
 	<h4>${a_mould_info["mould_content"]}</h4>
 	<div class="zmcss_h_20"></div>
-	<div class="yb_message_box">提示：绿色字体为系统默认模板，无法修改</div>
 	
 	
 	
