@@ -8,7 +8,7 @@
 <#assign a_app_info=b_method.upClass("com.srnpr.yeshospital.support.AppInfoSupport") >
 
 <#assign a_member_code=RequestParameters['u_member_code']?default("") >
-<#assign a_visitlist=a_macro_wx_dbcall.queryAll("yh_count_warn_geracomium","create_time,warn_info,process_method,warn_code"
+<#assign a_visitlist=a_macro_wx_dbcall.queryAll("yh_count_warn_geracomium","create_time,warn_info,process_step,warn_code"
 	+",(select define_name from yh_define where define_code=yh_count_warn_geracomium.warn_level ) as v_warn_level"
 	+",(select hospital_name from yh_hospital_info where yh_hospital_info.hospital_code=yh_count_warn_geracomium.hospital_code ) as v_hospital_name"
 	,"-zid","","member_code",a_member_code)>
