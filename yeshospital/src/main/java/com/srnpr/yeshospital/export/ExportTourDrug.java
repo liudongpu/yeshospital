@@ -126,6 +126,9 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 
 		int iPageHeadSize = mPageData.getPageHead().size();
 
+		mPageData.getPageHead().add("诊断信息");
+		mPageData.getPageHead().add("查房医生");
+
 		mPageData.getPageHead().add("总金额");
 		mPageData.getPageHead().add("个人承担金额");
 
@@ -161,9 +164,17 @@ public class ExportTourDrug extends RootProcess implements IWebFuncExport {
 				}
 
 				if (mDetailMap != null && mDetailMap.size() > 0) {
-					hRow.createCell(iPageHeadSize).setCellValue(mDetailMap.get("money_all"));
 
-					hRow.createCell(iPageHeadSize + 1).setCellValue(mDetailMap.get("money_person"));
+					hRow.createCell(iPageHeadSize).setCellValue(mDetailMap.get("tour_info"));
+
+					hRow.createCell(iPageHeadSize + 1)
+							.setCellValue(DbUp.upTable("za_userinfo")
+									.dataGet("real_name", "", new MDataMap("user_code", mDetailMap.get("create_user")))
+									.toString());
+
+					hRow.createCell(iPageHeadSize + 2).setCellValue(mDetailMap.get("money_all"));
+
+					hRow.createCell(iPageHeadSize + 3).setCellValue(mDetailMap.get("money_person"));
 				}
 
 				iNowRow++;
