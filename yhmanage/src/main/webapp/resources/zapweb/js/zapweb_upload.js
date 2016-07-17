@@ -3,6 +3,8 @@
  * 文件上传类
  */
 
+var zapweb_upload_flag_edit_load = true;
+
 var zapweb_upload = {
 
 	// 上传显示
@@ -171,8 +173,13 @@ var zapweb_upload = {
 												+ ',\'down\')">下移</a>'
 												: '')
 										+ '<a href="javascript:zapweb_upload.change_index(\''
+										+ sField
+										+ '\','
+										+ i
+										+ ',\'delete\')">删除</a>'
+										+ '<a href="javascript:zapweb_upload.change_size(\''
 										+ sField + '\',' + i
-										+ ',\'delete\')">删除</a></div>');
+										+ ',\'delete\')">编辑</a>' + '</div>');
 
 						aHtml.push('<div class="w_clear"></div>');
 
@@ -214,6 +221,16 @@ var zapweb_upload = {
 
 			$('#' + sField).nextAll('.control-upload').html('');
 		}
+
+		if (zapweb_upload_flag_edit_load) {
+			zapweb_upload_flag_edit_load = false;
+			
+			$(document.body).append('<scri'+'pt src="http://open.web.meitu.com/sources/xiuxiu.js" type="text/javascript"></scri'+'pt>');
+			
+			//document.body.append();
+
+		}
+
 	},
 	array_change : function(aArray, iOne, iTwo) {
 		if (iOne < 0 || iTwo < 0 || iOne > aArray.length - 1
@@ -302,8 +319,8 @@ var zapweb_upload = {
 			}
 			// 定义如果超出最大上传数量限制 则返回
 			if (sFiles.length >= iMaxNumber) {
-				
-				alert("最多允许上传文件数量："+iMaxNumber);
+
+				alert("最多允许上传文件数量：" + iMaxNumber);
 				return;
 			}
 
@@ -354,6 +371,47 @@ var zapweb_upload = {
 
 		zapweb_upload.upload_show(sField);
 
+	},
+
+	change_size : function(sField, iIndex) {
+		
+		
+		var sFiles = zapjs.f.split($('#' + sField).val(), zapjs.c.split);
+
+		var sContent='<div style="width:850px;height:600px;"><div id="altContent" ><h1>美图秀秀</h1></div></div>';
+		zapjs.f.modal({
+			content : sContent,
+			okfunc : null,
+			width:900,
+			flagbutton:false,
+			id:'zapjs_f_id_modal_upload_change'
+		});
+		
+		
+		 /*第1个参数是加载编辑器div容器，第2个参数是编辑器类型，第3个参数是div容器宽，第4个参数是div容器高*/
+		xiuxiu.embedSWF("altContent",5,"100%","100%");
+	       //修改为您自己的图片上传接口
+		xiuxiu.setUploadURL("http://upload.jk.yxl9.cn/yhmanage/upload/realsave");
+	        xiuxiu.setUploadType(2);
+	        xiuxiu.setUploadDataFieldName("file");
+		xiuxiu.onInit = function ()
+		{
+			xiuxiu.loadPhoto(sFiles[iIndex]);
+		}	
+		xiuxiu.onUploadResponse = function (data)
+		{
+			//alert("上传响应" + data);  可以开启调试
+			console.log(data);
+			console.log(sFiles);
+			sFiles[iIndex]=zapjs.f.evaljson(data).resultObject;
+			$('#' + sField).val(sFiles.join(zapjs.c.split));
+			console.log(sFiles);
+			zapweb_upload.upload_show(sField);
+			zapjs.f.modal_close('zapjs_f_id_modal_upload_change');
+		}
+		
+		
+		
 	},
 
 	// 删除上传文件
