@@ -54,6 +54,13 @@ public class UserLoginApi extends RootApi<UserLoginApiResult, UserLoginInput> {
 			}
 
 		}
+		
+		if(mResult.upFlagTrue())
+		{
+			MUserInfo mUserInfo=  UserFactory.INSTANCE.create();
+			mResult.setUserInfo(mUserInfo);
+		}
+		
 
 		return mResult;
 
