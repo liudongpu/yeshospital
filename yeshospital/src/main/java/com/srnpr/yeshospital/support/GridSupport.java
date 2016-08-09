@@ -25,7 +25,7 @@ public class GridSupport {
 			sTableName = "yh_post_pressure";
 			sField = "left(create_time,10) as 创建时间,heart_rate as 心率";
 		} else if (sCode.equals("oxygen")) {
-			sTableName = "yh_post_glucose";
+			sTableName = "yh_post_oxygen";
 			sField = "left(create_time,10) as 创建时间,oxygen as 血氧";
 		} else if (sCode.equals("pressure")) {
 			sTableName = "yh_post_pressure";
