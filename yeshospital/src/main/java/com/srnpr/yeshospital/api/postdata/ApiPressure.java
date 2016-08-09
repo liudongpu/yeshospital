@@ -57,6 +57,7 @@ public class ApiPressure extends PostDataApi<PostDataResult, PressureInput> {
 	public MWebResult toProcess(PressureInput tInput) {
 		MWebResult mWebResult = new MWebResult();
 
+		/*
 		if (mWebResult.upFlagTrue()) {
 			WarnSupport warnSupport = new WarnSupport();
 
@@ -70,6 +71,7 @@ public class ApiPressure extends PostDataApi<PostDataResult, PressureInput> {
 							"46580001000300030007", tInput.getDataHeart(),
 							tInput.getPostServerCode())));
 		}
+		*/
 
 		if (mWebResult.upFlagTrue()) {
 			mWebResult.inOtherResult(updateReport(

@@ -58,6 +58,7 @@ public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 	public MWebResult toProcess(GlucoseInput tInput) {
 		MWebResult mWebResult = new MWebResult();
 
+		/*
 		if (mWebResult.upFlagTrue()) {
 			WarnSupport warnSupport = new WarnSupport();
 
@@ -77,6 +78,7 @@ public class ApiGlucose extends PostDataApi<PostDataResult, GlucoseInput> {
 								tInput.getDataGlucose(), tInput.getPostServerCode())));
 			}
 		}
+		*/
 
 		if (mWebResult.upFlagTrue()) {
 			mWebResult

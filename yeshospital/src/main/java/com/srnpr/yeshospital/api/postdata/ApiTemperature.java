@@ -58,6 +58,7 @@ public class ApiTemperature extends
 	public MWebResult toProcess(TemperatureInput tInput) {
 		MWebResult mWebResult = new MWebResult();
 
+		/*
 		if (mWebResult.upFlagTrue()) {
 			WarnSupport warnSupport = new WarnSupport();
 
@@ -68,7 +69,7 @@ public class ApiTemperature extends
 							tInput.getDataTemperature(), tInput
 									.getPostServerCode())));
 		}
-
+		*/
 		if (mWebResult.upFlagTrue()) {
 			mWebResult.inOtherResult(updateReport("temperature_info",
 					bInfo(965805107, tInput.getDataTemperature()),

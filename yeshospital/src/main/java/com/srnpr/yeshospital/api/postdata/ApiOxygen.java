@@ -55,6 +55,7 @@ public class ApiOxygen extends PostDataApi<PostDataResult, OxygenInput> {
 	public MWebResult toProcess(OxygenInput tInput) {
 		MWebResult mWebResult = new MWebResult();
 
+		/*
 		if (mWebResult.upFlagTrue()) {
 			WarnSupport warnSupport = new WarnSupport();
 
@@ -70,6 +71,7 @@ public class ApiOxygen extends PostDataApi<PostDataResult, OxygenInput> {
 											.getDataHeart(), tInput
 											.getPostServerCode())));
 		}
+		*/
 
 		if (mWebResult.upFlagTrue()) {
 			mWebResult.inOtherResult(updateReport("oxygen_info",
