@@ -15,20 +15,20 @@ public class JobSendMessage extends RootJob {
 
 		MessageSupport messageSupport = new MessageSupport();
 
-		for (MDataMap mDataMap : messageSupport
-				.upSendListBySendSource("46580001000200030001")) {
+		for (MDataMap mDataMap : messageSupport.upSendListBySendSource("46580001000200030001")) {
 
 			String sMsg = bConfig("yeshospital.sms_link");
 
-			String sSend = FormatHelper.formatString(sMsg,
-					mDataMap.get("msg_receive"), mDataMap.get("msg_content"));
-			String sReturn="";
+			String sSend = FormatHelper.formatString(sMsg, mDataMap.get("msg_receive"), mDataMap.get("msg_content"));
+			String sReturn = "";
 			try {
 				sReturn = WebClientSupport.create().doGet(sSend);
 			} catch (Exception e) {
 
 				e.printStackTrace();
 			}
+
+			bLogInfo(965805206, sSend, sReturn);
 
 		}
 
