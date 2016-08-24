@@ -60,10 +60,10 @@ public class VerifySupport extends BaseClass {
 			else if(sCode.equals("76543"))
 			{
 				mDataMap.inAllValues("flag_verify", "1", "verify_time",
-						FormatHelper.upDateTime(),"verify_type","76543");
+						FormatHelper.upDateTime(),"verify_sum","76543");
 
 				DbUp.upTable("yh_verify_message").dataUpdate(mDataMap,
-						"flag_verify,verify_time,verify_type", "zid");
+						"flag_verify,verify_time,verify_sum", "zid");
 			}
 			else {
 
