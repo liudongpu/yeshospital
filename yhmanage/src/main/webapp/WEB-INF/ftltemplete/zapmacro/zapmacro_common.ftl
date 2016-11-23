@@ -446,7 +446,14 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 <#macro m_zapmacro_common_show_operate     e_list_operates  e_area_type  e_style_css >
 
 			<#list e_list_operates as e>
+			
+				
+				
+			
     			<#if e.getAreaTypeAid()==e_area_type>
+    			
+	    			
+    			
     		
 	    			<#if e.getOperateTypeAid()=="116015010">
 	    				<@m_zapmacro_common_operate_button e  e_style_css/>
@@ -464,8 +471,23 @@ ${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.get
 <#macro m_zapmacro_common_set_operate     e_list_operates  e_area_type  e_style_css >
 			<#list e_list_operates as e>
     			<#if e.getAreaTypeAid()==e_area_type>
+    			
+    			
+    			
+    			<#local link=e.getOperateLink()>
+    			
+    			<#if (e.getOperateLink()?index_of('[')>-1)>
+						<#local webhelper=b_method.upClass("com.srnpr.yeshospital.helper.YesHospitalHelper")>
+						
+						
+						<#local link=webhelper.upCheckReplace(link)>
+						
+						
+						
+					</#if>
+    			
 
-    		<a class="${e_style_css}" zapweb_attr_operate_id="${e.getOperateUid()}"  <#if e.getOperateTypeAid()=="116015010"> href="javascript:" onclick="${e.getOperateLink()}" <#else> href="${e.getOperateLink()}" </#if> >
+    		<a class="${e_style_css}" zapweb_attr_operate_id="${e.getOperateUid()}"  <#if e.getOperateTypeAid()=="116015010"> href="javascript:" onclick="${link}" <#else> href="${link}" </#if> >
     		<#if e.getOperateName()=="添加"><i class="icon-pencil"></i></#if>
     		${e.getOperateName()}</a>&nbsp;&nbsp;
     			</#if>
