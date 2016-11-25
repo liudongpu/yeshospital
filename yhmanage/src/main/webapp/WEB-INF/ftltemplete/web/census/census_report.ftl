@@ -37,6 +37,52 @@
 </div>
 
 
+<div class="weui-progress">
+	<div class="census_h_30"></div>
+            <div class="weui-progress__bar">
+                <div class="weui-progress__inner-bar js_progress" style="width: 100%;"></div>
+            </div>
+    <div class="census_h_30"></div>       
+</div>
+
+
+
+	<div class="weui-panel">
+
+            <div class="weui-panel__hd">评分结论</div>
+
+            <div class="weui-panel__bd">
+
+                <div class="weui-media-box weui-media-box_text">
+
+                    <h4 class="weui-media-box__title">标题一</h4>
+
+                    <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+
+                    <ul class="weui-media-box__info">
+
+                        <li class="weui-media-box__info__meta">文字来源</li>
+
+                        <li class="weui-media-box__info__meta">时间</li>
+
+                        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+<div>
+${a_census_report["census_report_remark"]}
+</div>
+
+
+
 <#macro m_text_detail a_detail>
 ${a_detail["sort_code"]}.&nbsp;&nbsp;${a_detail["census_detail_name"]}
 </#macro>
