@@ -23,7 +23,7 @@
 
 <#assign a_macro_wx_resources_base_js=["mlib/jquery/jquery-2.1.4.min.js","mlib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"] >
 
-<#assign a_macro_wx_resources_thems_js=["zapjs/zapapi.js","zapjs/zapfunc.js","yeswx/js/yeswx.js"] >
+<#assign a_macro_wx_resources_thems_js=["zapjs/zapapi.js","zapjs/zapfunc.js","yeswx/js/yeswx.js","yeswx/js/census.js"] >
 
 <#assign a_macro_wx_resources_thems_css=["mlib/jquery.mobile.wx/themes/jm-wx.min.css","mlib/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css","mlib/jquery.mobile.wx/themes/jquery.mobile.icons.min.css","yeswx/css/wxcss.css"] >
 

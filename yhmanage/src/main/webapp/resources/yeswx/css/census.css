@@ -8,3 +8,25 @@ body,html{height:100%;-webkit-tap-highlight-color:transparent}body{font-family:-
 }
 
 
+.census_score
+{
+	font-size: 34px;
+  color: #3cc51f;
+  font-weight: 400;
+}
+
+.census_btn_box
+{
+	padding:15px 15px 50px 15px;
+}
+
+.census_standard_item
+{
+	font-size: 24px;
+  color: #3cc51f;
+}
+
+.census_sum_standard
+{
+	min-height:40px;
+}
