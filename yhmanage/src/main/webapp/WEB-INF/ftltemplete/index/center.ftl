@@ -1,7 +1,13 @@
 <#include "../macro/macro_report.ftl" />
 
 <input type="button" class="btn" onclick="zapadmin.window_url('../show/page_zapadmin_window_change_password')" value="修改密码"/>
+
+<a  class="btn" href="https://web-rtc-server.yinxl.com/" target="_blank">视频系统</a>
+
 <div style="height:20px;"></div>
+
+
+
 <@m_report_html_js e_themes=""/>
 
 <script>
