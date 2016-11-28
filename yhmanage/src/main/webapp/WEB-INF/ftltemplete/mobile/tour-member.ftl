@@ -88,6 +88,7 @@
             	<a <@m_mobile_a_href p_page="tour-drug?u_order_code=${a_orderCode}&u_member_code=${a_memberCode}&u_drug_type=46580001000400020001" /> class="ui-btn ui-btn-inline">添加药物</a>
             	<a <@m_mobile_a_href p_page="tour-drug?u_order_code=${a_orderCode}&u_member_code=${a_memberCode}&u_drug_type=46580001000400020002" /> class="ui-btn ui-btn-inline">添加化验</a>
             	<br/>
+            	<a <@m_mobile_a_href p_page="../web/census/census_list?u_member_code=${a_memberCode}" /> class="ui-btn ui-btn-inline">调查评估</a>
             	<#if a_uid=="" >	
             	<br/>
             	<div class="yb_message_box">请保存完老人的查房明细/记录后再维护药物信息</div>
