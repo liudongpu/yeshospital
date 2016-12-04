@@ -16,9 +16,9 @@ public class FuncEditWithZu  extends RootFunc{
 
 		MWebResult mResult = new MWebResult();
 
-		MDataMap mAddMaps = mDataMap.upSubMap(WebConst.CONST_WEB_FIELD_NAME);
 		
-		mAddMaps.put("zu", DateHelper.upNow());
+		
+		mDataMap.put("zw_f_zu", DateHelper.upNow());
 
 		if (mResult.upFlagTrue()) {
 			mResult = new FuncEdit().funcDo(sOperateUid, mDataMap);
