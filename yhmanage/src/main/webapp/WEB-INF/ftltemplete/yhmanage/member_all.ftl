@@ -7,6 +7,7 @@
 
 
 <#assign a_order_code=RequestParameters['zw_f_member_code']?default("xxxxx") >
+<#assign a_macro_dbcall=b_method.upClass("com.srnpr.zapweb.websupport.DataCallSupport") >
 
 
 
@@ -99,4 +100,17 @@
 	<@m_zapmacro_common_table a_order_detail />
 
 	</#if>	
-
+<#assign a_pic_detail=a_macro_dbcall.queryAll("yh_member_pic","","-zid","","member_code",a_order_code)>
+<div class="zab_info_page_title  w_clear">
+	<span>用户图片</span>
+	</div>
+	<div>
+		<#list a_pic_detail as a_det>
+		
+			<div style="width:100px;float:left;border:solid 1px #ccc;padding:5px;margin-left:9px;">
+				<a href="${a_det['pic_url']}" target="_blank"><img src="${a_det['pic_url']}"/></a>
+			</div>
+			
+		</#list>
+		<div style="clear:both;"></div>
+	</div>
