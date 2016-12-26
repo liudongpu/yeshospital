@@ -2,7 +2,22 @@
 
 <input type="button" class="btn" onclick="zapadmin.window_url('../show/page_zapadmin_window_change_password')" value="修改密码"/>
 
-<a  class="btn" href="https://web-rtc-server.yinxl.com/" target="_blank">视频系统</a>
+
+<#assign a_user_info= b_method.upClass("com.srnpr.zapweb.websupport.UserSupport").getUserInfo() />
+
+
+<#if ((a_user_info.manageCode?trim=="")||(a_user_info.manageCode?starts_with("HI")))>
+	<a  class="btn" href="https://web-rtc-server.yinxl.com/" target="_blank">视频系统</a>
+</#if>
+
+
+<#if ((a_user_info.manageCode?trim=="")||(a_user_info.manageCode?starts_with("HI")))>
+	<a  class="btn" href="https://web-rtc-server.yinxl.com/?u_model=1&u_code=${a_user_info.loginName}&u_client=docclient" target="_blank">视频系统</a>
+</#if>
+
+
+
+
 
 <div style="height:20px;"></div>
 
