@@ -10,7 +10,7 @@
 	<a  class="btn" href="https://web-rtc-server.yinxl.com/" target="_blank">视频系统</a>
 
 <#elseif ((a_user_info.manageCode?trim=="")||(a_user_info.manageCode?starts_with("HI")))>
-	<a  class="btn" href="https://web-rtc-server.yinxl.com/?u_model=1&u_code=${a_user_info.loginName}&u_client=docclient" target="_blank">视频系统</a>
+	<a  class="btn" href="https://web-rtc-server.yinxl.com/?u_model=1&u_user=${a_user_info.loginName}&u_client=docclient" target="_blank">视频系统</a>
 </#if>
 
 
