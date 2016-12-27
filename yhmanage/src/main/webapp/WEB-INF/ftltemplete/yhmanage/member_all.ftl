@@ -13,6 +13,13 @@
 
 <div class="zab_info_page">
 
+<#assign a_user_info= b_method.upClass("com.srnpr.zapweb.websupport.UserSupport").getUserInfo() />
+
+<#if (a_user_info.manageCode?starts_with("GC"))>
+	<div style="height:50px;">
+	<a  class="btn" href="${b_method.upConfig('yeshospital.rtc_server')}?u_model=1&u_member=${a_order_code}&u_user=${a_user_info.loginName}&u_client=manageclient" target="_blank">远程医疗系统</a>
+	</div>
+</#if>
 
 
 

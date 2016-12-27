@@ -7,10 +7,10 @@
 
 
 <#if ((a_user_info.manageCode?trim=="")||(a_user_info.manageCode?starts_with("HI140824100001")))>
-	<a  class="btn" href="https://web-rtc-server.yinxl.com/" target="_blank">视频系统</a>
+	<a  class="btn" href="${b_method.upConfig('yeshospital.rtc_server')}" target="_blank">视频系统</a>
 
-<#elseif ((a_user_info.manageCode?trim=="")||(a_user_info.manageCode?starts_with("HI")))>
-	<a  class="btn" href="https://web-rtc-server.yinxl.com/?u_model=1&u_user=${a_user_info.loginName}&u_client=docclient" target="_blank">远程医疗系统</a>
+<#elseif (a_user_info.manageCode?starts_with("GC"))>
+	<a  class="btn" href="${b_method.upConfig('yeshospital.rtc_server')}?u_model=1&u_user=${a_user_info.loginName}&u_client=manageclient" target="_blank">远程医疗系统</a>
 </#if>
 
 
