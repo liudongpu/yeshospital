@@ -59,18 +59,26 @@ public class UserListApi extends RootApi<UserListApiResult, UserListApiInput> {
 				if (StringUtils.isNotBlank(sUserCode) && StringUtils.equals(sClientType, "webbrowser")) {
 
 					if (StringUtils.isBlank(upMapValue(map, "userGroup"))) {
-						String sOfficeCode = DbUp.upTable("yh_doctor_info").one("doctor_code", sUserCode)
-								.get("office_code");
 
-						if (StringUtils.isNotBlank(sOfficeCode)) {
+						MDataMap mUserMap = DbUp.upTable("za_userinfo").one("user_name", sUserCode);
+						if (mUserMap != null && !mUserMap.isEmpty()) {
 
-							String sOfficeName = DbUp.upTable("yh_office_info").one("office_code", sOfficeCode)
-									.get("office_name");
+							MDataMap mDoctorMap = DbUp.upTable("yh_doctor_info").one("doctor_code",
+									mUserMap.get("user_code"));
 
-							map.put("userGroup", sOfficeName);
+							if (mDoctorMap != null && !mDoctorMap.isEmpty()) {
+								String sOfficeCode = mDoctorMap.get("office_code");
 
+								if (StringUtils.isNotBlank(sOfficeCode)) {
+
+									String sOfficeName = DbUp.upTable("yh_office_info").one("office_code", sOfficeCode)
+											.get("office_name");
+
+									map.put("userGroup", sOfficeName);
+
+								}
+							}
 						}
-
 					}
 
 				}
