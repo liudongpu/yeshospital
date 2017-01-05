@@ -9,6 +9,7 @@ import com.srnpr.zapcom.basehelper.GsonHelper;
 import com.srnpr.zapcom.basemodel.MDataMap;
 import com.srnpr.zapcom.topapi.RootApi;
 import com.srnpr.zapdata.dbdo.DbUp;
+import com.srnpr.zapweb.webdo.WebTemp;
 
 public class UserListApi extends RootApi<UserListApiResult, UserListApiInput> {
 
@@ -34,26 +35,26 @@ public class UserListApi extends RootApi<UserListApiResult, UserListApiInput> {
 
 				if (StringUtils.isNotBlank(sUserCode) && StringUtils.isBlank(upMapValue(map, "showName"))) {
 					// map.put("userName", "aaa");
+					if (!StringUtils.equals(sClientType, "webbrowser")) {
+						MDataMap mUserMap = DbUp.upTable("za_userinfo").one("user_name", sUserCode);
 
-					MDataMap mUserMap = DbUp.upTable("za_userinfo").one("user_name", sUserCode);
+						if (mUserMap != null && !mUserMap.isEmpty()) {
 
-					if (mUserMap != null && !mUserMap.isEmpty()) {
+							map.put("showName", mUserMap.get("real_name"));
 
-						map.put("showName", mUserMap.get("real_name"));
+							String sManageCode = mUserMap.get("manage_code");
 
-						String sManageCode = mUserMap.get("manage_code");
+							if (StringUtils.isNotBlank(sManageCode) && sManageCode.startsWith("GC")) {
 
-						if (StringUtils.isNotBlank(sManageCode) && sManageCode.startsWith("GC")) {
+								String sGeraName = DbUp.upTable("yh_geracomium_info")
+										.one("geracomium_code", sManageCode).get("geracomium_name");
 
-							String sGeraName = DbUp.upTable("yh_geracomium_info").one("geracomium_code", sManageCode)
-									.get("geracomium_name");
+								map.put("showName", mUserMap.get("real_name") + "-" + sGeraName);
 
-							map.put("showName", mUserMap.get("real_name") + "-" + sGeraName);
+							}
 
 						}
-
 					}
-
 				}
 
 				if (StringUtils.isNotBlank(sUserCode) && StringUtils.equals(sClientType, "webbrowser")) {
@@ -63,7 +64,7 @@ public class UserListApi extends RootApi<UserListApiResult, UserListApiInput> {
 						MDataMap mUserMap = DbUp.upTable("za_userinfo").one("user_name", sUserCode);
 						if (mUserMap != null && !mUserMap.isEmpty()) {
 
-							MDataMap mDoctorMap = DbUp.upTable("yh_doctor_info").one("doctor_code",
+							MDataMap mDoctorMap = DbUp.upTable("yh_doctor_info").one("user_code",
 									mUserMap.get("user_code"));
 
 							if (mDoctorMap != null && !mDoctorMap.isEmpty()) {
