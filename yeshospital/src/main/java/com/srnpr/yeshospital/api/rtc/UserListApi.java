@@ -64,6 +64,10 @@ public class UserListApi extends RootApi<UserListApiResult, UserListApiInput> {
 						MDataMap mUserMap = DbUp.upTable("za_userinfo").one("user_name", sUserCode);
 						if (mUserMap != null && !mUserMap.isEmpty()) {
 
+							if (StringUtils.isBlank(upMapValue(map, "showName"))) {
+								map.put("showName", mUserMap.get("real_name"));
+							}
+
 							MDataMap mDoctorMap = DbUp.upTable("yh_doctor_info").one("user_code",
 									mUserMap.get("user_code"));
 
