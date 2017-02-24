@@ -82,6 +82,16 @@ public class HomeController extends RootControl {
 
 		return "mobile/" + sUrl;
 	}
+	
+	@RequestMapping(value = "/apps/{url}")
+	public String apps(@PathVariable("url") String sUrl, Model model, HttpServletRequest request) {
+
+		model.addAttribute("b_method", web_method);
+
+		
+
+		return "apps/" + sUrl;
+	}
 
 	@RequestMapping(value = "/yhqrcode/{operateId}", produces = { "application/binary;charset=UTF-8" })
 	@ResponseBody
