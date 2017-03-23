@@ -225,7 +225,7 @@ var zapweb_upload = {
 		if (zapweb_upload_flag_edit_load) {
 			zapweb_upload_flag_edit_load = false;
 			
-			$(document.body).append('<scri'+'pt src="http://open.web.meitu.com/sources/xiuxiu.js" type="text/javascript"></scri'+'pt>');
+			$(document.body).append('<scri'+'pt src="https://open.web.meitu.com/sources/xiuxiu.js" type="text/javascript"></scri'+'pt>');
 			
 			//document.body.append();
 
@@ -394,7 +394,7 @@ var zapweb_upload = {
 		 /*第1个参数是加载编辑器div容器，第2个参数是编辑器类型，第3个参数是div容器宽，第4个参数是div容器高*/
 		xiuxiu.embedSWF("altContent",1,"100%","100%","lite");
 	       //修改为您自己的图片上传接口
-		xiuxiu.setUploadURL("http://upload.jk.yxl9.cn/yhmanage/upload/realsave");
+		xiuxiu.setUploadURL("https://upload.jk.yxl9.cn/yhmanage/upload/realsave");
 	        xiuxiu.setUploadType(2);
 	        xiuxiu.setUploadDataFieldName("file");
 		xiuxiu.onInit = function ()
