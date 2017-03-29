@@ -146,7 +146,12 @@
 </#macro>
 
 <#macro m_zapmacro_common_page_pagination_href  e_page  e_pagedata  e_pageindex>
-${e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.getPageCount()),(e_page.upConst("126022016","index="))+(e_pageindex)])}
+
+<#local l_page=e_page.upReplaceUrl("",[(e_page.upConst("126022016","count="))+(e_pagedata.getPageCount()),(e_page.upConst("126022016","index="))+(e_pageindex)]) />
+<#if (l_page?index_of('jk-manage')>-1) >
+<#local l_page=l_page?replace("http:","https:") />
+</#if>
+${l_page}
 </#macro>
 
 
