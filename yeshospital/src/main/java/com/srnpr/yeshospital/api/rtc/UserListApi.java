@@ -22,6 +22,8 @@ public class UserListApi extends RootApi<UserListApiResult, UserListApiInput> {
 			maps = new GsonHelper().fromJson(inputParam.getInputJson(), maps);
 
 		}
+		
+		String sServerString="voipserverapp,voipserverweb,webbrowser";
 
 		// 开始处理map内容
 		if (result.upFlagTrue()) {
@@ -35,7 +37,7 @@ public class UserListApi extends RootApi<UserListApiResult, UserListApiInput> {
 
 				if (StringUtils.isNotBlank(sUserCode) && StringUtils.isBlank(upMapValue(map, "showName"))) {
 					// map.put("userName", "aaa");
-					if (!StringUtils.equals(sClientType, "webbrowser")) {
+					if (!StringUtils.contains(sServerString, sClientType)) {
 						MDataMap mUserMap = DbUp.upTable("za_userinfo").one("user_name", sUserCode);
 
 						if (mUserMap != null && !mUserMap.isEmpty()) {
@@ -57,7 +59,7 @@ public class UserListApi extends RootApi<UserListApiResult, UserListApiInput> {
 					}
 				}
 
-				if (StringUtils.isNotBlank(sUserCode) && StringUtils.equals(sClientType, "webbrowser")) {
+				if (StringUtils.isNotBlank(sUserCode) &&StringUtils.contains(sServerString, sClientType) ) {
 
 					if (StringUtils.isBlank(upMapValue(map, "userGroup"))) {
 
