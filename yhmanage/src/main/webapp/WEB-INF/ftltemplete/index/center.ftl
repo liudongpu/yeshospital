@@ -6,7 +6,7 @@
 <#assign a_user_info= b_method.upClass("com.srnpr.zapweb.websupport.UserSupport").getUserInfo() />
 <#assign a_voip_info= b_method.upClass("com.srnpr.yeshospital.support.RongCloudSupport") />
 
-<#if (a_user_info.manageCode?trim=="")>
+<#if ((a_user_info.manageCode?trim=="")||(a_user_info.loginName=="11056780003"))>
 <a  class="btn" href="${b_method.upConfig('yeshospital.rtc_server')}voip?u_model=0&u_user=${a_user_info.loginName}&u_client=voipserverweb&u_video=${a_voip_info.upVideoToken(a_user_info.loginName,a_user_info.userCode)}" target="_blank">视频系统</a>
 
 <#elseif ((a_user_info.manageCode?trim=="")||(a_user_info.manageCode?starts_with("HI140824100001")))>
