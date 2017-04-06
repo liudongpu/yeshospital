@@ -69,6 +69,15 @@ public class RongCloudSupport {
 			mInputMap.inAllValues("userId", sLoginName, "name", sLoginName);
 
 			sReturn = userGetToken(mInputMap).get("token");
+			
+			
+			if(map!=null){
+				
+				map.put("video_token", sReturn);
+				DbUp.upTable("ys_user_info").dataUpdate(map, "video_token", "user_code");
+				
+			}
+			
 
 		}
 
