@@ -105,6 +105,16 @@
 	</div>
 	<#assign a_order_detail=b_method.upControlPage("page_chart_v_yh_count_advice","zw_f_member_code="+a_order_code).upChartData()>
 	<@m_zapmacro_common_table a_order_detail />
+	
+	
+	<div class="zab_info_page_title  w_clear">
+	<span>用户记录</span>
+	<a href="page_chart_v_yh_member_note?zw_f_member_code=${a_order_code}" target="_blank">查看全部</a>
+	</div>
+	<#assign a_order_detail=b_method.upControlPage("page_chart_v_yh_member_note","zw_f_member_code="+a_order_code).upChartData()>
+	<@m_zapmacro_common_table a_order_detail />
+	
+	
 
 	</#if>	
 <#assign a_pic_detail=a_macro_dbcall.queryAll("yh_member_pic","","-zid","","member_code",a_order_code)>
