@@ -18,7 +18,7 @@ public class FuncEditDoctor extends RootFunc {
 
 		if (mWebResult.upFlagTrue()) {
 			MDataMap mAddMaps = mDataMap.upSubMap(WebConst.CONST_WEB_FIELD_NAME);
-			MDataMap map = DbUp.upTable("yh_tour_order_drug").one("uid", mAddMaps.get("uid"));
+			MDataMap map = DbUp.upTable("yh_doctor_info").one("uid", mAddMaps.get("uid"));
 			if (map != null && map.size() > 0) {
 				DbUp.upTable("fm_form_scope").delete("user_code", map.get("user_code"));
 			}
