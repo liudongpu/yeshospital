@@ -13,7 +13,7 @@
 
 	
 
-	<a  class="btn" href="${b_method.upConfig('yeshospital.rtc_server')}?u_model=0&u_user=${a_user_info.loginName}&u_client=webbrowser" target="_blank">视频系统</a>
+<a  class="btn" href="${b_method.upConfig('yeshospital.rtc_server')}voip?u_model=0&u_user=${a_user_info.loginName}&u_client=voipserverweb&u_video=${a_voip_info.upVideoToken(a_user_info.loginName,a_user_info.userCode)}" target="_blank">视频系统</a>
 
 <#elseif (a_user_info.manageCode?starts_with("SI"))>
 	<a  class="btn" href="${b_method.upConfig('yeshospital.rtc_server')}?u_model=1&u_user=${a_user_info.loginName}&u_client=manageclient" target="_blank">远程医疗系统</a>
